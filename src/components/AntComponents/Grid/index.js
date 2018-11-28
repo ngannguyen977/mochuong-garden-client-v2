@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import SyntaxHighlighter from 'react-syntax-highlighter/prism'
+import SyntaxHighlighter from 'react-syntax-highlighter'
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/styles/prism'
 import { Collapse, Icon } from 'antd'
 

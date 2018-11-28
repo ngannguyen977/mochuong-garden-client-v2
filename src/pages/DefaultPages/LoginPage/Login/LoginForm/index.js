@@ -1,15 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { REDUCER, submit } from 'ducks/login'
+import { mapStateToProps, mapDispathToProps } from './container'
 import { Form, Input, Button } from 'antd'
 
 const FormItem = Form.Item
 
-const mapStateToProps = (state, props) => ({
-  isSubmitForm: state.app.submitForms[REDUCER],
-})
 
-@connect(mapStateToProps)
+@connect(mapStateToProps, mapDispathToProps)
 @Form.create()
 class LoginForm extends React.Component {
   static defaultProps = {}
@@ -17,11 +14,11 @@ class LoginForm extends React.Component {
   // $FlowFixMe
   onSubmit = (isSubmitForm: ?boolean) => event => {
     event.preventDefault()
-    const { form, dispatch } = this.props
+    const { form, submit } = this.props
     if (!isSubmitForm) {
       form.validateFields((error, values) => {
         if (!error) {
-          dispatch(submit(values))
+          submit(values)
         }
       })
     }

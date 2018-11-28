@@ -9,7 +9,6 @@ import createHistory from 'history/createHashHistory'
 import thunk from 'redux-thunk'
 import 'es6-promise/auto'
 import 'setimmediate'
-import 'chartist-plugin-tooltip'
 
 import { LocaleProvider } from 'antd'
 import enGB from 'antd/lib/locale-provider/en_GB'
@@ -40,7 +39,7 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <LocaleProvider locale={enGB}>
         <div>
-          <Helmet titleTemplate="Clean UI - %s" />
+          <Helmet titleTemplate="OnSky - %s" />
           <Layout />
         </div>
       </LocaleProvider>

@@ -1,0 +1,6 @@
+{
+    "api":{
+        "host":"https://api-dev.onskycloud.com/authen/v1/api",
+        "login":"auth/login"
+    }
+}

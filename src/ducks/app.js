@@ -2,6 +2,7 @@ import { createAction, createReducer } from 'redux-act'
 import { push } from 'react-router-redux'
 import { pendingTask, begin, end } from 'react-redux-spinner'
 import { notification } from 'antd'
+import axios from 'axios'
 
 const REDUCER = 'app'
 const NS = `@@${REDUCER}/`
@@ -84,7 +85,10 @@ export const initAuth = roles => (dispatch, getState) => {
 
 export function login(username, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
+  axios.post()
 
+
+  
   if (username === 'admin@mediatec.org' && password === '123123') {
     window.localStorage.setItem('app.Authorization', '')
     window.localStorage.setItem('app.Role', 'administrator')
