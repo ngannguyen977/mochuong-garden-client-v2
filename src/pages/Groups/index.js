@@ -14,7 +14,7 @@ class Group extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="Groups" />
-        <GroupPage/>
+        <GroupPage />
       </Page>
     )
   }

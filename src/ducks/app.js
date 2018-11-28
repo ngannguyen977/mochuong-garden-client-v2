@@ -87,8 +87,6 @@ export function login(username, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   axios.post()
 
-
-  
   if (username === 'admin@mediatec.org' && password === '123123') {
     window.localStorage.setItem('app.Authorization', '')
     window.localStorage.setItem('app.Role', 'administrator')

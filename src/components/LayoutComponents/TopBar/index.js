@@ -23,8 +23,7 @@ class TopBar extends React.Component {
             target="_blank"
             rel="noopener noreferrer"
             className="mr-4 d-none d-sm-inline"
-          >
-          </a>
+          />
           <BitcoinPrice />
           <HomeMenu />
           <ProfileMenu />

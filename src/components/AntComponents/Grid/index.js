@@ -175,11 +175,10 @@ ReactDOM.render(
                       </div>
                       <div className="card-body pb-0">
                         You can use the <code>{'gutter'}</code> property of <code>{'Row'}</code> as
-                        grid spacing, we recommend set it to <code>{'(16 + 8n) px'}</code>. (<code>
-                          {'n'}
-                        </code>{' '}
-                        stands for natural number.) You can set it to a object like{' '}
-                        <code>{'{ xs: 8, sm: 16, md: 24, lg: 32 }'}</code> for responsive design.
+                        grid spacing, we recommend set it to <code>{'(16 + 8n) px'}</code>. (
+                        <code>{'n'}</code> stands for natural number.) You can set it to a object
+                        like <code>{'{ xs: 8, sm: 16, md: 24, lg: 32 }'}</code> for responsive
+                        design.
                       </div>
                       <div className="card-body pb-0">
                         <div id="GridGutter" />
@@ -463,11 +462,10 @@ ReactDOM.render(
                       </div>
                       <div className="card-body pb-0">
                         Use <code>{'row-flex'}</code> define <code>{'flex'}</code> layout, its child
-                        elements depending on the value of the <code>{'start'}</code>,<code>
-                          {' center'}
-                        </code>, <code>{'end'}</code>,<code>{' space-between'}</code>,{' '}
-                        <code>{'space-around'}</code>, which are defined in its parent node layout
-                        mode.
+                        elements depending on the value of the <code>{'start'}</code>,
+                        <code>{' center'}</code>, <code>{'end'}</code>,
+                        <code>{' space-between'}</code>, <code>{'space-around'}</code>, which are
+                        defined in its parent node layout mode.
                       </div>
                       <div className="card-body pb-0">
                         <div id="GridFlex" />
@@ -613,7 +611,8 @@ ReactDOM.render(
                         <code>{'offset'}</code> <code>{'order'}</code> property can be embedded into{' '}
                         <code>{'xs'}</code> <code>{'sm'}</code> <code>{'md'}</code>{' '}
                         <code>{'lg'}</code> <code>{'xl'}</code> properties to use, where{' '}
-                        <code>{'xs = {6}'}</code> is equivalent to <code>{'xs = {{span: 6}}'}</code>.
+                        <code>{'xs = {6}'}</code> is equivalent to <code>{'xs = {{span: 6}}'}</code>
+                        .
                       </div>
                       <div className="card-body pb-0">
                         <div id="GridResponsivemore" />

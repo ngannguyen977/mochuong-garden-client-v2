@@ -22,5 +22,5 @@ export default [
     key: 'grid',
     url: '/grid',
     icon: 'icmn icmn-stack',
-  }
+  },
 ]

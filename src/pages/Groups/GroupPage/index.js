@@ -31,19 +31,23 @@ class GroupPage extends React.Component {
                       #<br />
                     </th>
                     <th>
-                      Name<br />
+                      Name
+                      <br />
                       <small>of groups</small>
                     </th>
                     <th>
-                      Users<br />
+                      Users
+                      <br />
                       <small>≥576px</small>
                     </th>
                     <th>
-                      Policies<br />
+                      Policies
+                      <br />
                       <small>≥768px</small>
                     </th>
                     <th>
-                      Create Time<br />
+                      Create Time
+                      <br />
                       <small>≥992px</small>
                     </th>
                   </tr>
@@ -60,28 +64,32 @@ class GroupPage extends React.Component {
               </table>
             </div>
             <div>
-            <div className="table">
-                  <Row>
-                    <th>
-                      #<br />
-                    </th>
-                    <th>
-                      Name<br />
-                      <small>of groups</small>
-                    </th>
-                    <th>
-                      Users<br />
-                      <small>≥576px</small>
-                    </th>
-                    <th>
-                      Policies<br />
-                      <small>≥768px</small>
-                    </th>
-                    <th>
-                      Create Time<br />
-                      <small>≥992px</small>
-                    </th>
-                  </Row>
+              <div className="table">
+                <Row>
+                  <th>
+                    #<br />
+                  </th>
+                  <th>
+                    Name
+                    <br />
+                    <small>of groups</small>
+                  </th>
+                  <th>
+                    Users
+                    <br />
+                    <small>≥576px</small>
+                  </th>
+                  <th>
+                    Policies
+                    <br />
+                    <small>≥768px</small>
+                  </th>
+                  <th>
+                    Create Time
+                    <br />
+                    <small>≥992px</small>
+                  </th>
+                </Row>
                 <tbody>
                   <Row>
                     <th className="text-nowrap" scope="row">
@@ -92,7 +100,6 @@ class GroupPage extends React.Component {
                   </Row>
                 </tbody>
               </div>
-            
             </div>
           </div>
         </section>

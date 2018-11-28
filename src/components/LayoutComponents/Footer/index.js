@@ -14,8 +14,7 @@ class AppFooter extends React.Component {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mr-4"
-              >
-              </a>
+              />
             </div>
             <div className="col-sm-6">
               <div className="footer__copyright">

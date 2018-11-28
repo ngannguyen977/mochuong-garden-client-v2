@@ -1,6 +1,6 @@
 
 
-APP_NAME :=onsky-iot-frontend
+APP_NAME :=iot-frontend
 VERSION := $(shell git describe --tags --abbrev=0)
 DOCKER_USER=eneoti
 DOCKER_REPO=754404031763.dkr.ecr.ap-southeast-1.amazonaws.com

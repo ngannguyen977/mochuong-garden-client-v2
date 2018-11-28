@@ -22,7 +22,6 @@ const loadableRoutes = {
     component: loadable(() => import('pages/DefaultPages/EmptyPage')),
   },
 
-
   // Dashboards
   '/dashboard/alpha': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
@@ -30,11 +29,11 @@ const loadableRoutes = {
   // Groups
   '/groups': {
     component: loadable(() => import('pages/Groups')),
-  }  ,
+  },
   // Grid
   '/grid': {
     component: loadable(() => import('pages/GridPage')),
-  }
+  },
 }
 
 class Routes extends React.Component {

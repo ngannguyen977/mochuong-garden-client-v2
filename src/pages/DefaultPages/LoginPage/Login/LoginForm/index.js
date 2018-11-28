@@ -5,8 +5,10 @@ import { Form, Input, Button } from 'antd'
 
 const FormItem = Form.Item
 
-
-@connect(mapStateToProps, mapDispathToProps)
+@connect(
+  mapStateToProps,
+  mapDispathToProps,
+)
 @Form.create()
 class LoginForm extends React.Component {
   static defaultProps = {}
