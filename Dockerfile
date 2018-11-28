@@ -16,9 +16,11 @@ RUN apk update && apk add curl python g++ make && rm -rf /var/cache/apk/*
 
 COPY package*.json ./
 
+COPY . .
+
 RUN yarn install
 RUN yarn build
-COPY . .
+
 
 EXPOSE 8080 
 

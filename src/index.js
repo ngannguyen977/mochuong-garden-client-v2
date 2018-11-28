@@ -7,6 +7,8 @@ import { Helmet } from 'react-helmet'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createHistory from 'history/createHashHistory'
 import thunk from 'redux-thunk'
+import nconf from 'nconf'
+import path from 'path'
 import 'es6-promise/auto'
 import 'setimmediate'
 
@@ -23,6 +25,15 @@ import 'bootstrap/dist/css/bootstrap.min.css' // bootstrap styles
 import 'resources/AntStyles/AntDesign/antd.cleanui.scss'
 import 'resources/CleanStyles/Core/core.cleanui.scss'
 import 'resources/CleanStyles/Vendors/vendors.cleanui.scss'
+
+ //config nconf
+ let environment = process.env.NODE_ENV || 'development'
+ nconf
+   .argv()
+   .env()
+   .file(environment, path.resolve(process.cwd(), '../config/' + environment.toLowerCase() + '.json'))
+   .file('config', path.resolve(process.cwd(), '../config/default.json'))
+global.nconf = nconf
 
 const history = createHistory()
 const router = routerMiddleware(history)
