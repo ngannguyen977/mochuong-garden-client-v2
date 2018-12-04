@@ -11,5 +11,5 @@ nconf
   //   environment,
   //   path.resolve(process.cwd(), '../config/' + environment.toLowerCase() + '.json'),
   // )
-  .file('config','../config/default.json')
+  .file('config', '../config/default.json')
 global.nconf = nconf

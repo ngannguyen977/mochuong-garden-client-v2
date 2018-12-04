@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 import Register from './Register'
 
 class RegisterPage extends React.Component {
-
   render() {
     const { match, ...props } = this.props
     return (

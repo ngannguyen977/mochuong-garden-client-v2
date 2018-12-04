@@ -24,7 +24,7 @@ const loadableRoutes = {
   '/empty': {
     component: loadable(() => import('pages/DefaultPages/EmptyPage')),
   },
-  '/customers/activate':{
+  '/customers/activate': {
     component: loadable(() => import('pages/DefaultPages/ConfirmPage')),
   },
 

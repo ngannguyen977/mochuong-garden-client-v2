@@ -1,18 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Table, Button } from 'antd';
+import { Table, Button } from 'antd'
 import { mapStateToProps, mapDispathToProps } from './container'
 
-
-
-const data = [];
+const data = []
 for (let i = 0; i < 46; i++) {
   data.push({
     key: i,
     name: `Edward King ${i}`,
     age: 32,
     address: `London, Park Lane no. ${i}`,
-  });
+  })
 }
 
 @connect(
@@ -23,19 +21,19 @@ class GroupPage extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
     loading: false,
-  };
-  onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({ selectedRowKeys });
+  }
+  onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys)
+    this.setState({ selectedRowKeys })
   }
   render() {
-    const { loading, selectedRowKeys } = this.state;
-    const {columns} = this.props
+    const { loading, selectedRowKeys } = this.state
+    const { columns } = this.props
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
+    }
+    const hasSelected = selectedRowKeys.length > 0
 
     return (
       <div>
@@ -57,7 +55,7 @@ class GroupPage extends React.Component {
               table.
             </p>
             <br />
-            <div className='table-responsive'>
+            <div className="table-responsive">
               <div style={{ marginBottom: 16 }}>
                 <Button
                   type="primary"
@@ -66,7 +64,7 @@ class GroupPage extends React.Component {
                   loading={loading}
                 >
                   Reload
-          </Button>
+                </Button>
                 <span style={{ marginLeft: 8 }}>
                   {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                 </span>

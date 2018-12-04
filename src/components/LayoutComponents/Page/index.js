@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { initAuth, setLoading, setUpdatingContent, resetHideLogin } from 'reducers/app'
-import {authorize} from 'reducers/auth'
+import { authorize } from 'reducers/auth'
 import axios from 'axios'
 import NotFoundPage from 'pages/DefaultPages/NotFoundPage'
 
@@ -90,12 +90,12 @@ class Page extends React.Component {
     axios.defaults.cancelToken = source.token
     const { onMounted, roles, dispatch } = this.props
     this._onMounted = () => {
-          return dispatch(authorize()).then(response => {
-            if (response && onMounted) {
-              return onMounted()
-            }
-          })
+      return dispatch(authorize()).then(response => {
+        if (response && onMounted) {
+          return onMounted()
         }
+      })
+    }
 
     if (this._onMounted) {
       dispatch(setLoading(true))

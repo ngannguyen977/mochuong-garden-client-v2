@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'antd'
+import { Button } from 'antd'
 import '../../LoginPage/Login/style.scss'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispathToProps } from './container'
@@ -9,13 +9,13 @@ import { mapStateToProps, mapDispathToProps } from './container'
   mapDispathToProps,
 )
 class Confirm extends React.Component {
-  state = { backgroundImage: 'url(resources/images/login/4.jpg)'}
+  state = { backgroundImage: 'url(resources/images/login/4.jpg)' }
 
   componentDidMount() {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
     let hash = window.location.hash
-    let code = hash.substring('#/customers/activate?code='.length,hash.length)
-    if(code){
+    let code = hash.substring('#/customers/activate?code='.length, hash.length)
+    if (code) {
       this.props.submit(code)
     }
   }
@@ -38,8 +38,11 @@ class Confirm extends React.Component {
   render() {
     const { backgroundImage } = this.state
     return (
-      <div  onLoad={()=>this.generateBackground()} className="main-login main-login--fullscreen" 
-      style={{ backgroundImage: backgroundImage }}>
+      <div
+        onLoad={() => this.generateBackground()}
+        className="main-login main-login--fullscreen"
+        style={{ backgroundImage: backgroundImage }}
+      >
         <div className="main-login__block main-login__block--extended pb-0">
           <div className="row">
             <div className="col-xl-12">
@@ -54,14 +57,15 @@ class Confirm extends React.Component {
               </div>
               <div className="main-login__block__inner">
                 <div className="main-login__block__form">
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-                <Button type="primary" href='/#/login'>Go to Login</Button>
+                  <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                    Ipsum has been the industry's standard dummy text ever since the 1500s.
+                  </p>
+                  <Button type="primary" href="/#/login">
+                    Go to Login
+                  </Button>
                 </div>
-                <div className="main-login__block__sidebar">
-                </div>
+                <div className="main-login__block__sidebar" />
               </div>
             </div>
           </div>

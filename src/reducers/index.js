@@ -10,5 +10,5 @@ export default combineReducers({
   pendingTasks: pendingTasksReducer,
   app,
   login,
-  register
+  register,
 })

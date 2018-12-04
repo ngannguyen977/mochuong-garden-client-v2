@@ -10,25 +10,28 @@ export const REDUCER = 'register'
 const api = constant.api.authen
 const registerApi = `${api.host}/${api.register}`
 
-export const submit = (model) => (dispatch, getState) => {
-  axios.post(registerApi, model).then((response) => {
-    console.log(response)
-    if (response && response.data) {
-      dispatch(push('/customers/activate'))
-      notification.open({
-        type: 'success',
-        message: 'You have register successfully!',
-        description:
-          'Welcome to the OnSky Family. Please confirm email and login to access OnSky IoT Website Application',
-      })
-    }
-  }).catch((error) => {
-    let errorMessage = 'register fail'
-    if(error.response && error.response.data){
-      errorMessage = error.response.data
-    }
-    message.error(errorMessage)
-  })
+export const submit = model => (dispatch, getState) => {
+  axios
+    .post(registerApi, model)
+    .then(response => {
+      console.log(response)
+      if (response && response.data) {
+        dispatch(push('/customers/activate'))
+        notification.open({
+          type: 'success',
+          message: 'You have register successfully!',
+          description:
+            'Welcome to the OnSky Family. Please confirm email and login to access OnSky IoT Website Application',
+        })
+      }
+    })
+    .catch(error => {
+      let errorMessage = 'register fail'
+      if (error.response && error.response.data) {
+        errorMessage = error.response.data
+      }
+      message.error(errorMessage)
+    })
 }
 
 const initialState = {
@@ -44,7 +47,5 @@ const initialState = {
   // "confirmed": false,
   // "active": true
 }
-const ACTION_HANDLES = {
-
-}
+const ACTION_HANDLES = {}
 export default createReducer(ACTION_HANDLES, initialState)

@@ -156,8 +156,8 @@ class MailTemplates extends React.Component {
                                 Password Reset
                               </h5>
                               <p>
-                                Seems like you forgot your password for OnSky IoT Website Application. If this is true,
-                                click below to reset your password.
+                                Seems like you forgot your password for OnSky IoT Website
+                                Application. If this is true, click below to reset your password.
                               </p>
                               <div style={{ textAlign: 'center' }}>
                                 <a
@@ -179,7 +179,9 @@ class MailTemplates extends React.Component {
                                 If you did not forgot your password you can safely ignore his email.
                               </p>
                               <p>
-                                Regards,<br />Mediatec Software
+                                Regards,
+                                <br />
+                                Mediatec Software
                               </p>
                             </td>
                           </tr>

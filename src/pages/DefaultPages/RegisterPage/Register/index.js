@@ -25,7 +25,8 @@ class Register extends React.Component {
     const { backgroundImage } = this.state
 
     return (
-      <div onLoad={() => this.generateBackground()}
+      <div
+        onLoad={() => this.generateBackground()}
         className="register register--fullscreen"
         style={{ backgroundImage: backgroundImage }}
       >

@@ -22,7 +22,6 @@ export const addSubmitForm = createAction(`${NS}ADD_SUBMIT_FORM`)
 export const deleteSubmitForm = createAction(`${NS}DELETE_SUBMIT_FORM`)
 export const setLayoutState = createAction(`${NS}SET_LAYOUT_STATE`)
 
-
 export const setLoading = isLoading => {
   const action = _setLoading(isLoading)
   action[pendingTask] = isLoading ? begin : end
@@ -37,36 +36,39 @@ export const resetHideLogin = () => (dispatch, getState) => {
   return Promise.resolve()
 }
 
-export const login = (customer, username, password, dispatch) => new Promise((resolve, reject) => {
-
-  axios.post(loginApi, { customer, username, password }).then((response) => {
-    dispatch(
-      setUserState({
-        userState: {
-          customer: customer,
-          user: username,
-          token: response.data.token,
-          refresh_token: response.data.refresh_token,
-          expires: response.data.expires,
-          role: ''
-        }
+export const login = (customer, username, password, dispatch) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(loginApi, { customer, username, password })
+      .then(response => {
+        dispatch(
+          setUserState({
+            userState: {
+              customer: customer,
+              user: username,
+              token: response.data.token,
+              refresh_token: response.data.refresh_token,
+              expires: response.data.expires,
+              role: '',
+            },
+          }),
+        )
+        dispatch(_setHideLogin(true))
+        dispatch(push('/dashboard'))
+        notification.open({
+          type: 'success',
+          message: 'You have successfully logged in!',
+          description:
+            'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
+        })
+        return resolve(true)
       })
-    )
-    dispatch(_setHideLogin(true))
-    dispatch(push('/dashboard'))
-    notification.open({
-      type: 'success',
-      message: 'You have successfully logged in!',
-      description:
-        'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
-    })
-    return resolve(true)
-  }).catch((error) => {
-    console.log('ERROR', error.message)
-    dispatch(_setFrom(''))
-    return resolve(false)
+      .catch(error => {
+        console.log('ERROR', error.message)
+        dispatch(_setFrom(''))
+        return resolve(false)
+      })
   })
-})
 
 export const logout = () => (dispatch, getState) => {
   dispatch(
@@ -76,8 +78,8 @@ export const logout = () => (dispatch, getState) => {
         user: '',
         token: '',
         role: '',
-      }
-    })
+      },
+    }),
   )
   dispatch(push('/login'))
 }

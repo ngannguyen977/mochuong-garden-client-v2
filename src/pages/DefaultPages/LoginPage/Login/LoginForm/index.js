@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispathToProps } from './container'
-import { Alert ,notification} from 'antd'
+import { Alert, notification } from 'antd'
 import { Form, Icon, Input, Button, Checkbox } from 'antd'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 const FormItem = Form.Item
 
@@ -31,12 +31,17 @@ class LoginForm extends React.Component {
   render() {
     const { getFieldDecorator, isSubmitForm } = this.props.form
     return (
-      <Form layout="vertical" hideRequiredMark onSubmit={this.onSubmit(isSubmitForm)} className="login-form">
+      <Form
+        layout="vertical"
+        hideRequiredMark
+        onSubmit={this.onSubmit(isSubmitForm)}
+        className="login-form"
+      >
         <FormItem>
           <label className="form-label mb-0">Alias</label>
           {getFieldDecorator('alias', {
-              initialValue: 'admin',
-              rules: [{ required: true, message: 'Please input your alias!' }],
+            initialValue: 'admin',
+            rules: [{ required: true, message: 'Please input your alias!' }],
           })(
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -47,8 +52,8 @@ class LoginForm extends React.Component {
         <FormItem>
           <label className="form-label mb-0">Username</label>
           {getFieldDecorator('userName', {
-              initialValue: 'admin',
-              rules: [{ required: true, message: 'Please input your username!' }],
+            initialValue: 'admin',
+            rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -59,8 +64,8 @@ class LoginForm extends React.Component {
         <FormItem>
           <label className="form-label mb-0">Password</label>
           {getFieldDecorator('password', {
-              initialValue: 'Onsky@$32!',
-              rules: [{ required: true, message: 'Please input your Password!' }],
+            initialValue: 'Onsky@$32!',
+            rules: [{ required: true, message: 'Please input your Password!' }],
           })(
             <Input
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -84,16 +89,16 @@ class LoginForm extends React.Component {
         </FormItem>
         <div className="form-actions">
           <Button
-              type="primary"
-              className="login-form-button"
-              htmlType="submit"
-              loading={isSubmitForm}
-              icon='check-circle'
-            >
-               Sign in
-            </Button>
+            type="primary"
+            className="login-form-button"
+            htmlType="submit"
+            loading={isSubmitForm}
+            icon="check-circle"
+          >
+            Sign in
+          </Button>
           <span className="ml-3 register-link">
-            <Link to='/register' className="text-primary utils__link--underlined">
+            <Link to="/register" className="text-primary utils__link--underlined">
               Register
             </Link>{' '}
             if you don't have account

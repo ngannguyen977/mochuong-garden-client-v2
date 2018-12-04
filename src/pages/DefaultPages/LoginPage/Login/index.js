@@ -3,7 +3,7 @@ import LoginForm from './LoginForm'
 import './style.scss'
 
 class Login extends React.Component {
-  state = { backgroundImage: 'url(resources/images/login/4.jpg)'}
+  state = { backgroundImage: 'url(resources/images/login/4.jpg)' }
 
   componentDidMount() {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
@@ -27,8 +27,11 @@ class Login extends React.Component {
   render() {
     const { backgroundImage } = this.state
     return (
-      <div  onLoad={()=>this.generateBackground()} className="main-login main-login--fullscreen" 
-      style={{ backgroundImage: backgroundImage }}>
+      <div
+        onLoad={() => this.generateBackground()}
+        className="main-login main-login--fullscreen"
+        style={{ backgroundImage: backgroundImage }}
+      >
         <div className="main-login__block main-login__block--extended pb-0">
           <div className="row">
             <div className="col-xl-12">
