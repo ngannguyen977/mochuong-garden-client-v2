@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logout } from 'ducks/app'
+import { logout } from 'reducers/app'
 import { Menu, Dropdown, Avatar, Badge } from 'antd'
 
 const mapDispatchToProps = dispatch => ({

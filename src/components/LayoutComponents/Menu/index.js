@@ -4,7 +4,7 @@ import DrawerMenu from 'rc-drawer'
 import { MenuLeft } from './MenuLeft'
 import { MenuTop } from './MenuTop'
 import { connect } from 'react-redux'
-import { setLayoutState } from 'ducks/app'
+import { setLayoutState } from 'reducers/app'
 import './style.scss'
 
 const mapStateToProps = ({ app }, props) => ({

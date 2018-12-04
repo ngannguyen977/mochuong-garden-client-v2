@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setActiveDialog, deleteDialogForm } from 'ducks/app'
+import { setActiveDialog, deleteDialogForm } from 'reducers/app'
 import { Modal } from 'antd'
 
 const mapStateToProps = (state, props) => ({

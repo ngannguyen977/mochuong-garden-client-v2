@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
-import { setLayoutState } from 'ducks/app'
+import { setLayoutState } from 'reducers/app'
 import { merge } from 'lodash'
 import classNames from 'classnames'
 

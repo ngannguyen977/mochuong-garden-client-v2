@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { setUpdatingContent } from 'ducks/app'
+import { setUpdatingContent } from 'reducers/app'
 import { isEmpty } from 'lodash'
 import Breadcrumb from 'components/LayoutComponents/Breadcrumb'
 

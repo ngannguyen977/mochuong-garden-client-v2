@@ -1,7 +1,7 @@
-import { REDUCER, submit } from 'reducers/login'
+import { REDUCER, submit } from 'reducers/confirm-email'
 
 export const mapDispathToProps = {
-  submit: (username, password) => submit(username, password),
+  submit: (code) => submit(code),
 }
 export const mapStateToProps = (state, props) => {
   return {

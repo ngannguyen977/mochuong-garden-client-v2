@@ -15,15 +15,21 @@ const loadable = loader =>
 
 const loadableRoutes = {
   // Default Pages
+  '/register': {
+    component: loadable(() => import('pages/DefaultPages/RegisterPage')),
+  },
   '/login': {
     component: loadable(() => import('pages/DefaultPages/LoginPage')),
   },
   '/empty': {
     component: loadable(() => import('pages/DefaultPages/EmptyPage')),
   },
+  '/customers/activate':{
+    component: loadable(() => import('pages/DefaultPages/ConfirmPage')),
+  },
 
   // Dashboards
-  '/dashboard/alpha': {
+  '/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
   },
   // Groups

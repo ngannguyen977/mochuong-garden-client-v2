@@ -29,7 +29,7 @@ class MailTemplates extends React.Component {
                           <td style={{ verticalAlign: 'top' }}>
                             <img
                               src="resources/images/logo.png"
-                              alt="Clean UI Admin Template"
+                              alt="OnSky IoT Website Application"
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -99,7 +99,7 @@ class MailTemplates extends React.Component {
                           Unsubscribe
                         </a>
                         <br />
-                        Powered by Clean UI
+                        Powered by Onsky Inc.
                       </p>
                     </div>
                   </div>
@@ -127,7 +127,7 @@ class MailTemplates extends React.Component {
                           <td style={{ verticalAlign: 'top' }}>
                             <img
                               src="resources/images/logo.png"
-                              alt="Clean UI Admin Template"
+                              alt="OnSky IoT Website Application"
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -156,7 +156,7 @@ class MailTemplates extends React.Component {
                                 Password Reset
                               </h5>
                               <p>
-                                Seems like you forgot your password for Clean UI. If this is true,
+                                Seems like you forgot your password for OnSky IoT Website Application. If this is true,
                                 click below to reset your password.
                               </p>
                               <div style={{ textAlign: 'center' }}>
@@ -205,7 +205,7 @@ class MailTemplates extends React.Component {
                           Unsubscribe
                         </a>
                         <br />
-                        Powered by Clean UI
+                        Powered by Onsky Inc.
                       </p>
                     </div>
                   </div>
@@ -239,7 +239,7 @@ class MailTemplates extends React.Component {
                           <td style={{ verticalAlign: 'top' }}>
                             <img
                               src="resources/images/logo.png"
-                              alt="Clean UI Admin Template"
+                              alt="OnSky IoT Website Application"
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -625,7 +625,7 @@ class MailTemplates extends React.Component {
                           Unsubscribe
                         </a>
                         <br />
-                        Powered by Clean UI
+                        Powered by OnSky Inc.
                       </p>
                     </div>
                   </div>
@@ -653,7 +653,7 @@ class MailTemplates extends React.Component {
                           <td style={{ verticalAlign: 'top' }}>
                             <img
                               src="resources/images/logo.png"
-                              alt="Clean UI Admin Template"
+                              alt="OnSky IoT Website Application"
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -748,7 +748,7 @@ class MailTemplates extends React.Component {
                           Unsubscribe
                         </a>
                         <br />
-                        Powered by Clean UI
+                        Powered by Onsky Inc.
                       </p>
                     </div>
                   </div>

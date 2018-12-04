@@ -1,12 +1,23 @@
 import React from 'react'
-import LoginForm from './LoginForm'
-import './style.scss'
+import {Button} from 'antd'
+import '../../LoginPage/Login/style.scss'
+import { connect } from 'react-redux'
+import { mapStateToProps, mapDispathToProps } from './container'
 
-class Login extends React.Component {
+@connect(
+  mapStateToProps,
+  mapDispathToProps,
+)
+class Confirm extends React.Component {
   state = { backgroundImage: 'url(resources/images/login/4.jpg)'}
 
   componentDidMount() {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+    let hash = window.location.hash
+    let code = hash.substring('#/customers/activate?code='.length,hash.length)
+    if(code){
+      this.props.submit(code)
+    }
   }
 
   componentWillUnmount() {
@@ -43,25 +54,13 @@ class Login extends React.Component {
               </div>
               <div className="main-login__block__inner">
                 <div className="main-login__block__form">
-                  <LoginForm email={this.state.restoredEmail} />
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                  Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
+                <Button type="primary" href='/#/login'>Go to Login</Button>
                 </div>
                 <div className="main-login__block__sidebar">
-                  <h4 className="main-login__block__sidebar__title text-white">
-                    <strong>OnSky Application</strong>
-                    <br />
-                    <span>August 2018</span>
-                  </h4>
-                  <div className="main-login__block__sidebar__item">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard dummy text ever since the 1500s.
-                  </div>
-                  <div className="main-login__block__sidebar__item">
-                    Ipsum has been the industry's standard dummy text ever since the 1500s.
-                  </div>
-                  <div className="main-login__block__sidebar__place">
-                    <i className="icmn-location mr-3" />
-                    Hồ Chí Minh, VN
-                  </div>
                 </div>
               </div>
             </div>
@@ -91,4 +90,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default Confirm

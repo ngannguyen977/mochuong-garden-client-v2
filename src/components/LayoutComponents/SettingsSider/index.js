@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setLayoutState } from 'ducks/app'
+import { setLayoutState } from 'reducers/app'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { Switch } from 'antd'
 import './style.scss'

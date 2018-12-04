@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { initAuth, setLoading, setUpdatingContent, resetHideLogin } from 'ducks/app'
+import { initAuth, setLoading, setUpdatingContent, resetHideLogin } from 'reducers/app'
+import {authorize} from 'reducers/auth'
 import axios from 'axios'
 import NotFoundPage from 'pages/DefaultPages/NotFoundPage'
 
@@ -88,17 +89,14 @@ class Page extends React.Component {
     source.token.promise.catch = source.token.promise.catch.bind(source.token.promise)
     axios.defaults.cancelToken = source.token
     const { onMounted, roles, dispatch } = this.props
-    if (roles.length > 0) {
-      this._onMounted = () => {
-        return dispatch(initAuth(roles)).then(response => {
-          if (response && onMounted) {
-            return onMounted()
-          }
-        })
-      }
-    } else {
-      this._onMounted = onMounted
-    }
+    this._onMounted = () => {
+          return dispatch(authorize()).then(response => {
+            if (response && onMounted) {
+              return onMounted()
+            }
+          })
+        }
+
     if (this._onMounted) {
       dispatch(setLoading(true))
       this.isStartLoading = true

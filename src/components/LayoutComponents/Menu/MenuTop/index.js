@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 import { reduce } from 'lodash'
-import { setLayoutState } from 'ducks/app'
+import { setLayoutState } from 'reducers/app'
 import { default as menuData } from './menuData'
 import './style.scss'
 
