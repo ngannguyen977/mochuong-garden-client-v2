@@ -16,11 +16,10 @@ class User extends React.Component {
   }
   componentDidMount() {
     console.log(this.props.location)
-  
   }
   render() {
     const props = this.props
-    console.log('propsss',this.props)
+    console.log('propsss', this.props)
     return (
       <Page {...props}>
         <Helmet title="Users" />

@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux'
 import moment from 'moment'
-import { _setFrom,setUserState } from 'reducers/app'
+import { _setFrom, setUserState } from 'reducers/app'
 import { message } from 'antd'
 
 const ignoreAuth = ['/register', '/login', '/empty', '/customers/activate']
@@ -15,8 +15,8 @@ export const authorize = () => (dispatch, getState) => {
     const token = JSON.parse(window.localStorage.getItem('app.token'))
     if (token) {
       //set app state
-      let userState = {...app.userState,token: token}
-      dispatch(setUserState({userState}))
+      let userState = { ...app.userState, token: token }
+      dispatch(setUserState({ userState }))
 
       return Promise.resolve(true)
     }

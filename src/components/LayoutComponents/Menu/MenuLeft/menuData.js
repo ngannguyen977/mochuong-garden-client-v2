@@ -22,6 +22,5 @@ export default [
     key: 'groups',
     url: '/groups',
     icon: 'icmn icmn-stack',
-  }
-
+  },
 ]

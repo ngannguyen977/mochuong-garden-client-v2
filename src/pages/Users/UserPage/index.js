@@ -22,7 +22,7 @@ class GroupPage extends React.Component {
   }
 
   render() {
-    console.log('render',this.props)
+    console.log('render', this.props)
     const { loading, selectedRowKeys } = this.state
     const { columns } = this.props
     const rowSelection = {
