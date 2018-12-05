@@ -122,7 +122,10 @@ export default createReducer(
     [_setLoading]: (state, isLoading) => ({ ...state, isLoading }),
     [_setHideLogin]: (state, isHideLogin) => ({ ...state, isHideLogin }),
     [setUpdatingContent]: (state, isUpdatingContent) => ({ ...state, isUpdatingContent }),
-    [setUserState]: (state, { userState }) => ({ ...state, userState }),
+    [setUserState]: (state, { userState }) => {
+      window.localStorage.setItem('app.token', JSON.stringify(userState.token))
+      return { ...state, userState }
+    },
     [setLayoutState]: (state, param) => {
       const layoutState = { ...state.layoutState, ...param }
       const newState = { ...state, layoutState }

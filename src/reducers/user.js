@@ -10,9 +10,9 @@ export const REDUCER = 'user'
 const api = constant.api.authen
 const userApi = `${api.host}/${api.user}`
 
-export const submit = model => (dispatch, getState) => {
+export const getList = (limit = 10,page = 0,sort='name',isAsc=false) => (dispatch, getState) => {
   axios
-    .post(userApi, model)
+    .get(userApi,{params:{limit:limit,page:page,sort:sort,isAsc:isAsc}})
     .then(response => {
       console.log(response)
       if (response && response.data) {

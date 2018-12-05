@@ -1,7 +1,7 @@
-import { getData } from '../reducer'
+import { getList } from 'reducers/user'
 
 export const mapDispathToProps = {
-  getData: (limit, page, sort, isAsc) => getData(limit, page, sort, isAsc),
+  getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
 }
 export const mapStateToProps = (state, props) => {
   const columns = [
@@ -19,7 +19,7 @@ export const mapStateToProps = (state, props) => {
       dataIndex: 'customerName',
     },
     {
-      title: 'Users',
+      title: 'Groups',
       dataIndex: 'userList',
     },
     {

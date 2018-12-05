@@ -1,7 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Table, Button } from 'antd'
-import { mapStateToProps, mapDispathToProps } from './container'
 
 const data = []
 for (let i = 0; i < 46; i++) {
@@ -13,10 +11,6 @@ for (let i = 0; i < 46; i++) {
   })
 }
 
-@connect(
-  mapStateToProps,
-  mapDispathToProps,
-)
 class GroupPage extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
@@ -26,7 +20,9 @@ class GroupPage extends React.Component {
     console.log('selectedRowKeys changed: ', selectedRowKeys)
     this.setState({ selectedRowKeys })
   }
+
   render() {
+    console.log('render',this.props)
     const { loading, selectedRowKeys } = this.state
     const { columns } = this.props
     const rowSelection = {
@@ -40,7 +36,7 @@ class GroupPage extends React.Component {
         <section className="card">
           <div className="card-header">
             <div className="utils__title">
-              <strong>Groups Management</strong>
+              <strong>Users Management</strong>
             </div>
           </div>
           <div className="card-body">

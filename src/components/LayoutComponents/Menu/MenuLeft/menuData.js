@@ -12,15 +12,16 @@ export default [
     icon: 'icmn icmn-books',
   },
   {
+    title: 'Users',
+    key: 'users',
+    url: '/users',
+    icon: 'icmn icmn-stack',
+  },
+  {
     title: 'Groups',
     key: 'groups',
     url: '/groups',
     icon: 'icmn icmn-stack',
-  },
-  {
-    title: 'grid',
-    key: 'grid',
-    url: '/grid',
-    icon: 'icmn icmn-stack',
-  },
+  }
+
 ]

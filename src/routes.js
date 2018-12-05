@@ -36,9 +36,9 @@ const loadableRoutes = {
   '/groups': {
     component: loadable(() => import('pages/Groups')),
   },
-  // Grid
-  '/grid': {
-    component: loadable(() => import('pages/GridPage')),
+  // users
+  '/users': {
+    component: loadable(() => import('pages/Users')),
   },
 }
 
