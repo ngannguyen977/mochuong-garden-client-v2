@@ -94,7 +94,7 @@ export default function(ReactDOM, mountNode) {
       ]
       return (
         <div>
-          <div className="table-operations">
+          <div className='table-operations'>
             <Button onClick={this.setAgeSort}>Sort age</Button>
             <Button onClick={this.clearFilters}>Clear filters</Button>
             <Button onClick={this.clearAll}>Clear filters and sorters</Button>

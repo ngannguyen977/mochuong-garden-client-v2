@@ -4,7 +4,7 @@ import { ConnectedSwitch } from 'reactRouterConnected'
 import Loadable from 'react-loadable'
 import Page from 'components/LayoutComponents/Page'
 import NotFoundPage from 'pages/DefaultPages/NotFoundPage'
-import HomePage from 'pages/DefaultPages/HomePage'
+import DashboardAlphaPage from 'pages/Dashboard/DashboardAlphaPage'
 
 const loadable = loader =>
   Loadable({
@@ -29,17 +29,30 @@ const loadableRoutes = {
   },
 
   // Dashboards
-  '/dashboard': {
+  '/home': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
   },
   // Groups
   '/groups': {
-    component: loadable(() => import('pages/Groups')),
+    component: loadable(() => import('pages/authen/Groups')),
+  },
+  '/groups/create': {
+    component: loadable(() => import('pages/authen/Groups/create')),
   },
   // users
   '/users': {
-    component: loadable(() => import('pages/Users')),
+    component: loadable(() => import('pages/authen/Users')),
   },
+  '/users/create': {
+    component: loadable(() => import('pages/authen/Users/create')),
+  },
+  // permissions
+  '/permissions': {
+    component: loadable(() => import('pages/authen/Permissions')),
+  },
+  '/permissions/create': {
+    component: loadable(() => import('pages/authen/Permissions/create')),
+  }
 }
 
 class Routes extends React.Component {
@@ -61,7 +74,7 @@ class Routes extends React.Component {
   render() {
     return (
       <ConnectedSwitch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path='/' component={DashboardAlphaPage} />
         {Object.keys(loadableRoutes).map(path => {
           const { exact, ...props } = loadableRoutes[path]
           props.exact = exact === void 0 || exact || false // set true as default

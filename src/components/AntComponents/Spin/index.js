@@ -27,53 +27,53 @@ class SpinItems extends React.Component {
 
   render() {
     return (
-      <div className="SpinDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='SpinDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Spin</strong>
                   <a
-                    href="https://ant.design/components/spin/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/spin/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-spin-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">basic Usage</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-spin-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>basic Usage</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">A simple loading status.</div>
-                      <div className="card-body pb-0">
-                        <div id="SpinBasic" />
+                      <div className='card-body pb-0'>A simple loading status.</div>
+                      <div className='card-body pb-0'>
+                        <div id='SpinBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -86,36 +86,36 @@ ReactDOM.render(<Spin />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-spin-demo-delayAndDebounce">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">delay</strong>
+                    <div className='card card--example' id='components-spin-demo-delayAndDebounce'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>delay</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Specifies a delay for loading state. If <code>{'spinning'}</code> ends
                         during delay, loading status won't appear.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SpinDelayAndDebounce" />
+                      <div className='card-body pb-0'>
+                        <div id='SpinDelayAndDebounce' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -152,36 +152,36 @@ ReactDOM.render(<Card />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-spin-demo-nested">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Embedded mode</strong>
+                    <div className='card card--example' id='components-spin-demo-nested'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Embedded mode</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Embedding content into <code>{'Spin'}</code> will alter it into loading
                         state.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SpinNested" />
+                      <div className='card-body pb-0'>
+                        <div id='SpinNested' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -217,33 +217,33 @@ ReactDOM.render(<Card />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-spin-demo-tip">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Customized description</strong>
+                    <div className='card card--example' id='components-spin-demo-tip'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Customized description</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Customized description content.</div>
-                      <div className="card-body pb-0">
-                        <div id="SpinTip" />
+                      <div className='card-body pb-0'>Customized description content.</div>
+                      <div className='card-body pb-0'>
+                        <div id='SpinTip' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -265,34 +265,34 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-spin-demo-custom-indicator">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Custom spinning indicator</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-spin-demo-custom-indicator'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Custom spinning indicator</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Use custom loading indicator.</div>
-                      <div className="card-body pb-0">
-                        <div id="SpinCustomindicator" />
+                      <div className='card-body pb-0'>Use custom loading indicator.</div>
+                      <div className='card-body pb-0'>
+                        <div id='SpinCustomindicator' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -307,33 +307,33 @@ ReactDOM.render(<Spin indicator=\{antIcon\} />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-spin-demo-inside">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Inside a container</strong>
+                    <div className='card card--example' id='components-spin-demo-inside'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Inside a container</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Spin in a container.</div>
-                      <div className="card-body pb-0">
-                        <div id="SpinInside" />
+                      <div className='card-body pb-0'>Spin in a container.</div>
+                      <div className='card-body pb-0'>
+                        <div id='SpinInside' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -350,37 +350,37 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-spin-demo-size">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Size</strong>
+                    <div className='card card--example' id='components-spin-demo-size'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Size</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         A small <code>{'Spin'}</code> use in loading text, default{' '}
                         <code>{'Spin'}</code> use in loading card-level block, and large{' '}
                         <code>{'Spin'}</code> use in loading **page**.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SpinSize" />
+                      <div className='card-body pb-0'>
+                        <div id='SpinSize' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

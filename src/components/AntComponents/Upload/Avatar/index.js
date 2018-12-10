@@ -44,21 +44,21 @@ export default function(ReactDOM, mountNode) {
       const uploadButton = (
         <div>
           <Icon type={this.state.loading ? 'loading' : 'plus'} />
-          <div className="ant-upload-text">Upload</div>
+          <div className='ant-upload-text'>Upload</div>
         </div>
       )
       const imageUrl = this.state.imageUrl
       return (
         <Upload
-          name="avatar"
-          listType="picture-card"
-          className="avatar-uploader"
+          name='avatar'
+          listType='picture-card'
+          className='avatar-uploader'
           showUploadList={false}
-          action="//jsonplaceholder.typicode.com/posts/"
+          action='//jsonplaceholder.typicode.com/posts/'
           beforeUpload={beforeUpload}
           onChange={this.handleChange}
         >
-          {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton}
+          {imageUrl ? <img src={imageUrl} alt='' /> : uploadButton}
         </Upload>
       )
     }

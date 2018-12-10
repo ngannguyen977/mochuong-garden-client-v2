@@ -49,11 +49,11 @@ class DashboardAlpha extends React.Component {
 
     return (
       <div>
-        <div className="utils__title utils__title--flat mb-3">
-          <span className="text-uppercase font-size-16">Last Week Statistics</span>
+        <div className='utils__title utils__title--flat mb-3'>
+          <span className='text-uppercase font-size-16'>Last Week Statistics</span>
         </div>
-        <div className="row">
-          <div className="col-xl-4">
+        <div className='row'>
+          <div className='col-xl-4'>
             <ChartCard
               title={'Transactions'}
               amount={'1240'}
@@ -72,7 +72,7 @@ class DashboardAlpha extends React.Component {
               }}
             />
           </div>
-          <div className="col-xl-4">
+          <div className='col-xl-4'>
             <ChartCard
               title={'Income'}
               amount={'$1,240.00'}
@@ -91,7 +91,7 @@ class DashboardAlpha extends React.Component {
               }}
             />
           </div>
-          <div className="col-xl-4">
+          <div className='col-xl-4'>
             <ChartCard
               title={'Outcome'}
               amount={'$240.56'}
@@ -111,16 +111,16 @@ class DashboardAlpha extends React.Component {
             />
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">Recently Referrals</div>
-                <div className="utils__titleDescription">
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>Recently Referrals</div>
+                <div className='utils__titleDescription'>
                   Block with important Recently Referrals information
                 </div>
               </div>
-              <div className="card-body">
+              <div className='card-body'>
                 <Table
                   columns={tableColumns}
                   dataSource={this.state.tableData}
@@ -130,12 +130,12 @@ class DashboardAlpha extends React.Component {
             </div>
           </div>
         </div>
-        <div className="utils__title utils__title--flat mb-3">
-          <span className="text-uppercase font-size-16">Your Cards (3)</span>
-          <Button className="ml-3">View All</Button>
+        <div className='utils__title utils__title--flat mb-3'>
+          <span className='text-uppercase font-size-16'>Your Cards (3)</span>
+          <Button className='ml-3'>View All</Button>
         </div>
-        <div className="row">
-          <div className="col-lg-4">
+        <div className='row'>
+          <div className='col-lg-4'>
             <PaymentCard
               icon={'lnr lnr-bookmark'}
               name={'Matt Daemon'}
@@ -145,7 +145,7 @@ class DashboardAlpha extends React.Component {
               sum={'$2,156.78'}
             />
           </div>
-          <div className="col-lg-4">
+          <div className='col-lg-4'>
             <PaymentCard
               icon={'lnr lnr-bookmark'}
               name={'David Beckham'}
@@ -155,7 +155,7 @@ class DashboardAlpha extends React.Component {
               sum={'$560,245.35'}
             />
           </div>
-          <div className="col-lg-4">
+          <div className='col-lg-4'>
             <PaymentCard
               icon={'lnr lnr-hourglass'}
               name={'Mrs. Angelina Jolie'}
@@ -166,12 +166,12 @@ class DashboardAlpha extends React.Component {
             />
           </div>
         </div>
-        <div className="utils__title utils__title--flat mb-3">
-          <span className="text-uppercase font-size-16">Your Accounts (6)</span>
-          <Button className="ml-3">View All</Button>
+        <div className='utils__title utils__title--flat mb-3'>
+          <span className='text-uppercase font-size-16'>Your Accounts (6)</span>
+          <Button className='ml-3'>View All</Button>
         </div>
-        <div className="row">
-          <div className="col-lg-6">
+        <div className='row'>
+          <div className='col-lg-6'>
             <PaymentAccount
               icon={'lnr lnr-inbox'}
               number={'US 4658-1678-7528'}
@@ -179,7 +179,7 @@ class DashboardAlpha extends React.Component {
               sum={'$2,156.78'}
             />
           </div>
-          <div className="col-lg-6">
+          <div className='col-lg-6'>
             <PaymentAccount
               icon={'lnr lnr-inbox'}
               number={'IBAN 445646-8748-4664-1678-5416'}
@@ -188,8 +188,8 @@ class DashboardAlpha extends React.Component {
             />
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-6">
+        <div className='row'>
+          <div className='col-lg-6'>
             <PaymentAccount
               icon={'lnr lnr-inbox'}
               number={'US 4658-1678-7528'}
@@ -197,7 +197,7 @@ class DashboardAlpha extends React.Component {
               sum={'$2,156.78'}
             />
           </div>
-          <div className="col-lg-6">
+          <div className='col-lg-6'>
             <PaymentAccount
               icon={'lnr lnr-inbox'}
               number={'IBAN 445646-8748-4664-1678-5416'}
@@ -206,12 +206,12 @@ class DashboardAlpha extends React.Component {
             />
           </div>
         </div>
-        <div className="utils__title mb-3">
-          <span className="text-uppercase font-size-16">Recent Transactions (167)</span>
-          <Button className="ml-3">View All</Button>
+        <div className='utils__title mb-3'>
+          <span className='text-uppercase font-size-16'>Recent Transactions (167)</span>
+          <Button className='ml-3'>View All</Button>
         </div>
-        <div className="row">
-          <div className="col-lg-12">
+        <div className='row'>
+          <div className='col-lg-12'>
             <PaymentTx
               income={false}
               amount={'-$100.00'}
@@ -230,8 +230,8 @@ class DashboardAlpha extends React.Component {
               info={'6245-XXXX-1678-3256'}
               footer={'To Tesla Cars, LA, USA'}
             />
-            <div className="text-center pb-5">
-              <Button type="primary" className="width-200" loading>
+            <div className='text-center pb-5'>
+              <Button type='primary' className='width-200' loading>
                 Load More...
               </Button>
             </div>

@@ -42,15 +42,15 @@ export default function(ReactDOM, mountNode) {
           <Steps current={current}>
             {steps.map(item => <Step key={item.title} title={item.title} />)}
           </Steps>
-          <div className="steps-content">{steps[this.state.current].content}</div>
-          <div className="steps-action">
+          <div className='steps-content'>{steps[this.state.current].content}</div>
+          <div className='steps-action'>
             {this.state.current < steps.length - 1 && (
-              <Button type="primary" onClick={() => this.next()}>
+              <Button type='primary' onClick={() => this.next()}>
                 Next
               </Button>
             )}
             {this.state.current === steps.length - 1 && (
-              <Button type="primary" onClick={() => message.success('Processing complete!')}>
+              <Button type='primary' onClick={() => message.success('Processing complete!')}>
                 Done
               </Button>
             )}

@@ -17,10 +17,10 @@ export default function(ReactDOM, mountNode) {
       const preColor = value >= mid ? '' : 'rgba(0, 0, 0, .45)'
       const nextColor = value >= mid ? 'rgba(0, 0, 0, .45)' : ''
       return (
-        <div className="icon-wrapper">
-          <Icon style={{ color: preColor }} type="frown-o" />
+        <div className='icon-wrapper'>
+          <Icon style={{ color: preColor }} type='frown-o' />
           <Slider {...this.props} onChange={this.handleChange} value={value} />
-          <Icon style={{ color: nextColor }} type="smile-o" />
+          <Icon style={{ color: nextColor }} type='smile-o' />
         </div>
       )
     }

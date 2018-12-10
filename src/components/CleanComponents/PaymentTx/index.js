@@ -32,16 +32,16 @@ class PaymentTx extends React.Component {
             : 'card card--withShadow paymentTx'
         }
       >
-        <div className="paymentTx__icon">
+        <div className='paymentTx__icon'>
           <i className={income ? 'lnr lnr-arrow-left' : 'lnr lnr-arrow-right'} />
         </div>
         {amount && (
           <div>
-            <span className="paymentTx__amount">{amount}</span>
-            {info && <sup className="paymentTx__info">{info}</sup>}
+            <span className='paymentTx__amount'>{amount}</span>
+            {info && <sup className='paymentTx__info'>{info}</sup>}
           </div>
         )}
-        {footer && <div className="paymentTx__footer">{footer}</div>}
+        {footer && <div className='paymentTx__footer'>{footer}</div>}
       </a>
     )
   }

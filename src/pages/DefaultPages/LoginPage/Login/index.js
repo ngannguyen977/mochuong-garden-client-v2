@@ -29,14 +29,14 @@ class Login extends React.Component {
     return (
       <div
         onLoad={() => this.generateBackground()}
-        className="main-login main-login--fullscreen"
+        className='main-login main-login--fullscreen'
         style={{ backgroundImage: backgroundImage }}
       >
-        <div className="main-login__block main-login__block--extended pb-0">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="main-login__block__promo text-white text-center">
-                <h1 className="mb-3 text-white">
+        <div className='main-login__block main-login__block--extended pb-0'>
+          <div className='row'>
+            <div className='col-xl-12'>
+              <div className='main-login__block__promo text-white text-center'>
+                <h1 className='mb-3 text-white'>
                   <strong>Welcome to OnSky Team</strong>
                 </h1>
                 <p>
@@ -44,25 +44,25 @@ class Login extends React.Component {
                   Ipsum has been the industry's standard dummy text ever since the 1500s.
                 </p>
               </div>
-              <div className="main-login__block__inner">
-                <div className="main-login__block__form">
+              <div className='main-login__block__inner'>
+                <div className='main-login__block__form'>
                   <LoginForm email={this.state.restoredEmail} />
                 </div>
-                <div className="main-login__block__sidebar">
-                  <h4 className="main-login__block__sidebar__title text-white">
+                <div className='main-login__block__sidebar'>
+                  <h4 className='main-login__block__sidebar__title text-white'>
                     <strong>OnSky Application</strong>
                     <br />
                     <span>August 2018</span>
                   </h4>
-                  <div className="main-login__block__sidebar__item">
+                  <div className='main-login__block__sidebar__item'>
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     Ipsum has been the industry's standard dummy text ever since the 1500s.
                   </div>
-                  <div className="main-login__block__sidebar__item">
+                  <div className='main-login__block__sidebar__item'>
                     Ipsum has been the industry's standard dummy text ever since the 1500s.
                   </div>
-                  <div className="main-login__block__sidebar__place">
-                    <i className="icmn-location mr-3" />
+                  <div className='main-login__block__sidebar__place'>
+                    <i className='icmn-location mr-3' />
                     Hồ Chí Minh, VN
                   </div>
                 </div>
@@ -70,22 +70,22 @@ class Login extends React.Component {
             </div>
           </div>
         </div>
-        <div className="main-login__footer text-center">
-          <ul className="list-unstyled list-inline">
-            <li className="list-inline-item">
-              <a href="javascript: void(0);">Terms of Use</a>
+        <div className='main-login__footer text-center'>
+          <ul className='list-unstyled list-inline'>
+            <li className='list-inline-item'>
+              <a href='javascript: void(0);'>Terms of Use</a>
             </li>
-            <li className="active list-inline-item">
-              <a href="javascript: void(0);">Compliance</a>
+            <li className='active list-inline-item'>
+              <a href='javascript: void(0);'>Compliance</a>
             </li>
-            <li className="list-inline-item">
-              <a href="javascript: void(0);">Confidential Information</a>
+            <li className='list-inline-item'>
+              <a href='javascript: void(0);'>Confidential Information</a>
             </li>
-            <li className="list-inline-item">
-              <a href="javascript: void(0);">Support</a>
+            <li className='list-inline-item'>
+              <a href='javascript: void(0);'>Support</a>
             </li>
-            <li className="list-inline-item">
-              <a href="javascript: void(0);">Contacts</a>
+            <li className='list-inline-item'>
+              <a href='javascript: void(0);'>Contacts</a>
             </li>
           </ul>
         </div>

@@ -34,8 +34,8 @@ export default function(ReactDOM, mountNode) {
           onSearch={this.handleSearch}
         >
           <TextArea
-            placeholder="input here"
-            className="custom"
+            placeholder='input here'
+            className='custom'
             style={{ height: 50 }}
             onKeyPress={this.handleKeyPress}
           />

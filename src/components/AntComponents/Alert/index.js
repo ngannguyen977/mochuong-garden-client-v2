@@ -29,55 +29,55 @@ class AlertItems extends React.Component {
 
   render() {
     return (
-      <div className="AlertDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='AlertDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Alert</strong>
                   <a
-                    href="https://ant.design/components/alert/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/alert/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-alert-demo-banner">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Banner</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-alert-demo-banner'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Banner</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Display Alert as a banner at top of page.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="AlertBanner" />
+                      <div className='card-body pb-0'>
+                        <div id='AlertBanner' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -100,33 +100,33 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-alert-demo-closable">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Closable</strong>
+                    <div className='card card--example' id='components-alert-demo-closable'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Closable</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">To show close button.</div>
-                      <div className="card-body pb-0">
-                        <div id="AlertClosable" />
+                      <div className='card-body pb-0'>To show close button.</div>
+                      <div className='card-body pb-0'>
+                        <div id='AlertClosable' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -159,35 +159,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-alert-demo-description">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Description</strong>
+                    <div className='card card--example' id='components-alert-demo-description'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Description</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Additional description for alert message.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="AlertDescription" />
+                      <div className='card-body pb-0'>
+                        <div id='AlertDescription' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -223,33 +223,33 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-alert-demo-smooth-closed">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Smoothly Unmount</strong>
+                    <div className='card card--example' id='components-alert-demo-smooth-closed'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Smoothly Unmount</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Smoothly and unaffectedly unmount Alert.</div>
-                      <div className="card-body pb-0">
-                        <div id="AlertSmoothclosed" />
+                      <div className='card-body pb-0'>Smoothly and unaffectedly unmount Alert.</div>
+                      <div className='card-body pb-0'>
+                        <div id='AlertSmoothclosed' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -291,34 +291,34 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-alert-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-alert-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">The simplest usage for short messages.</div>
-                      <div className="card-body pb-0">
-                        <div id="AlertBasic" />
+                      <div className='card-body pb-0'>The simplest usage for short messages.</div>
+                      <div className='card-body pb-0'>
+                        <div id='AlertBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -333,35 +333,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-alert-demo-close-text">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Customized Close Text</strong>
+                    <div className='card card--example' id='components-alert-demo-close-text'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Customized Close Text</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Replace the default icon with customized text.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="AlertClosetext" />
+                      <div className='card-body pb-0'>
+                        <div id='AlertClosetext' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -376,35 +376,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-alert-demo-icon">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Icon</strong>
+                    <div className='card card--example' id='components-alert-demo-icon'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Icon</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Decent icon make information more clear and more friendly.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="AlertIcon" />
+                      <div className='card-body pb-0'>
+                        <div id='AlertIcon' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -448,36 +448,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-alert-demo-style">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">More types</strong>
+                    <div className='card card--example' id='components-alert-demo-style'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>More types</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         There are 4 types of Alert: <code>{'success'}</code>, <code>{'info'}</code>,{' '}
                         <code>{'warning'}</code>, <code>{'error'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="AlertStyle" />
+                      <div className='card-body pb-0'>
+                        <div id='AlertStyle' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

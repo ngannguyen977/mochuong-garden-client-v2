@@ -7,13 +7,13 @@ const Panel = Collapse.Panel
 class Empty extends React.Component {
   render() {
     return (
-      <section className="card">
-        <div className="card-header">
-          <div className="utils__title">
+      <section className='card'>
+        <div className='card-header'>
+          <div className='utils__title'>
             <strong>Empty Page</strong>
           </div>
         </div>
-        <div className="card-body">
+        <div className='card-body'>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
             has been the industry's standard dummy text ever since the 1500s, when an unknown

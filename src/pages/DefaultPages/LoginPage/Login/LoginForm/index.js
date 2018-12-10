@@ -32,45 +32,45 @@ class LoginForm extends React.Component {
     const { getFieldDecorator, isSubmitForm } = this.props.form
     return (
       <Form
-        layout="vertical"
+        layout='vertical'
         hideRequiredMark
         onSubmit={this.onSubmit(isSubmitForm)}
-        className="login-form"
+        className='login-form'
       >
         <FormItem>
-          <label className="form-label mb-0">Alias</label>
+          <label className='form-label mb-0'>Alias</label>
           {getFieldDecorator('alias', {
             initialValue: 'admin',
             rules: [{ required: true, message: 'Please input your alias!' }],
           })(
             <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
+              prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder='Username'
             />,
           )}
         </FormItem>
         <FormItem>
-          <label className="form-label mb-0">Username</label>
+          <label className='form-label mb-0'>Username</label>
           {getFieldDecorator('userName', {
             initialValue: 'admin',
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
+              prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder='Username'
             />,
           )}
         </FormItem>
         <FormItem>
-          <label className="form-label mb-0">Password</label>
+          <label className='form-label mb-0'>Password</label>
           {getFieldDecorator('password', {
             initialValue: 'Onsky@$32!',
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
             <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type="password"
-              placeholder="Password"
+              prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type='password'
+              placeholder='Password'
             />,
           )}
         </FormItem>
@@ -80,44 +80,44 @@ class LoginForm extends React.Component {
             initialValue: true,
           })(<Checkbox>Remember me</Checkbox>)}
           <a
-            className="login-form-forgot pull-right text-primary"
+            className='login-form-forgot pull-right text-primary'
             style={{ lineHeight: '36px' }}
-            href="javascript: void(0);"
+            href='javascript: void(0);'
           >
             Forgot password?
           </a>
         </FormItem>
-        <div className="form-actions">
+        <div className='form-actions'>
           <Button
-            type="primary"
-            className="login-form-button"
-            htmlType="submit"
+            type='primary'
+            className='login-form-button'
+            htmlType='submit'
             loading={isSubmitForm}
-            icon="check-circle"
+            icon='check-circle'
           >
             Sign in
           </Button>
-          <span className="ml-3 register-link">
-            <Link to="/register" className="text-primary utils__link--underlined">
+          <span className='ml-3 register-link'>
+            <Link to='/register' className='text-primary utils__link--underlined'>
               Register
             </Link>{' '}
             if you don't have account
           </span>
         </div>
-        <div className="form-group">
+        <div className='form-group'>
           <span>Use another service to Log In</span>
-          <div className="mt-2">
-            <a href="javascript: void(0);" className="btn btn-icon mr-2">
-              <i className="icmn-facebook" />
+          <div className='mt-2'>
+            <a href='javascript: void(0);' className='btn btn-icon mr-2'>
+              <i className='icmn-facebook' />
             </a>
-            <a href="javascript: void(0);" className="btn btn-icon mr-2">
-              <i className="icmn-google" />
+            <a href='javascript: void(0);' className='btn btn-icon mr-2'>
+              <i className='icmn-google' />
             </a>
-            <a href="javascript: void(0);" className="btn btn-icon mr-2">
-              <i className="icmn-windows" />
+            <a href='javascript: void(0);' className='btn btn-icon mr-2'>
+              <i className='icmn-windows' />
             </a>
-            <a href="javascript: void(0);" className="btn btn-icon mr-2">
-              <i className="icmn-twitter" />
+            <a href='javascript: void(0);' className='btn btn-icon mr-2'>
+              <i className='icmn-twitter' />
             </a>
           </div>
         </div>

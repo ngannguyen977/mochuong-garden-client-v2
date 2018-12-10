@@ -25,56 +25,56 @@ class CollapseItems extends React.Component {
 
   render() {
     return (
-      <div className="CollapseDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='CollapseDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Collapse</strong>
                   <a
-                    href="https://ant.design/components/collapse/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/collapse/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-collapse-demo-accordion">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Accordion</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-collapse-demo-accordion'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Accordion</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Accordion mode, only one panel can be expanded at a time. The first panel
                         will be expanded by default.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CollapseAccordion" />
+                      <div className='card-body pb-0'>
+                        <div id='CollapseAccordion' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -106,33 +106,33 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-collapse-demo-borderless">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Borderless</strong>
+                    <div className='card card--example' id='components-collapse-demo-borderless'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Borderless</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">A borderless style of Collapse.</div>
-                      <div className="card-body pb-0">
-                        <div id="CollapseBorderless" />
+                      <div className='card-body pb-0'>A borderless style of Collapse.</div>
+                      <div className='card-body pb-0'>
+                        <div id='CollapseBorderless' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -166,35 +166,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-collapse-demo-mix">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Nested panel</strong>
+                    <div className='card card--example' id='components-collapse-demo-mix'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Nested panel</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         <code>{'Collapse'}</code> is nested inside the <code>{'Collapse'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CollapseMix" />
+                      <div className='card-body pb-0'>
+                        <div id='CollapseMix' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -235,37 +235,37 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-collapse-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Collapse</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-collapse-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Collapse</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         More than one panel can be expanded at a time, the first panel is
                         initialized to be active in this case.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CollapseBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='CollapseBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -301,35 +301,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-collapse-demo-custom">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Custom Panel</strong>
+                    <div className='card card--example' id='components-collapse-demo-custom'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Custom Panel</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Customize the background, border and margin styles for each panel.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CollapseCustom" />
+                      <div className='card-body pb-0'>
+                        <div id='CollapseCustom' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -369,37 +369,37 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-collapse-demo-noarrow">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">No arrow</strong>
+                    <div className='card card--example' id='components-collapse-demo-noarrow'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>No arrow</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         You can disable showing arrow icon by passing{' '}
                         <code>{'showArrow={false}'}</code> to <code>{'CollapsePanel'}</code>{' '}
                         component.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CollapseNoarrow" />
+                      <div className='card-body pb-0'>
+                        <div id='CollapseNoarrow' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

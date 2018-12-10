@@ -55,11 +55,11 @@ export default function(ReactDOM, mountNode) {
           render: (text, record) => {
             const { editable } = record
             return (
-              <div className="editable-row-operations">
+              <div className='editable-row-operations'>
                 {editable ? (
                   <span>
                     <a onClick={() => this.save(record.key)}>Save</a>
-                    <Popconfirm title="Sure to cancel?" onConfirm={() => this.cancel(record.key)}>
+                    <Popconfirm title='Sure to cancel?' onConfirm={() => this.cancel(record.key)}>
                       <a>Cancel</a>
                     </Popconfirm>
                   </span>

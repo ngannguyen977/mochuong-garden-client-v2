@@ -68,42 +68,42 @@ class SettingsSider extends React.Component {
         className={'settingsSider ' + (layoutState.settingsOpened ? 'settingsSider--opened' : '')}
       >
         <Scrollbars style={{ height: '100vh' }}>
-          <div className="settingsSider__container">
-            <div className="settingsSider__title">
+          <div className='settingsSider__container'>
+            <div className='settingsSider__title'>
               Theme Settings
-              <span className="fa fa-times" onClick={this.closeSettings} />
+              <span className='fa fa-times' onClick={this.closeSettings} />
             </div>
-            <div className="settingsSider__description">
+            <div className='settingsSider__description'>
               This component "SettingsSider" gives possibility to construct custom blocks with any
               widgets, components and elements inside, like this theme settings
             </div>
-            <div className="settingsSider__item">
+            <div className='settingsSider__item'>
               <Switch checked={layoutState.isMenuTop} onChange={this.setIsMenuTop} />
-              <span className="settingsSider__itemLabel">Menu Top (Horizontal)</span>
+              <span className='settingsSider__itemLabel'>Menu Top (Horizontal)</span>
             </div>
-            <div className="settingsSider__item">
+            <div className='settingsSider__item'>
               <Switch checked={layoutState.menuCollapsed} onChange={this.setMenuCollapsed} />
-              <span className="settingsSider__itemLabel">Collapsed Menu</span>
+              <span className='settingsSider__itemLabel'>Collapsed Menu</span>
             </div>
-            <div className="settingsSider__item">
+            <div className='settingsSider__item'>
               <Switch checked={layoutState.menuShadow} onChange={this.setMenuShadow} />
-              <span className="settingsSider__itemLabel">Menu Shadow</span>
+              <span className='settingsSider__itemLabel'>Menu Shadow</span>
             </div>
-            <div className="settingsSider__item">
+            <div className='settingsSider__item'>
               <Switch checked={layoutState.themeLight} onChange={this.setThemeLight} />
-              <span className="settingsSider__itemLabel">Light Theme</span>
+              <span className='settingsSider__itemLabel'>Light Theme</span>
             </div>
-            <div className="settingsSider__item">
+            <div className='settingsSider__item'>
               <Switch checked={layoutState.borderLess} onChange={this.setBorderLess} />
-              <span className="settingsSider__itemLabel">Borderless Cards</span>
+              <span className='settingsSider__itemLabel'>Borderless Cards</span>
             </div>
-            <div className="settingsSider__item">
+            <div className='settingsSider__item'>
               <Switch checked={layoutState.squaredBorders} onChange={this.setSquaredBorders} />
-              <span className="settingsSider__itemLabel">Squared Borders</span>
+              <span className='settingsSider__itemLabel'>Squared Borders</span>
             </div>
-            <div className="settingsSider__item">
+            <div className='settingsSider__item'>
               <Switch checked={layoutState.fixedWidth} onChange={this.setFixedWidth} />
-              <span className="settingsSider__itemLabel">Fixed Width</span>
+              <span className='settingsSider__itemLabel'>Fixed Width</span>
             </div>
           </div>
         </Scrollbars>

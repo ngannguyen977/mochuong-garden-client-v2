@@ -27,56 +27,56 @@ class BadgeItems extends React.Component {
 
   render() {
     return (
-      <div className="BadgeDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='BadgeDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Badge</strong>
                   <a
-                    href="https://ant.design/components/badge/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/badge/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-badge-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-badge-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Simplest Usage. Badge will be hidden when <code>{'count'}</code> is{' '}
                         <code>{'0'}</code>, but we can use <code>{'showZero'}</code> to show it.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BadgeBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='BadgeBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -98,36 +98,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-badge-demo-dot">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Red badge</strong>
+                    <div className='card card--example' id='components-badge-demo-dot'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Red badge</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         This will simply display a red badge, without a specific count. If count
                         equals 0, it won't display the dot.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BadgeDot" />
+                      <div className='card-body pb-0'>
+                        <div id='BadgeDot' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -152,35 +152,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-badge-demo-no-wrapper">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Standalone</strong>
+                    <div className='card card--example' id='components-badge-demo-no-wrapper'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Standalone</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Used in standalone when children is empty.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BadgeNowrapper" />
+                      <div className='card-body pb-0'>
+                        <div id='BadgeNowrapper' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -199,33 +199,33 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-badge-demo-status">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Status</strong>
+                    <div className='card card--example' id='components-badge-demo-status'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Status</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Standalone badge with status.</div>
-                      <div className="card-body pb-0">
-                        <div id="BadgeStatus" />
+                      <div className='card-body pb-0'>Standalone badge with status.</div>
+                      <div className='card-body pb-0'>
+                        <div id='BadgeStatus' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -257,36 +257,36 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-badge-demo-change">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Dynamic</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-badge-demo-change'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Dynamic</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         The count will be animated as it changes.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BadgeChange" />
+                      <div className='card-body pb-0'>
+                        <div id='BadgeChange' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -350,35 +350,35 @@ ReactDOM.render(<Demo />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-badge-demo-link">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Clickable</strong>
+                    <div className='card card--example' id='components-badge-demo-link'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Clickable</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         The badge can be wrapped with <code>{'a'}</code> tag to make it linkable.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BadgeLink" />
+                      <div className='card-body pb-0'>
+                        <div id='BadgeLink' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -397,37 +397,37 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-badge-demo-overflow">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Overflow Count</strong>
+                    <div className='card card--example' id='components-badge-demo-overflow'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Overflow Count</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         <code>{'${overflowCount}+'}</code> is displayed when count is larger than{' '}
                         <code>{'overflowCount'}</code>. The default value of{' '}
                         <code>{'overflowCount'}</code> is <code>{'99'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BadgeOverflow" />
+                      <div className='card-body pb-0'>
+                        <div id='BadgeOverflow' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

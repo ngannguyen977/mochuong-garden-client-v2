@@ -11,7 +11,7 @@ export default function(ReactDOM, mountNode) {
       dataIndex: 'name',
       key: 'name',
       width: 150,
-      render: text => <a href="javascript: void(0);">{text}</a>,
+      render: text => <a href='javascript: void(0);'>{text}</a>,
     },
     {
       title: 'Age',
@@ -30,12 +30,12 @@ export default function(ReactDOM, mountNode) {
       width: 360,
       render: (text, record) => (
         <span>
-          <a href="javascript: void(0);">Action 一 {record.name}</a>
-          <Divider type="vertical" />
-          <a href="javascript: void(0);">Delete</a>
-          <Divider type="vertical" />
-          <a href="javascript: void(0);" className="ant-dropdown-link">
-            More actions <Icon type="down" />
+          <a href='javascript: void(0);'>Action 一 {record.name}</a>
+          <Divider type='vertical' />
+          <a href='javascript: void(0);'>Delete</a>
+          <Divider type='vertical' />
+          <a href='javascript: void(0);' className='ant-dropdown-link'>
+            More actions <Icon type='down' />
           </a>
         </span>
       ),
@@ -119,48 +119,48 @@ export default function(ReactDOM, mountNode) {
       const state = this.state
       return (
         <div>
-          <div className="components-table-demo-control-bar">
-            <Form layout="inline">
-              <FormItem label="Bordered">
+          <div className='components-table-demo-control-bar'>
+            <Form layout='inline'>
+              <FormItem label='Bordered'>
                 <Switch checked={state.bordered} onChange={this.handleToggle('bordered')} />
               </FormItem>
-              <FormItem label="loading">
+              <FormItem label='loading'>
                 <Switch checked={state.loading} onChange={this.handleToggle('loading')} />
               </FormItem>
-              <FormItem label="Title">
+              <FormItem label='Title'>
                 <Switch checked={!!state.title} onChange={this.handleTitleChange} />
               </FormItem>
-              <FormItem label="Column Header">
+              <FormItem label='Column Header'>
                 <Switch checked={!!state.showHeader} onChange={this.handleHeaderChange} />
               </FormItem>
-              <FormItem label="Footer">
+              <FormItem label='Footer'>
                 <Switch checked={!!state.footer} onChange={this.handleFooterChange} />
               </FormItem>
-              <FormItem label="Expandable">
+              <FormItem label='Expandable'>
                 <Switch checked={!!state.expandedRowRender} onChange={this.handleExpandChange} />
               </FormItem>
-              <FormItem label="Checkbox">
+              <FormItem label='Checkbox'>
                 <Switch checked={!!state.rowSelection} onChange={this.handleRowSelectionChange} />
               </FormItem>
-              <FormItem label="Fixed Header">
+              <FormItem label='Fixed Header'>
                 <Switch checked={!!state.scroll} onChange={this.handleScollChange} />
               </FormItem>
-              <FormItem label="Size">
-                <Radio.Group size="default" value={state.size} onChange={this.handleSizeChange}>
-                  <Radio.Button value="default">Default</Radio.Button>
-                  <Radio.Button value="middle">Middle</Radio.Button>
-                  <Radio.Button value="small">Small</Radio.Button>
+              <FormItem label='Size'>
+                <Radio.Group size='default' value={state.size} onChange={this.handleSizeChange}>
+                  <Radio.Button value='default'>Default</Radio.Button>
+                  <Radio.Button value='middle'>Middle</Radio.Button>
+                  <Radio.Button value='small'>Small</Radio.Button>
                 </Radio.Group>
               </FormItem>
-              <FormItem label="Pagination">
+              <FormItem label='Pagination'>
                 <Radio.Group
                   value={state.pagination ? state.pagination.position : 'none'}
                   onChange={this.handlePaginationChange}
                 >
-                  <Radio.Button value="top">Top</Radio.Button>
-                  <Radio.Button value="bottom">Bottom</Radio.Button>
-                  <Radio.Button value="both">Both</Radio.Button>
-                  <Radio.Button value="none">None</Radio.Button>
+                  <Radio.Button value='top'>Top</Radio.Button>
+                  <Radio.Button value='bottom'>Bottom</Radio.Button>
+                  <Radio.Button value='both'>Both</Radio.Button>
+                  <Radio.Button value='none'>None</Radio.Button>
                 </Radio.Group>
               </FormItem>
             </Form>

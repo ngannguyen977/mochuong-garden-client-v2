@@ -15,7 +15,7 @@ export default function(ReactDOM, mountNode) {
             style.borderRadius = '50%'
           }
           return (
-            <div className="ant-calendar-date" style={style}>
+            <div className='ant-calendar-date' style={style}>
               {current.date()}
             </div>
           )
@@ -29,7 +29,7 @@ export default function(ReactDOM, mountNode) {
             style.borderRadius = '50%'
           }
           return (
-            <div className="ant-calendar-date" style={style}>
+            <div className='ant-calendar-date' style={style}>
               {current.date()}
             </div>
           )

@@ -9,11 +9,11 @@ export default function(ReactDOM, mountNode) {
     <Menu>
       <Menu.Item>1st menu item</Menu.Item>
       <Menu.Item>2nd menu item</Menu.Item>
-      <SubMenu title="sub menu">
+      <SubMenu title='sub menu'>
         <Menu.Item>3rd menu item</Menu.Item>
         <Menu.Item>4th menu item</Menu.Item>
       </SubMenu>
-      <SubMenu title="disabled sub menu" disabled>
+      <SubMenu title='disabled sub menu' disabled>
         <Menu.Item>5d menu item</Menu.Item>
         <Menu.Item>6th menu item</Menu.Item>
       </SubMenu>
@@ -22,8 +22,8 @@ export default function(ReactDOM, mountNode) {
 
   ReactDOM.render(
     <Dropdown overlay={menu}>
-      <a className="ant-dropdown-link" href="javascript: void(0);">
-        Cascading menu <Icon type="down" />
+      <a className='ant-dropdown-link' href='javascript: void(0);'>
+        Cascading menu <Icon type='down' />
       </a>
     </Dropdown>,
     mountNode,

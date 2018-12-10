@@ -23,36 +23,36 @@ class ProductCard extends React.Component {
       productStatus,
     } = this.state
     return (
-      <div className="productCard">
-        <div className="productCard__img">
+      <div className='productCard'>
+        <div className='productCard__img'>
           {productStatus === 'new' && (
-            <div className="productCard__status">
-              <span className="productCard__status__title">New</span>
+            <div className='productCard__status'>
+              <span className='productCard__status__title'>New</span>
             </div>
           )}
-          <div className="productCard__like">
-            <i className="icmn-heart" />
+          <div className='productCard__like'>
+            <i className='icmn-heart' />
           </div>
-          <a href="javascript: void(0);">
-            <img src={productImg} alt="" />
+          <a href='javascript: void(0);'>
+            <img src={productImg} alt='' />
           </a>
         </div>
-        <div className="productCard__title">
-          <a href="javascript: void(0);">{productName}</a>
-          <div className="productCard__price">
+        <div className='productCard__title'>
+          <a href='javascript: void(0);'>{productName}</a>
+          <div className='productCard__price'>
             {productPrice}
-            <div className="productCard__price--old">{productOldPrice}</div>
+            <div className='productCard__price--old'>{productOldPrice}</div>
           </div>
         </div>
-        <div className="productCard__descr">
-          <div className="productCard__descr__sizes">
-            <Tooltip placement="top" title="Size S">
+        <div className='productCard__descr'>
+          <div className='productCard__descr__sizes'>
+            <Tooltip placement='top' title='Size S'>
               <span>S</span>
             </Tooltip>
-            <Tooltip placement="top" title="Size M">
-              <span title="Size M">M</span>
+            <Tooltip placement='top' title='Size M'>
+              <span title='Size M'>M</span>
             </Tooltip>
-            <Tooltip placement="top" title="Size XL">
+            <Tooltip placement='top' title='Size XL'>
               <span>XL</span>
             </Tooltip>
           </div>

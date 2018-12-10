@@ -35,7 +35,7 @@ export default function(ReactDOM, mountNode) {
         children.push(
           <Col span={8} key={i} style={{ display: i < count ? 'block' : 'none' }}>
             <FormItem label={`Field ${i}`}>
-              {getFieldDecorator(`field-${i}`)(<Input placeholder="placeholder" />)}
+              {getFieldDecorator(`field-${i}`)(<Input placeholder='placeholder' />)}
             </FormItem>
           </Col>,
         )
@@ -45,11 +45,11 @@ export default function(ReactDOM, mountNode) {
 
     render() {
       return (
-        <Form className="ant-advanced-search-form" onSubmit={this.handleSearch}>
+        <Form className='ant-advanced-search-form' onSubmit={this.handleSearch}>
           <Row gutter={24}>{this.getFields()}</Row>
           <Row>
             <Col span={24} style={{ textAlign: 'right' }}>
-              <Button type="primary" htmlType="submit">
+              <Button type='primary' htmlType='submit'>
                 Search
               </Button>
               <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>
@@ -69,7 +69,7 @@ export default function(ReactDOM, mountNode) {
   ReactDOM.render(
     <div>
       <WrappedAdvancedSearchForm />
-      <div className="search-result-list">Search Result List</div>
+      <div className='search-result-list'>Search Result List</div>
     </div>,
     mountNode,
   )

@@ -30,13 +30,13 @@ export default function(ReactDOM, mountNode) {
         {item.query} 在
         <a
           href={`https://s.taobao.com/search?q=${item.query}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           {item.category}
         </a>
         区块中
-        <span className="global-search-item-count">约 {item.count} 个结果</span>
+        <span className='global-search-item-count'>约 {item.count} 个结果</span>
       </Option>
     )
   }
@@ -55,21 +55,21 @@ export default function(ReactDOM, mountNode) {
     render() {
       const { dataSource } = this.state
       return (
-        <div className="global-search-wrapper" style={{ width: 300 }}>
+        <div className='global-search-wrapper' style={{ width: 300 }}>
           <AutoComplete
-            className="global-search"
-            size="large"
+            className='global-search'
+            size='large'
             style={{ width: '100%' }}
             dataSource={dataSource.map(renderOption)}
             onSelect={onSelect}
             onSearch={this.handleSearch}
-            placeholder="input here"
-            optionLabelProp="text"
+            placeholder='input here'
+            optionLabelProp='text'
           >
             <Input
               suffix={
-                <Button className="search-btn" size="large" type="primary">
-                  <Icon type="search" />
+                <Button className='search-btn' size='large' type='primary'>
+                  <Icon type='search' />
                 </Button>
               }
             />

@@ -19,53 +19,53 @@ class BreadcrumbItems extends React.Component {
 
   render() {
     return (
-      <div className="BreadcrumbDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='BreadcrumbDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Breadcrumb</strong>
                   <a
-                    href="https://ant.design/components/breadcrumb/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/breadcrumb/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-breadcrumb-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic Usage</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-breadcrumb-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic Usage</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">The simplest use</div>
-                      <div className="card-body pb-0">
-                        <div id="BreadcrumbBasic" />
+                      <div className='card-body pb-0'>The simplest use</div>
+                      <div className='card-body pb-0'>
+                        <div id='BreadcrumbBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -85,36 +85,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-breadcrumb-demo-router">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">React Router Integration</strong>
+                    <div className='card card--example' id='components-breadcrumb-demo-router'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>React Router Integration</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Used together with <code>{'react-router@2'}</code>{' '}
                         <code>{'react-router@3'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BreadcrumbRouter" />
+                      <div className='card-body pb-0'>
+                        <div id='BreadcrumbRouter' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -161,35 +161,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-breadcrumb-demo-withIcon">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">With an Icon</strong>
+                    <div className='card card--example' id='components-breadcrumb-demo-withIcon'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>With an Icon</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         The icon should be placed in front of the text.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BreadcrumbWithIcon" />
+                      <div className='card-body pb-0'>
+                        <div id='BreadcrumbWithIcon' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -216,36 +216,36 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-breadcrumb-demo-router-4">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Other Router Integration</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-breadcrumb-demo-router-4'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Other Router Integration</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Used together with <code>{'react-router@4'}</code> or other router.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BreadcrumbRouter4" />
+                      <div className='card-body pb-0'>
+                        <div id='BreadcrumbRouter4' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -317,36 +317,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-breadcrumb-demo-separator">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Configuring the Separator</strong>
+                    <div className='card card--example' id='components-breadcrumb-demo-separator'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Configuring the Separator</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         The separator can be customized by setting the separator property:
                         separator=">"
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="BreadcrumbSeparator" />
+                      <div className='card-body pb-0'>
+                        <div id='BreadcrumbSeparator' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

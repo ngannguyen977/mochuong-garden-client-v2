@@ -99,8 +99,8 @@ class MenuLeft extends React.Component {
     return items.map(menuItem => {
       if (menuItem.children) {
         let subMenuTitle = (
-          <span className="menuLeft__title-wrap" key={menuItem.key}>
-            <span className="menuLeft__item-title">{menuItem.title}</span>
+          <span className='menuLeft__title-wrap' key={menuItem.key}>
+            <span className='menuLeft__item-title'>{menuItem.title}</span>
             {menuItem.icon && <span className={menuItem.icon + ' menuLeft__icon'} />}
           </span>
         )
@@ -126,21 +126,21 @@ class MenuLeft extends React.Component {
           onClick={
             this.props.isMobile
               ? () => {
-                  dispatch(setLayoutState({ menuCollapsed: false }))
-                }
+                dispatch(setLayoutState({ menuCollapsed: false }))
+              }
               : undefined
           }
         >
-          <span className="menuLeft__item-title">{title}</span>
+          <span className='menuLeft__item-title'>{title}</span>
           {icon && <span className={icon + ' menuLeft__icon'} />}
         </Link>
       </Menu.Item>
     ) : (
-      <Menu.Item key={key} disabled={disabled}>
-        <span className="menuLeft__item-title">{title}</span>
-        {icon && <span className={icon + ' menuLeft__icon'} />}
-      </Menu.Item>
-    )
+          <Menu.Item key={key} disabled={disabled}>
+            <span className='menuLeft__item-title'>{title}</span>
+            {icon && <span className={icon + ' menuLeft__icon'} />}
+          </Menu.Item>
+        )
   }
 
   onCollapse = (value, type) => {
@@ -191,17 +191,17 @@ class MenuLeft extends React.Component {
     }
     const params = isMobile ? paramsMobile : paramsDesktop
     return (
-      <Sider {...params} className="menuLeft">
-        <div className="menuLeft__logo">
+      <Sider {...params} className='menuLeft'>
+        <div className='menuLeft__logo'>
           {params.collapsed ? (
-            <div className="menuLeft__logoContainer menuLeft__logoContainer--collapsed">
-              <img src="resources/images/logo-inverse-mobile.png" alt="" />
+            <div className='menuLeft__logoContainer menuLeft__logoContainer--collapsed'>
+              <img src='resources/images/logo-inverse-mobile.png' alt='' />
             </div>
           ) : (
-            <div className="menuLeft__logoContainer">
-              <img src="resources/images/logo-inverse.png" alt="" />
-            </div>
-          )}
+              <div className='menuLeft__logoContainer'>
+                <img src='resources/images/logo-inverse.png' alt='' />
+              </div>
+            )}
         </div>
         <Scrollbars
           autoHide
@@ -213,11 +213,11 @@ class MenuLeft extends React.Component {
             selectedKeys={[selectedKeys]}
             openKeys={openKeys}
             onOpenChange={this.onOpenChange}
-            mode="inline"
-            className="menuLeft__navigation"
+            mode='inline'
+            className='menuLeft__navigation'
           >
             <Menu.Item key={'settings'}>
-              <span className="menuLeft__item-title">Theme Settings</span>
+              <span className='menuLeft__item-title'>Theme Settings</span>
               <span
                 className={'icmn icmn-cog menuLeft__icon utils__spin-delayed--pseudo-selector'}
               />

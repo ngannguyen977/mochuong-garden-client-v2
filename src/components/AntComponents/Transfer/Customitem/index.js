@@ -34,7 +34,7 @@ export default function(ReactDOM, mountNode) {
     }
     renderItem = item => {
       const customLabel = (
-        <span className="custom-item">
+        <span className='custom-item'>
           {item.title} - {item.description}
         </span>
       )

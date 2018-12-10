@@ -24,16 +24,16 @@ export default function(ReactDOM, mountNode) {
     render() {
       const { value, editable } = this.state
       return (
-        <div className="editable-cell">
+        <div className='editable-cell'>
           {editable ? (
-            <div className="editable-cell-input-wrapper">
+            <div className='editable-cell-input-wrapper'>
               <Input value={value} onChange={this.handleChange} onPressEnter={this.check} />
-              <Icon type="check" className="editable-cell-icon-check" onClick={this.check} />
+              <Icon type='check' className='editable-cell-icon-check' onClick={this.check} />
             </div>
           ) : (
-            <div className="editable-cell-text-wrapper">
+            <div className='editable-cell-text-wrapper'>
               {value || ' '}
-              <Icon type="edit" className="editable-cell-icon" onClick={this.edit} />
+              <Icon type='edit' className='editable-cell-icon' onClick={this.edit} />
             </div>
           )}
         </div>
@@ -66,8 +66,8 @@ export default function(ReactDOM, mountNode) {
           dataIndex: 'operation',
           render: (text, record) => {
             return this.state.dataSource.length > 1 ? (
-              <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(record.key)}>
-                <a href="javascript: void(0);">Delete</a>
+              <Popconfirm title='Sure to delete?' onConfirm={() => this.onDelete(record.key)}>
+                <a href='javascript: void(0);'>Delete</a>
               </Popconfirm>
             ) : null
           },
@@ -124,7 +124,7 @@ export default function(ReactDOM, mountNode) {
       const columns = this.columns
       return (
         <div>
-          <Button className="editable-add-btn" onClick={this.handleAdd}>
+          <Button className='editable-add-btn' onClick={this.handleAdd}>
             Add
           </Button>
           <Table bordered dataSource={dataSource} columns={columns} />

@@ -3,33 +3,33 @@ import React from 'react'
 class MailTemplates extends React.Component {
   render() {
     return (
-      <section className="card">
-        <div className="card-header">
-          <div className="utils__title">
+      <section className='card'>
+        <div className='card-header'>
+          <div className='utils__title'>
             <strong>Mail Templates</strong>
           </div>
         </div>
-        <div className="card-body">
-          <div className="row">
-            <div className="col-xl-6 col-lg-12">
-              <h5 className="text-black">
+        <div className='card-body'>
+          <div className='row'>
+            <div className='col-xl-6 col-lg-12'>
+              <h5 className='text-black'>
                 <strong>Simple Email</strong>
               </h5>
-              <p className="text-muted mb-2">Element: see source code</p>
-              <div className="mb-5">
+              <p className='text-muted mb-2'>Element: see source code</p>
+              <div className='mb-5'>
                 <div style={{ background: '#eceff4', padding: '50px 20px', color: '#514d6a' }}>
                   <div style={{ maxWidth: '700px', margin: '0px auto', fontSize: '14px' }}>
                     <table
-                      cellPadding="0"
-                      cellSpacing="0"
+                      cellPadding='0'
+                      cellSpacing='0'
                       style={{ width: '100%', marginBottom: '20px', border: '0px' }}
                     >
                       <tbody>
                         <tr>
                           <td style={{ verticalAlign: 'top' }}>
                             <img
-                              src="resources/images/logo.png"
-                              alt="OnSky IoT Website Application"
+                              src='resources/images/logo.png'
+                              alt='OnSky IoT Website Application'
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -41,8 +41,8 @@ class MailTemplates extends React.Component {
                     </table>
                     <div style={{ padding: '40px 40px 20px 40px', background: '#fff' }}>
                       <table
-                        cellPadding="0"
-                        cellSpacing="0"
+                        cellPadding='0'
+                        cellSpacing='0'
                         style={{ width: '100%', border: '0px' }}
                       >
                         <tbody>
@@ -54,7 +54,7 @@ class MailTemplates extends React.Component {
                                 design and clear call to action.
                               </p>
                               <a
-                                href="javascript: void(0);"
+                                href='javascript: void(0);'
                                 style={{
                                   display: 'inline-block',
                                   padding: '11px 30px 6px',
@@ -90,7 +90,7 @@ class MailTemplates extends React.Component {
                         <br />
                         Don't like these emails?{' '}
                         <a
-                          href="javascript: void(0);"
+                          href='javascript: void(0);'
                           style={{
                             color: '#a09bb9',
                             textDecoration: 'underline',
@@ -106,28 +106,28 @@ class MailTemplates extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-xl-6 col-lg-12">
-              <h5 className="text-black">
+            <div className='col-xl-6 col-lg-12'>
+              <h5 className='text-black'>
                 <strong>Email w/ Header</strong>
               </h5>
-              <p className="text-muted mb-2">Element: see source code</p>
-              <div className="mb-5">
+              <p className='text-muted mb-2'>Element: see source code</p>
+              <div className='mb-5'>
                 <div
-                  width="100%"
+                  width='100%'
                   style={{ background: '#eceff4', padding: '50px 20px', color: '#514d6a' }}
                 >
                   <div style={{ maxWidth: '700px', margin: '0px auto', fontSize: '14px' }}>
                     <table
-                      cellPadding="0"
-                      cellSpacing="0"
+                      cellPadding='0'
+                      cellSpacing='0'
                       style={{ width: '100%', marginBottom: '20px', border: '0px' }}
                     >
                       <tbody>
                         <tr>
                           <td style={{ verticalAlign: 'top' }}>
                             <img
-                              src="resources/images/logo.png"
-                              alt="OnSky IoT Website Application"
+                              src='resources/images/logo.png'
+                              alt='OnSky IoT Website Application'
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -139,8 +139,8 @@ class MailTemplates extends React.Component {
                     </table>
                     <div style={{ padding: '40px 40px 20px 40px', background: '#fff' }}>
                       <table
-                        cellPadding="0"
-                        cellSpacing="0"
+                        cellPadding='0'
+                        cellSpacing='0'
                         style={{ width: '100%', border: '0px' }}
                       >
                         <tbody>
@@ -161,7 +161,7 @@ class MailTemplates extends React.Component {
                               </p>
                               <div style={{ textAlign: 'center' }}>
                                 <a
-                                  href="javascript: void(0);"
+                                  href='javascript: void(0);'
                                   style={{
                                     display: 'inline-block',
                                     padding: '11px 30px 6px',
@@ -201,7 +201,7 @@ class MailTemplates extends React.Component {
                         <br />
                         Don't like these emails?{' '}
                         <a
-                          href="javascript: void(0);"
+                          href='javascript: void(0);'
                           style={{ color: '#a09bb9', textDecoration: 'underline' }}
                         >
                           Unsubscribe
@@ -215,13 +215,13 @@ class MailTemplates extends React.Component {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-xl-6 col-lg-12">
-              <h5 className="text-black">
+          <div className='row'>
+            <div className='col-xl-6 col-lg-12'>
+              <h5 className='text-black'>
                 <strong>Ecommerce Email</strong>
               </h5>
-              <p className="text-muted mb-2">Element: see source code</p>
-              <div className="mb-5">
+              <p className='text-muted mb-2'>Element: see source code</p>
+              <div className='mb-5'>
                 <div
                   style={{
                     width: '100%',
@@ -232,16 +232,16 @@ class MailTemplates extends React.Component {
                 >
                   <div style={{ maxWidth: '700px', margin: '0px auto', fontSize: '14px' }}>
                     <table
-                      cellPadding="0"
-                      cellSpacing="0"
+                      cellPadding='0'
+                      cellSpacing='0'
                       style={{ width: '100%', marginBottom: '20px', border: '0px' }}
                     >
                       <tbody>
                         <tr>
                           <td style={{ verticalAlign: 'top' }}>
                             <img
-                              src="resources/images/logo.png"
-                              alt="OnSky IoT Website Application"
+                              src='resources/images/logo.png'
+                              alt='OnSky IoT Website Application'
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -253,8 +253,8 @@ class MailTemplates extends React.Component {
                     </table>
                     <div style={{ padding: '40px 40px 20px 40px', background: '#fff' }}>
                       <table
-                        cellPadding="0"
-                        cellSpacing="0"
+                        cellPadding='0'
+                        cellSpacing='0'
                         style={{ width: '100%', border: '0px' }}
                       >
                         <tbody>
@@ -285,8 +285,8 @@ class MailTemplates extends React.Component {
                                 Your Order #00002345
                               </h5>
                               <table
-                                cellPadding="0"
-                                cellSpacing="0"
+                                cellPadding='0'
+                                cellSpacing='0'
                                 style={{ width: '100%', border: '0px' }}
                               >
                                 <tbody>
@@ -530,8 +530,8 @@ class MailTemplates extends React.Component {
                                 Your Details
                               </h5>
                               <table
-                                cellPadding="0"
-                                cellSpacing="0"
+                                cellPadding='0'
+                                cellSpacing='0'
                                 style={{ width: '100%', border: '0px' }}
                               >
                                 <tbody>
@@ -596,7 +596,7 @@ class MailTemplates extends React.Component {
                               <p style={{ textAlign: 'center' }}>
                                 Notice something wrong?{' '}
                                 <a
-                                  href="javascript: void(0);"
+                                  href='javascript: void(0);'
                                   style={{ color: '#01a8fe', textDecoration: 'underline' }}
                                 >
                                   Contact our support team
@@ -621,7 +621,7 @@ class MailTemplates extends React.Component {
                         <br />
                         Don't like these emails?{' '}
                         <a
-                          href="javascript: void(0);"
+                          href='javascript: void(0);'
                           style={{ color: '#a09bb9', textDecoration: 'underline' }}
                         >
                           Unsubscribe
@@ -634,28 +634,28 @@ class MailTemplates extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-xl-6 col-lg-12">
-              <h5 className="text-black">
+            <div className='col-xl-6 col-lg-12'>
+              <h5 className='text-black'>
                 <strong>Email w/ Action</strong>
               </h5>
-              <p className="text-muted mb-2">Element: see source code</p>
-              <div className="mb-5">
+              <p className='text-muted mb-2'>Element: see source code</p>
+              <div className='mb-5'>
                 <div
-                  width="100%"
+                  width='100%'
                   style={{ background: '#eceff4', padding: '50px 20px', color: '#514d6a' }}
                 >
                   <div style={{ maxWidth: '700px', margin: '0px auto', fontSize: '14px' }}>
                     <table
-                      cellPadding="0"
-                      cellSpacing="0"
+                      cellPadding='0'
+                      cellSpacing='0'
                       style={{ width: '100%', marginBottom: '20px', border: '0px' }}
                     >
                       <tbody>
                         <tr>
                           <td style={{ verticalAlign: 'top' }}>
                             <img
-                              src="resources/images/logo.png"
-                              alt="OnSky IoT Website Application"
+                              src='resources/images/logo.png'
+                              alt='OnSky IoT Website Application'
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -667,8 +667,8 @@ class MailTemplates extends React.Component {
                     </table>
                     <div style={{ padding: '40px 40px 20px 40px', background: '#fff' }}>
                       <table
-                        cellPadding="0"
-                        cellSpacing="0"
+                        cellPadding='0'
+                        cellSpacing='0'
                         style={{ width: '100%', border: '0px' }}
                       >
                         <tbody>
@@ -711,7 +711,7 @@ class MailTemplates extends React.Component {
                               <p>Congratulations! Something good has appened.</p>
                               <div style={{ textAlign: 'center' }}>
                                 <a
-                                  href="javascript: void(0);"
+                                  href='javascript: void(0);'
                                   style={{
                                     display: 'inline-block',
                                     padding: '11px 30px 6px',
@@ -744,7 +744,7 @@ class MailTemplates extends React.Component {
                         <br />
                         Don't like these emails?{' '}
                         <a
-                          href="javascript: void(0);"
+                          href='javascript: void(0);'
                           style={{ color: '#a09bb9', textDecoration: 'underline' }}
                         >
                           Unsubscribe

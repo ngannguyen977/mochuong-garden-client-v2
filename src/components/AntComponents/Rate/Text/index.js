@@ -15,7 +15,7 @@ export default function(ReactDOM, mountNode) {
       return (
         <span>
           <Rate onChange={this.handleChange} value={value} />
-          {value && <span className="ant-rate-text">{value} stars</span>}
+          {value && <span className='ant-rate-text'>{value} stars</span>}
         </span>
       )
     }

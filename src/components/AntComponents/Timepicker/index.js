@@ -29,56 +29,56 @@ class TimepickerItems extends React.Component {
 
   render() {
     return (
-      <div className="TimepickerDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='TimepickerDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>TimePicker</strong>
                   <a
-                    href="https://ant.design/components/time-picker/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/time-picker/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-time-picker-demo-12hours">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">12 hours</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-time-picker-demo-12hours'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>12 hours</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         TimePicker of 12 hours format, with default format{' '}
                         <code>{'h:mm:ss a'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="Timepicker12hours" />
+                      <div className='card-body pb-0'>
+                        <div id='Timepicker12hours' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -101,36 +101,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-time-picker-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic</strong>
+                    <div className='card card--example' id='components-time-picker-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Click <code>{'TimePicker'}</code>, and then we could select or input a time
                         in panel.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="TimepickerBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='TimepickerBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -152,38 +152,38 @@ ReactDOM.render(
                       </div>
                     </div>
                     <div
-                      className="card card--example"
-                      id="components-time-picker-demo-hide-column"
+                      className='card card--example'
+                      id='components-time-picker-demo-hide-column'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Hour and minute</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Hour and minute</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         While part of <code>{'format'}</code> is omitted, the corresponding column
                         in panel will disappear, too.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="TimepickerHidecolumn" />
+                      <div className='card-body pb-0'>
+                        <div id='TimepickerHidecolumn' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -201,36 +201,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-time-picker-demo-size">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Three Sizes</strong>
+                    <div className='card card--example' id='components-time-picker-demo-size'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Three Sizes</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         The input box comes in three sizes. large is used in the form, while the
                         medium size is the default.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="TimepickerSize" />
+                      <div className='card-body pb-0'>
+                        <div id='TimepickerSize' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -251,36 +251,36 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-time-picker-demo-addon">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Addon</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-time-picker-demo-addon'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Addon</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Render addon contents to timepicker panel's bottom.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="TimepickerAddon" />
+                      <div className='card-body pb-0'>
+                        <div id='TimepickerAddon' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -317,35 +317,35 @@ ReactDOM.render(<TimePickerAddonDemo />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-time-picker-demo-disabled">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">disabled</strong>
+                    <div className='card card--example' id='components-time-picker-demo-disabled'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>disabled</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         A disabled state of the <code>{'TimePicker'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="TimepickerDisabled" />
+                      <div className='card-body pb-0'>
+                        <div id='TimepickerDisabled' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -362,38 +362,38 @@ ReactDOM.render(
                       </div>
                     </div>
                     <div
-                      className="card card--example"
-                      id="components-time-picker-demo-interval-options"
+                      className='card card--example'
+                      id='components-time-picker-demo-interval-options'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">interval option</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>interval option</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Show stepped options by <code>{'hourStep'}</code>{' '}
                         <code>{'minuteStep'}</code> <code>{'secondStep'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="TimepickerIntervaloptions" />
+                      <div className='card-body pb-0'>
+                        <div id='TimepickerIntervaloptions' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -408,36 +408,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-time-picker-demo-value">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Under Control</strong>
+                    <div className='card card--example' id='components-time-picker-demo-value'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Under Control</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         <code>{'value'}</code> and <code>{'onChange'}</code> should be used
                         together,
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="TimepickerValue" />
+                      <div className='card-body pb-0'>
+                        <div id='TimepickerValue' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

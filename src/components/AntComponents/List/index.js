@@ -32,53 +32,53 @@ class ListItems extends React.Component {
 
   render() {
     return (
-      <div className="ListDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='ListDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>List</strong>
                   <a
-                    href="https://ant.design/components/list/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/list/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-list-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic list</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-list-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic list</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Basic list.</div>
-                      <div className="card-body pb-0">
-                        <div id="ListBasic" />
+                      <div className='card-body pb-0'>Basic list.</div>
+                      <div className='card-body pb-0'>
+                        <div id='ListBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -120,36 +120,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-list-demo-infinite-load">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Scrolling loaded</strong>
+                    <div className='card card--example' id='components-list-demo-infinite-load'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Scrolling loaded</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         The example of infinite load with
                         [react-infinite-scroller](https://github.com/CassetteRocks/react-infinite-scroller).
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ListInfiniteload" />
+                      <div className='card-body pb-0'>
+                        <div id='ListInfiniteload' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -243,35 +243,35 @@ ReactDOM.render(<InfiniteListExample />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-list-demo-loadmore">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Load more</strong>
+                    <div className='card card--example' id='components-list-demo-loadmore'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Load more</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Load more list with <code>{'loadMore'}</code> property.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ListLoadmore" />
+                      <div className='card-body pb-0'>
+                        <div id='ListLoadmore' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -361,39 +361,39 @@ ReactDOM.render(<LoadMoreList />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-list-demo-simple">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Simple list</strong>
+                    <div className='card card--example' id='components-list-demo-simple'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Simple list</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Ant Design supports a default list size as well as a large and small size.
                         If a large or small list is desired, set the size property to either large
                         or small respectively. Omit the size property for a list with the default
                         size. Customizing the header and footer of list by setting{' '}
                         <code>{'header'}</code> and <code>{'footer'}</code> property.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ListSimple" />
+                      <div className='card-body pb-0'>
+                        <div id='ListSimple' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -444,36 +444,36 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-list-demo-grid">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Grid</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-list-demo-grid'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Grid</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Creating a grid list by setting the <code>{'grid'}</code> property of List
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ListGrid" />
+                      <div className='card-body pb-0'>
+                        <div id='ListGrid' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -512,15 +512,15 @@ ReactDOM.render(
                       </div>
                     </div>
                     <div
-                      className="card card--example"
-                      id="components-list-demo-infinite-virtualized-load"
+                      className='card card--example'
+                      id='components-list-demo-infinite-virtualized-load'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Infinite</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Infinite</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         An example of infinite list & virtualized loading using
                         [react-virtualized](https://github.com/bvaughn/react-virtualized). [Learn
                         more](https://blog.jscrambler.com/optimizing-react-rendering-through-virtualization/)
@@ -528,26 +528,26 @@ ReactDOM.render(
                         data. It reduces the amount of rendered DOM nodes by tracking and hiding
                         whatever isn't currently visible.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ListInfinitevirtualizedload" />
+                      <div className='card-body pb-0'>
+                        <div id='ListInfinitevirtualizedload' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -680,36 +680,36 @@ ReactDOM.render(<VirtualizedExample />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-list-demo-resposive">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Responsive grid list</strong>
+                    <div className='card card--example' id='components-list-demo-resposive'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Responsive grid list</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Responsive grid list. The size property is as same as [Layout
                         Grid](https://ant.design/components/grid/#Col).
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ListResposive" />
+                      <div className='card-body pb-0'>
+                        <div id='ListResposive' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -753,36 +753,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-list-demo-vertical">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Vertical</strong>
+                    <div className='card card--example' id='components-list-demo-vertical'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Vertical</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Setting <code>{'itemLayout'}</code> property with <code>{'vertical'}</code>{' '}
                         to create a vertical list.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ListVertical" />
+                      <div className='card-body pb-0'>
+                        <div id='ListVertical' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

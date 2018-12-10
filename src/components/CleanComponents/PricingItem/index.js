@@ -18,15 +18,15 @@ class PricingItem extends React.Component {
           type ? ' pricing-table__item--' + type : ''
         }`}
       >
-        <div className="pricing-table__header">
-          <div className="pricing-table__pricing__price">
-            <span className="pricing-table__pricing__currency">{data.currency}</span>
-            <span className="pricing-table__pricing__amount">{data.amount}</span>
-            <span className="pricing-table__pricing__period">{data.period}</span>
+        <div className='pricing-table__header'>
+          <div className='pricing-table__pricing__price'>
+            <span className='pricing-table__pricing__currency'>{data.currency}</span>
+            <span className='pricing-table__pricing__amount'>{data.amount}</span>
+            <span className='pricing-table__pricing__period'>{data.period}</span>
           </div>
-          <div className="pricing-table__header__title">{data.title}</div>
+          <div className='pricing-table__header__title'>{data.title}</div>
         </div>
-        <ul className="pricing-table__features">
+        <ul className='pricing-table__features'>
           {data.features.map((feature, index) => (
             <li key={index}>
               <strong>{feature.main}</strong>
@@ -34,9 +34,9 @@ class PricingItem extends React.Component {
             </li>
           ))}
         </ul>
-        <div className="pricing-table__footer">
-          <a href="javascript: void(0);" className="btn" role="button">
-            <i className="icmn-download mr-3" aria-hidden="true" />
+        <div className='pricing-table__footer'>
+          <a href='javascript: void(0);' className='btn' role='button'>
+            <i className='icmn-download mr-3' aria-hidden='true' />
             {data.btnText}
           </a>
         </div>

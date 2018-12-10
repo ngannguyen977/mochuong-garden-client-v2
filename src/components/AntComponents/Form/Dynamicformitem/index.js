@@ -81,11 +81,11 @@ export default function(ReactDOM, mountNode) {
                   message: "Please input passenger's name or delete this field.",
                 },
               ],
-            })(<Input placeholder="passenger name" style={{ width: '60%', marginRight: 8 }} />)}
+            })(<Input placeholder='passenger name' style={{ width: '60%', marginRight: 8 }} />)}
             {keys.length > 1 ? (
               <Icon
-                className="dynamic-delete-button"
-                type="minus-circle-o"
+                className='dynamic-delete-button'
+                type='minus-circle-o'
                 disabled={keys.length === 1}
                 onClick={() => this.remove(k)}
               />
@@ -97,12 +97,12 @@ export default function(ReactDOM, mountNode) {
         <Form onSubmit={this.handleSubmit}>
           {formItems}
           <FormItem {...formItemLayoutWithOutLabel}>
-            <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-              <Icon type="plus" /> Add field
+            <Button type='dashed' onClick={this.add} style={{ width: '60%' }}>
+              <Icon type='plus' /> Add field
             </Button>
           </FormItem>
           <FormItem {...formItemLayoutWithOutLabel}>
-            <Button type="primary" htmlType="submit">
+            <Button type='primary' htmlType='submit'>
               Submit
             </Button>
           </FormItem>

@@ -73,9 +73,9 @@ export default function(ReactDOM, mountNode) {
         <List.Item key={key} style={style}>
           <List.Item.Meta
             avatar={
-              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+              <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
             }
-            title={<a href="https://ant.design">{item.name.last}</a>}
+            title={<a href='https://ant.design'>{item.name.last}</a>}
             description={item.email}
           />
           <div>Content</div>
@@ -122,7 +122,7 @@ export default function(ReactDOM, mountNode) {
           {data.length > 0 && (
             <WindowScroller scrollElement={null}>{infiniteLoader}</WindowScroller>
           )}
-          {this.state.loading && <Spin className="demo-loading" />}
+          {this.state.loading && <Spin className='demo-loading' />}
         </List>
       )
     }

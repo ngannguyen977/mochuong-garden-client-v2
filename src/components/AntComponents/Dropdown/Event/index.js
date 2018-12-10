@@ -9,16 +9,16 @@ export default function(ReactDOM, mountNode) {
 
   const menu = (
     <Menu onClick={onClick}>
-      <Menu.Item key="1">1st menu item</Menu.Item>
-      <Menu.Item key="2">2nd memu item</Menu.Item>
-      <Menu.Item key="3">3rd menu item</Menu.Item>
+      <Menu.Item key='1'>1st menu item</Menu.Item>
+      <Menu.Item key='2'>2nd memu item</Menu.Item>
+      <Menu.Item key='3'>3rd menu item</Menu.Item>
     </Menu>
   )
 
   ReactDOM.render(
     <Dropdown overlay={menu}>
-      <a className="ant-dropdown-link" href="javascript: void(0);">
-        Hover me, Click menu item <Icon type="down" />
+      <a className='ant-dropdown-link' href='javascript: void(0);'>
+        Hover me, Click menu item <Icon type='down' />
       </a>
     </Dropdown>,
     mountNode,

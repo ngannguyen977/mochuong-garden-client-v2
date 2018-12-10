@@ -23,8 +23,8 @@ export default function(ReactDOM, mountNode) {
   })(props => {
     const { getFieldDecorator } = props.form
     return (
-      <Form layout="inline">
-        <FormItem label="Username">
+      <Form layout='inline'>
+        <FormItem label='Username'>
           {getFieldDecorator('username', {
             rules: [{ required: true, message: 'Username is required!' }],
           })(<Input />)}
@@ -51,7 +51,7 @@ export default function(ReactDOM, mountNode) {
       return (
         <div>
           <CustomizedForm {...fields} onChange={this.handleFormChange} />
-          <pre className="language-bash">{JSON.stringify(fields, null, 2)}</pre>
+          <pre className='language-bash'>{JSON.stringify(fields, null, 2)}</pre>
         </div>
       )
     }

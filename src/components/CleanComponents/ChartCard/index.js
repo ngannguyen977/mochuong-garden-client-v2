@@ -13,14 +13,14 @@ class ChartCard extends React.Component {
     const { chartProps, title, amount } = this.props
 
     return (
-      <div className="card chartCard">
+      <div className='card chartCard'>
         {chartProps && (
-          <div className="chartCard__chart">
+          <div className='chartCard__chart'>
             <Sparkline {...chartProps} />
           </div>
         )}
-        {amount && <div className="chartCard__amount">{amount}</div>}
-        {title && <div className="chartCard__title">{title}</div>}
+        {amount && <div className='chartCard__amount'>{amount}</div>}
+        {title && <div className='chartCard__title'>{title}</div>}
       </div>
     )
   }

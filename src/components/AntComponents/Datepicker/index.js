@@ -35,55 +35,55 @@ class DatepickerItems extends React.Component {
 
   render() {
     return (
-      <div className="DatepickerDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='DatepickerDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>DatePicker</strong>
                   <a
-                    href="https://ant.design/components/date-picker/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/date-picker/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-date-picker-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-date-picker-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Basic use case. Users can select or input a date in panel.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -112,39 +112,39 @@ ReactDOM.render(
                       </div>
                     </div>
                     <div
-                      className="card card--example"
-                      id="components-date-picker-demo-disabled-date"
+                      className='card card--example'
+                      id='components-date-picker-demo-disabled-date'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Disabled Date</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Disabled Date</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Disabled part of dates and time by <code>{'disabledDate'}</code> and{' '}
                         <code>{'disabledTime'}</code> respectively, and{' '}
                         <code>{'disabledTime'}</code> only works with <code>{'showTime'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerDisableddate" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerDisableddate' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -218,37 +218,37 @@ ReactDOM.render(
                       </div>
                     </div>
                     <div
-                      className="card card--example"
-                      id="components-date-picker-demo-extra-footer"
+                      className='card card--example'
+                      id='components-date-picker-demo-extra-footer'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Extra Footer</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Extra Footer</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Render extra footer in panel for customized requirements.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerExtrafooter" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerExtrafooter' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -270,36 +270,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-date-picker-demo-mode">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Controlled Panels</strong>
+                    <div className='card card--example' id='components-date-picker-demo-mode'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Controlled Panels</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Determing which panel to show with <code>{'mode'}</code> and{' '}
                         <code>{'onPanelChange'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerMode" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerMode' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -374,36 +374,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-date-picker-demo-size">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Three Sizes</strong>
+                    <div className='card card--example' id='components-date-picker-demo-size'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Three Sizes</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         The input box comes in three sizes. <code>{'default'}</code> will be used if{' '}
                         <code>{'size'}</code> is omitted.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerSize" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerSize' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -448,37 +448,37 @@ ReactDOM.render(<PickerSizesDemo />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-date-picker-demo-time">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Choose Time</strong>
+                    <div className='card card--example' id='components-date-picker-demo-time'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Choose Time</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         This property provide an additional time selection. When{' '}
                         <code>{'showTime'}</code> is an Object, its properties will be passed on to
                         built-in <code>{'TimePicker'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerTime" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerTime' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -520,40 +520,40 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
+                  <div className='col-xl-6 col-lg-12'>
                     <div
-                      className="card card--example"
-                      id="components-date-picker-demo-date-render"
+                      className='card card--example'
+                      id='components-date-picker-demo-date-render'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Customized Date Rendering</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Customized Date Rendering</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         We can customize the rendering of date cells in the calendar by providing a{' '}
                         <code>{'dateRender'}</code> function to <code>{'DatePicker'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerDaterender" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerDaterender' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -598,35 +598,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-date-picker-demo-disabled">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Disabled</strong>
+                    <div className='card card--example' id='components-date-picker-demo-disabled'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Disabled</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         A disabled state of the <code>{'DatePicker'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerDisabled" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerDisabled' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -653,35 +653,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-date-picker-demo-format">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Date Format</strong>
+                    <div className='card card--example' id='components-date-picker-demo-format'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Date Format</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         We can set the date format by <code>{'format'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerFormat" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerFormat' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -710,37 +710,37 @@ ReactDOM.render(
                       </div>
                     </div>
                     <div
-                      className="card card--example"
-                      id="components-date-picker-demo-presetted-ranges"
+                      className='card card--example'
+                      id='components-date-picker-demo-presetted-ranges'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Presetted Ranges</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Presetted Ranges</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         We can set presetted ranges to RangePicker to improve user experience.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerPresettedranges" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerPresettedranges' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -775,39 +775,39 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-date-picker-demo-start-end">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Customized Range Picker</strong>
+                    <div className='card card--example' id='components-date-picker-demo-start-end'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Customized Range Picker</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         When <code>{'RangePicker'}</code> does not satisfied your requirements, try
                         to implement similar functionality with two <code>{'DatePicker'}</code>. > *
                         Use the <code>{'disabledDate'}</code> property to limit the start and end
                         dates. > * Improve user experience with <code>{'open'}</code> and{' '}
                         <code>{'onOpenChange'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="DatepickerStartend" />
+                      <div className='card-body pb-0'>
+                        <div id='DatepickerStartend' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

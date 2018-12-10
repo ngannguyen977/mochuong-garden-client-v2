@@ -17,14 +17,14 @@ export default function(ReactDOM, mountNode) {
     render() {
       const { getFieldDecorator } = this.props.form
       return (
-        <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form onSubmit={this.handleSubmit} className='login-form'>
           <FormItem>
             {getFieldDecorator('userName', {
               rules: [{ required: true, message: 'Please input your username!' }],
             })(
               <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Username"
+                prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder='Username'
               />,
             )}
           </FormItem>
@@ -33,9 +33,9 @@ export default function(ReactDOM, mountNode) {
               rules: [{ required: true, message: 'Please input your Password!' }],
             })(
               <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="Password"
+                prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type='password'
+                placeholder='Password'
               />,
             )}
           </FormItem>
@@ -44,13 +44,13 @@ export default function(ReactDOM, mountNode) {
               valuePropName: 'checked',
               initialValue: true,
             })(<Checkbox>Remember me</Checkbox>)}
-            <a className="login-form-forgot" href="">
+            <a className='login-form-forgot' href=''>
               Forgot password
             </a>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button type='primary' htmlType='submit' className='login-form-button'>
               Log in
             </Button>
-            Or <a href="">register now!</a>
+            Or <a href=''>register now!</a>
           </FormItem>
         </Form>
       )

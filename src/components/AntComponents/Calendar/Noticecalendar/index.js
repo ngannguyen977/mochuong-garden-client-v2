@@ -37,7 +37,7 @@ export default function(ReactDOM, mountNode) {
   function dateCellRender(value) {
     const listData = getListData(value)
     return (
-      <ul className="events">
+      <ul className='events'>
         {listData.map(item => (
           <li key={item.content}>
             <Badge status={item.type} text={item.content} />
@@ -56,7 +56,7 @@ export default function(ReactDOM, mountNode) {
   function monthCellRender(value) {
     const num = getMonthData(value)
     return num ? (
-      <div className="notes-month">
+      <div className='notes-month'>
         <section>{num}</section>
         <span>Backlog number</span>
       </div>

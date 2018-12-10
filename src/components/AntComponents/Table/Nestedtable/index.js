@@ -20,7 +20,7 @@ export default function(ReactDOM, mountNode) {
           key: 'state',
           render: () => (
             <span>
-              <Badge status="success" />Finished
+              <Badge status='success' />Finished
             </span>
           ),
         },
@@ -30,12 +30,12 @@ export default function(ReactDOM, mountNode) {
           dataIndex: 'operation',
           key: 'operation',
           render: () => (
-            <span className="table-operation">
-              <a href="javascript: void(0);">Pause</a>
-              <a href="javascript: void(0);">Stop</a>
+            <span className='table-operation'>
+              <a href='javascript: void(0);'>Pause</a>
+              <a href='javascript: void(0);'>Stop</a>
               <Dropdown overlay={menu}>
-                <a href="javascript: void(0);">
-                  More <Icon type="down" />
+                <a href='javascript: void(0);'>
+                  More <Icon type='down' />
                 </a>
               </Dropdown>
             </span>
@@ -65,7 +65,7 @@ export default function(ReactDOM, mountNode) {
       {
         title: 'Action',
         key: 'operation',
-        render: () => <a href="javascript: void(0);">Publish</a>,
+        render: () => <a href='javascript: void(0);'>Publish</a>,
       },
     ]
 
@@ -84,7 +84,7 @@ export default function(ReactDOM, mountNode) {
 
     return (
       <Table
-        className="components-table-demo-nested"
+        className='components-table-demo-nested'
         columns={columns}
         expandedRowRender={expandedRowRender}
         dataSource={data}

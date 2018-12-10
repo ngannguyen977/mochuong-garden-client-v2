@@ -29,57 +29,57 @@ class ButtonItems extends React.Component {
 
   render() {
     return (
-      <div className="ButtonDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='ButtonDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Button</strong>
                   <a
-                    href="https://ant.design/components/button/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/button/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-button-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Type</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-button-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Type</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         There are <code>{'primary'}</code> button, <code>{'default'}</code> button,{' '}
                         <code>{'dashed'}</code> button and <code>{'danger'}</code> button in antd. >{' '}
                         <code>{'danger'}</code> is supported after <code>{'antd@2.7'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ButtonBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='ButtonBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -99,36 +99,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-button-demo-disabled">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Disabled</strong>
+                    <div className='card card--example' id='components-button-demo-disabled'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Disabled</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         To mark a button as disabled, add the <code>{'disabled'}</code> property to
                         the <code>{'Button'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ButtonDisabled" />
+                      <div className='card-body pb-0'>
+                        <div id='ButtonDisabled' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -156,13 +156,13 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-button-demo-icon">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Icon</strong>
+                    <div className='card card--example' id='components-button-demo-icon'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Icon</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         <code>{'Button'}</code> components can contain an <code>{'Icon'}</code>.
                         This is done by setting the <code>{'icon'}</code> property or placing an{' '}
                         <code>{'Icon'}</code> component within the <code>{'Button'}</code>
@@ -171,26 +171,26 @@ ReactDOM.render(
                         <code>{'Icon'}</code> component within the <code>{'Button'}</code> rather
                         than using the <code>{'icon'}</code> property.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ButtonIcon" />
+                      <div className='card-body pb-0'>
+                        <div id='ButtonIcon' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -216,37 +216,37 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-button-demo-multiple">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Multiple Buttons</strong>
+                    <div className='card card--example' id='components-button-demo-multiple'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Multiple Buttons</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         If you need several buttons, we recommend that you use 1 primary button + n
                         secondary buttons, and if there are more than three operations, you can
                         group some of them into <code>{'Dropdown.Button'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ButtonMultiple" />
+                      <div className='card-body pb-0'>
+                        <div id='ButtonMultiple' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -283,39 +283,39 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-button-demo-button-group">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Button Group</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-button-demo-button-group'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Button Group</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Buttons can be grouped by placing multiple <code>{'Button'}</code>{' '}
                         components into a <code>{'Button.Group'}</code>. The <code>{'size'}</code>{' '}
                         can be set to <code>{'large'}</code>, <code>{'small'}</code> or left unset
                         resulting in a default size.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ButtonButtongroup" />
+                      <div className='card-body pb-0'>
+                        <div id='ButtonButtongroup' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -362,36 +362,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-button-demo-ghost">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Ghost Button</strong>
+                    <div className='card card--example' id='components-button-demo-ghost'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Ghost Button</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         <code>{'ghost'}</code> property will make button's background transparent,
                         it is common used in colored background.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ButtonGhost" />
+                      <div className='card-body pb-0'>
+                        <div id='ButtonGhost' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -411,36 +411,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-button-demo-loading">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Loading</strong>
+                    <div className='card card--example' id='components-button-demo-loading'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Loading</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         A loading indicator can be added to a button by setting the{' '}
                         <code>{'loading'}</code> property on the <code>{'Button'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ButtonLoading" />
+                      <div className='card-body pb-0'>
+                        <div id='ButtonLoading' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -491,39 +491,39 @@ ReactDOM.render(<App />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-button-demo-size">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Size</strong>
+                    <div className='card card--example' id='components-button-demo-size'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Size</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Ant Design supports a default button size as well as a large and small size.
                         If a large or small button is desired, set the <code>{'size'}</code>{' '}
                         property to either <code>{'large'}</code> or <code>{'small'}</code>{' '}
                         respectively. Omit the <code>{'size'}</code> property for a button with the
                         default size.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="ButtonSize" />
+                      <div className='card-body pb-0'>
+                        <div id='ButtonSize' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

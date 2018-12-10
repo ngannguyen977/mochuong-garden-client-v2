@@ -27,57 +27,57 @@ class SliderItems extends React.Component {
 
   render() {
     return (
-      <div className="SliderDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='SliderDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Slider</strong>
                   <a
-                    href="https://ant.design/components/slider/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/slider/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-slider-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-slider-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Basic slider. When <code>{'range'}</code> is <code>{'true'}</code>, display
                         as dual thumb mode. When <code>{'disable'}</code> is <code>{'true'}</code>,
                         the slider will not be interactable.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SliderBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='SliderBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -109,35 +109,35 @@ ReactDOM.render(<Demo />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-slider-demo-icon-slider">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Slider with icon</strong>
+                    <div className='card card--example' id='components-slider-demo-icon-slider'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Slider with icon</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         You can add an icon beside the slider to make it meaningful.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SliderIconslider" />
+                      <div className='card-body pb-0'>
+                        <div id='SliderIconslider' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -173,39 +173,39 @@ ReactDOM.render(<IconSlider min=\{0\} max=\{20\} />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-slider-demo-mark">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Graduated slider</strong>
+                    <div className='card card--example' id='components-slider-demo-mark'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Graduated slider</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Using <code>{'marks'}</code> property to mark a graduated slider, use{' '}
                         <code>{'value'}</code> or <code>{'defaultValue'}</code> to specify the
                         position of thumb. When <code>{'included'}</code> is false, means that
                         different thumbs are coordinative. when <code>{'step'}</code> is null, users
                         can only slide the thumbs onto marks.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SliderMark" />
+                      <div className='card-body pb-0'>
+                        <div id='SliderMark' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -245,33 +245,33 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-slider-demo-vertical">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Vertical</strong>
+                    <div className='card card--example' id='components-slider-demo-vertical'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Vertical</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">The vertical Slider.</div>
-                      <div className="card-body pb-0">
-                        <div id="SliderVertical" />
+                      <div className='card-body pb-0'>The vertical Slider.</div>
+                      <div className='card-body pb-0'>
+                        <div id='SliderVertical' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -316,38 +316,38 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-slider-demo-event">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Event</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-slider-demo-event'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Event</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         The <code>{'onChange'}</code> callback function will fire when the user
                         changes the slider's value. The <code>{'onAfterChange'}</code> callback
                         function will fire when <code>{'onmouseup'}</code> fired.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SliderEvent" />
+                      <div className='card-body pb-0'>
+                        <div id='SliderEvent' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -374,35 +374,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-slider-demo-input-number">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Slider with InputNumber</strong>
+                    <div className='card card--example' id='components-slider-demo-input-number'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Slider with InputNumber</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Synchronize with [InptNumber](/components/input-number/) component.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SliderInputnumber" />
+                      <div className='card-body pb-0'>
+                        <div id='SliderInputnumber' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -479,36 +479,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-slider-demo-tip-formatter">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Customerize tooltip</strong>
+                    <div className='card card--example' id='components-slider-demo-tip-formatter'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Customerize tooltip</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Use <code>{'tipFormatter'}</code> to format content of{' '}
                         <code>{'Toolip'}</code>. If <code>{'tipFormatter'}</code> is null, hide it.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="SliderTipformatter" />
+                      <div className='card-body pb-0'>
+                        <div id='SliderTipformatter' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

@@ -71,12 +71,12 @@ export default function(ReactDOM, mountNode) {
         <div>
           <Upload {...props}>
             <Button>
-              <Icon type="upload" /> Select File
+              <Icon type='upload' /> Select File
             </Button>
           </Upload>
           <Button
-            className="upload-demo-start"
-            type="primary"
+            className='upload-demo-start'
+            type='primary'
             onClick={this.handleUpload}
             disabled={this.state.fileList.length === 0}
             loading={uploading}

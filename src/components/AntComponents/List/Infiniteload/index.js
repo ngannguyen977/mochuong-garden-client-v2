@@ -56,7 +56,7 @@ export default function(ReactDOM, mountNode) {
     }
     render() {
       return (
-        <div className="demo-infinite-container">
+        <div className='demo-infinite-container'>
           <InfiniteScroll
             initialLoad={false}
             pageStart={0}
@@ -70,16 +70,16 @@ export default function(ReactDOM, mountNode) {
                 <List.Item key={item.id}>
                   <List.Item.Meta
                     avatar={
-                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                      <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' />
                     }
-                    title={<a href="https://ant.design">{item.name.last}</a>}
+                    title={<a href='https://ant.design'>{item.name.last}</a>}
                     description={item.email}
                   />
                   <div>Content</div>
                 </List.Item>
               )}
             >
-              {this.state.loading && this.state.hasMore && <Spin className="demo-loading" />}
+              {this.state.loading && this.state.hasMore && <Spin className='demo-loading' />}
             </List>
           </InfiniteScroll>
         </div>

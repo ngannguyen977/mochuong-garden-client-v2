@@ -1,11 +1,11 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import GroupPage from './GroupPage'
+import Lockscreen from './Lockscreen'
 
-class Group extends React.Component {
+class LockscreenPage extends React.Component {
   static defaultProps = {
-    pathName: 'Groups',
+    pathName: 'Lockscreen',
     roles: ['agent', 'administrator'],
   }
 
@@ -13,11 +13,11 @@ class Group extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Groups" />
-        <GroupPage />
+        <Helmet title='Lockscreen' />
+        <Lockscreen name = {props.name} link = {props.link}/>
       </Page>
     )
   }
 }
 
-export default Group
+export default LockscreenPage

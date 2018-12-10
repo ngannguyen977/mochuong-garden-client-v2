@@ -1,23 +1,23 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import GridItems from 'components/AntComponents/Grid/index'
+import CreatePage from './CreatePage'
 
-class GridPage extends React.Component {
+
+class User extends React.Component {
   static defaultProps = {
-    pathName: 'Grid',
+    pathName: 'Users Create',
     roles: ['agent', 'administrator'],
   }
-
   render() {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Grid" />
-        <GridItems />
+        <Helmet title='Users' />
+        <CreatePage location={props.location}/>
       </Page>
     )
   }
 }
 
-export default GridPage
+export default User

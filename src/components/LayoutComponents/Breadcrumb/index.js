@@ -39,17 +39,17 @@ class Breadcrumb extends React.Component {
         if (index === path.length - 1) {
           return (
             <span key={item.key}>
-              <span className="breadcrumbBar__arrow text-muted" />
-              <span className="text-muted">{item.title}</span>
-              <span className="breadcrumbBar__arrow" />
+              <span className='breadcrumbBar__arrow text-muted' />
+              <span className='text-muted'>{item.title}</span>
+              <span className='breadcrumbBar__arrow' />
               <strong>{activeMenuItem.title}</strong>
             </span>
           )
         } else {
           return (
             <span key={item.key}>
-              <span className="breadcrumbBar__arrow text-muted" />
-              <span className="text-muted">{item.title}</span>
+              <span className='breadcrumbBar__arrow text-muted' />
+              <span className='text-muted'>{item.title}</span>
             </span>
           )
         }
@@ -57,7 +57,7 @@ class Breadcrumb extends React.Component {
     } else {
       breadcrumb = (
         <span>
-          <span className="breadcrumbBar__arrow" />
+          <span className='breadcrumbBar__arrow' />
           <strong>{props.name}</strong>
         </span>
       )
@@ -80,9 +80,9 @@ class Breadcrumb extends React.Component {
   render() {
     let { breadcrumb } = this.state
     return (
-      <div className="breadcrumbBar">
-        <div className="breadcrumbBar__path">
-          <Link to={`/dashboard`} className="text-muted">
+      <div className='breadcrumbBar'>
+        <div className='breadcrumbBar__path'>
+          <Link to={`/dashboard`} className='text-muted'>
             Home
           </Link>
           {breadcrumb}

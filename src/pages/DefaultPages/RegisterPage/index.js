@@ -8,7 +8,7 @@ class RegisterPage extends React.Component {
     const { match, ...props } = this.props
     return (
       <Page {...props}>
-        <Helmet title="Register" />
+        <Helmet title='Register' />
         <Register match={match} />
       </Page>
     )

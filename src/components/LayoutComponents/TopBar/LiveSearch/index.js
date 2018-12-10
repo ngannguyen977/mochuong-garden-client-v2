@@ -47,119 +47,119 @@ class LiveSearch extends React.Component {
     let { show, searchText } = this.state
 
     return (
-      <div className="d-inline-block mr-4">
+      <div className='d-inline-block mr-4'>
         <Input
-          className="livesearch__topInput"
-          placeholder="Type to search..."
-          prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+          className='livesearch__topInput'
+          placeholder='Type to search...'
+          prefix={<Icon type='search' style={{ color: 'rgba(0,0,0,.25)' }} />}
           style={{ width: 200 }}
           onFocus={this.showLiveSearch}
         />
 
         <div
           className={show === true ? 'livesearch livesearch--show' : 'livesearch'}
-          id="livesearch"
+          id='livesearch'
         >
-          <div className="livesearch__close" onClick={this.hideLiveSearch}>
-            <i className="icmn-cross" />
+          <div className='livesearch__close' onClick={this.hideLiveSearch}>
+            <i className='icmn-cross' />
           </div>
-          <div className="container-fluid">
-            <div className="livesearch__wrapper">
-              <div className="livesearch__logo">
-                <img className="livesearch__logo-img" src="resources/images/logo.png" alt="" />
+          <div className='container-fluid'>
+            <div className='livesearch__wrapper'>
+              <div className='livesearch__logo'>
+                <img className='livesearch__logo-img' src='resources/images/logo.png' alt='' />
               </div>
-              <div className="livesearch__search">
+              <div className='livesearch__search'>
                 <input
-                  type="search"
-                  className="livesearch__input"
+                  type='search'
+                  className='livesearch__input'
                   value={searchText}
                   onChange={this.changeSearchText}
-                  id="livesearchInput"
-                  placeholder="Type to search..."
+                  id='livesearchInput'
+                  placeholder='Type to search...'
                   ref={ele => (this.searchInput = ele)}
                 />
               </div>
-              <ul className="livesearch__options">
-                <li className="livesearch__option livesearch__option--checkbox">
+              <ul className='livesearch__options'>
+                <li className='livesearch__option livesearch__option--checkbox'>
                   <Checkbox>Search within page</Checkbox>
                 </li>
-                <li className="livesearch__option">Press enter to search</li>
+                <li className='livesearch__option'>Press enter to search</li>
               </ul>
-              <div className="livesearch__results">
-                <div className="livesearch__results-title">
-                  <span className="livesearch__results-title-text">Pages Search Results</span>
+              <div className='livesearch__results'>
+                <div className='livesearch__results-title'>
+                  <span className='livesearch__results-title-text'>Pages Search Results</span>
                 </div>
-                <div className="row">
-                  <div className="col-lg-4">
-                    <div className="livesearch__result-content">
+                <div className='row'>
+                  <div className='col-lg-4'>
+                    <div className='livesearch__result-content'>
                       <div
-                        className="livesearch__result-thumb"
+                        className='livesearch__result-thumb'
                         style={{ backgroundImage: 'url(resources/images/photos/7.jpeg)' }}
                       >
                         #1
                       </div>
-                      <div className="livesearch__result">
-                        <div className="livesearch__result-text">
+                      <div className='livesearch__result'>
+                        <div className='livesearch__result-text'>
                           Text from input field must be here
                         </div>
-                        <div className="livesearch__result-source">In some partition</div>
+                        <div className='livesearch__result-source'>In some partition</div>
                       </div>
                     </div>
-                    <div className="livesearch__result-content">
+                    <div className='livesearch__result-content'>
                       <div
-                        className="livesearch__result-thumb"
+                        className='livesearch__result-thumb'
                         style={{ backgroundImage: 'url(resources/images/photos/9.jpeg)' }}
                       >
                         KF
                       </div>
-                      <div className="livesearch__result">
-                        <div className="livesearch__result-text">
+                      <div className='livesearch__result'>
+                        <div className='livesearch__result-text'>
                           Text from input field must be here
                         </div>
-                        <div className="livesearch__result-source">In some partition</div>
+                        <div className='livesearch__result-source'>In some partition</div>
                       </div>
                     </div>
-                    <div className="livesearch__result-content">
+                    <div className='livesearch__result-content'>
                       <div
-                        className="livesearch__result-thumb"
+                        className='livesearch__result-thumb'
                         style={{ backgroundImage: 'url(resources/images/photos/8.jpeg)' }}
                       >
                         GF
                       </div>
-                      <div className="livesearch__result">
-                        <div className="livesearch__result-text">
+                      <div className='livesearch__result'>
+                        <div className='livesearch__result-text'>
                           Text from input field must be here
                         </div>
-                        <div className="livesearch__result-source">In some partition</div>
+                        <div className='livesearch__result-source'>In some partition</div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-4">
-                    <div className="livesearch__result-content">
-                      <div className="livesearch__result-thumb">01</div>
-                      <div className="livesearch__result">
-                        <div className="livesearch__result-text">
+                  <div className='col-lg-4'>
+                    <div className='livesearch__result-content'>
+                      <div className='livesearch__result-thumb'>01</div>
+                      <div className='livesearch__result'>
+                        <div className='livesearch__result-text'>
                           Text from input field must be here
                         </div>
-                        <div className="livesearch__result-source">In some partition</div>
+                        <div className='livesearch__result-source'>In some partition</div>
                       </div>
                     </div>
-                    <div className="livesearch__result-content">
-                      <div className="livesearch__result-thumb">02</div>
-                      <div className="livesearch__result">
-                        <div className="livesearch__result-text">
+                    <div className='livesearch__result-content'>
+                      <div className='livesearch__result-thumb'>02</div>
+                      <div className='livesearch__result'>
+                        <div className='livesearch__result-text'>
                           Text from input field must be here
                         </div>
-                        <div className="livesearch__result-source">In some partition</div>
+                        <div className='livesearch__result-source'>In some partition</div>
                       </div>
                     </div>
-                    <div className="livesearch__result-content">
-                      <div className="livesearch__result-thumb">03</div>
-                      <div className="livesearch__result">
-                        <div className="livesearch__result-text">
+                    <div className='livesearch__result-content'>
+                      <div className='livesearch__result-thumb'>03</div>
+                      <div className='livesearch__result'>
+                        <div className='livesearch__result-text'>
                           Text from input field must be here
                         </div>
-                        <div className="livesearch__result-source">In some partition</div>
+                        <div className='livesearch__result-source'>In some partition</div>
                       </div>
                     </div>
                   </div>

@@ -67,7 +67,7 @@ class Dialog extends React.Component {
       <Modal
         key={isDialogForm}
         title={title}
-        wrapClassName="ant-modal-centered"
+        wrapClassName='ant-modal-centered'
         visible={isOpen}
         onCancel={close}
         footer={null}

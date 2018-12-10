@@ -31,23 +31,23 @@ export default function(ReactDOM, mountNode) {
 
   ReactDOM.render(
     <Table dataSource={data}>
-      <ColumnGroup title="Name">
-        <Column title="First Name" dataIndex="firstName" key="firstName" />
-        <Column title="Last Name" dataIndex="lastName" key="lastName" />
+      <ColumnGroup title='Name'>
+        <Column title='First Name' dataIndex='firstName' key='firstName' />
+        <Column title='Last Name' dataIndex='lastName' key='lastName' />
       </ColumnGroup>
-      <Column title="Age" dataIndex="age" key="age" />
-      <Column title="Address" dataIndex="address" key="address" />
+      <Column title='Age' dataIndex='age' key='age' />
+      <Column title='Address' dataIndex='address' key='address' />
       <Column
-        title="Action"
-        key="action"
+        title='Action'
+        key='action'
         render={(text, record) => (
           <span>
-            <a href="javascript: void(0);">Action 一 {record.name}</a>
-            <Divider type="vertical" />
-            <a href="javascript: void(0);">Delete</a>
-            <Divider type="vertical" />
-            <a href="javascript: void(0);" className="ant-dropdown-link">
-              More actions <Icon type="down" />
+            <a href='javascript: void(0);'>Action 一 {record.name}</a>
+            <Divider type='vertical' />
+            <a href='javascript: void(0);'>Delete</a>
+            <Divider type='vertical' />
+            <a href='javascript: void(0);' className='ant-dropdown-link'>
+              More actions <Icon type='down' />
             </a>
           </span>
         )}

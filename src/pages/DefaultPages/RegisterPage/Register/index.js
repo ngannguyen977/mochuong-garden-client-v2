@@ -27,14 +27,14 @@ class Register extends React.Component {
     return (
       <div
         onLoad={() => this.generateBackground()}
-        className="register register--fullscreen"
+        className='register register--fullscreen'
         style={{ backgroundImage: backgroundImage }}
       >
-        <div className="register__block">
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="register__block__promo text-white text-center">
-                <h1 className="mb-3 text-white">
+        <div className='register__block'>
+          <div className='row'>
+            <div className='col-xl-12'>
+              <div className='register__block__promo text-white text-center'>
+                <h1 className='mb-3 text-white'>
                   <strong>Welcome to OnSky Team</strong>
                 </h1>
                 <p>
@@ -42,9 +42,9 @@ class Register extends React.Component {
                   Ipsum has been the industry's standard dummy text ever since the 1500s.
                 </p>
               </div>
-              <div className="register__block__inner">
-                <div className="register__block__form">
-                  <h4 className="text-uppercase">
+              <div className='register__block__inner'>
+                <div className='register__block__form'>
+                  <h4 className='text-uppercase'>
                     <strong>Please Register</strong>
                   </h4>
                   <br />
@@ -54,22 +54,22 @@ class Register extends React.Component {
             </div>
           </div>
         </div>
-        <div className="register__footer text-center">
-          <ul className="list-unstyled list-inline">
-            <li className="list-inline-item">
-              <a href="javascript: void(0);">Terms of Use</a>
+        <div className='register__footer text-center'>
+          <ul className='list-unstyled list-inline'>
+            <li className='list-inline-item'>
+              <a href='javascript: void(0);'>Terms of Use</a>
             </li>
-            <li className="active list-inline-item">
-              <a href="javascript: void(0);">Compliance</a>
+            <li className='active list-inline-item'>
+              <a href='javascript: void(0);'>Compliance</a>
             </li>
-            <li className="list-inline-item">
-              <a href="javascript: void(0);">Confidential Information</a>
+            <li className='list-inline-item'>
+              <a href='javascript: void(0);'>Confidential Information</a>
             </li>
-            <li className="list-inline-item">
-              <a href="javascript: void(0);">Support</a>
+            <li className='list-inline-item'>
+              <a href='javascript: void(0);'>Support</a>
             </li>
-            <li className="list-inline-item">
-              <a href="javascript: void(0);">Contacts</a>
+            <li className='list-inline-item'>
+              <a href='javascript: void(0);'>Contacts</a>
             </li>
           </ul>
         </div>

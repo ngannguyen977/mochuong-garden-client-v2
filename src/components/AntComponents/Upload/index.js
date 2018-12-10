@@ -29,58 +29,58 @@ class UploadItems extends React.Component {
 
   render() {
     return (
-      <div className="UploadDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='UploadDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Upload</strong>
                   <a
-                    href="https://ant.design/components/upload/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/upload/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-upload-demo-avatar">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Avatar</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-upload-demo-avatar'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Avatar</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Click to upload user's avatar, and validate size and format of picture with{' '}
                         <code>{'beforeUpload'}</code>. > The return value of function{' '}
                         <code>{'beforeUpload'}</code> can be a Promise to check asynchronously.
                         [demo](http://react-component.github.io/upload/examples/beforeUpload.html)
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="UploadAvatar" />
+                      <div className='card-body pb-0'>
+                        <div id='UploadAvatar' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -152,35 +152,35 @@ ReactDOM.render(<Avatar />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-upload-demo-defaultFileList">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Default Files</strong>
+                    <div className='card card--example' id='components-upload-demo-defaultFileList'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Default Files</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Use <code>{'defaultFileList'}</code> for uploaded files when page init.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="UploadDefaultFileList" />
+                      <div className='card-body pb-0'>
+                        <div id='UploadDefaultFileList' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -226,41 +226,41 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-upload-demo-fileList">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">
+                    <div className='card card--example' id='components-upload-demo-fileList'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>
                             Complete control over file list
                           </strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         You can gain full control over filelist by configuring{' '}
                         <code>{'fileList'}</code>. You can accomplish all kinds of customed
                         functions. The following shows three circumstances: 1) limit the number of
                         uploaded files. 2) read from response and show file link. 3) filter
                         successfully uploaded files according to response from server.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="UploadFileList" />
+                      <div className='card-body pb-0'>
+                        <div id='UploadFileList' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -324,37 +324,37 @@ ReactDOM.render(<MyUpload />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-upload-demo-picture-style">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Pictures with list style</strong>
+                    <div className='card card--example' id='components-upload-demo-picture-style'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Pictures with list style</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         If uploaded file is a picture, the thumbnail can be shown.{' '}
                         <code>{'IE8/9'}</code> do not support local thumbnail show. Please use{' '}
                         <code>{'thumbUrl'}</code> instead.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="UploadPicturestyle" />
+                      <div className='card-body pb-0'>
+                        <div id='UploadPicturestyle' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -410,36 +410,36 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-upload-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Upload by clicking</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-upload-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Upload by clicking</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Classic mode. File selection dialog pops up when upload button is clicked.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="UploadBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='UploadBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -476,37 +476,37 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-upload-demo-drag">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Drag and Drop</strong>
+                    <div className='card card--example' id='components-upload-demo-drag'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Drag and Drop</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         You can drag files to a specific area, to upload. Alternatively, you can
                         also upload by selecting. We can upload serveral files at once in modern
                         browsers by giving the input the <code>{'multiple'}</code> attribute.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="UploadDrag" />
+                      <div className='card-body pb-0'>
+                        <div id='UploadDrag' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -545,36 +545,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-upload-demo-picture-card">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Pictures Wall</strong>
+                    <div className='card card--example' id='components-upload-demo-picture-card'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Pictures Wall</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         After users upload picture, the thumbnail will be shown in list. The upload
                         button will disappear when count meets limitation.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="UploadPicturecard" />
+                      <div className='card-body pb-0'>
+                        <div id='UploadPicturecard' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -637,36 +637,36 @@ ReactDOM.render(<PicturesWall />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-upload-demo-upload-manually">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Upload manually</strong>
+                    <div className='card card--example' id='components-upload-demo-upload-manually'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Upload manually</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Upload files manually after <code>{'beforeUpload'}</code> returns{' '}
                         <code>{'false'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="UploadUploadmanually" />
+                      <div className='card-body pb-0'>
+                        <div id='UploadUploadmanually' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

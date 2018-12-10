@@ -5,6 +5,7 @@ export default {
       login: 'auth/login',
       register: 'customers',
       group: 'groups',
+      user:'users',
       confirmEmail: 'customers/activate',
     },
     policy: {

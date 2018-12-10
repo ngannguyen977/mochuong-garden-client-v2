@@ -1,4 +1,4 @@
-import { createReducer } from 'redux-act'
+import { createAction, createReducer } from 'redux-act'
 import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
@@ -7,18 +7,26 @@ import { notification } from 'antd'
 
 export const REDUCER = 'user'
 
+const NS = `@@${REDUCER}/`
 const api = constant.api.authen
 const userApi = `${api.host}/${api.user}`
 
-export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
-  dispatch,
-  getState,
-) => {
+export const setUserPage = createAction(`${NS}SET_USER_PAGE`)
+export const createUserState = createAction(`${NS}CREATE_USER`)
+
+export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (dispatch, getState) => {
   axios
     .get(userApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
-      console.log(response)
       if (response && response.data) {
+        let { users, page, totalItems } = response.data
+        if (!totalItems || totalItems === 0) {
+          totalItems = users.length
+        }
+        if (!users) {
+          users = { customer: {}, groups: {} }
+        }
+        dispatch(setUserPage({ users, page, totalItems }))
       }
     })
     .catch(error => {
@@ -27,10 +35,39 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
         errorMessage = error.response.data
       }
       message.error(errorMessage)
+      // mock user
+      const { users } = require('../reducers/mock')
+      dispatch(setUserPage(users))
     })
 }
+export const changeStatus = (id, status) => (dispatch, getState) => {
+  axios.patch(`${userApi}/${id}`, { active: status }).then(response => {
+    if (response && response.data) {
+      let { users, page, totalItems } = getState().user
+      if (users && Array.isArray(users) && users.length > 0) {
+        let user = users.find(x => x.id === response.data.id)
+        if (user) {
+          user = response.data
+          dispatch(setUserPage({ users, page, totalItems }))
+        }
+      }
+    }
+  }).catch(error => {
+    let errorMessage = 'change user status fail'
+    if (error.response && error.response.data) {
+      errorMessage = error.response.data
+    }
+    message.error(errorMessage)
+  })
+}
+export const createUser = (model, isCreate = false) => (dispatch, getState) => {
+  dispatch(createUserState(model))
+  if(isCreate){
 
+  }
+}
 const initialState = {
+  totalItems: 0,
   page: 0,
   users: [
     {
@@ -48,11 +85,11 @@ const initialState = {
         domain: 'string',
         email: 'string',
         first_name: 'string',
-        id: 0,
+        id: -1,
         image: {
           created_at: '2018-12-04T10:29:14.705Z',
           deleted_at: '2018-12-04T10:29:14.705Z',
-          id: 0,
+          id: -1,
           path: 'string',
           updated_at: '2018-12-04T10:29:14.705Z',
         },
@@ -76,11 +113,11 @@ const initialState = {
             domain: 'string',
             email: 'string',
             first_name: 'string',
-            id: 0,
+            id: -1,
             image: {
               created_at: '2018-12-04T10:29:14.705Z',
               deleted_at: '2018-12-04T10:29:14.705Z',
-              id: 0,
+              id: -1,
               path: 'string',
               updated_at: '2018-12-04T10:29:14.705Z',
             },
@@ -89,19 +126,19 @@ const initialState = {
             updated_at: '2018-12-04T10:29:14.705Z',
           },
           deleted_at: '2018-12-04T10:29:14.705Z',
-          id: 0,
+          id: -1,
           name: 'string',
           updated_at: '2018-12-04T10:29:14.705Z',
           users: [null],
           uuid: 'string',
         },
       ],
-      id: 0,
+      id: -1,
       last_login: '2018-12-04T10:29:14.705Z',
       last_password_change: '2018-12-04T10:29:14.705Z',
       role: {
         access_level: 0,
-        id: 0,
+        id: -1,
         name: 'string',
       },
       updated_at: '2018-12-04T10:29:14.705Z',
@@ -110,5 +147,8 @@ const initialState = {
     },
   ],
 }
-const ACTION_HANDLES = {}
+const ACTION_HANDLES = {
+  [setUserPage]: (state, { users, page, totalItems }) => ({ ...state, users, page, totalItems }),
+  [createUserState]: (state, userCreate) => ({ ...state, userCreate }),
+}
 export default createReducer(ACTION_HANDLES, initialState)

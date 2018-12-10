@@ -12,7 +12,7 @@ class Donut extends React.Component {
     const { name, color, type } = this.props
 
     return (
-      <span className="mr-2 nowrap">
+      <span className='mr-2 nowrap'>
         <span
           className={color === undefined ? 'donut donut--' + type : 'donut'}
           style={color !== undefined ? { borderColor: color } : {}}

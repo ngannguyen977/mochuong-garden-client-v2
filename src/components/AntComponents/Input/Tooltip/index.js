@@ -40,7 +40,7 @@ export default function(ReactDOM, mountNode) {
     render() {
       const { value } = this.props
       const title = value ? (
-        <span className="numeric-input-title">{value !== '-' ? formatNumber(value) : '-'}</span>
+        <span className='numeric-input-title'>{value !== '-' ? formatNumber(value) : '-'}</span>
       ) : (
         'Input a number'
       )
@@ -48,15 +48,15 @@ export default function(ReactDOM, mountNode) {
         <Tooltip
           trigger={['focus']}
           title={title}
-          placement="topLeft"
-          overlayClassName="numeric-input"
+          placement='topLeft'
+          overlayClassName='numeric-input'
         >
           <Input
             {...this.props}
             onChange={this.onChange}
             onBlur={this.onBlur}
-            placeholder="Input a number"
-            maxLength="25"
+            placeholder='Input a number'
+            maxLength='25'
           />
         </Tooltip>
       )

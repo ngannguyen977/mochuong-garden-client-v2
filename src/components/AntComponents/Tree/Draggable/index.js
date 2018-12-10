@@ -105,7 +105,7 @@ export default function(ReactDOM, mountNode) {
         })
       return (
         <Tree
-          className="draggable-tree"
+          className='draggable-tree'
           defaultExpandedKeys={this.state.expandedKeys}
           draggable
           onDragEnter={this.onDragEnter}

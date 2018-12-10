@@ -10,7 +10,7 @@ class Loader extends React.Component {
   render() {
     const { isHideLogin } = this.props
     if (!isHideLogin) return null
-    return <div className="utils__loadingPage" />
+    return <div className='utils__loadingPage' />
   }
 }
 

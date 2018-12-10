@@ -93,8 +93,8 @@ class MenuTop extends React.Component {
     return items.map(menuItem => {
       if (menuItem.children) {
         let subMenuTitle = (
-          <span className="menuTop__title-wrap" key={menuItem.key}>
-            <span className="menuTop__item-title">{menuItem.title}</span>
+          <span className='menuTop__title-wrap' key={menuItem.key}>
+            <span className='menuTop__item-title'>{menuItem.title}</span>
             {menuItem.icon && <span className={menuItem.icon + ' menuTop__icon'} />}
           </span>
         )
@@ -125,13 +125,13 @@ class MenuTop extends React.Component {
               : undefined
           }
         >
-          <span className="menuTop__item-title">{title}</span>
+          <span className='menuTop__item-title'>{title}</span>
           {icon && <span className={icon + ' menuTop__icon'} />}
         </Link>
       </Menu.Item>
     ) : (
       <Menu.Item key={key} disabled={disabled}>
-        <span className="menuTop__item-title">{title}</span>
+        <span className='menuTop__item-title'>{title}</span>
         {icon && <span className={icon + ' menuTop__icon'} />}
       </Menu.Item>
     )
@@ -160,10 +160,10 @@ class MenuTop extends React.Component {
     const { selectedKeys, openKeys, theme } = this.state
     const menuItems = this.generateMenuPartitions(menuData)
     return (
-      <div className="menuTop">
-        <div className="menuTop__logo">
-          <div className="menuTop__logoContainer">
-            <img src="resources/images/logo-inverse.png" alt="" />
+      <div className='menuTop'>
+        <div className='menuTop__logo'>
+          <div className='menuTop__logoContainer'>
+            <img src='resources/images/logo-inverse.png' alt='' />
           </div>
         </div>
         <Menu
@@ -172,11 +172,11 @@ class MenuTop extends React.Component {
           selectedKeys={[selectedKeys]}
           openKeys={openKeys}
           onOpenChange={this.onOpenChange}
-          mode="horizontal"
-          className="menuTop__navigation"
+          mode='horizontal'
+          className='menuTop__navigation'
         >
           <Menu.Item key={'settings'}>
-            <span className="menuTop__item-title">Settings</span>
+            <span className='menuTop__item-title'>Settings</span>
             <span className={'icmn icmn-cog menuTop__icon utils__spin-delayed--pseudo-selector'} />
           </Menu.Item>
           {menuItems}

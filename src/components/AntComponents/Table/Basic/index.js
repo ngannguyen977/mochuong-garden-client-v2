@@ -8,7 +8,7 @@ export default function(ReactDOM, mountNode) {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: text => <a href="javascript: void(0);">{text}</a>,
+      render: text => <a href='javascript: void(0);'>{text}</a>,
     },
     {
       title: 'Age',
@@ -25,12 +25,12 @@ export default function(ReactDOM, mountNode) {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript: void(0);">Action 一 {record.name}</a>
-          <Divider type="vertical" />
-          <a href="javascript: void(0);">Delete</a>
-          <Divider type="vertical" />
-          <a href="javascript: void(0);" className="ant-dropdown-link">
-            More actions <Icon type="down" />
+          <a href='javascript: void(0);'>Action 一 {record.name}</a>
+          <Divider type='vertical' />
+          <a href='javascript: void(0);'>Delete</a>
+          <Divider type='vertical' />
+          <a href='javascript: void(0);' className='ant-dropdown-link'>
+            More actions <Icon type='down' />
           </a>
         </span>
       ),

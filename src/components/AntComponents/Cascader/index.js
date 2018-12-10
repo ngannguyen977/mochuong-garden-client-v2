@@ -33,55 +33,55 @@ class CascaderItems extends React.Component {
 
   render() {
     return (
-      <div className="CascaderDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='CascaderDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Cascader</strong>
                   <a
-                    href="https://ant.design/components/cascader/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/cascader/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-cascader-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-cascader-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Cascade selection box for selecting province/city/district.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='CascaderBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -124,35 +124,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-cascader-demo-custom-render">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Custom render</strong>
+                    <div className='card card--example' id='components-cascader-demo-custom-render'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Custom render</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         For instance, add an external link after the selected value.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderCustomrender" />
+                      <div className='card-body pb-0'>
+                        <div id='CascaderCustomrender' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -215,33 +215,33 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-cascader-demo-default-value">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Default value</strong>
+                    <div className='card card--example' id='components-cascader-demo-default-value'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Default value</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Specifies default value by an array.</div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderDefaultvalue" />
+                      <div className='card-body pb-0'>Specifies default value by an array.</div>
+                      <div className='card-body pb-0'>
+                        <div id='CascaderDefaultvalue' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -284,35 +284,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-cascader-demo-hover">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Hover</strong>
+                    <div className='card card--example' id='components-cascader-demo-hover'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Hover</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Hover to expand sub menu, click to select option.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderHover" />
+                      <div className='card-body pb-0'>
+                        <div id='CascaderHover' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -365,37 +365,37 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-cascader-demo-search">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Search</strong>
+                    <div className='card card--example' id='components-cascader-demo-search'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Search</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Search and select options directly. > Now,{' '}
                         <code>{'Cascader[showSearch]'}</code> doesn't support search on server, more
                         info [#5547](https://github.com/ant-design/ant-design/issues/5547)
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderSearch" />
+                      <div className='card-body pb-0'>
+                        <div id='CascaderSearch' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -453,37 +453,37 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
+                  <div className='col-xl-6 col-lg-12'>
                     <div
-                      className="card card--example"
-                      id="components-cascader-demo-change-on-select"
+                      className='card card--example'
+                      id='components-cascader-demo-change-on-select'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Change on select</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Change on select</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Allow only select parent options.</div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderChangeonselect" />
+                      <div className='card-body pb-0'>Allow only select parent options.</div>
+                      <div className='card-body pb-0'>
+                        <div id='CascaderChangeonselect' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -527,35 +527,35 @@ ReactDOM.render(
                       </div>
                     </div>
                     <div
-                      className="card card--example"
-                      id="components-cascader-demo-custom-trigger"
+                      className='card card--example'
+                      id='components-cascader-demo-custom-trigger'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Custom trigger</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Custom trigger</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Separate trigger button and result.</div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderCustomtrigger" />
+                      <div className='card-body pb-0'>Separate trigger button and result.</div>
+                      <div className='card-body pb-0'>
+                        <div id='CascaderCustomtrigger' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -608,38 +608,38 @@ ReactDOM.render(<CitySwitcher />, mountNode);
                       </div>
                     </div>
                     <div
-                      className="card card--example"
-                      id="components-cascader-demo-disabled-option"
+                      className='card card--example'
+                      id='components-cascader-demo-disabled-option'
                     >
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Disabled option</strong>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Disabled option</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Disable option by specifying the <code>{'disabled'}</code> property in{' '}
                         <code>{'options'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderDisabledoption" />
+                      <div className='card-body pb-0'>
+                        <div id='CascaderDisabledoption' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -683,36 +683,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-cascader-demo-lazy">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Load Options Lazily</strong>
+                    <div className='card card--example' id='components-cascader-demo-lazy'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Load Options Lazily</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Load options lazily with <code>{'loadData'}</code>. > Note:{' '}
                         <code>{'loadData'}</code> cannot work with <code>{'showSearch'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderLazy" />
+                      <div className='card-body pb-0'>
+                        <div id='CascaderLazy' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -773,35 +773,35 @@ ReactDOM.render(<LazyOptions />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-cascader-demo-size">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Size</strong>
+                    <div className='card card--example' id='components-cascader-demo-size'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Size</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Cascade selection box of different sizes.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="CascaderSize" />
+                      <div className='card-body pb-0'>
+                        <div id='CascaderSize' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >

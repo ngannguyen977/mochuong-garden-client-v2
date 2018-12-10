@@ -4,6 +4,9 @@ import { pendingTasksReducer } from 'react-redux-spinner'
 import app from './app'
 import login from './login'
 import register from './register'
+import user from './user'
+import group from './group'
+import permission from './permission'
 
 export default combineReducers({
   routing: routerReducer,
@@ -11,4 +14,7 @@ export default combineReducers({
   app,
   login,
   register,
+  user,
+  group,
+  permission
 })

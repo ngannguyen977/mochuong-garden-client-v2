@@ -13,8 +13,8 @@ class ConfirmPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Confirm Page" />
-        <Confirm />
+        <Helmet title='Confirm Page' />
+        <Confirm location = {props.location}/>
       </Page>
     )
   }

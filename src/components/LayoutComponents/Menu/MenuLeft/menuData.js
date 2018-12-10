@@ -1,8 +1,8 @@
 export default [
   {
-    title: 'Dashboard Alpha',
-    key: 'dashboardAlpha',
-    url: '/dashboard',
+    title: 'Dashboard',
+    key: 'dashboard',
+    url: '/home',
     icon: 'icmn icmn-stack',
   },
   {
@@ -15,12 +15,18 @@ export default [
     title: 'Users',
     key: 'users',
     url: '/users',
-    icon: 'icmn icmn-stack',
+    icon: 'icmn icmn-user',
   },
   {
     title: 'Groups',
     key: 'groups',
     url: '/groups',
-    icon: 'icmn icmn-stack',
+    icon: 'icmn icmn-user',
+  },
+  {
+    title: 'Permission',
+    key: 'permission',
+    url: '/permissions',
+    icon: 'icmn icmn-lock',
   },
 ]

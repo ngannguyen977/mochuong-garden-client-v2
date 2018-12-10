@@ -16,12 +16,12 @@ class Avatar extends React.Component {
         className={`d-block mx-auto ${size > 0 ? 'avatar avatar--' + size : ''} ${
           border ? ' avatar--border' : ''
         }`}
-        href="javascript: void(0);"
+        href='javascript: void(0);'
         style={{
           borderColor: borderColor,
         }}
       >
-        <img src={src} alt="User" />
+        <img src={src} alt='User' />
       </a>
     )
   }

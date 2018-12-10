@@ -33,58 +33,58 @@ class GridItems extends React.Component {
 
   render() {
     return (
-      <div className="GridDemo">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="card">
-              <div className="card-header">
-                <div className="utils__title">
+      <div className='GridDemo'>
+        <div className='row'>
+          <div className='col-lg-12'>
+            <div className='card'>
+              <div className='card-header'>
+                <div className='utils__title'>
                   <strong>Grid</strong>
                   <a
-                    href="https://ant.design/components/grid/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-sm btn-primary ml-4"
+                    href='https://ant.design/components/grid/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-sm btn-primary ml-4'
                   >
-                    Official Documentation <i className="icmn-link ml-1" />
+                    Official Documentation <i className='icmn-link ml-1' />
                   </a>
                 </div>
               </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-grid-demo-basic">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Basic Grid</strong>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-grid-demo-basic'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Basic Grid</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         From the stack to the horizontal arrangement. You can create a basic grid
                         system by using a single set of <code>{'Row'}</code> and{' '}
                         <code>{'Col'}</code> grid assembly, all of the columns (Col) must be placed
                         in <code>{'Row'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridBasic" />
+                      <div className='card-body pb-0'>
+                        <div id='GridBasic' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -116,35 +116,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-grid-demo-flex-order">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Flex Order</strong>
+                    <div className='card card--example' id='components-grid-demo-flex-order'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Flex Order</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         To change the element sort by Flex layout order.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridFlexorder" />
+                      <div className='card-body pb-0'>
+                        <div id='GridFlexorder' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -167,39 +167,39 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-grid-demo-gutter">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Grid Gutter</strong>
+                    <div className='card card--example' id='components-grid-demo-gutter'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Grid Gutter</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         You can use the <code>{'gutter'}</code> property of <code>{'Row'}</code> as
                         grid spacing, we recommend set it to <code>{'(16 + 8n) px'}</code>. (
                         <code>{'n'}</code> stands for natural number.) You can set it to a object
                         like <code>{'{ xs: 8, sm: 16, md: 24, lg: 32 }'}</code> for responsive
                         design.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridGutter" />
+                      <div className='card-body pb-0'>
+                        <div id='GridGutter' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -229,35 +229,35 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-grid-demo-playground">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Playground</strong>
+                    <div className='card card--example' id='components-grid-demo-playground'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Playground</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         A simple playground for column count and gutter.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridPlayground" />
+                      <div className='card-body pb-0'>
+                        <div id='GridPlayground' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -334,38 +334,38 @@ ReactDOM.render(<App />, mountNode);
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-grid-demo-responsive">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Responsive</strong>
+                    <div className='card card--example' id='components-grid-demo-responsive'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Responsive</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Referring to the Bootstrap [responsive design]
                         (http://getbootstrap.com/css/#grid-media-queries), here preset five
                         dimensions: <code>{'xs'}</code> <code>{'sm'}</code> <code>{'md'}</code>{' '}
                         <code>{'lg'}</code> <code>{'xl'}</code>.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridResponsive" />
+                      <div className='card-body pb-0'>
+                        <div id='GridResponsive' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -385,34 +385,34 @@ ReactDOM.render(
                       </div>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-12">
-                    <div className="card card--example" id="components-grid-demo-flex-align">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Flex Alignment</strong>
+                  <div className='col-xl-6 col-lg-12'>
+                    <div className='card card--example' id='components-grid-demo-flex-align'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Flex Alignment</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">Flex child elements vertically aligned.</div>
-                      <div className="card-body pb-0">
-                        <div id="GridFlexalign" />
+                      <div className='card-body pb-0'>Flex child elements vertically aligned.</div>
+                      <div className='card-body pb-0'>
+                        <div id='GridFlexalign' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -454,39 +454,39 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-grid-demo-flex">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Flex Layout</strong>
+                    <div className='card card--example' id='components-grid-demo-flex'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Flex Layout</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         Use <code>{'row-flex'}</code> define <code>{'flex'}</code> layout, its child
                         elements depending on the value of the <code>{'start'}</code>,
                         <code>{' center'}</code>, <code>{'end'}</code>,
                         <code>{' space-between'}</code>, <code>{'space-around'}</code>, which are
                         defined in its parent node layout mode.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridFlex" />
+                      <div className='card-body pb-0'>
+                        <div id='GridFlex' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -542,37 +542,37 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-grid-demo-offset">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Column offset</strong>
+                    <div className='card card--example' id='components-grid-demo-offset'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Column offset</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         <code>{'Offset'}</code> can set the column to the right side. For example,
                         using <code>{'offset = {4}'}</code> can set the element shifted to the right
                         four columns width.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridOffset" />
+                      <div className='card-body pb-0'>
+                        <div id='GridOffset' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -600,13 +600,13 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-grid-demo-responsive-more">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">More responsive</strong>
+                    <div className='card card--example' id='components-grid-demo-responsive-more'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>More responsive</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         <code>{'span'}</code> <code>{'pull'}</code> <code>{'push'}</code>{' '}
                         <code>{'offset'}</code> <code>{'order'}</code> property can be embedded into{' '}
                         <code>{'xs'}</code> <code>{'sm'}</code> <code>{'md'}</code>{' '}
@@ -614,26 +614,26 @@ ReactDOM.render(
                         <code>{'xs = {6}'}</code> is equivalent to <code>{'xs = {{span: 6}}'}</code>
                         .
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridResponsivemore" />
+                      <div className='card-body pb-0'>
+                        <div id='GridResponsivemore' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
@@ -652,36 +652,36 @@ ReactDOM.render(
                         </Collapse>
                       </div>
                     </div>
-                    <div className="card card--example" id="components-grid-demo-sort">
-                      <div className="card-header">
-                        <h5 className="text-black">
-                          <strong className="text-capitalize">Grid sort</strong>
+                    <div className='card card--example' id='components-grid-demo-sort'>
+                      <div className='card-header'>
+                        <h5 className='text-black'>
+                          <strong className='text-capitalize'>Grid sort</strong>
                         </h5>
                       </div>
-                      <div className="card-body pb-0">
+                      <div className='card-body pb-0'>
                         By using <code>{'push'}</code> and<code>{' pull'}</code> class you can
                         easily change column order.
                       </div>
-                      <div className="card-body pb-0">
-                        <div id="GridSort" />
+                      <div className='card-body pb-0'>
+                        <div id='GridSort' />
                       </div>
-                      <div className="utils__codeCollapse">
+                      <div className='utils__codeCollapse'>
                         <Collapse bordered={false} defaultActiveKey={['1']}>
                           <Panel
                             header={
                               <span>
                                 <i
-                                  className="fa fa-code"
+                                  className='fa fa-code'
                                   style={{ fontSize: 16, color: '#9f9f9f' }}
                                 />
-                                <span className="ml-2 text-primary">Show Code</span>
+                                <span className='ml-2 text-primary'>Show Code</span>
                               </span>
                             }
-                            key="2"
+                            key='2'
                             showArrow={false}
                           >
                             <SyntaxHighlighter
-                              language="jsx"
+                              language='jsx'
                               style={base16AteliersulphurpoolLight}
                               useInlineStyles={true}
                             >
