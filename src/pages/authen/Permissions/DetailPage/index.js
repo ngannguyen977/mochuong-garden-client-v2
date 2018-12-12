@@ -1,23 +1,23 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import CreatePage from './create'
+import DetailTabPage from './detailTab'
 
 
-class UserCreate extends React.Component {
+class PermissionDetail extends React.Component {
   static defaultProps = {
-    pathName: 'Users Create',
+    pathName: 'Permissions Details',
     roles: ['agent', 'administrator'],
   }
   render() {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Users' />
-        <CreatePage location={props.location}/>
+        <Helmet title='Permission Details' />
+        <DetailTabPage location={props.location}/>
       </Page>
     )
   }
 }
 
-export default UserCreate
+export default PermissionDetail

@@ -2,7 +2,6 @@ import { createAction, createReducer } from 'redux-act'
 import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
-import { push } from 'react-router-redux'
 import { notification } from 'antd'
 
 export const REDUCER = 'user'
@@ -12,6 +11,7 @@ const api = constant.api.authen
 const userApi = `${api.host}/${api.user}`
 
 export const setUserPage = createAction(`${NS}SET_USER_PAGE`)
+export const setUserDetailPage = createAction(`${NS}SET_USER_DETAIL_PAGE`)
 export const createUserState = createAction(`${NS}CREATE_USER`)
 
 export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (dispatch, getState) => {
@@ -40,6 +40,25 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
       dispatch(setUserPage(users))
     })
 }
+export const getOne = (id) => (dispatch, getState) => {
+  axios
+    .get(`${userApi}/${id}`)
+    .then(response => {
+      if (response && response.data) {
+        dispatch(setUserDetailPage(response.data))
+      }
+    })
+    .catch(error => {
+      let errorMessage = 'get user fail'
+      if (error.response && error.response.data) {
+        errorMessage = error.response.data
+      }
+      message.error(errorMessage)
+      // mock user
+      const { user } = require('../reducers/mock')
+      dispatch(setUserDetailPage(user))
+    })
+}
 export const changeStatus = (id, status) => (dispatch, getState) => {
   axios.patch(`${userApi}/${id}`, { active: status }).then(response => {
     if (response && response.data) {
@@ -49,6 +68,10 @@ export const changeStatus = (id, status) => (dispatch, getState) => {
         if (user) {
           user = response.data
           dispatch(setUserPage({ users, page, totalItems }))
+          notification['success']({
+            message: 'Change status of users success!',
+            description: 'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
+          })
         }
       }
     }
@@ -58,97 +81,66 @@ export const changeStatus = (id, status) => (dispatch, getState) => {
       errorMessage = error.response.data
     }
     message.error(errorMessage)
+    // mock
+    notification['success']({
+      message: 'Change status of users success!',
+      description: 'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
+    })
   })
 }
-export const createUser = (model, isCreate = false) => (dispatch, getState) => {
+export const destroy = (ids) => (dispatch, getState) => {
+  axios.delete(`${userApi}/${ids}`).then(response => {
+    notification['success']({
+      message: 'Delete user success!',
+      description: 'These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+    })
+    let { users } = getState().user
+    dispatch(setUserPage(users.filter((user) => !ids.includes(user.id))))
+  }).catch(error => {
+    let errorMessage = 'change user status fail'
+    if (error.response && error.response.data) {
+      errorMessage = error.response.data
+    }
+    message.error(errorMessage)
+    // mock
+    notification['success']({
+      message: 'Delete user success!',
+      description: 'These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+    })
+  })
+}
+export const create = (model, isCreate = false) => (dispatch, getState) => {
   dispatch(createUserState(model))
-  if(isCreate){
-
+  if (isCreate) {
+    axios
+      .post(userApi, model)
+      .then(response => {
+        if (response && response.data) {
+          let { users, page, totalItems } = getState().user
+          users.push(response.data)
+          dispatch(setUserPage({ users, page, totalItems: totalItems++ }))
+        }
+        dispatch(createUserState({}))
+      })
+      .catch(error => {
+        let errorMessage = 'create user fail'
+        if (error.response && error.response.data) {
+          errorMessage = error.response.data
+        }
+        message.error(errorMessage)
+      })
   }
 }
 const initialState = {
   totalItems: 0,
   page: 0,
-  users: [
-    {
-      active: true,
-      created_at: '2018-12-04T10:29:14.705Z',
-      customer: {
-        account_number: 'string',
-        active: true,
-        address1: 'string',
-        address2: 'string',
-        alias: 'string',
-        confirmed: true,
-        created_at: '2018-12-04T10:29:14.705Z',
-        deleted_at: '2018-12-04T10:29:14.705Z',
-        domain: 'string',
-        email: 'string',
-        first_name: 'string',
-        id: -1,
-        image: {
-          created_at: '2018-12-04T10:29:14.705Z',
-          deleted_at: '2018-12-04T10:29:14.705Z',
-          id: -1,
-          path: 'string',
-          updated_at: '2018-12-04T10:29:14.705Z',
-        },
-        last_name: 'string',
-        mobile: 'string',
-        updated_at: '2018-12-04T10:29:14.705Z',
-      },
-      deleted_at: '2018-12-04T10:29:14.705Z',
-      groups: [
-        {
-          created_at: '2018-12-04T10:29:14.705Z',
-          customer: {
-            account_number: 'string',
-            active: true,
-            address1: 'string',
-            address2: 'string',
-            alias: 'string',
-            confirmed: true,
-            created_at: '2018-12-04T10:29:14.705Z',
-            deleted_at: '2018-12-04T10:29:14.705Z',
-            domain: 'string',
-            email: 'string',
-            first_name: 'string',
-            id: -1,
-            image: {
-              created_at: '2018-12-04T10:29:14.705Z',
-              deleted_at: '2018-12-04T10:29:14.705Z',
-              id: -1,
-              path: 'string',
-              updated_at: '2018-12-04T10:29:14.705Z',
-            },
-            last_name: 'string',
-            mobile: 'string',
-            updated_at: '2018-12-04T10:29:14.705Z',
-          },
-          deleted_at: '2018-12-04T10:29:14.705Z',
-          id: -1,
-          name: 'string',
-          updated_at: '2018-12-04T10:29:14.705Z',
-          users: [null],
-          uuid: 'string',
-        },
-      ],
-      id: -1,
-      last_login: '2018-12-04T10:29:14.705Z',
-      last_password_change: '2018-12-04T10:29:14.705Z',
-      role: {
-        access_level: 0,
-        id: -1,
-        name: 'string',
-      },
-      updated_at: '2018-12-04T10:29:14.705Z',
-      username: 'string',
-      uuid: 'string',
-    },
-  ],
+  users: [],
+  userCreate: {},
+  detail: {}
 }
 const ACTION_HANDLES = {
   [setUserPage]: (state, { users, page, totalItems }) => ({ ...state, users, page, totalItems }),
   [createUserState]: (state, userCreate) => ({ ...state, userCreate }),
+  [setUserDetailPage]: (state, detail) => ({ ...state, detail })
 }
 export default createReducer(ACTION_HANDLES, initialState)

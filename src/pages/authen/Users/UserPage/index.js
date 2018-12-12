@@ -1,11 +1,11 @@
 import React from 'react'
 import { Table, Button } from 'antd'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
 import helper from '../../../../helper'
-import { Checkbox, Popover, Icon, Tag } from 'antd'
+import { Checkbox, Popover, Icon, Tag, Popconfirm, message } from 'antd'
 import '../../../../resources/style.scss'
 
 @connect(
@@ -16,7 +16,6 @@ class UserPage extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
     loading: false,
-    actionsVisible: false,
     pagination: {
       defaultCurrent: 1,
       total: -1,
@@ -32,9 +31,8 @@ class UserPage extends React.Component {
     }
     this.setState({ ...this.state.pagination, total: this.props.totalItems })
   }
-  handleActions = (type,id)=>{
-    console.log('type',type,id)
-  }
+
+
   handleTableChange = (pagination, filters, sorter) => {
     console.log('hanlde table change', (pagination, filters, sorter))
     const pager = { ...this.state.pagination }
@@ -51,9 +49,6 @@ class UserPage extends React.Component {
     }
     this.props.getList({ ...params });
   }
-  changeStatus = (id, status) => {
-    // this.props.changeStatus(id, !status)
-  }
   render() {
     const columns = [
       {
@@ -61,6 +56,7 @@ class UserPage extends React.Component {
         dataIndex: 'username',
         sorter: true,
         width: '20%',
+        render: (text, record) => (<a className='link' href={`#/users/detail/${record.id}`}>{record.username}</a>)
       },
       {
         title: 'Customer',
@@ -95,7 +91,6 @@ class UserPage extends React.Component {
           <Checkbox
             defaultChecked={record.active}
             checked={record.active}
-            onClick={this.changeStatus(record.id, record.active)}
           ></Checkbox>
         ),
       },
@@ -115,7 +110,8 @@ class UserPage extends React.Component {
       },
     ]
     const { loading, selectedRowKeys } = this.state
-    const { totalItems, page, data } = this.props
+    const { totalItems, page, data, type } = this.props
+    const hasSelected = selectedRowKeys.length > 0
     // rowSelection object indicates the need for row selection
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
@@ -126,15 +122,44 @@ class UserPage extends React.Component {
         name: record.name,
       }),
     };
-    const hasSelected = selectedRowKeys.length > 0
+    const handleActions = (actionType, status = true) => {
+      if (!this.state.selectedRowKeys || this.state.selectedRowKeys.length === 0) {
+        message.info('No user is selected!')
+      } else {
+        switch (actionType) {
+          case type.del:
+            if (status) {
+              this.props.destroy(this.state.selectedRowKeys, status)
+            } else {
+              message.info('canceled delete')
+            }
+            break;
+          case type.changeStatus:
+            this.props.changeStatus(this.state.selectedRowKeys, status)
+            break
+          case type.attachPolicy:
+            break
+          case type.addToGroup:
+            break
+          default:
+            break
+        }
+      }
+    }
     const content = (
       <div>
-        <p className='link' onClick={this.handleActions('del')}>Delete users</p>
-        <p className='link' onClick={this.handleActions('change-status')}>Change users STATUS</p>
-        <p className='link' onClick={this.handleActions('policy')}>Change users POLICIES</p>
-        <p className='link' onClick={this.handleActions('group')}>Change users GROUPS</p>
+        <Popconfirm title='Are you sure delete these users? You cannot rollback.' onConfirm={() => handleActions(type.del)} onCancel={() => handleActions(type.del, false)} okText='Yes, I confirm' cancelText="No, I don't">
+          <p className='link'>Delete USERS</p>
+        </Popconfirm>
+        <Popconfirm title='Are you sure change status these users?' onConfirm={() => handleActions(type.changeStatus)} onCancel={() => handleActions(type.changeStatus, false)} okText='Active' cancelText='Deactive'>
+          <p className='link'>Change STATUS</p>
+        </Popconfirm>
+        <p className='link' onClick={() => handleActions(type.attachPolicy)}>Attach POLICIES(comein soon)</p>
+        <p className='link' onClick={() => handleActions(type.addToGroup)}>Add to GROUPS(comein soon)</p>
       </div>
     );
+
+
     return (
       <div>
         <section className='card'>
@@ -142,19 +167,11 @@ class UserPage extends React.Component {
             <div className='utils__title'>
               <strong>Users Management</strong>
             </div>
+            <small>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </small>
           </div>
           <div className='card-body'>
-            <p>
-              While Bootstrap uses aaa<code>em</code>s or <code>rem</code>s for defining most sizes,{' '}
-              <code>px</code>s are used for grid breakpoints and container widths. This is because
-              the viewport width is in pixels and does not change with the{' '}
-              <a href='https://drafts.csswg.org/mediaqueries-3/#units'>font size</a>.
-            </p>
-            <p>
-              See how aspects of the Bootstrap grid system work across multiple devices with a handy
-              table.
-            </p>
-            <br />
             {(totalItems && totalItems > 0) &&
               (<div className='table-responsive'>
                 <div style={{ marginBottom: 16, textAlign: "right" }}>
@@ -167,9 +184,9 @@ class UserPage extends React.Component {
                     Create User
                     </Button>
                   <Popover
-                  placement='bottomRight'
-                  content={content}
-                  trigger='click'>
+                    placement='bottomRight'
+                    content={content}
+                    trigger='click'>
                     <Button
                       type='primary'
                       disabled={!hasSelected}

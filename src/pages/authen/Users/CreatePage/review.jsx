@@ -1,35 +1,11 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import { Table, TreeSelect, Tag, Button, Upload, Icon, message, Steps, Divider } from 'antd'
+import { Table, Radio } from 'antd'
+import Avatar from 'components/CleanComponents/Avatar'
+import { changeStepProgressBar } from '../../../components/buttonStep'
 
-const columns = [
-    {
-        title: 'Policy name',
-        dataIndex: 'name',
-        width: '20%',
-    },
-    {
-        title: 'Type',
-        dataIndex: 'type',
-        width: '10%',
-    },
-    {
-        title: 'Groups',
-        dataIndex: 'groups',
-        width: '20%',
-        render: tags => (
-            <span>
-                {tags.map(tag => <Tag color='blue' key={tag.id}>{tag.name}</Tag>)}
-            </span>
-        ),
-    },
-    {
-        title: 'Description',
-        dataIndex: 'description',
-        width: '30%',
-    }
-]
+const { Group, Button } = Radio
 
 @connect(
     mapStateToProps,
@@ -49,28 +25,45 @@ export class Review extends React.Component {
             }
         }
     }
+    changePassword(changeStepState, steps) {
+        changeStepProgressBar(0, steps)
+        changeStepState(0)
+    }
     render() {
+        const { reviewColumns, userCreate, data, changeStepState, steps } = this.props
+        const { pagination, loading } = this.state
         return (
             <div className='user-create-step-1 row'>
                 <div className='col-lg-4 text-justify'>
-                    <div className='form-group font-size-20'>
-                        <label htmlFor='product-edit-title'>Username:</label>
-                        <code id='product-edit-title' > {this.props.userCreate.user || 'username is missing'}</code>
-                    </div>
-                    <div className='form-group font-size-20'>
-                        <label htmlFor='product-edit-title'>Password:</label>
-                        <code id='product-edit-title' >  {this.props.userCreate.password || 'password is missing'}</code>
+                    <div className={`userCard px-3 py-5 userCard--typed bg-`}>
+                        <Avatar
+                            src={'resources/images/avatars/1.jpg'}
+                            border={true}
+                            borderColor='white'
+                            size='90'
+                        />
+                        <div className='my-3 text-center'>
+                            <div className='userCard__userName font-size-18'>{userCreate.user || 'No name'}</div>
+                            <div className='userCard__post'>Password: {userCreate.password || (<i>password is missing</i>)}</div>
+                        </div>
+                        <div className='text-center'>
+                            <div className='btn-group text-center'>
+                                <Group size='small'>
+                                    <Button onClick={() => this.changePassword(changeStepState, steps)}>Change</Button>
+                                </Group>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className='col-lg-8'>
                     <div className='form-group'>
                         <Table
                             rowKey={record => record.id}
-                            pagination={this.state.pagination}
-                            loading={this.state.loading}
-                            columns={columns}
+                            pagination={pagination}
+                            loading={loading}
+                            columns={reviewColumns}
                             onChange={this.handleTableChange}
-                            dataSource={this.props.data} />
+                            dataSource={data} />
                     </div>
                 </div>
             </div>)

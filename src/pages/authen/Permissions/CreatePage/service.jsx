@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input, Table, Select, Button, Upload, Icon, message, Steps, Divider } from 'antd'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 
 const columns = [
@@ -38,7 +38,7 @@ class ServiceList extends React.Component {
   }
   componentDidMount() {
     if(!this.props.groups){
-      this.props.getGroupList(100, 0)
+      this.props.getList(100, 0)
       this.setState({ ...this.state.pagination, total: this.props.totalItems })
     }
   }

@@ -37,22 +37,31 @@ const loadableRoutes = {
     component: loadable(() => import('pages/authen/Groups')),
   },
   '/groups/create': {
-    component: loadable(() => import('pages/authen/Groups/create')),
+    component: loadable(() => import('pages/authen/Groups/CreatePage')),
+  },
+  '/groups/detail/:id': {
+    component: loadable(() => import('pages/authen/Groups/DetailPage')),
   },
   // users
   '/users': {
     component: loadable(() => import('pages/authen/Users')),
   },
   '/users/create': {
-    component: loadable(() => import('pages/authen/Users/create')),
+    component: loadable(() => import('pages/authen/Users/CreatePage')),
+  },
+  '/users/detail/:id': {
+    component: loadable(() => import('pages/authen/Users/DetailPage')),
   },
   // permissions
   '/permissions': {
     component: loadable(() => import('pages/authen/Permissions')),
   },
   '/permissions/create': {
-    component: loadable(() => import('pages/authen/Permissions/create')),
-  }
+    component: loadable(() => import('pages/authen/Permissions/CreatePage')),
+  },
+  '/permissions/detail/:id': {
+    component: loadable(() => import('pages/authen/Permissions/DetailPage')),
+  },
 }
 
 class Routes extends React.Component {

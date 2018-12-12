@@ -1,11 +1,10 @@
 import React from 'react'
-import { Table, Button } from 'antd'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
 import helper from '../../../../helper'
-import { Checkbox, Popover,Icon } from 'antd'
+import { Checkbox, Popover, Icon, Tag, Popconfirm, message,Table, Button  } from 'antd'
 
 @connect(
   mapStateToProps,
@@ -22,13 +21,11 @@ class PermissionPage extends React.Component {
       pageSize: 0,
     }
   }
-  onSelectChange = selectedRowKeys => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys)
-    this.setState({ selectedRowKeys })
-  }
   componentDidMount() {
-    const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search);
-    this.props.getList(limit, page, sort, isAsc)
+    if (!this.props.totalItems || this.props.totalItems === 0) {
+      const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search);
+      this.props.getList(limit, page, sort, isAsc)
+    }
     this.setState({ ...this.state.pagination, total: this.props.totalItems })
   }
   handleTableChange = (pagination, filters, sorter) => {
@@ -47,84 +44,78 @@ class PermissionPage extends React.Component {
     }
     this.props.getList({ ...params });
   }
-  changeStatus = (id, status) => {
-    // this.props.changeStatus(id, !status)
-    console.log('status', id, status)
-  }
   render() {
     const columns = [
-      // {
-      //   title: 'Id',
-      //   dataIndex: 'id',
-      //   hidden: true,
-      // },
       {
-        title: 'Permissionname',
-        dataIndex: 'permissionname',
+        title: 'Permission name',
+        dataIndex: 'name',
+        sorter: true,
+        width: '30%',
+        render: (text, record) => (<a className='link' href={`#/permissions/detail/${record.id}`}>{record.name}</a>)
+      },
+      {
+        title: 'Type',
+        dataIndex: 'type',
         sorter: true,
         width: '20%',
       },
       {
-        title: 'Customer',
-        dataIndex: 'customer.alias',
+        title: 'Description',
+        dataIndex: 'description',
         sorter: true,
-        width: '20%',
-      },
-      {
-        title: 'Role',
-        dataIndex: 'role.name',
-        sorter: true,
-        width: '20%',
-      },
-      {
-        title: 'Group',
-        dataIndex: 'groups',
-        sorter: true,
-        width: '10%',
-      },
-      {
-        title: 'Status',
-        dataIndex: 'active',
-        sorter: true,
-        width: '7%',
-        render: (text, record) => (
-          <Checkbox
-            defaultChecked={record.active}
-            onClick={this.changeStatus(record.id, record.active)}
-          ></Checkbox>
-        ),
-      },
-      {
-        title: 'Last Activity',
-        dataIndex: 'last_login',
-        sorter: true,
-        width: '15%',
-        render: (x => helper.formatDate(new Date(x)))
-      },
-      {
-        title: 'Create time',
-        dataIndex: 'created_at',
-        sorter: true,
-        width: '15%',
-        render: (x => helper.formatDate(new Date(x)))
-      },
+        width: '50%',
+      }
     ]
     const { loading, selectedRowKeys } = this.state
-    const { totalItems, page, data } = this.props
+    const { totalItems, page, data , type } = this.props
     const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    }
+      onChange: (selectedRowKeys, selectedRows) => {
+        this.setState({
+          selectedRowKeys
+        })
+      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User', // Column configuration not to be checked
+        name: record.name,
+      }),
+    };
     const hasSelected = selectedRowKeys.length > 0
-    const text = <span>Actions</span>;
+    const handleActions = (actionType, status = true) => {
+      if (!selectedRowKeys || selectedRowKeys.length === 0) {
+        message.info('No group is selected!')
+      } else {
+        switch (actionType) {
+          case type.del:
+            if (status) {
+              this.props.destroy(selectedRowKeys, status)
+            } else {
+              message.info('canceled delete')
+            }
+            break;
+          case type.changeStatus:
+            this.props.changeStatus(selectedRowKeys, status)
+            break
+          case type.attachPolicy:
+            break
+          case type.addToGroup:
+            break
+          default:
+            break
+        }
+      }
+    }
     const content = (
       <div>
-        <p>Delete permissions</p>
-        <p>Change permissions STATUS</p>
-        <p>Change permissions POLICIES</p>
-        <p>Change permissions GROUPS</p>
+        <Popconfirm title='Are you sure delete these users? You cannot rollback.' onConfirm={() => handleActions(type.del)} onCancel={() => handleActions(type.del, false)} okText='Yes, I confirm' cancelText="No, I don't">
+          <p className='link'>Delete USERS</p>
+        </Popconfirm>
+        <Popconfirm title='Are you sure change status these users?' onConfirm={() => handleActions(type.changeStatus)} onCancel={() => handleActions(type.changeStatus, false)} okText='Active' cancelText='Deactive'>
+          <p className='link'>Change STATUS</p>
+        </Popconfirm>
+        <p className='link' onClick={() => handleActions(type.attachPolicy)}>Attach POLICIES(comein soon)</p>
+        <p className='link' onClick={() => handleActions(type.addToGroup)}>Add to GROUPS(comein soon)</p>
       </div>
-    );
+    )
     return (
       <div>
         <section className='card'>
@@ -132,46 +123,38 @@ class PermissionPage extends React.Component {
             <div className='utils__title'>
               <strong>Permissions Management</strong>
             </div>
+            <small>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </small>
           </div>
           <div className='card-body'>
-            <p>
-              While Bootstrap uses aaa<code>em</code>s or <code>rem</code>s for defining most sizes,{' '}
-              <code>px</code>s are used for grid breakpoints and container widths. This is because
-              the viewport width is in pixels and does not change with the{' '}
-              <a href='https://drafts.csswg.org/mediaqueries-3/#units'>font size</a>.
-            </p>
-            <p>
-              See how aspects of the Bootstrap grid system work across multiple devices with a handy
-              table.
-            </p>
-            <br />
             {(totalItems && totalItems > 0) &&
               (<div className='table-responsive'>
                 <div style={{ marginBottom: 16,textAlign:"right" }}>
                 <Button
                       type='primary'
-                      onClick={this.start}
                       loading={loading}
                       style={{ marginRight:'5px' }}
                       href='#/permissions/create'
                     >
                       Create Permission
                     </Button>
-                  <Popover placement='bottomRight' title={text} content={content} trigger='click'>
+                    <Popover
+                    placement='bottomRight'
+                    content={content}
+                    trigger='click'>
                     <Button
                       type='primary'
-                      onClick={this.start}
                       disabled={!hasSelected}
                       loading={loading}
                     >
                       Actions <Icon type='down-circle' theme='filled' />
                     </Button>
                   </Popover>
-
-                  <span style={{ marginLeft: 8 }}>
+                </div>
+                <span style={{ marginLeft: 8 }}>
                     {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
                   </span>
-                </div>
                 <Table
                   rowSelection={rowSelection}
                   rowKey={record => record.id}

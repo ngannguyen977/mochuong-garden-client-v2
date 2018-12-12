@@ -1,15 +1,15 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import { Input,  Button } from 'antd'
-import UserList from './users'
+import UserList from '../../Users/UserPage/user.summary'
 const Search = Input.Search;
 
 @connect(
   mapStateToProps,
   mapDispathToProps,
 )
-class Step2 extends React.Component {
+class UserSummaryList extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -19,7 +19,7 @@ class Step2 extends React.Component {
   render() {
 
     return (
-      <div className='group-create-step-2 row'>
+      <div className='group-create add-users row'>
         <div className='col-lg-4 text-justify'>
           <p>With most services, your groupname is a name you created, or that has been assigned to you. If you do not recall creating a groupname,
                (or don't remember the name you chose), try using your e-mail address as your groupname.
@@ -45,9 +45,9 @@ class Step2 extends React.Component {
                 className='text-capitalize'
                 onClick={this.start}
                 style={{ marginRight: '5px' }}
-                href='#/groups/create'
+                href='#/users/create'
               >
-                Create Group
+                Create User
               </Button>
             </div>
           </div>
@@ -61,4 +61,4 @@ class Step2 extends React.Component {
   }
 }
 
-export default Step2
+export default UserSummaryList

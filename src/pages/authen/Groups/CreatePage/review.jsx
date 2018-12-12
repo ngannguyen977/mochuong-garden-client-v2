@@ -1,35 +1,8 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import { Table, TreeSelect, Tag, Button, Upload, Icon, message, Steps, Divider } from 'antd'
 
-const columns = [
-    {
-        title: 'Policy name',
-        dataIndex: 'name',
-        width: '20%',
-    },
-    {
-        title: 'Type',
-        dataIndex: 'type',
-        width: '10%',
-    },
-    {
-        title: 'Groups',
-        dataIndex: 'groups',
-        width: '20%',
-        render: tags => (
-            <span>
-                {tags.map(tag => <Tag color='blue' key={tag.id}>{tag.name}</Tag>)}
-            </span>
-        ),
-    },
-    {
-        title: 'Description',
-        dataIndex: 'description',
-        width: '30%',
-    }
-]
 
 @connect(
     mapStateToProps,
@@ -50,17 +23,19 @@ export class Review extends React.Component {
         }
     }
     render() {
+        const { reviewPermissionColumns,reviewUserColumns, groupCreate, data } = this.props
+        const { pagination, loading } = this.state
         return (
             <div className='group-create-step-1 '>
                 <div className='text-justify'>
                     <div className=' font-size-16 row'>
                         <div className='form-group col-lg-6'>
                             <label htmlFor='product-edit-title'>Group name:</label>
-                            <p id='product-edit-title' > {this.props.groupCreate.group || 'group name is missing'}</p>
+                            <p id='product-edit-title' > {groupCreate.name || 'group name is missing'}</p>
                         </div>
                         <div className='form-group col-lg-6'>
                             <label htmlFor='product-edit-title'>Description:</label>
-                            <p id='product-edit-title' >  {this.props.groupCreate.description || 'description is missing'}</p>
+                            <p id='product-edit-title' >  {groupCreate.description || 'description is missing'}</p>
                         </div>
                     </div>
                 </div>
@@ -70,23 +45,23 @@ export class Review extends React.Component {
                             <Table
                                 title={() => 'Users in Group'}
                                 rowKey={record => record.id}
-                                pagination={this.state.pagination}
-                                loading={this.state.loading}
-                                columns={columns}
+                                pagination={pagination}
+                                loading={loading}
+                                columns={reviewUserColumns}
                                 onChange={this.handleTableChange}
-                                dataSource={this.props.data} />
+                                dataSource={data} />
                         </div>
                     </div>
                     <div className='col-lg-6'>
                         <div className='form-group'>
                             <Table
-                                title={() => 'Policies for Group'}
+                                title={() => 'Permission for Group'}
                                 rowKey={record => record.id}
-                                pagination={this.state.pagination}
-                                loading={this.state.loading}
-                                columns={columns}
+                                pagination={pagination}
+                                loading={loading}
+                                columns={reviewPermissionColumns}
                                 onChange={this.handleTableChange}
-                                dataSource={this.props.data} />
+                                dataSource={data} />
                         </div>
                     </div>
                 </div>

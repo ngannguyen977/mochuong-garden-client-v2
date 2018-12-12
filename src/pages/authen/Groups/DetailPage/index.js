@@ -1,23 +1,23 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import CreatePage from './CreatePage'
+import DetailTabPage from './detailTab'
 
 
-class Create extends React.Component {
+class GroupDetail extends React.Component {
   static defaultProps = {
-    pathName: 'Groups Create',
+    pathName: 'Groups Details',
     roles: ['agent', 'administrator'],
   }
   render() {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Group Create' />
-        <CreatePage location={props.location}/>
+        <Helmet title='Group Details' />
+        <DetailTabPage location={props.location}/>
       </Page>
     )
   }
 }
 
-export default Create
+export default GroupDetail

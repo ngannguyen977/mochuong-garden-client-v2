@@ -1,34 +1,13 @@
 import React from 'react'
-import { Input, Table, Select, Button, Upload, Icon, message, Steps, Divider } from 'antd'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { Table } from 'antd'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-
-const columns = [
-  {
-    title: 'Group name',
-    dataIndex: 'name',
-    sorter: true,
-    width: '33%',
-  },
-  {
-    title: 'Attached Policies',
-    dataIndex: 'policies',
-    sorter: true,
-    width: '33%',
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    sorter: true,
-    width: '33%',
-  }
-]
 
 @connect(
   mapStateToProps,
   mapDispathToProps,
 )
-class GroupList extends React.Component {
+class GroupSummaryList extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -44,11 +23,12 @@ class GroupList extends React.Component {
   }
   componentDidMount() {
     if(!this.props.groups){
-      this.props.getGroupList(100, 0)
+      this.props.getList(100, 0)
       this.setState({ ...this.state.pagination, total: this.props.totalItems })
     }
   }
   render() {
+      const { summaryColumns } = this.props
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -65,10 +45,10 @@ class GroupList extends React.Component {
         rowKey={record => record.id}
         pagination={this.state.pagination}
         loading={this.state.loading}
-        columns={columns}
+        columns={summaryColumns}
         onChange={this.handleTableChange}
         dataSource={this.props.groups} />
     )
   }
 }
-export default GroupList
+export default GroupSummaryList

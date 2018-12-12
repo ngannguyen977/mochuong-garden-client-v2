@@ -1,5 +1,5 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import { Input, Radio, Button, Switch, Icon, message, Steps, Affix } from 'antd'

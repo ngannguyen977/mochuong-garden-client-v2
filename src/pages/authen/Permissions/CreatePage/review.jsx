@@ -1,11 +1,11 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import { Table, TreeSelect, Tag, Button, Upload, Icon, message, Steps, Divider } from 'antd'
 
 const columns = [
     {
-        title: 'Policy name',
+        title: 'Permission name',
         dataIndex: 'name',
         width: '20%',
     },
@@ -13,16 +13,6 @@ const columns = [
         title: 'Type',
         dataIndex: 'type',
         width: '10%',
-    },
-    {
-        title: 'Groups',
-        dataIndex: 'groups',
-        width: '20%',
-        render: tags => (
-            <span>
-                {tags.map(tag => <Tag color='blue' key={tag.id}>{tag.name}</Tag>)}
-            </span>
-        ),
     },
     {
         title: 'Description',

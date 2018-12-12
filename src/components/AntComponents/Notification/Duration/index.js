@@ -8,13 +8,13 @@ export default function(ReactDOM, mountNode) {
       message: 'Notification Title',
       description:
         'I will never close automatically. I will be close automatically. I will never close automatically.',
-      duration: 0,
+      // duration: 0,
     }
     notification.open(args)
   }
 
   ReactDOM.render(
-    <Button type="primary" onClick={openNotification}>
+    <Button type='primary' onClick={openNotification}>
       Open the notification box
     </Button>,
     mountNode,

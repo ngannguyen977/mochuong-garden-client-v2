@@ -1,34 +1,13 @@
 import React from 'react'
 import { Input, Table, Select, Button, Upload, Icon, message, Steps, Divider } from 'antd'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-
-const columns = [
-  {
-    title: 'Username',
-    dataIndex: 'name',
-    sorter: true,
-    width: '33%',
-  },
-  {
-    title: 'Full Name',
-    dataIndex: 'policies',
-    sorter: true,
-    width: '33%',
-  },
-  {
-    title: 'Last Activity',
-    dataIndex: 'last_login',
-    sorter: true,
-    width: '33%',
-  }
-]
 
 @connect(
   mapStateToProps,
   mapDispathToProps,
 )
-class UserList extends React.Component {
+class PermissionSummary extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -44,11 +23,12 @@ class UserList extends React.Component {
   }
   componentDidMount() {
     if(!this.props.groups){
-      this.props.getUserList(100, 0)
+      this.props.getList(100, 0)
       this.setState({ ...this.state.pagination, total: this.props.totalItems })
     }
   }
   render() {
+    const { summaryColumns } = this.props
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -65,10 +45,10 @@ class UserList extends React.Component {
         rowKey={record => record.id}
         pagination={this.state.pagination}
         loading={this.state.loading}
-        columns={columns}
+        columns={summaryColumns}
         onChange={this.handleTableChange}
         dataSource={this.props.groups} />
     )
   }
 }
-export default UserList
+export default PermissionSummary

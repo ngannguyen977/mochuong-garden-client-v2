@@ -1,15 +1,16 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import { Input, Table, Button, Switch, Icon, message, Steps, Divider } from 'antd'
-import UserList from './users'
+import PermissionList from '../../Permissions/PermissionPage/permission.summary'
+
 const Search = Input.Search;
 
 @connect(
   mapStateToProps,
   mapDispathToProps,
 )
-class Step2 extends React.Component {
+class PermissionSummaryList extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -19,7 +20,7 @@ class Step2 extends React.Component {
   render() {
 
     return (
-      <div className='group-create-step-2 row'>
+      <div className='group-create permission-step row'>
         <div className='col-lg-4 text-justify'>
           <p>With most services, your groupname is a name you created, or that has been assigned to you. If you do not recall creating a groupname,
                (or don't remember the name you chose), try using your e-mail address as your groupname.
@@ -29,11 +30,11 @@ class Step2 extends React.Component {
              If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
         </div>
         <div className='col-lg-8'>
-          <h2>Attach Policies for Group</h2>
+          <h2>Attach Permission for Group</h2>
           <div className='row'>
             <div className='col-lg-8'>
               <Search
-                placeholder='search groups'
+                placeholder='search permission'
                 onSearch={value => console.log(value)}
               // style={{ width: 200 }}
               />
@@ -45,14 +46,14 @@ class Step2 extends React.Component {
                 className='text-capitalize'
                 onClick={this.start}
                 style={{ marginRight: '5px' }}
-                href='#/groups/create'
+                href='#/permissions/create'
               >
-                Create Group
+                Create Permissions
               </Button>
             </div>
           </div>
           <div className='form-group'>
-          <UserList />
+          <PermissionList />
           </div>
         </div>
 
@@ -61,4 +62,4 @@ class Step2 extends React.Component {
   }
 }
 
-export default Step2
+export default PermissionSummaryList

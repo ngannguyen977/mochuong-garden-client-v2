@@ -1,5 +1,5 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import { Input, Table, Button, Switch, Icon, message, Steps, Divider } from 'antd'
@@ -21,7 +21,7 @@ class Step1 extends React.Component {
   render() {
 
     return (
-      <div className='permission-create-step-1 row'>
+      <div className='permission-create sevice-step row'>
         <div className='col-lg-4 text-justify'>
           <div className='form-group'>
           </div>

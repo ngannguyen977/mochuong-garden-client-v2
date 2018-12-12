@@ -1,34 +1,13 @@
 import React from 'react'
-import { Input, Table, Select, Button, Upload, Icon, message, Steps, Divider } from 'antd'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { Table } from 'antd'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-
-const columns = [
-  {
-    title: 'Policy name',
-    dataIndex: 'name',
-    sorter: true,
-    width: '33%',
-  },
-  {
-    title: 'Type',
-    dataIndex: 'type',
-    sorter: true,
-    width: '33%',
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    sorter: true,
-    width: '33%',
-  }
-]
 
 @connect(
   mapStateToProps,
   mapDispathToProps,
 )
-class PolicyList extends React.Component {
+class UserSummaryList extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -43,18 +22,19 @@ class PolicyList extends React.Component {
     }
   }
   componentDidMount() {
-    if(!this.props.groups){
-      this.props.getGroupList(100, 0)
+    if(!this.props.users){
+      this.props.getList(100, 0)
       this.setState({ ...this.state.pagination, total: this.props.totalItems })
     }
   }
   render() {
+      const { summaryColumns } = this.props
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
       },
       getCheckboxProps: record => ({
-        disabled: record.name === 'Disabled Group', // Column configuration not to be checked
+        disabled: record.name === 'Disabled User', // Column configuration not to be checked
         name: record.name,
       }),
     };
@@ -65,10 +45,10 @@ class PolicyList extends React.Component {
         rowKey={record => record.id}
         pagination={this.state.pagination}
         loading={this.state.loading}
-        columns={columns}
+        columns={summaryColumns}
         onChange={this.handleTableChange}
-        dataSource={this.props.data} />
+        dataSource={this.props.users} />
     )
   }
 }
-export default PolicyList
+export default UserSummaryList

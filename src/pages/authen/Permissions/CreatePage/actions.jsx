@@ -1,5 +1,5 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import { Input, Checkbox, Button, Switch, Icon, message, Steps, Affix } from 'antd'
@@ -24,7 +24,7 @@ class Step2 extends React.Component {
   render() {
 
     return (
-      <div className='permission permission-step-2 row'>
+      <div className='permission permission action-step row'>
       <div className='col-lg-2 text-justify'>
       <div className='permission__list'>
           <Affix offsetTop={20}>

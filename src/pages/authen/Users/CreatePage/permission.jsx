@@ -1,42 +1,38 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import queryString from 'query-string'
-import { Input, Table, Button, Switch, Icon, message, Steps, Divider } from 'antd'
-import GroupList from './group'
-import PolicyList from './policies'
+import { Input, Button, Switch } from 'antd'
+import GroupList from '../../Groups/GroupPage/group.summary'
+import PermissionList from '../../Permissions/PermissionPage/permission.summary'
 const Search = Input.Search;
 
 @connect(
   mapStateToProps,
   mapDispathToProps,
 )
-class Step2 extends React.Component {
+class PermissionPage extends React.Component {
   constructor() {
     super()
     this.state = {
-      modeTitle: 'Add user to groups',
+      title: 'Add user to groups',
       mode: 'group'
     }
   }
   handleMode(isAttachPolicies) {
-    switch (isAttachPolicies) {
-      case false:
-        this.setState({ modeTitle: 'Attach policies', mode: 'policy' })
-        break;
-      default:
-        this.setState({ modeTitle: 'Add user to groups', mode: 'group' })
-        break;
+    if(isAttachPolicies){
+      this.setState({ title: 'Add user to groups', mode: 'group' })
+    }else{
+      this.setState({ title: 'Attach permission', mode: 'permission' })
     }
   }
   render() {
-
+    const { title,mode } = this.state
     return (
       <div className='user-create-step-2 row'>
         <div className='col-lg-4 text-justify'>
           <div className='form-group'>
             <Switch size='large' defaultChecked onChange={(value) => this.handleMode(value)} />
-            <span>{'  ' + this.state.modeTitle}</span>
+            <span>{'  ' + title}</span>
           </div>
           <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
                (or don't remember the name you chose), try using your e-mail address as your username.
@@ -46,7 +42,7 @@ class Step2 extends React.Component {
              If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
         </div>
         <div className='col-lg-8'>
-          <h2>{this.state.modeTitle}</h2>
+          <h2>{title}</h2>
           <div className='row'>
             <div className='col-lg-8'>
               <Search
@@ -62,15 +58,15 @@ class Step2 extends React.Component {
                 className='text-capitalize'
                 onClick={this.start}
                 style={{ marginRight: '5px' }}
-                href={'#/' + this.state.mode + '/create'}
+                href={'#/' + mode + '/create'}
               >
-                Create&ensp;{this.state.mode}
+                Create&ensp;{mode}
               </Button>
             </div>
           </div>
           <div className='form-group'>
-            {this.state.mode === 'group' && <GroupList />}
-            {this.state.mode === 'policy' && <PolicyList />}
+            {mode === 'group' && <GroupList />}
+            {mode === 'permission' && <PermissionList />}
           </div>
         </div>
 
@@ -79,4 +75,4 @@ class Step2 extends React.Component {
   }
 }
 
-export default Step2
+export default PermissionPage
