@@ -14,7 +14,10 @@ export const setUserPage = createAction(`${NS}SET_USER_PAGE`)
 export const setUserDetailPage = createAction(`${NS}SET_USER_DETAIL_PAGE`)
 export const createUserState = createAction(`${NS}CREATE_USER`)
 
-export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (dispatch, getState) => {
+export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
+  dispatch,
+  getState,
+) => {
   axios
     .get(userApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
@@ -40,7 +43,7 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
       dispatch(setUserPage(users))
     })
 }
-export const getOne = (id) => (dispatch, getState) => {
+export const getOne = id => (dispatch, getState) => {
   axios
     .get(`${userApi}/${id}`)
     .then(response => {
@@ -60,54 +63,64 @@ export const getOne = (id) => (dispatch, getState) => {
     })
 }
 export const changeStatus = (id, status) => (dispatch, getState) => {
-  axios.patch(`${userApi}/${id}`, { active: status }).then(response => {
-    if (response && response.data) {
-      let { users, page, totalItems } = getState().user
-      if (users && Array.isArray(users) && users.length > 0) {
-        let user = users.find(x => x.id === response.data.id)
-        if (user) {
-          user = response.data
-          dispatch(setUserPage({ users, page, totalItems }))
-          notification['success']({
-            message: 'Change status of users success!',
-            description: 'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
-          })
+  axios
+    .patch(`${userApi}/${id}`, { active: status })
+    .then(response => {
+      if (response && response.data) {
+        let { users, page, totalItems } = getState().user
+        if (users && Array.isArray(users) && users.length > 0) {
+          let user = users.find(x => x.id === response.data.id)
+          if (user) {
+            user = response.data
+            dispatch(setUserPage({ users, page, totalItems }))
+            notification['success']({
+              message: 'Change status of users success!',
+              description:
+                'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
+            })
+          }
         }
       }
-    }
-  }).catch(error => {
-    let errorMessage = 'change user status fail'
-    if (error.response && error.response.data) {
-      errorMessage = error.response.data
-    }
-    message.error(errorMessage)
-    // mock
-    notification['success']({
-      message: 'Change status of users success!',
-      description: 'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
     })
-  })
+    .catch(error => {
+      let errorMessage = 'change user status fail'
+      if (error.response && error.response.data) {
+        errorMessage = error.response.data
+      }
+      message.error(errorMessage)
+      // mock
+      notification['success']({
+        message: 'Change status of users success!',
+        description:
+          'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
+      })
+    })
 }
-export const destroy = (ids) => (dispatch, getState) => {
-  axios.delete(`${userApi}/${ids}`).then(response => {
-    notification['success']({
-      message: 'Delete user success!',
-      description: 'These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+export const destroy = ids => (dispatch, getState) => {
+  axios
+    .delete(`${userApi}/${ids}`)
+    .then(response => {
+      notification['success']({
+        message: 'Delete user success!',
+        description:
+          'These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+      })
+      let { users } = getState().user
+      dispatch(setUserPage(users.filter(user => !ids.includes(user.id))))
     })
-    let { users } = getState().user
-    dispatch(setUserPage(users.filter((user) => !ids.includes(user.id))))
-  }).catch(error => {
-    let errorMessage = 'change user status fail'
-    if (error.response && error.response.data) {
-      errorMessage = error.response.data
-    }
-    message.error(errorMessage)
-    // mock
-    notification['success']({
-      message: 'Delete user success!',
-      description: 'These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+    .catch(error => {
+      let errorMessage = 'change user status fail'
+      if (error.response && error.response.data) {
+        errorMessage = error.response.data
+      }
+      message.error(errorMessage)
+      // mock
+      notification['success']({
+        message: 'Delete user success!',
+        description:
+          'These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+      })
     })
-  })
 }
 export const create = (model, isCreate = false) => (dispatch, getState) => {
   dispatch(createUserState(model))
@@ -136,11 +149,11 @@ const initialState = {
   page: 0,
   users: [],
   userCreate: {},
-  detail: {}
+  detail: {},
 }
 const ACTION_HANDLES = {
   [setUserPage]: (state, { users, page, totalItems }) => ({ ...state, users, page, totalItems }),
   [createUserState]: (state, userCreate) => ({ ...state, userCreate }),
-  [setUserDetailPage]: (state, detail) => ({ ...state, detail })
+  [setUserDetailPage]: (state, detail) => ({ ...state, detail }),
 }
 export default createReducer(ACTION_HANDLES, initialState)

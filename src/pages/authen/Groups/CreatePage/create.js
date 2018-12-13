@@ -13,30 +13,29 @@ import StepProgress from '../../../components/stepProgress'
   mapStateToProps,
   mapDispathToProps,
 )
-
 class GroupCreatePage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.changeStepState = this.changeStepState.bind(this)
     this.state = {
       step: {
-        current: 0
+        current: 0,
       },
       group: {
         groupname: '',
         password: '',
         confirm: '',
         groups: {},
-        permission: {}
-      }
+        permission: {},
+      },
     }
   }
 
   changeStepState(current) {
     this.setState({
       step: {
-        current: current
-      }
+        current: current,
+      },
     })
   }
 
@@ -45,10 +44,7 @@ class GroupCreatePage extends React.Component {
     const { steps } = this.props
     return (
       <div className='group-create'>
-        <StepProgress
-          steps={steps}
-          current={current}
-          type='GROUP' />
+        <StepProgress steps={steps} current={current} type='GROUP' />
         <div className='card'>
           <div className='card-header'>
             <h4 className='text-black mb-3'>
@@ -59,9 +55,7 @@ class GroupCreatePage extends React.Component {
             {current === 0 && <DetailPage />}
             {current === 1 && <UserSummaryList />}
             {current === 2 && <PermissionSummaryList />}
-            {(current === 3 || current === 4) && <Review
-              changeStepState={this.changeStepState}
-            />}
+            {(current === 3 || current === 4) && <Review changeStepState={this.changeStepState} />}
             <ButtonStep
               steps={steps}
               current={current}

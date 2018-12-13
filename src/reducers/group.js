@@ -14,7 +14,10 @@ export const setGroupPage = createAction(`${NS}SET_GROUP_PAGE`)
 export const setGroupDetailPage = createAction(`${NS}SET_GROUP_DETAIL_PAGE`)
 export const createGroupState = createAction(`${NS}CREATE_GROUP`)
 
-export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (dispatch, getState) => {
+export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
+  dispatch,
+  getState,
+) => {
   axios
     .get(groupApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
@@ -40,7 +43,7 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
       dispatch(setGroupPage(groups))
     })
 }
-export const getOne = (id) => (dispatch, getState) => {
+export const getOne = id => (dispatch, getState) => {
   axios
     .get(`${groupApi}/${id}`)
     .then(response => {
@@ -60,28 +63,32 @@ export const getOne = (id) => (dispatch, getState) => {
     })
 }
 export const changeStatus = (id, status) => (dispatch, getState) => {
-  axios.patch(`${groupApi}/${id}`, { active: status }).then(response => {
-    if (response && response.data) {
-      let { groups, page, totalItems } = getState().group
-      if (groups && Array.isArray(groups) && groups.length > 0) {
-        let group = groups.find(x => x.id === response.data.id)
-        if (group) {
-          group = response.data
-          dispatch(setGroupPage({ groups, page, totalItems }))
-          notification['success']({
-            message: 'Change status of users success!',
-            description: 'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
-          })
+  axios
+    .patch(`${groupApi}/${id}`, { active: status })
+    .then(response => {
+      if (response && response.data) {
+        let { groups, page, totalItems } = getState().group
+        if (groups && Array.isArray(groups) && groups.length > 0) {
+          let group = groups.find(x => x.id === response.data.id)
+          if (group) {
+            group = response.data
+            dispatch(setGroupPage({ groups, page, totalItems }))
+            notification['success']({
+              message: 'Change status of users success!',
+              description:
+                'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
+            })
+          }
         }
       }
-    }
-  }).catch(error => {
-    let errorMessage = 'change group status fail'
-    if (error.response && error.response.data) {
-      errorMessage = error.response.data
-    }
-    message.error(errorMessage)
-  })
+    })
+    .catch(error => {
+      let errorMessage = 'change group status fail'
+      if (error.response && error.response.data) {
+        errorMessage = error.response.data
+      }
+      message.error(errorMessage)
+    })
 }
 export const create = (model, isCreate = false) => (dispatch, getState) => {
   dispatch(createGroupState(model))
@@ -105,33 +112,38 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       })
   }
 }
-export const destroy = (ids) => (dispatch, getState) => {
-  axios.delete(`${groupApi}/${ids}`).then(response => {
-    notification['success']({
-      message: 'Delete group success!',
-      description: 'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these group, we will revert information for them.',
+export const destroy = ids => (dispatch, getState) => {
+  axios
+    .delete(`${groupApi}/${ids}`)
+    .then(response => {
+      notification['success']({
+        message: 'Delete group success!',
+        description:
+          'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these group, we will revert information for them.',
+      })
+      let { groups } = getState().group
+      dispatch(setGroupPage(groups.filter(group => !ids.includes(group.id))))
     })
-    let { groups } = getState().group
-    dispatch(setGroupPage(groups.filter((group) => !ids.includes(group.id))))
-  }).catch(error => {
-    let errorMessage = 'change group status fail'
-    if (error.response && error.response.data) {
-      errorMessage = error.response.data
-    }
-    message.error(errorMessage)
-    // mock
-    notification['success']({
-      message: 'Delete group success!',
-      description: 'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+    .catch(error => {
+      let errorMessage = 'change group status fail'
+      if (error.response && error.response.data) {
+        errorMessage = error.response.data
+      }
+      message.error(errorMessage)
+      // mock
+      notification['success']({
+        message: 'Delete group success!',
+        description:
+          'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+      })
     })
-  })
 }
 const initialState = {
   totalItems: 0,
   page: 0,
   groups: [],
   groupCreate: {},
-  detail: {}
+  detail: {},
 }
 const ACTION_HANDLES = {
   [setGroupPage]: (state, { groups, page, totalItems }) => ({ ...state, groups, page, totalItems }),

@@ -54,21 +54,20 @@ const reviewColumns = [
     title: 'Groups',
     dataIndex: 'groups',
     width: '20%',
-    render: tags => tags.map(tag => tag.name + ', ')
-    ,
+    render: tags => tags.map(tag => tag.name + ', '),
   },
   {
     title: 'Description',
     dataIndex: 'description',
     width: '30%',
-  }
+  },
 ]
 
 const type = {
   del: 'del',
   changeStatus: 'change-status',
   attachPolicy: 'attach-policy',
-  addToGroup: 'add-to-group'
+  addToGroup: 'add-to-group',
 }
 const summaryColumns = [
   {
@@ -88,14 +87,14 @@ const summaryColumns = [
     dataIndex: 'last_login',
     sorter: true,
     width: '33%',
-  }
+  },
 ]
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   changeStatus: (id, status) => changeStatus(id, status),
   create: model => create(model),
-  destroy: (ids) => destroy(ids)
+  destroy: ids => destroy(ids),
 }
 export const mapStateToProps = (state, props) => {
   return {
@@ -106,8 +105,8 @@ export const mapStateToProps = (state, props) => {
     groups: state.group.groups,
     steps: steps,
     reviewColumns: reviewColumns,
-    summaryColumns:summaryColumns,
-    type: type
+    summaryColumns: summaryColumns,
+    type: type,
   }
 }
 

@@ -21,24 +21,23 @@ class UserPage extends React.Component {
       total: -1,
       current: 1,
       pageSize: 0,
-    }
+    },
   }
 
   componentDidMount() {
     if (!this.props.totalItems || this.props.totalItems === 0) {
-      const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search);
+      const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search)
       this.props.getList(limit, page, sort, isAsc)
     }
     this.setState({ ...this.state.pagination, total: this.props.totalItems })
   }
-
 
   handleTableChange = (pagination, filters, sorter) => {
     console.log('hanlde table change', (pagination, filters, sorter))
     const pager = { ...this.state.pagination }
     pager.current = pagination.current
     this.setState({
-      pagination: pager
+      pagination: pager,
     })
     let params = {
       limit: pagination.pageSize,
@@ -47,7 +46,7 @@ class UserPage extends React.Component {
       isAsc: sorter.order,
       ...filters,
     }
-    this.props.getList({ ...params });
+    this.props.getList({ ...params })
   }
   render() {
     const columns = [
@@ -56,14 +55,22 @@ class UserPage extends React.Component {
         dataIndex: 'username',
         sorter: true,
         width: '20%',
-        render: (text, record) => (<a className='link' href={`#/users/detail/${record.id}`}>{record.username}</a>)
+        render: (text, record) => (
+          <a className="link" href={`#/users/detail/${record.id}`}>
+            {record.username}
+          </a>
+        ),
       },
       {
         title: 'Customer',
         dataIndex: 'customer',
         sorter: true,
         width: '20%',
-        render: (record) => (<span>{record.alias} - {record.first_name} {record.last_name}</span>)
+        render: record => (
+          <span>
+            {record.alias} - {record.first_name} {record.last_name}
+          </span>
+        ),
       },
       {
         title: 'Role',
@@ -78,7 +85,11 @@ class UserPage extends React.Component {
         width: '10%',
         render: tags => (
           <span>
-            {tags.map(tag => <Tag color='blue' key={tag.id}>{tag.name}</Tag>)}
+            {tags.map(tag => (
+              <Tag color="blue" key={tag.id}>
+                {tag.name}
+              </Tag>
+            ))}
           </span>
         ),
       },
@@ -88,10 +99,7 @@ class UserPage extends React.Component {
         sorter: true,
         width: '7%',
         render: (text, record) => (
-          <Checkbox
-            defaultChecked={record.active}
-            checked={record.active}
-          ></Checkbox>
+          <Checkbox defaultChecked={record.active} checked={record.active} />
         ),
       },
       {
@@ -99,14 +107,14 @@ class UserPage extends React.Component {
         dataIndex: 'last_login',
         sorter: true,
         width: '15%',
-        render: (x => helper.formatDate(new Date(x)))
+        render: x => helper.formatDate(new Date(x)),
       },
       {
         title: 'Create time',
         dataIndex: 'created_at',
         sorter: true,
         width: '15%',
-        render: (x => helper.formatDate(new Date(x)))
+        render: x => helper.formatDate(new Date(x)),
       },
     ]
     const { loading, selectedRowKeys } = this.state
@@ -115,13 +123,13 @@ class UserPage extends React.Component {
     // rowSelection object indicates the need for row selection
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
       },
       getCheckboxProps: record => ({
         disabled: record.name === 'Disabled User', // Column configuration not to be checked
         name: record.name,
       }),
-    };
+    }
     const handleActions = (actionType, status = true) => {
       if (!this.state.selectedRowKeys || this.state.selectedRowKeys.length === 0) {
         message.info('No user is selected!')
@@ -133,7 +141,7 @@ class UserPage extends React.Component {
             } else {
               message.info('canceled delete')
             }
-            break;
+            break
           case type.changeStatus:
             this.props.changeStatus(this.state.selectedRowKeys, status)
             break
@@ -148,51 +156,64 @@ class UserPage extends React.Component {
     }
     const content = (
       <div>
-        <Popconfirm title='Are you sure delete these users? You cannot rollback.' onConfirm={() => handleActions(type.del)} onCancel={() => handleActions(type.del, false)} okText='Yes, I confirm' cancelText="No, I don't">
-          <p className='link'>Delete USERS</p>
+        <Popconfirm
+          title="Are you sure delete these users? You cannot rollback."
+          onConfirm={() => handleActions(type.del)}
+          onCancel={() => handleActions(type.del, false)}
+          okText="Yes, I confirm"
+          cancelText="No, I don't"
+        >
+          <p className="link">Delete USERS</p>
         </Popconfirm>
-        <Popconfirm title='Are you sure change status these users?' onConfirm={() => handleActions(type.changeStatus)} onCancel={() => handleActions(type.changeStatus, false)} okText='Active' cancelText='Deactive'>
-          <p className='link'>Change STATUS</p>
+        <Popconfirm
+          title="Are you sure change status these users?"
+          onConfirm={() => handleActions(type.changeStatus)}
+          onCancel={() => handleActions(type.changeStatus, false)}
+          okText="Active"
+          cancelText="Deactive"
+        >
+          <p className="link">Change STATUS</p>
         </Popconfirm>
-        <p className='link' onClick={() => handleActions(type.attachPolicy)}>Attach POLICIES(comein soon)</p>
-        <p className='link' onClick={() => handleActions(type.addToGroup)}>Add to GROUPS(comein soon)</p>
+        <p className="link" onClick={() => handleActions(type.attachPolicy)}>
+          Attach POLICIES(comein soon)
+        </p>
+        <p className="link" onClick={() => handleActions(type.addToGroup)}>
+          Add to GROUPS(comein soon)
+        </p>
       </div>
-    );
-
+    )
 
     return (
       <div>
-        <section className='card'>
-          <div className='card-header'>
-            <div className='utils__title'>
+        <section className="card">
+          <div className="card-header">
+            <div className="utils__title">
               <strong>Users Management</strong>
             </div>
             <small>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
             </small>
           </div>
-          <div className='card-body'>
-            {(totalItems && totalItems > 0) &&
-              (<div className='table-responsive'>
-                <div style={{ marginBottom: 16, textAlign: "right" }}>
+          <div className="card-body">
+            {totalItems && totalItems > 0 && (
+              <div className="table-responsive">
+                <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
-                    type='primary'
+                    type="primary"
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href='#/users/create'
+                    href="#/users/create"
                   >
                     Create User
-                    </Button>
-                  <Popover
-                    placement='bottomRight'
-                    content={content}
-                    trigger='click'>
-                    <Button
-                      type='primary'
-                      disabled={!hasSelected}
-                      loading={loading}
-                    >
-                      Actions <Icon type='down-circle' theme='filled' />
+                  </Button>
+                  <Popover placement="bottomRight" content={content} trigger="click">
+                    <Button type="primary" disabled={!hasSelected} loading={loading}>
+                      Actions <Icon type="down-circle" theme="filled" />
                     </Button>
                   </Popover>
                 </div>
@@ -206,12 +227,13 @@ class UserPage extends React.Component {
                   loading={this.state.loading}
                   columns={columns}
                   onChange={this.handleTableChange}
-                  dataSource={data} />
-              </div>)
-            }
-            {(!totalItems || totalItems === 0)
-              && (<LockScreenPage name='User' link='#/users/create' />)}
-
+                  dataSource={data}
+                />
+              </div>
+            )}
+            {(!totalItems || totalItems === 0) && (
+              <LockScreenPage name="User" link="#/users/create" />
+            )}
           </div>
         </section>
       </div>

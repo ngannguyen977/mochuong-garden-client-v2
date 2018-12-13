@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
 import helper from '../../../../helper'
-import { Checkbox, Popover, Icon, Tag, Popconfirm, message,Table, Button  } from 'antd'
+import { Checkbox, Popover, Icon, Tag, Popconfirm, message, Table, Button } from 'antd'
 
 @connect(
   mapStateToProps,
@@ -19,12 +19,12 @@ class GroupPage extends React.Component {
       total: -1,
       current: 1,
       pageSize: 0,
-    }
+    },
   }
 
   componentDidMount() {
     if (!this.props.totalItems || this.props.totalItems === 0) {
-      const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search);
+      const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search)
       this.props.getList(limit, page, sort, isAsc)
     }
     this.setState({ ...this.state.pagination, total: this.props.totalItems })
@@ -34,7 +34,7 @@ class GroupPage extends React.Component {
     const pager = { ...this.state.pagination }
     pager.current = pagination.current
     this.setState({
-      pagination: pager
+      pagination: pager,
     })
     let params = {
       limit: pagination.pageSize,
@@ -43,7 +43,7 @@ class GroupPage extends React.Component {
       isAsc: sorter.order,
       ...filters,
     }
-    this.props.getList({ ...params });
+    this.props.getList({ ...params })
   }
   render() {
     const columns = [
@@ -52,7 +52,11 @@ class GroupPage extends React.Component {
         dataIndex: 'name',
         sorter: true,
         width: '20%',
-        render: (text, record) => (<a className='link' href={`#/groups/detail/${record.id}`}>{record.name}</a>)
+        render: (text, record) => (
+          <a className="link" href={`#/groups/detail/${record.id}`}>
+            {record.name}
+          </a>
+        ),
       },
       {
         title: 'Users',
@@ -61,7 +65,11 @@ class GroupPage extends React.Component {
         width: '30%',
         render: tags => (
           <span>
-            {tags.map(tag => <Tag color='blue' key={tag.id}>{tag.name}</Tag>)}
+            {tags.map(tag => (
+              <Tag color="blue" key={tag.id}>
+                {tag.name}
+              </Tag>
+            ))}
           </span>
         ),
       },
@@ -72,7 +80,12 @@ class GroupPage extends React.Component {
         width: '30%',
         render: tags => (
           <span>
-            {tags && tags.map(tag => <Tag color='blue' key={tag.id}>{tag.name}</Tag>)}
+            {tags &&
+              tags.map(tag => (
+                <Tag color="blue" key={tag.id}>
+                  {tag.name}
+                </Tag>
+              ))}
           </span>
         ),
       },
@@ -85,7 +98,7 @@ class GroupPage extends React.Component {
           <Checkbox
             defaultChecked={record.active}
             // checked={record.active}
-          ></Checkbox>
+          />
         ),
       },
       {
@@ -93,7 +106,7 @@ class GroupPage extends React.Component {
         dataIndex: 'created_at',
         sorter: true,
         width: '15%',
-        render: (x => helper.formatDate(new Date(x)))
+        render: x => helper.formatDate(new Date(x)),
       },
     ]
     const { loading, selectedRowKeys } = this.state
@@ -103,14 +116,14 @@ class GroupPage extends React.Component {
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
         this.setState({
-          selectedRowKeys
+          selectedRowKeys,
         })
       },
       getCheckboxProps: record => ({
         disabled: record.name === 'Disabled User', // Column configuration not to be checked
         name: record.name,
       }),
-    };
+    }
     const handleActions = (actionType, status = true) => {
       if (!selectedRowKeys || selectedRowKeys.length === 0) {
         message.info('No group is selected!')
@@ -122,7 +135,7 @@ class GroupPage extends React.Component {
             } else {
               message.info('canceled delete')
             }
-            break;
+            break
           case type.changeStatus:
             this.props.changeStatus(selectedRowKeys, status)
             break
@@ -137,49 +150,63 @@ class GroupPage extends React.Component {
     }
     const content = (
       <div>
-        <Popconfirm title='Are you sure delete these users? You cannot rollback.' onConfirm={() => handleActions(type.del)} onCancel={() => handleActions(type.del, false)} okText='Yes, I confirm' cancelText="No, I don't">
-          <p className='link'>Delete USERS</p>
+        <Popconfirm
+          title="Are you sure delete these users? You cannot rollback."
+          onConfirm={() => handleActions(type.del)}
+          onCancel={() => handleActions(type.del, false)}
+          okText="Yes, I confirm"
+          cancelText="No, I don't"
+        >
+          <p className="link">Delete USERS</p>
         </Popconfirm>
-        <Popconfirm title='Are you sure change status these users?' onConfirm={() => handleActions(type.changeStatus)} onCancel={() => handleActions(type.changeStatus, false)} okText='Active' cancelText='Deactive'>
-          <p className='link'>Change STATUS</p>
+        <Popconfirm
+          title="Are you sure change status these users?"
+          onConfirm={() => handleActions(type.changeStatus)}
+          onCancel={() => handleActions(type.changeStatus, false)}
+          okText="Active"
+          cancelText="Deactive"
+        >
+          <p className="link">Change STATUS</p>
         </Popconfirm>
-        <p className='link' onClick={() => handleActions(type.attachPolicy)}>Attach POLICIES(comein soon)</p>
-        <p className='link' onClick={() => handleActions(type.addToGroup)}>Add to GROUPS(comein soon)</p>
+        <p className="link" onClick={() => handleActions(type.attachPolicy)}>
+          Attach POLICIES(comein soon)
+        </p>
+        <p className="link" onClick={() => handleActions(type.addToGroup)}>
+          Add to GROUPS(comein soon)
+        </p>
       </div>
-    );
+    )
     return (
       <div>
-        <section className='card'>
-          <div className='card-header'>
-            <div className='utils__title'>
+        <section className="card">
+          <div className="card-header">
+            <div className="utils__title">
               <strong>Groups Management</strong>
             </div>
             <small>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
             </small>
           </div>
-          <div className='card-body'>
-            {(totalItems && totalItems > 0) &&
-              (<div className='table-responsive'>
-                <div style={{ marginBottom: 16, textAlign: "right" }}>
+          <div className="card-body">
+            {totalItems && totalItems > 0 && (
+              <div className="table-responsive">
+                <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
-                    type='primary'
+                    type="primary"
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href='#/groups/create'
+                    href="#/groups/create"
                   >
                     Create Group
-                    </Button>
-                  <Popover
-                    placement='bottomRight'
-                    content={content}
-                    trigger='click'>
-                    <Button
-                      type='primary'
-                      disabled={!hasSelected}
-                      loading={loading}
-                    >
-                      Actions <Icon type='down-circle' theme='filled' />
+                  </Button>
+                  <Popover placement="bottomRight" content={content} trigger="click">
+                    <Button type="primary" disabled={!hasSelected} loading={loading}>
+                      Actions <Icon type="down-circle" theme="filled" />
                     </Button>
                   </Popover>
                 </div>
@@ -193,12 +220,13 @@ class GroupPage extends React.Component {
                   loading={this.state.loading}
                   columns={columns}
                   onChange={this.handleTableChange}
-                  dataSource={data} />
-              </div>)
-            }
-            {(!totalItems || totalItems === 0)
-              && (<LockScreenPage name='Group' link='#/groups/create' />)}
-
+                  dataSource={data}
+                />
+              </div>
+            )}
+            {(!totalItems || totalItems === 0) && (
+              <LockScreenPage name="Group" link="#/groups/create" />
+            )}
           </div>
         </section>
       </div>

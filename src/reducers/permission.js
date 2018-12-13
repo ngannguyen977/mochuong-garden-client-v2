@@ -4,7 +4,6 @@ import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
 
-
 export const REDUCER = 'permission'
 
 const NS = `@@${REDUCER}/`
@@ -15,7 +14,10 @@ export const setPermissionPage = createAction(`${NS}SET_PERMISSION_PAGE`)
 export const setPermissionDetailPage = createAction(`${NS}SET_PERMISSION_DETAIL_PAGE`)
 export const createPermissionState = createAction(`${NS}CREATE_PERMISSION`)
 
-export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (dispatch, getState) => {
+export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
+  dispatch,
+  getState,
+) => {
   axios
     .get(permissionApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
@@ -41,7 +43,7 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
       dispatch(setPermissionPage(permissions))
     })
 }
-export const getOne = (id) => (dispatch, getState) => {
+export const getOne = id => (dispatch, getState) => {
   axios
     .get(`${permissionApi}/${id}`)
     .then(response => {
@@ -82,36 +84,44 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       })
   }
 }
-export const destroy = (ids) => (dispatch, getState) => {
-  axios.delete(`${permissionApi}/${ids}`).then(response => {
-    notification['success']({
-      message: 'Delete group success!',
-      description: 'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these group, we will revert information for them.',
+export const destroy = ids => (dispatch, getState) => {
+  axios
+    .delete(`${permissionApi}/${ids}`)
+    .then(response => {
+      notification['success']({
+        message: 'Delete group success!',
+        description:
+          'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these group, we will revert information for them.',
+      })
+      let { groups } = getState().group
+      dispatch(setPermissionPage(groups.filter(group => !ids.includes(group.id))))
     })
-    let { groups } = getState().group
-    dispatch(setPermissionPage(groups.filter((group) => !ids.includes(group.id))))
-  }).catch(error => {
-    let errorMessage = 'change group status fail'
-    if (error.response && error.response.data) {
-      errorMessage = error.response.data
-    }
-    message.error(errorMessage)
-    // mock
-    notification['success']({
-      message: 'Delete permission success!',
-      description: 'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+    .catch(error => {
+      let errorMessage = 'change group status fail'
+      if (error.response && error.response.data) {
+        errorMessage = error.response.data
+      }
+      message.error(errorMessage)
+      // mock
+      notification['success']({
+        message: 'Delete permission success!',
+        description:
+          'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+      })
     })
-  })
 }
 const initialState = {
   totalItems: 0,
   page: 0,
-  permissions: [
-
-  ],
+  permissions: [],
 }
 const ACTION_HANDLES = {
-  [setPermissionPage]: (state, { permissions, page, totalItems }) => ({ ...state, permissions, page, totalItems }),
+  [setPermissionPage]: (state, { permissions, page, totalItems }) => ({
+    ...state,
+    permissions,
+    page,
+    totalItems,
+  }),
   [setPermissionDetailPage]: (state, detail) => ({ ...state, detail }),
   [createPermissionState]: (state, permissionCreate) => ({ ...state, permissionCreate }),
 }

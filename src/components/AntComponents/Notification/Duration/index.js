@@ -14,7 +14,7 @@ export default function(ReactDOM, mountNode) {
   }
 
   ReactDOM.render(
-    <Button type='primary' onClick={openNotification}>
+    <Button type="primary" onClick={openNotification}>
       Open the notification box
     </Button>,
     mountNode,
