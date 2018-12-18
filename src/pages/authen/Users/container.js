@@ -1,4 +1,4 @@
-import { getList, changeStatus, create, destroy } from 'reducers/user'
+import { getList, getOne, changeStatus, create, destroy } from 'reducers/user'
 
 const steps = [
   {
@@ -95,6 +95,7 @@ export const mapDispathToProps = {
   changeStatus: (id, status) => changeStatus(id, status),
   create: model => create(model),
   destroy: ids => destroy(ids),
+  getOne: (id) => getOne(id)
 }
 export const mapStateToProps = (state, props) => {
   return {
@@ -107,6 +108,7 @@ export const mapStateToProps = (state, props) => {
     reviewColumns: reviewColumns,
     summaryColumns: summaryColumns,
     type: type,
+    detail: state.user.detail
   }
 }
 

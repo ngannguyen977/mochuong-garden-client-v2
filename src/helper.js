@@ -1,4 +1,4 @@
-function formatDate(date) {
+export function formatDate(date) {
     var monthNames = [
         "Jan", "Feb", "March",
         "Apr", "May", "Jun", "Jul",
@@ -14,4 +14,7 @@ function formatDate(date) {
     }
     return monthNames[monthIndex] + ' ' + day + ', ' + year;
 }
-export default { formatDate }
+export function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+export default { formatDate,onlyUnique }

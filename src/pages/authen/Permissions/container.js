@@ -1,5 +1,4 @@
-import { getList, create, destroy } from 'reducers/permission'
-import helper from '../../../helper'
+import { getList, create, update, destroy, getListService, getListActionOfService, getOne } from 'reducers/permission'
 
 const steps = [
   {
@@ -57,7 +56,32 @@ const steps = [
     nextTitle: 'Go to Permissions List',
   },
 ]
-
+const actionColumns = [
+  {
+    title: 'Action name',
+    dataIndex: 'name',
+    sorter: true,
+    width: '20%',
+  },
+  {
+    title: 'type',
+    dataIndex: 'type',
+    sorter: true,
+    width: '20%',
+  },
+  {
+    title: 'Resource name',
+    dataIndex: 'resourceType',
+    sorter: true,
+    width: '20%',
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    sorter: true,
+    width: '40%',
+  }
+]
 const summaryColumns = [
   {
     title: 'Permission name',
@@ -78,26 +102,58 @@ const summaryColumns = [
     width: '33%',
   },
 ]
+const reviewColumns = [
+  {
+    title: 'Actions',
+    dataIndex: 'name',
+    width: '20%',
+  },
+  {
+    title: 'Type',
+    dataIndex: 'type',
+    width: '10%',
+  },
+  {
+    title: 'Resource',
+    dataIndex: 'resource',
+    width: '30%',
+  }
+]
 const type = {
   del: 'del',
   changeStatus: 'change-status',
-  attachPolicy: 'attach-policy',
   addToGroup: 'add-to-group',
+  addToUser: 'add-to-user',
 }
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
-  create: model => create(model),
+  getListService: (keyword, keysort, skip, count, orderDescending) => getListService(keyword, keysort, skip, count, orderDescending),
+  getListActionOfService: (shortName) => getListActionOfService(shortName),
+  create: (model, isCreate) => create(model, isCreate),
   destroy: ids => destroy(ids),
+  update: (policyId, model, isUpdate) => update(policyId, model, isUpdate),
+  getOne: (id) => getOne(id)
 }
 export const mapStateToProps = (state, props) => {
+  let permission = state.permission || {}
+
   return {
-    totalItems: state.permission.totalItems,
-    page: state.permission.page,
-    data: state.permission.permissions,
-    permissionCreate: state.permission.permissionCreate || {},
-    summaryColumns: summaryColumns,
+    permission: permission,
+    totalItems: permission.totalItems,
+    page: permission.page,
+    data: permission.permissions,
+    permissionCreate: permission.permissionCreate || {},
+    services: (permission.services || {}).records || [],
+    serviceTotal: (permission.services || {}).total || 0,
+    actions: permission.actions || [],
+    actionTotal: (permission.actions || []).length,
+
     steps: steps,
     type: type,
+    summaryColumns: summaryColumns,
+    actionColumns: actionColumns,
+    reviewColumns: reviewColumns,
+    detail: permission.detail
   }
 }
 

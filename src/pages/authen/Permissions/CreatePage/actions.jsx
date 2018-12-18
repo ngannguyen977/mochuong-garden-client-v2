@@ -12,77 +12,87 @@ const Search = Input.Search;
   mapStateToProps,
   mapDispathToProps,
 )
-class Step2 extends React.Component {
+class Actions extends React.Component {
   constructor() {
     super()
+    this.changeTypePermission = this.changeTypePermission.bind(this)
     this.state = {
-      modeTitle: 'Add permission to groups',
-      mode: 'group'
+      current: 0,
+      isAllowPermission: true
     }
   }
-
+  changeTypePermission(value) {
+    const { create, permissionCreate } = this.props
+    create({ ...permissionCreate, isAllowPermission: value })
+    this.setState({
+      isAllowPermission: value
+    })
+  }
   render() {
-
+    const chooseActionType = (index) => {
+      this.setState({ current: index })
+    }
     return (
       <div className='permission permission action-step row'>
-      <div className='col-lg-2 text-justify'>
-      <div className='permission__list'>
-          <Affix offsetTop={20}>
-            <a href='javascript: void(0);' className='permission__listItem permission__listItem--current'>
-              <span className='permission__listPercents'>
-                <span>30 actions</span>
-              </span>
-              <span className='permission__listActionTitle'>
-              <Checkbox >List</Checkbox>
-              </span>
-            </a>
-            <a href='javascript: void(0);' className='permission__listItem permission__listItem'>
-              <span className='permission__listPercents'>
-                <span>30 actions</span>
-              </span>
-              <span className='permission__listActionTitle'>
-              <Checkbox >Read</Checkbox>
-              </span>
-            </a>
-            <a href='javascript: void(0);' className='permission__listItem permission__listItem'>
-              <span className='permission__listPercents'>
-                <span>23 actions</span>
-              </span>
-              <span className='permission__listActionTitle'>
-              <Checkbox >Write</Checkbox>
-              </span>
-            </a>
-            <a href='javascript: void(0);' className='permission__listItem permission__listItem'>
-              <span className='permission__listPercents'>
-                <span>130 actions</span>
-              </span>
-              <span className='permission__listActionTitle'>
-              <Checkbox >All actions</Checkbox>
-              </span>
-            </a>
-          </Affix>
-        </div>
-      </div>
-      <div className='col-lg-10'>
-        <h2>Select actions</h2>
-        <div className='row'>
-          <div className='col-lg-8'>
-            <Search
-              placeholder='search actions'
-              onSearch={value => console.log(value)}
-            // style={{ width: 200 }}
-            />
-            <small className='font-italic text-right'>*Add permission to groups help you manage your permissions easier. You can add permission to many permissions by add permission to group instead.</small>
+        <div className='col-lg-2 text-justify'>
+          <div className='permission__list'>
+            <Affix offsetTop={20}>
+              <a onClick={() => chooseActionType(0)} className={'permission__listItem ' + (this.state.current === 0 && 'permission__listItem--current')}>
+                <span className='permission__listPercents'>
+                  <span>30 actions</span>
+                </span>
+                <span className='permission__listActionTitle'>
+                  <Checkbox >List</Checkbox>
+                </span>
+              </a>
+              <a onClick={() => chooseActionType(1)} className={'permission__listItem ' + (this.state.current === 1 && 'permission__listItem--current')}>
+                <span className='permission__listPercents'>
+                  <span>30 actions</span>
+                </span>
+                <span className='permission__listActionTitle'>
+                  <Checkbox >Read</Checkbox>
+                </span>
+              </a>
+              <a onClick={() => chooseActionType(2)} className={'permission__listItem ' + (this.state.current === 2 && 'permission__listItem--current')}>
+                <span className='permission__listPercents'>
+                  <span>23 actions</span>
+                </span>
+                <span className='permission__listActionTitle'>
+                  <Checkbox >Write</Checkbox>
+                </span>
+              </a>
+              <a onClick={() => chooseActionType(3)} className={'permission__listItem ' + (this.state.current === 3 && 'permission__listItem--current')}>
+                <span className='permission__listPercents'>
+                  <span>130 actions</span>
+                </span>
+                <span className='permission__listActionTitle'>
+                  <Checkbox >All actions</Checkbox>
+                </span>
+              </a>
+            </Affix>
           </div>
         </div>
-        <div className='form-group'>
-          <ActionList />
-        </div>
-      </div>
+        <div className='col-lg-10'>
+          <h2>Select actions</h2>
+          <div className='row'>
+            <div className='col-lg-8'>
+              <Search
+                placeholder='search actions'
+                onSearch={value => console.log(value)}
+              // style={{ width: 200 }}
+              />
+              <small className='font-italic text-right'>*Add permission to groups help you manage your permissions easier. You can add permission to many permissions by add permission to group instead.</small>
+            </div>
 
-    </div>
+          </div>
+          <div className='form-group'>
+            <ActionList />
+          </div>
+        </div>
+
+      </div>
     )
   }
 }
 
-export default Step2
+export default Actions

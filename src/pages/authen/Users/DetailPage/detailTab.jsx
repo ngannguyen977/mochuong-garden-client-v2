@@ -5,8 +5,9 @@ import DetailPage from './detail'
 import { Input, Button, Tabs, Icon } from 'antd'
 import GroupList from '../../Groups/GroupPage/group.summary'
 import PermissionList from '../../Permissions/PermissionPage/permission.summary'
-const Search = Input.Search;
+import queryString from 'query-string'
 
+const Search = Input.Search;
 const TabPane = Tabs.TabPane;
 
 @connect(
@@ -15,6 +16,13 @@ const TabPane = Tabs.TabPane;
 )
 export class DetailTabPage extends React.Component {
 
+    componentDidMount(){
+        console.log(this.props)
+        if(!this.props.detail){
+            const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search)
+            this.props.getOne()
+        }
+    }
     render() {
         const handleButton = (
             <div className='text-right'>

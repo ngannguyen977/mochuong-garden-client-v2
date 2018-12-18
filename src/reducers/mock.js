@@ -670,3 +670,54 @@ export const permissions = {
     },
   ],
 }
+export const services = {
+  total: 1,
+  records: [
+    {
+      id: 1,
+      name: 'test',
+      shortName: 'test',
+      version: '14/12/2018',
+      description: 'test register service',
+      isActive: true,
+      resourceTypes: [
+        {
+          name: 'users',
+          actions: [
+            {
+              name: 'iam:getUsers',
+              type: 'List'
+            },
+            {
+              name: 'iam:putUser',
+              type: 'Write'
+            }
+          ]
+        }
+      ],
+      createdAt: '2018-12-14T01:48:37.514Z',
+      updatedAt: '2018-12-14T01:48:37.514Z'
+    }
+  ]
+}
+export const actions = {
+  "records": [
+    {
+      "resourceTypes": [
+        {
+          "name": "users",
+          "actions": [
+            {
+              "name": "iam:getUsers",
+              "type": "List"
+            },
+            {
+              "name": "iam:putUser",
+              "type": "Write"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

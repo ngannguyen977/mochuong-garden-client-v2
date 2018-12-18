@@ -11,7 +11,7 @@ const Search = Input.Search;
   mapStateToProps,
   mapDispathToProps,
 )
-class Step1 extends React.Component {
+class ServicePage extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -54,4 +54,4 @@ class Step1 extends React.Component {
   }
 }
 
-export default Step1
+export default ServicePage

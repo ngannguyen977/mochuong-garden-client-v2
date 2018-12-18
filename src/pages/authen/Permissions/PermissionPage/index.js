@@ -21,11 +21,13 @@ class PermissionPage extends React.Component {
       pageSize: 0,
     },
   }
-  componentDidMount() {
+  componentWillMount() {
     if (!this.props.totalItems || this.props.totalItems === 0) {
-      const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search)
-      this.props.getList(limit, page, sort, isAsc)
+      const { keyword, keysort, types, skip, limit, isAsc } = queryString.parse(this.props.location.search)
+      this.props.getList(keyword, keysort, types, skip, limit, isAsc)
     }
+  }
+  componentDidMount() {
     this.setState({ ...this.state.pagination, total: this.props.totalItems })
   }
   handleTableChange = (pagination, filters, sorter) => {
@@ -52,7 +54,7 @@ class PermissionPage extends React.Component {
         sorter: true,
         width: '30%',
         render: (text, record) => (
-          <a className="link" href={`#/permissions/detail/${record.id}`}>
+          <a className='link' href={`#/permissions/detail/${record.policyId}`}>
             {record.name}
           </a>
         ),
@@ -86,20 +88,17 @@ class PermissionPage extends React.Component {
     const hasSelected = selectedRowKeys.length > 0
     const handleActions = (actionType, status = true) => {
       if (!selectedRowKeys || selectedRowKeys.length === 0) {
-        message.info('No group is selected!')
+        message.info('No row is selected!')
       } else {
         switch (actionType) {
           case type.del:
             if (status) {
-              this.props.destroy(selectedRowKeys, status)
+              this.props.destroy(selectedRowKeys)
             } else {
               message.info('canceled delete')
             }
             break
-          case type.changeStatus:
-            this.props.changeStatus(selectedRowKeys, status)
-            break
-          case type.attachPolicy:
+          case type.addToUser:
             break
           case type.addToGroup:
             break
@@ -111,36 +110,27 @@ class PermissionPage extends React.Component {
     const content = (
       <div>
         <Popconfirm
-          title="Are you sure delete these users? You cannot rollback."
+          title='Are you sure delete these permissions? You cannot rollback.'
           onConfirm={() => handleActions(type.del)}
           onCancel={() => handleActions(type.del, false)}
-          okText="Yes, I confirm"
+          okText='Yes, I confirm'
           cancelText="No, I don't"
         >
-          <p className="link">Delete USERS</p>
+          <p className='link'>Delete PERMISSIONS</p>
         </Popconfirm>
-        <Popconfirm
-          title="Are you sure change status these users?"
-          onConfirm={() => handleActions(type.changeStatus)}
-          onCancel={() => handleActions(type.changeStatus, false)}
-          okText="Active"
-          cancelText="Deactive"
-        >
-          <p className="link">Change STATUS</p>
-        </Popconfirm>
-        <p className="link" onClick={() => handleActions(type.attachPolicy)}>
-          Attach POLICIES(comein soon)
+        <p className='link' onClick={() => handleActions(type.addToUser)}>
+          Add to USERS(come in soon)
         </p>
-        <p className="link" onClick={() => handleActions(type.addToGroup)}>
-          Add to GROUPS(comein soon)
+        <p className='link' onClick={() => handleActions(type.addToGroup)}>
+          Add to GROUPS(come in soon)
         </p>
       </div>
     )
     return (
       <div>
-        <section className="card">
-          <div className="card-header">
-            <div className="utils__title">
+        <section className='card'>
+          <div className='card-header'>
+            <div className='utils__title'>
               <strong>Permissions Management</strong>
             </div>
             <small>
@@ -152,21 +142,21 @@ class PermissionPage extends React.Component {
               mollit anim id est laborum.
             </small>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
             {totalItems && totalItems > 0 && (
-              <div className="table-responsive">
+              <div className='table-responsive'>
                 <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
-                    type="primary"
+                    type='primary'
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href="#/permissions/create"
+                    href='#/permissions/create'
                   >
                     Create Permission
                   </Button>
-                  <Popover placement="bottomRight" content={content} trigger="click">
-                    <Button type="primary" disabled={!hasSelected} loading={loading}>
-                      Actions <Icon type="down-circle" theme="filled" />
+                  <Popover placement='bottomRight' content={content} trigger='click'>
+                    <Button type='primary' disabled={!hasSelected} loading={loading}>
+                      Actions <Icon type='down-circle' theme='filled' />
                     </Button>
                   </Popover>
                 </div>
@@ -175,7 +165,7 @@ class PermissionPage extends React.Component {
                 </span>
                 <Table
                   rowSelection={rowSelection}
-                  rowKey={record => record.id}
+                  rowKey={record => record.policyId}
                   pagination={this.state.pagination}
                   loading={this.state.loading}
                   columns={columns}
@@ -185,7 +175,7 @@ class PermissionPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems === 0) && (
-              <LockScreenPage name="Permission" link="#/permissions/create" />
+              <LockScreenPage name='Permission' link='#/permissions/create' />
             )}
           </div>
         </section>

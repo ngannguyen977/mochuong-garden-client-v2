@@ -30,29 +30,42 @@ class ServiceList extends React.Component {
       loading: false,
       pagination: {
         defaultCurrent: 1,
-        total: -1,
-        current: 1,
-        pageSize: 0,
+        total: 0,
+        pageSize: 10,
       }
     }
   }
-  componentDidMount() {
-    if(!this.props.groups){
-      this.props.getList(100, 0)
-      this.setState({ ...this.state.pagination, total: this.props.totalItems })
+  componentWillMount() {
+    if (!this.props.services || this.props.serviceTotal === 0) {
+      this.props.getListService()
+    }
+  }
+  componentDidMount(){
+    const { permissionCreate,permission } = this.props
+    if(permission.shortName){
+      this.setState({
+        selectedRowKeys: [permissionCreate.service.id]
+      })
     }
   }
   render() {
+    const { create, permissionCreate } = this.props
+    const { selectedRowKeys } = this.state
     const rowSelection = {
+      selectedRowKeys,
       onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        create({ ...permissionCreate, service: selectedRows[0] })
+        this.setState({ selectedRowKeys })
       },
       getCheckboxProps: record => ({
         disabled: record.name === 'Disabled Permission', // Column configuration not to be checked
         name: record.name,
       }),
-    };
-
+      type: 'radio'
+    }
+    if (this.state.pagination.total === 0 && this.props.actionTotal !== 0) {
+      this.setState({ ...this.state, pagination: { ...this.state.pagination, total: this.props.serviceTotal } })
+    }
     return (
       <Table
         rowSelection={rowSelection}
@@ -61,7 +74,7 @@ class ServiceList extends React.Component {
         loading={this.state.loading}
         columns={columns}
         onChange={this.handleTableChange}
-        dataSource={this.props.groups} />
+        dataSource={this.props.services} />
     )
   }
 }

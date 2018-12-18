@@ -27,6 +27,11 @@
     img {
       height: 77px;
     }
+    &--collapsed{
+      img {
+        height: 50px;
+      }
+    }
   }
 
   &__navigation {

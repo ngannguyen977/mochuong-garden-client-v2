@@ -5,8 +5,8 @@ import DetailPage from './detail'
 import { Input, Button, Tabs, Icon } from 'antd'
 import GroupList from '../../Groups/GroupPage/group.summary'
 import PermissionList from '../../Permissions/PermissionPage/permission.summary'
-const Search = Input.Search;
 
+const Search = Input.Search;
 const TabPane = Tabs.TabPane;
 
 @connect(
@@ -14,7 +14,16 @@ const TabPane = Tabs.TabPane;
     mapDispathToProps,
 )
 export class DetailTabPage extends React.Component {
-
+    constructor() {
+        super()
+        this.state = {
+            isDetail: true
+        }
+    }
+    componentWillMount() {
+        const { match, getOne } = this.props
+        getOne(match.params.id)
+    }
     render() {
         const handleButton = (
             <div className='text-right'>
@@ -79,7 +88,7 @@ export class DetailTabPage extends React.Component {
         )
         const tabDetail = (
             <div className='detail-tab'>
-                <DetailPage />
+                <DetailPage isEdit={this.state.isDetail} />
                 {handleButton}
             </div>
         )

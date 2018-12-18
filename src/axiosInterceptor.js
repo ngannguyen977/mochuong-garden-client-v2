@@ -36,9 +36,11 @@ const createAxiosInterceptor = store => {
       return response
     },
     function(error) {
+      console.log(error.response,error.response.status)
       if (error.response) {
         if (error.response.status === 401) {
-          store.dispatch(push('/login'))
+          console.log('unauthorize',store)
+          store.dispatch(handleUnauthorize(store.routing,store.dispatch))
           // message.error('Unauthorized')
         }
         if (error.response.status === 400) {

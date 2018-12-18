@@ -30,10 +30,15 @@ class CreatePage extends React.Component {
     }
   }
   changeStepState(current) {
+    console.log('curren', current)
+    const { create,permissionCreate } = this.props
+    if (current === 5) {
+      create(permissionCreate, true)
+    }
     this.setState({
       step: {
         current: current,
-      },
+      }
     })
   }
 

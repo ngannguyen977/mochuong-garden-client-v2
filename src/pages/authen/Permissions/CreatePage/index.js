@@ -12,7 +12,7 @@ class Create extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Permission" />
+        <Helmet title='Permission' />
         <CreatePage location={props.location} />
       </Page>
     )

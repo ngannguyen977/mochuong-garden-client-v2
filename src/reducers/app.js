@@ -54,7 +54,7 @@ export const login = (customer, username, password, dispatch) =>
           }),
         )
         dispatch(_setHideLogin(true))
-        dispatch(push('/dashboard'))
+        dispatch(push('/'))
         notification.open({
           type: 'success',
           message: 'You have successfully logged in!',
