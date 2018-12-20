@@ -19,38 +19,36 @@ class DashboardAlpha extends React.Component {
         key: 'name',
       },
       {
-        title: 'Position',
-        dataIndex: 'position',
-        key: 'position',
+        title: 'Quota',
+        dataIndex: 'Quota',
+        key: 'Quota',
       },
       {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        sorter: (a, b) => a.age - b.age,
+        title: 'Address',
+        dataIndex: 'Address',
+        key: 'Address',
       },
       {
-        title: 'Office',
-        dataIndex: 'office',
-        key: 'office',
+        title: 'Associated Gateway',
+        dataIndex: 'Associated',
+        key: 'Associated',
       },
       {
-        title: 'Date',
-        dataIndex: 'date',
-        key: 'date',
+        title: 'Security Calling',
+        dataIndex: 'Expired',
+        key: 'Expired',
       },
       {
-        title: 'Salary',
-        dataIndex: 'salary',
-        key: 'salary',
-        sorter: (a, b) => a.salary - b.salary,
+        title: 'Devices',
+        dataIndex: 'device',
+        key: 'device',
       },
     ]
 
     return (
       <div>
         <div className='utils__title utils__title--flat mb-3'>
-          <span className='text-uppercase font-size-16'>Last Week Statistics</span>
+          <span className='text-uppercase font-size-16'>Statistics Overview</span>
         </div>
         <div className='row'>
           <div className='col-xl-4'>
@@ -75,7 +73,7 @@ class DashboardAlpha extends React.Component {
           <div className='col-xl-4'>
             <ChartCard
               title={'Income'}
-              amount={'$1,240.00'}
+              amount={'290,240'}
               chartProps={{
                 width: 120,
                 height: 107,
@@ -94,7 +92,7 @@ class DashboardAlpha extends React.Component {
           <div className='col-xl-4'>
             <ChartCard
               title={'Outcome'}
-              amount={'$240.56'}
+              amount={'284,056'}
               chartProps={{
                 width: 120,
                 height: 107,
@@ -115,13 +113,14 @@ class DashboardAlpha extends React.Component {
           <div className='col-lg-12'>
             <div className='card'>
               <div className='card-header'>
-                <div className='utils__title'>Recently Referrals</div>
+                <div className='utils__title'>Recently Customer Registered</div>
                 <div className='utils__titleDescription'>
-                  Block with important Recently Referrals information
+                  Recently, more 36 percent customer registration than last week.
                 </div>
               </div>
               <div className='card-body'>
                 <Table
+                  rowKey={x => x.name}
                   columns={tableColumns}
                   dataSource={this.state.tableData}
                   pagination={false}
@@ -130,106 +129,8 @@ class DashboardAlpha extends React.Component {
             </div>
           </div>
         </div>
-        <div className='utils__title utils__title--flat mb-3'>
-          <span className='text-uppercase font-size-16'>Your Cards (3)</span>
-          <Button className='ml-3'>View All</Button>
-        </div>
-        <div className='row'>
-          <div className='col-lg-4'>
-            <PaymentCard
-              icon={'lnr lnr-bookmark'}
-              name={'Matt Daemon'}
-              number={'4512-XXXX-1678-7528'}
-              type={'VISA'}
-              footer={'Expires at 02/20'}
-              sum={'$2,156.78'}
-            />
-          </div>
-          <div className='col-lg-4'>
-            <PaymentCard
-              icon={'lnr lnr-bookmark'}
-              name={'David Beckham'}
-              number={'8748-XXXX-1678-5416'}
-              type={'MASTERCARD'}
-              footer={'Expires at 03/22'}
-              sum={'$560,245.35'}
-            />
-          </div>
-          <div className='col-lg-4'>
-            <PaymentCard
-              icon={'lnr lnr-hourglass'}
-              name={'Mrs. Angelina Jolie'}
-              number={'6546-XXXX-1678-1579'}
-              type={'VISA'}
-              footer={'Locked Temporary'}
-              sum={'$1,467,98'}
-            />
-          </div>
-        </div>
-        <div className='utils__title utils__title--flat mb-3'>
-          <span className='text-uppercase font-size-16'>Your Accounts (6)</span>
-          <Button className='ml-3'>View All</Button>
-        </div>
-        <div className='row'>
-          <div className='col-lg-6'>
-            <PaymentAccount
-              icon={'lnr lnr-inbox'}
-              number={'US 4658-1678-7528'}
-              footer={'Current month charged: $10,200.00'}
-              sum={'$2,156.78'}
-            />
-          </div>
-          <div className='col-lg-6'>
-            <PaymentAccount
-              icon={'lnr lnr-inbox'}
-              number={'IBAN 445646-8748-4664-1678-5416'}
-              footer={'Current month charged: $1,276.00'}
-              sum={'$560,245.35'}
-            />
-          </div>
-        </div>
-        <div className='row'>
-          <div className='col-lg-6'>
-            <PaymentAccount
-              icon={'lnr lnr-inbox'}
-              number={'US 4658-1678-7528'}
-              footer={'Current month charged: $10,200.00'}
-              sum={'$2,156.78'}
-            />
-          </div>
-          <div className='col-lg-6'>
-            <PaymentAccount
-              icon={'lnr lnr-inbox'}
-              number={'IBAN 445646-8748-4664-1678-5416'}
-              footer={'Current month charged: $1,276.00'}
-              sum={'$560,245.35'}
-            />
-          </div>
-        </div>
-        <div className='utils__title mb-3'>
-          <span className='text-uppercase font-size-16'>Recent Transactions (167)</span>
-          <Button className='ml-3'>View All</Button>
-        </div>
         <div className='row'>
           <div className='col-lg-12'>
-            <PaymentTx
-              income={false}
-              amount={'-$100.00'}
-              info={'US 4658-1678-7528'}
-              footer={'To AMAZON COPR, NY, 1756'}
-            />
-            <PaymentTx
-              income={true}
-              amount={'+27,080.00'}
-              info={'4512-XXXX-1678-7528'}
-              footer={'To DigitalOcean Cloud Hosting, Winnetka, LA'}
-            />
-            <PaymentTx
-              income={false}
-              amount={'-100,000.00'}
-              info={'6245-XXXX-1678-3256'}
-              footer={'To Tesla Cars, LA, USA'}
-            />
             <div className='text-center pb-5'>
               <Button type='primary' className='width-200' loading>
                 Load More...

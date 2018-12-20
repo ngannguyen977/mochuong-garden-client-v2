@@ -3,8 +3,7 @@ import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import DetailPage from './detail'
 import { Input, Button, Tabs, Icon } from 'antd'
-import GroupList from '../../Groups/GroupPage/group.summary'
-import PermissionList from '../../Permissions/PermissionPage/permission.summary'
+import ResourceList from './resource'
 
 const Search = Input.Search;
 const TabPane = Tabs.TabPane;
@@ -25,6 +24,7 @@ export class DetailTabPage extends React.Component {
         getOne(match.params.id)
     }
     render() {
+        const { update, detail } = this.props
         const handleButton = (
             <div className='text-right'>
                 <Button
@@ -39,6 +39,7 @@ export class DetailTabPage extends React.Component {
                     type='primary'
                     className='text-capitalize'
                     style={{ marginRight: '25px' }}
+                    onClick={() => update(detail.policyId,detail,true)}
                 >
                     Change
                         </Button>
@@ -67,22 +68,10 @@ export class DetailTabPage extends React.Component {
                             />
                             <small className='font-italic text-right'>*Add permission to groups help you manage your permissions easier. You can add permission to many permissions by add permission to group instead.</small>
                         </div>
-                        <div className='col-lg-3 text-right'>
-                            <Button
-                                type='primary'
-                                className='text-capitalize'
-                                onClick={this.start}
-                                style={{ marginRight: '5px' }}
-                                href={'#/' + type + '/create'}
-                            >
-                                Create&ensp;{type}
-                            </Button>
-                        </div>
                     </div>
                     <div className='form-group'>
                         {dom}
                     </div>
-                    {handleButton}
                 </div>
             </div>
         )
@@ -92,13 +81,11 @@ export class DetailTabPage extends React.Component {
                 {handleButton}
             </div>
         )
-
         return (
             <div className='permission-detail'>
                 <Tabs defaultActiveKey='1' >
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
-                    <TabPane tab={<span><Icon type='team' />Actions</span>} key='2'>{moreTabContent('actions', <GroupList />)}</TabPane>
-                    <TabPane tab={<span><Icon type='profile' />Resource</span>} key='3'>{moreTabContent('resource', <PermissionList />)}</TabPane>
+                    <TabPane tab={<span><Icon type='profile' />Resources</span>} key='2'>{moreTabContent('resources', <ResourceList />)}</TabPane>
                 </Tabs>
             </div>
         )

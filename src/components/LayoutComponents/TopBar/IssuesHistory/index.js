@@ -58,7 +58,7 @@ class IssuesHistory extends React.Component {
           <a className='ant-dropdown-link' href='/'>
             <i className='icmn-folder-open mr-2 topbar__dropdownIcon' />
             <span className='d-none d-xl-inline'>
-              <strong>Issues History</strong>
+              {/* <strong>Issues History</strong> */}
             </span>
           </a>
         </Dropdown>

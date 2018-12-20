@@ -1,4 +1,6 @@
-import { getList, changeStatus, create, destroy } from 'reducers/group'
+import { getList, changeStatus, create, destroy, getOne, update } from 'reducers/group'
+import { getList as getPermissions } from 'reducers/permission'
+import { create as createUser } from 'reducers/user'
 import helper from '../../../helper'
 
 const steps = [
@@ -18,11 +20,11 @@ const steps = [
     iconDefault: 'user',
     status: 'wait',
     index: 1,
-    nextTitle: 'Next: Attach Policies',
+    nextTitle: 'Next: Permissions',
   },
   {
-    title: 'Attach Policies',
-    subTitle: 'Attach Policies for Group',
+    title: 'Attach Permissions',
+    subTitle: 'Attach Permissions for Group',
     icon: 'file-protect',
     iconDefault: 'file-protect',
     status: 'wait',
@@ -71,8 +73,8 @@ const reviewUserColumns = [
     width: '20%',
   },
   {
-    title: 'Full Name',
-    dataIndex: 'name',
+    title: 'Role',
+    dataIndex: 'role.name',
     width: '20%',
   },
   {
@@ -105,26 +107,36 @@ const type = {
   del: 'del',
   changeStatus: 'change-status',
   attachPolicy: 'attach-policy',
-  addToGroup: 'add-to-group',
+  addUsers: 'add-users',
 }
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   changeStatus: (id, status) => changeStatus(id, status),
-  create: model => create(model),
+  create: (model, isCreate) => create(model, isCreate),
   destroy: ids => destroy(ids),
+  createUser: (model, isCreate) => createUser(model, isCreate),
+  getPermissions: () => getPermissions(),
+  getOne: (id) => getOne(id),
+  update: (id, model,isUpdate) => update(id, model,isUpdate)
 }
 export const mapStateToProps = (state, props) => {
+  let group = state.group || {}
   return {
-    totalItems: state.group.totalItems,
-    page: state.group.page,
-    data: state.group.groups,
-    groupCreate: state.group.groupCreate || {},
+    totalItems: group.totalItems,
+    group: group,
+    page: group.page,
+    data: group.groups,
+    userCreate: state.user.userCreate || {},
+    groupCreate: group.groupCreate || {},
     summaryColumns: summaryColumns,
     reviewPermissionColumns: reviewPermissionColumns,
     reviewUserColumns: reviewUserColumns,
     steps: steps,
     type: type,
+    detail: group.detail,
+    permission: state.permission,
+    groupCreatePermission: (state.permission || {}).groupCreatePermission
   }
 }
 

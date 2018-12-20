@@ -9,6 +9,7 @@ const api = constant.api.authen
 const REDUCER = 'app'
 const NS = `@@${REDUCER}/`
 const loginApi = `${api.host}/${api.login}`
+const infoApi = `${api.host}/${api.info}`
 
 export const _setFrom = createAction(`${NS}SET_FROM`)
 export const _setLoading = createAction(`${NS}SET_LOADING`)
@@ -44,24 +45,36 @@ export const login = (customer, username, password, dispatch) =>
         dispatch(
           setUserState({
             userState: {
-              customer: customer,
-              user: username,
               token: response.data.token,
               refresh_token: response.data.refresh_token,
               expires: response.data.expires,
-              role: '',
             },
           }),
         )
-        dispatch(_setHideLogin(true))
-        dispatch(push('/'))
-        notification.open({
-          type: 'success',
-          message: 'You have successfully logged in!',
-          description:
-            'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
+        axios.get(infoApi).then(userInfo => {
+          dispatch(_setHideLogin(true))
+          dispatch(
+            setUserState({
+              userState: {
+                ...userInfo.data,
+                token: response.data.token,
+                refresh_token: response.data.refresh_token,
+                expires: response.data.expires,
+              },
+            }),
+          )
+          dispatch(push('/'))
+          notification.open({
+            type: 'success',
+            message: 'You have successfully logged in!',
+            description:
+              'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
+          })
+          return resolve(true)
+        }).catch(error => {
+          console.log('GET INFO ERROR', error.message)
+          return resolve(false)
         })
-        return resolve(true)
       })
       .catch(error => {
         console.log('ERROR', error.message)
@@ -124,6 +137,7 @@ export default createReducer(
     [setUpdatingContent]: (state, isUpdatingContent) => ({ ...state, isUpdatingContent }),
     [setUserState]: (state, { userState }) => {
       window.localStorage.setItem('app.token', JSON.stringify(userState.token))
+      window.localStorage.setItem('app.userState', JSON.stringify(userState))
       return { ...state, userState }
     },
     [setLayoutState]: (state, param) => {

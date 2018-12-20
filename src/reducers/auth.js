@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux'
 import moment from 'moment'
-import { _setFrom, setUserState } from 'reducers/app'
+import { setUserState, setLoading } from 'reducers/app'
 import { message } from 'antd'
 
 const ignoreAuth = ['/register', '/login', '/empty', '/customers/activate']
@@ -32,10 +32,11 @@ export const authorize = () => (dispatch, getState) => {
   }
   return Promise.resolve(true)
 }
-export const handleUnauthorize = (routing, dispatch) => {
-  const location = routing.location
-  const from = location.pathname + location.search
-  dispatch(_setFrom(from))
+export const handleUnauthorize = (routing, dispatch, notify) => {
+  if (notify) {
+    message.error('Unauthorized!')
+  }
+  dispatch(setLoading(false))
   dispatch(push('/login'))
 
   return Promise.reject()

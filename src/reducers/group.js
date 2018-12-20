@@ -3,7 +3,9 @@ import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
-
+import {
+  createGroupPolicy
+} from '../services/policy'
 export const REDUCER = 'group'
 
 const NS = `@@${REDUCER}/`
@@ -21,45 +23,26 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
   axios
     .get(groupApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
-      if (response && response.data) {
-        let { groups, page, totalItems } = response.data
-        if (!totalItems || totalItems === 0) {
-          totalItems = groups.length
-        }
-        if (!groups) {
-          groups = { customer: {}, users: {} }
-        }
-        dispatch(setGroupPage({ groups, page, totalItems }))
+      let { groups, page, totalItems } = response.data
+      if (!groups) {
+        groups = []
       }
+      dispatch(setGroupPage({ groups, page, totalItems }))
     })
     .catch(error => {
-      let errorMessage = 'get group fail'
-      if (error.response && error.response.data) {
-        errorMessage = error.response.data
-      }
+      let errorMessage = ((error.response || {}).data || {}).message || 'get groups fail'
       message.error(errorMessage)
-      // mock groups
-      const { groups } = require('../reducers/mock')
-      dispatch(setGroupPage(groups))
     })
 }
 export const getOne = id => (dispatch, getState) => {
   axios
     .get(`${groupApi}/${id}`)
     .then(response => {
-      if (response && response.data) {
-        dispatch(setGroupDetailPage(response.data))
-      }
+      dispatch(setGroupDetailPage(response.data))
     })
     .catch(error => {
-      let errorMessage = 'get group fail'
-      if (error.response && error.response.data) {
-        errorMessage = error.response.data
-      }
+      let errorMessage = ((error.response || {}).data || {}).message || 'get groups fail'
       message.error(errorMessage)
-      // mock user
-      const { groups } = require('../reducers/mock')
-      dispatch(setGroupDetailPage(groups[0]))
     })
 }
 export const changeStatus = (id, status) => (dispatch, getState) => {
@@ -83,10 +66,7 @@ export const changeStatus = (id, status) => (dispatch, getState) => {
       }
     })
     .catch(error => {
-      let errorMessage = 'change group status fail'
-      if (error.response && error.response.data) {
-        errorMessage = error.response.data
-      }
+      let errorMessage = ((error.response || {}).data || {}).message || 'change status groups fail'
       message.error(errorMessage)
     })
 }
@@ -94,52 +74,72 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
   dispatch(createGroupState(model))
   if (isCreate) {
     axios
-      .post(groupApi, model)
+      .post(groupApi, { name: model.name })
       .then(response => {
-        if (response && response.data) {
-          let { users, page, totalItems } = getState().user
-          users.push(response.data)
-          dispatch(setGroupPage({ users, page, totalItems: totalItems++ }))
+
+        let { users, page, totalItems } = getState().user
+        users.push(response.data)
+        dispatch(setGroupPage({ users, page, totalItems: totalItems++ }))
+        if (model.permissions && Array.isArray(model.permissions) && model.permissions.length > 0) {
+          createGroupPolicy(response.data.id, { policyIds: model.permissions.map(x => x.policyId).join() }).then(
+            message.success('attach permission success')
+          ).catch(error => {
+            let errorMessage = ((error.response || {}).data || {}).message || `create permission for user ${model.username} fail`
+            message.error(errorMessage)
+          })
+          // todo: add users to group
         }
         dispatch(createGroupState({}))
       })
       .catch(error => {
-        let errorMessage = 'create user fail'
-        if (error.response && error.response.data) {
-          errorMessage = error.response.data
+        let errorMessage = ((error.response || {}).data || {}).message || 'create groups fail'
+        message.error(errorMessage)
+      })
+  }
+}
+export const update = (id, model, isUpdate) => (dispatch, getState) => {
+  let { groups, page, totalItems, detail } = getState().group
+  dispatch(setGroupDetailPage({ ...detail, name: model.name }))
+  if (isUpdate) {
+    axios
+      .patch(`${groupApi}/${id}`, { name: model.name })
+      .then(response => {
+        notification['success']({
+          message: 'Update group success!',
+          description:
+            'These groups is updated successfully!',
+        })
+        let group = groups.find(x => x.id === response.data.id)
+        if (group) {
+          group = response.data
         }
+        dispatch(setGroupPage({ groups, page, totalItems: totalItems }))
+      })
+      .catch(error => {
+        let errorMessage = ((error.response || {}).data || {}).message || 'update groups fail'
         message.error(errorMessage)
       })
   }
 }
 export const destroy = ids => (dispatch, getState) => {
   axios
-    .delete(`${groupApi}/${ids}`)
+    .delete(`${groupApi}?ids=${ids}`)
     .then(response => {
       notification['success']({
         message: 'Delete group success!',
         description:
           'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these group, we will revert information for them.',
       })
-      let { groups } = getState().group
-      dispatch(setGroupPage(groups.filter(group => !ids.includes(group.id))))
+      let { groups, page, totalItems } = getState().group
+      dispatch(setGroupPage({ groups: groups.filter(group => !ids.includes(group.id)), page, totalItems: totalItems - ids.length }))
     })
     .catch(error => {
-      let errorMessage = 'change group status fail'
-      if (error.response && error.response.data) {
-        errorMessage = error.response.data
-      }
+      let errorMessage = ((error.response || {}).data || {}).message || 'delete groups fail'
       message.error(errorMessage)
-      // mock
-      notification['success']({
-        message: 'Delete group success!',
-        description:
-          'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
-      })
     })
 }
 const initialState = {
-  totalItems: 0,
+  totalItems: -1,
   page: 0,
   groups: [],
   groupCreate: {},

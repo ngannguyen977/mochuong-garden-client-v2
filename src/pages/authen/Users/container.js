@@ -1,4 +1,7 @@
-import { getList, getOne, changeStatus, create, destroy } from 'reducers/user'
+import { getList, getOne, changeStatus, create, destroy, getUsersByGroup } from 'reducers/user'
+import { getList as getPermissions, getByGroup as getPermissionByGroup } from 'reducers/permission'
+import { getList as getGroups, create as createGroup } from 'reducers/group'
+import helper from '../../../helper'
 
 const steps = [
   {
@@ -51,12 +54,6 @@ const reviewColumns = [
     width: '10%',
   },
   {
-    title: 'Groups',
-    dataIndex: 'groups',
-    width: '20%',
-    render: tags => tags.map(tag => tag.name + ', '),
-  },
-  {
     title: 'Description',
     dataIndex: 'description',
     width: '30%',
@@ -68,17 +65,19 @@ const type = {
   changeStatus: 'change-status',
   attachPolicy: 'attach-policy',
   addToGroup: 'add-to-group',
+  group: 'group',
+  permission: 'permission'
 }
 const summaryColumns = [
   {
     title: 'Username',
-    dataIndex: 'name',
+    dataIndex: 'username',
     sorter: true,
     width: '33%',
   },
   {
-    title: 'Full Name',
-    dataIndex: 'policies',
+    title: 'Role',
+    dataIndex: 'role.name',
     sorter: true,
     width: '33%',
   },
@@ -86,29 +85,41 @@ const summaryColumns = [
     title: 'Last Activity',
     dataIndex: 'last_login',
     sorter: true,
-    width: '33%',
+    width: '15%',
+    render: x => helper.formatDate(new Date(x)),
   },
 ]
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   changeStatus: (id, status) => changeStatus(id, status),
-  create: model => create(model),
+  create: (model, iscreate) => create(model, iscreate),
+  createGroup: (model, iscreate) => createGroup(model, iscreate),
   destroy: ids => destroy(ids),
-  getOne: (id) => getOne(id)
+  getOne: id => getOne(id),
+  getPermissions: () => getPermissions(),
+  getGroups: () => getGroups(),
+  getPermissionByGroup: (ids) => getPermissionByGroup(ids),
+  getUsersByGroup: (groupId) => getUsersByGroup(groupId)
 }
 export const mapStateToProps = (state, props) => {
+  let user = state.user || {}
   return {
-    totalItems: state.user.totalItems,
-    page: state.user.page,
-    data: state.user.users,
-    userCreate: state.user.userCreate || {},
+    totalItems: user.totalItems,
+    page: user.page,
+    data: user.users,
+    userCreate: user.userCreate || {},
+    groupCreate: state.group.groupCreate || {},
     groups: state.group.groups,
     steps: steps,
     reviewColumns: reviewColumns,
     summaryColumns: summaryColumns,
     type: type,
-    detail: state.user.detail
+    detail: user.detail,
+    permission: state.permission,
+    group: state.group,
+    userCreatePermission: (state.permission || {}).userCreatePermission,
+    usersInGroup: state.user.usersInGroup
   }
 }
 

@@ -4,13 +4,20 @@ import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
 import { getServices, getActions } from '../services/resource'
-import { createPolicy, getPolicies, deletePolicy, updatePolicy, getPolicyById } from '../services/policy'
+import { setUserState } from 'reducers/app'
+import {
+  createPolicy,
+  getPolicies,
+  deletePolicy,
+  updatePolicy,
+  getPolicyById,
+  getPolicyByGroup,
+  getPolicyByUserOrGroup
+} from '../services/policy'
 
 export const REDUCER = 'permission'
 
 const NS = `@@${REDUCER}/`
-const api = constant.api.authen
-const permissionApi = `${api.host}/${api.permission}`
 
 export const setPermissionPage = createAction(`${NS}SET_PERMISSION_PAGE`)
 export const setServiceList = createAction(`${NS}SET_SERVICES`)
@@ -19,6 +26,8 @@ export const setPermissionDetailPage = createAction(`${NS}SET_PERMISSION_DETAIL_
 export const createPermissionState = createAction(`${NS}CREATE_PERMISSION_STATE`)
 export const createPermission = createAction(`${NS}CREATE_PERMISSION`)
 export const updatePermissionState = createAction(`${NS}UPDATE_PERMISSION_STATE`)
+export const setPermissionPerGroup = createAction(`${NS}SET_PERMISSION_GROUP_STATE`)
+export const getPermissionByUser = createAction(`${NS}GET_PERMISSION_USER_STATE`)
 
 export const getList = (keyword, keysort, types, skip = 0, limit = 10, isAsc = false) => (
   dispatch,
@@ -75,12 +84,16 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
         name: x.type,
         effect: x.isAllowPermission ? 'allow' : 'deny',
         actions: model.actions.filter(a => a.resourceType === x.type).map(a => a.name),
-        resources: x.value.split(',')
-      }))
+        resources: x.value.split(','),
+      })),
     }
 
     let { userState } = getState().app
-    createPolicy(userState.userId || -258, _model)
+    if (!userState.id) {
+      userState = JSON.parse(window.localStorage.getItem('app.userState'))
+    }
+     console.log('user state',userState)
+    createPolicy(userState.id, _model)
       .then(response => {
         let { permissions, page, totalItems } = getState().permission
         permissions.push(response)
@@ -99,17 +112,26 @@ export const destroy = ids => (dispatch, getState) => {
       notification['success']({
         message: 'Delete permission success!',
         description:
-          'These permisions will be delete permanly shortly in 1 month. In that time, if you re-create these permission, we will revert information for them.',
+          'These permissions will be delete permanly shortly in 1 month. In that time, if you re-create these permission, we will revert information for them.',
       })
       let { permissions, page, totalItems } = getState().permission
-      dispatch(setPermissionPage({ permissions: permissions.filter(x => !ids.includes(x.policyId)), page, totalItems: totalItems-- }))
+      dispatch(
+        setPermissionPage({
+          permissions: permissions.filter(x => !ids.includes(x.policyId)),
+          page,
+          totalItems: totalItems--,
+        }),
+      )
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'delete permission fail'
       message.error(errorMessage)
     })
 }
-export const getListService = (keyword, keysort, skip, count, orderDescending) => (dispatch, getState) => {
+export const getListService = (keyword, keysort, skip, count, orderDescending) => (
+  dispatch,
+  getState,
+) => {
   getServices(keyword, keysort, skip, count, orderDescending)
     .then(response => {
       dispatch(setServiceList(response))
@@ -124,7 +146,7 @@ export const getListService = (keyword, keysort, skip, count, orderDescending) =
       message.error(errorMessage)
     })
 }
-export const getListActionOfService = (shortName) => (dispatch, getState) => {
+export const getListActionOfService = shortName => (dispatch, getState) => {
   getActions(shortName)
     .then(response => {
       dispatch(setActionList({ shortName, actions: response }))
@@ -135,14 +157,39 @@ export const getListActionOfService = (shortName) => (dispatch, getState) => {
       })
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get list actions by service fail'
+      let errorMessage =
+        ((error.response || {}).data || {}).message || 'get list actions by service fail'
+      message.error(errorMessage)
+    })
+}
+export const getByGroup = groupIds => (dispatch, getState) => {
+  getPolicyByGroup(groupIds)
+    .then(response => {
+      console.log(response)
+      dispatch(setPermissionPerGroup(response))
+    })
+    .catch(error => {
+      let errorMessage =
+        ((error.response || {}).data || {}).message || 'get list permission by group fail'
+      message.error(errorMessage)
+    })
+}
+export const getByUser = userId => (dispatch, getState) => {
+  getPolicyByUserOrGroup(userId)
+    .then(response => {
+      console.log(response)
+      dispatch(getPermissionByUser(response))
+    })
+    .catch(error => {
+      let errorMessage =
+        ((error.response || {}).data || {}).message || 'get list permission by group fail'
       message.error(errorMessage)
     })
 }
 const initialState = {
-  totalItems: 0,
+  totalItems: -1,
   page: 0,
-  permissions: []
+  permissions: [],
 }
 const ACTION_HANDLES = {
   [setPermissionPage]: (state, { permissions, page, totalItems }) => ({
@@ -155,6 +202,12 @@ const ACTION_HANDLES = {
   [createPermissionState]: (state, permissionCreate) => ({ ...state, permissionCreate }),
   [updatePermissionState]: (state, permissionUpdate) => ({ ...state, permissionUpdate }),
   [setServiceList]: (state, services) => ({ ...state, services }),
-  [setActionList]: (state, { shortName, actions }) => ({ ...state, shortName: shortName, actions: actions }),
+  [setActionList]: (state, { shortName, actions }) => ({
+    ...state,
+    shortName: shortName,
+    actions: actions,
+  }),
+  [setPermissionPerGroup]: (state, permissions) => ({ ...state, userCreatePermission: permissions }),
+  [getPermissionByUser]: (state, permissions) => ({ ...state, userPermission: permissions }),
 }
 export default createReducer(ACTION_HANDLES, initialState)

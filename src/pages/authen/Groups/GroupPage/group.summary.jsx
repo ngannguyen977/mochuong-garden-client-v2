@@ -21,17 +21,31 @@ class GroupSummaryList extends React.Component {
       }
     }
   }
-  componentDidMount() {
-    if(!this.props.groups){
-      this.props.getList(100, 0)
-      this.setState({ ...this.state.pagination, total: this.props.totalItems })
+  componentWillMount() {
+    const { group, getList } = this.props
+    if (!group || group.totalItems === -1) {
+      getList()
     }
   }
+  componentDidMount() {
+    this.setState({ ...this.state.pagination, total: this.props.totalItems })
+  }
+
   render() {
-      const { summaryColumns } = this.props
+    const { summaryColumns, data,parent,userCreate,createUser } = this.props
+    const { pagination,loading } = this.state
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        this.setState({
+          selectedRowKeys,
+        })
+        switch (parent) {
+          case 'user':
+          createUser({ ...userCreate,groups:selectedRowKeys })
+            break
+          default:
+            break
+        }
       },
       getCheckboxProps: record => ({
         disabled: record.name === 'Disabled User', // Column configuration not to be checked
@@ -43,11 +57,11 @@ class GroupSummaryList extends React.Component {
       <Table
         rowSelection={rowSelection}
         rowKey={record => record.id}
-        pagination={this.state.pagination}
-        loading={this.state.loading}
+        pagination={pagination}
+        loading={loading}
         columns={summaryColumns}
         onChange={this.handleTableChange}
-        dataSource={this.props.groups} />
+        dataSource={data} />
     )
   }
 }

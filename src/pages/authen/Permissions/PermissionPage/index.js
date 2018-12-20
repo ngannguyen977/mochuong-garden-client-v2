@@ -3,8 +3,7 @@ import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
-import helper from '../../../../helper'
-import { Checkbox, Popover, Icon, Tag, Popconfirm, message, Table, Button } from 'antd'
+import { Popover, Icon, Popconfirm, message, Table, Button } from 'antd'
 
 @connect(
   mapStateToProps,
@@ -22,10 +21,13 @@ class PermissionPage extends React.Component {
     },
   }
   componentWillMount() {
-    if (!this.props.totalItems || this.props.totalItems === 0) {
-      const { keyword, keysort, types, skip, limit, isAsc } = queryString.parse(this.props.location.search)
-      this.props.getList(keyword, keysort, types, skip, limit, isAsc)
-    }
+    const { totalItems, location, getList } = this.props
+    // if (!totalItems || totalItems <= 0) {
+    const { keyword, keysort, types, skip, limit, isAsc } = queryString.parse(
+      location.search,
+    )
+    getList(keyword, keysort, types, skip, limit, isAsc)
+    // }
   }
   componentDidMount() {
     this.setState({ ...this.state.pagination, total: this.props.totalItems })
@@ -134,13 +136,10 @@ class PermissionPage extends React.Component {
               <strong>Permissions Management</strong>
             </div>
             <small>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
-            </small>
+              You manage access for users by creating permissions and attaching them to users or groups. A permission is an object, when associated with an entity or resource, defines their permissions. We evaluates these permissions when a principal, such as a user, makes a request. Permissions in the permissions determine whether the request is allowed or denied. Most permissions are stored in cloud as JSON documents.</small>
+            <p><small>
+              We define permissions for an action regardless of the method that you use to perform the operation. For example, if a permission allows the GetUser action, then a user with that permission can get user information. When you create a user, you can set up the user to allow console or programmatic access. The user can sign in to the console using a user name and password. Or they can use access keys to work on the website.
+            </small></p>
           </div>
           <div className='card-body'>
             {totalItems && totalItems > 0 && (
@@ -174,7 +173,7 @@ class PermissionPage extends React.Component {
                 />
               </div>
             )}
-            {(!totalItems || totalItems === 0) && (
+            {(!totalItems || totalItems <= 0) && (
               <LockScreenPage name='Permission' link='#/permissions/create' />
             )}
           </div>

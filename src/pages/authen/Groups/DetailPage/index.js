@@ -12,8 +12,8 @@ class GroupDetail extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Group Details" />
-        <DetailTabPage location={props.location} />
+        <Helmet title='Group Details' />
+        <DetailTabPage location={props.location} match={props.match} />
       </Page>
     )
   }

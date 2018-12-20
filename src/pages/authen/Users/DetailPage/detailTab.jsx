@@ -16,14 +16,13 @@ const TabPane = Tabs.TabPane;
 )
 export class DetailTabPage extends React.Component {
 
-    componentDidMount(){
-        console.log(this.props)
-        if(!this.props.detail){
-            const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search)
-            this.props.getOne()
-        }
+    componentWillMount() {
+        const { match, getOne } = this.props
+        getOne(match.params.id)
     }
+
     render() {
+        const { update, detail } = this.props
         const handleButton = (
             <div className='text-right'>
                 <Button
@@ -38,6 +37,7 @@ export class DetailTabPage extends React.Component {
                     type='primary'
                     className='text-capitalize'
                     style={{ marginRight: '25px' }}
+                    onClick={() => update(detail.id, detail, true)}
                 >
                     Change
                         </Button>
@@ -47,12 +47,8 @@ export class DetailTabPage extends React.Component {
             <div className={type + ' row'}>
                 <div className='col-lg-4 text-justify'>
                     <div className='form-group'>
-                        <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-                             (or don't remember the name you chose), try using your e-mail address as your username.
-                 If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
-                        <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-                        (or don't remember the name you chose), try using your e-mail address as your username.
-                 If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
+                    <p>User permissions specify what tasks users can perform and what features users can access. For example, users with the “Handle Device is sense in third floor” permission can view Devices pages, and users can access any in third floor is sense.</p>
+          <p>You can add this user to groups, then this user will have all permissions in these groups. Another way, you can set permissions for this user explicit by click on button switch to change to attach permission mode. </p>
                     </div>
                 </div>
                 <div className='col-lg-8'>
@@ -87,7 +83,7 @@ export class DetailTabPage extends React.Component {
         )
         const tabDetail = (
             <div className='detail-tab'>
-                <DetailPage />
+                <DetailPage isEdit={true} />
                 {handleButton}
             </div>
         )
@@ -96,8 +92,8 @@ export class DetailTabPage extends React.Component {
             <div className='user-detail'>
                 <Tabs defaultActiveKey='1' >
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
-                    <TabPane tab={<span><Icon type='team' />Groups</span>} key='2'>{moreTabContent('groups', <GroupList />)}</TabPane>
-                    <TabPane tab={<span><Icon type='profile' />Permissions</span>} key='3'>{moreTabContent('permissions', <PermissionList />)}</TabPane>
+                    <TabPane tab={<span><Icon type='team' />Groups</span>} key='2'>{moreTabContent('groups', <GroupList userId={(detail || {}).id} isEdit={true}/>)}</TabPane>
+                    <TabPane tab={<span><Icon type='profile' />Permissions</span>} key='3'>{moreTabContent('permissions', <PermissionList userId={(detail || {}).id} isEdit={true}/>)}</TabPane>
                 </Tabs>
             </div>
         )

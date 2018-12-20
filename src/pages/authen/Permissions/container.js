@@ -1,4 +1,16 @@
-import { getList, create, update, destroy, getListService, getListActionOfService, getOne } from 'reducers/permission'
+import {
+  getList,
+  create,
+  update,
+  destroy,
+  getListService,
+  getListActionOfService,
+  getOne,
+  getByUser,
+  getByGroup
+} from 'reducers/permission'
+import { create as createUser } from 'reducers/user'
+import { getList as getGroups, create as createGroup } from 'reducers/group'
 
 const steps = [
   {
@@ -80,7 +92,7 @@ const actionColumns = [
     dataIndex: 'description',
     sorter: true,
     width: '40%',
-  }
+  },
 ]
 const summaryColumns = [
   {
@@ -117,8 +129,9 @@ const reviewColumns = [
     title: 'Resource',
     dataIndex: 'resource',
     width: '30%',
-  }
+  },
 ]
+
 const type = {
   del: 'del',
   changeStatus: 'change-status',
@@ -127,12 +140,17 @@ const type = {
 }
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
-  getListService: (keyword, keysort, skip, count, orderDescending) => getListService(keyword, keysort, skip, count, orderDescending),
-  getListActionOfService: (shortName) => getListActionOfService(shortName),
+  getListService: (keyword, keysort, skip, count, orderDescending) =>
+    getListService(keyword, keysort, skip, count, orderDescending),
+  getListActionOfService: shortName => getListActionOfService(shortName),
   create: (model, isCreate) => create(model, isCreate),
+  createGroup: (model, isCreate) => createGroup(model, isCreate),
   destroy: ids => destroy(ids),
   update: (policyId, model, isUpdate) => update(policyId, model, isUpdate),
-  getOne: (id) => getOne(id)
+  getOne: id => getOne(id),
+  createUser: (model, isCreate) => createUser(model, isCreate),
+  getByUser: (userId) => getByUser(userId),
+  getByGroup:(groupIds)=>getByGroup(groupIds)
 }
 export const mapStateToProps = (state, props) => {
   let permission = state.permission || {}
@@ -142,18 +160,21 @@ export const mapStateToProps = (state, props) => {
     totalItems: permission.totalItems,
     page: permission.page,
     data: permission.permissions,
+    userCreate: state.user.userCreate || {},
     permissionCreate: permission.permissionCreate || {},
     services: (permission.services || {}).records || [],
     serviceTotal: (permission.services || {}).total || 0,
     actions: permission.actions || [],
     actionTotal: (permission.actions || []).length,
-
+    userPermission: permission.userPermission,
     steps: steps,
     type: type,
     summaryColumns: summaryColumns,
     actionColumns: actionColumns,
     reviewColumns: reviewColumns,
-    detail: permission.detail
+    detail: permission.detail,
+    groupCreate: state.group.groupCreate,
+    userCreatePermission: permission.userCreatePermission
   }
 }
 

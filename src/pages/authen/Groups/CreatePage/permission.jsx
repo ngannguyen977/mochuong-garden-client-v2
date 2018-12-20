@@ -22,12 +22,8 @@ class PermissionSummaryList extends React.Component {
     return (
       <div className='group-create permission-step row'>
         <div className='col-lg-4 text-justify'>
-          <p>With most services, your groupname is a name you created, or that has been assigned to you. If you do not recall creating a groupname,
-               (or don't remember the name you chose), try using your e-mail address as your groupname.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
-          <p>With most services, your groupname is a name you created, or that has been assigned to you. If you do not recall creating a groupname,
-          (or don't remember the name you chose), try using your e-mail address as your groupname.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
+          <p>Group permissions specify what tasks groups can perform and what features groups can access. For example, groups with the “Handle Device is sense in third floor” permission can view Devices pages, and groups can access any in third floor is sense.</p>
+          <p>You can add users to a group, then this user will have all permissions in this groups. Everything seem ok, go to the last step!</p>
         </div>
         <div className='col-lg-8'>
           <h2>Attach Permission for Group</h2>
@@ -53,7 +49,7 @@ class PermissionSummaryList extends React.Component {
             </div>
           </div>
           <div className='form-group'>
-          <PermissionList />
+            <PermissionList parent='group' />
           </div>
         </div>
 

@@ -30,15 +30,14 @@ class CreatePage extends React.Component {
     }
   }
   changeStepState(current) {
-    console.log('curren', current)
-    const { create,permissionCreate } = this.props
+    const { create, permissionCreate } = this.props
     if (current === 5) {
       create(permissionCreate, true)
     }
     this.setState({
       step: {
         current: current,
-      }
+      },
     })
   }
 
@@ -55,11 +54,11 @@ class CreatePage extends React.Component {
             </h4>
           </div>
           <div className='card-body'>
-            {this.state.step.current === 0 && <DetailPage />}
-            {this.state.step.current === 1 && <ServicePage />}
-            {this.state.step.current === 2 && <ActionPage />}
-            {this.state.step.current === 3 && <ResourcePage />}
-            {(this.state.step.current === 4 || this.state.step.current === 5) && <Review />}
+            {current === 0 && <DetailPage />}
+            {current === 1 && <ServicePage />}
+            {current === 2 && <ActionPage />}
+            {current === 3 && <ResourcePage />}
+            {(current === 4 || current === 5) && <Review />}
             <ButtonStep
               steps={steps}
               current={current}

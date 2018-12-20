@@ -14,19 +14,53 @@ class PermissionPage extends React.Component {
   constructor() {
     super()
     this.state = {
+      mode: 'group',
       title: 'Add user to groups',
-      mode: 'group'
+      description: '*Add user to groups help you manage your users easier. You can add permission to many users by add permission to group instead.'
     }
   }
-  handleMode(isAttachPolicies) {
-    if(isAttachPolicies){
-      this.setState({ title: 'Add user to groups', mode: 'group' })
-    }else{
-      this.setState({ title: 'Attach permission', mode: 'permission' })
+  componentDidMount() {
+    const { userCreate, type } = this.props
+    const { mode } = this.state
+    switch (mode) {
+      case type.group:
+        if (userCreate.groups) {
+          this.setState({
+            selectedRowKeys: userCreate.groups.map(x => x.id)
+          })
+        }
+        break
+      case type.permission:
+        if (userCreate.permissions) {
+          this.setState({
+            selectedRowKeys: userCreate.permissions.map(x => x.id)
+          })
+        }
+        break
+      default:
+        break
+    }
+  }
+  handleMode(groupMode) {
+    const { type,userCreate,create } = this.props
+    if (!groupMode) {
+      this.setState({
+        mode: type.permission,
+        title: 'Attach permission',
+        description: '*Add user to groups help you manage your users easier. You can add permission to many users by add permission to group instead.'
+      })
+      create({ ...userCreate,groups:null })
+    } else {
+      this.setState({
+        mode: type.group,
+        title: 'Add user to groups',
+        description: '*Add user to groups help you manage your users easier. You can add permission to many users by add permission to group instead.'
+      })
+      create({ ...userCreate,permissions:null })
     }
   }
   render() {
-    const { title,mode } = this.state
+    const { mode, title, description } = this.state
     return (
       <div className='user-create-step-2 row'>
         <div className='col-lg-4 text-justify'>
@@ -34,12 +68,9 @@ class PermissionPage extends React.Component {
             <Switch size='large' defaultChecked onChange={(value) => this.handleMode(value)} />
             <span>{'  ' + title}</span>
           </div>
-          <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-               (or don't remember the name you chose), try using your e-mail address as your username.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
-          <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-          (or don't remember the name you chose), try using your e-mail address as your username.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
+          <p>User permissions specify what tasks users can perform and what features users can access. For example, users with the “Handle Device is sense in third floor” permission can view Devices pages, and users can access any in third floor is sense.</p>
+          <p>You can add this user to groups, then this user will have all permissions in these groups. Another way, you can set permissions for this user explicit by click on button switch to change to attach permission mode. </p>
+          <p>You only can set permissions for a user by add this user to groups or attach permissions for this user on create user page. If you switch to attach permission mode, all groups you choose will be release. If you switch back to add user to groups mode, all permissions you choose will be release else.</p>
         </div>
         <div className='col-lg-8'>
           <h2>{title}</h2>
@@ -50,7 +81,7 @@ class PermissionPage extends React.Component {
                 onSearch={value => console.log(value)}
               // style={{ width: 200 }}
               />
-              <small className='font-italic text-right'>*Add user to groups help you manage your users easier. You can add permission to many users by add permission to group instead.</small>
+              <small className='font-italic text-right'>{description}</small>
             </div>
             <div className='col-lg-4 text-right'>
               <Button
@@ -65,8 +96,8 @@ class PermissionPage extends React.Component {
             </div>
           </div>
           <div className='form-group'>
-            {mode === 'group' && <GroupList />}
-            {mode === 'permission' && <PermissionList />}
+            {mode === 'group' && <GroupList parent='user' />}
+            {mode === 'permission' && <PermissionList parent='user' />}
           </div>
         </div>
 

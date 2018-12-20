@@ -25,12 +25,8 @@ class ServicePage extends React.Component {
         <div className='col-lg-4 text-justify'>
           <div className='form-group'>
           </div>
-          <p>With most services, your permissionname is a name you created, or that has been assigned to you. If you do not recall creating a permissionname,
-               (or don't remember the name you chose), try using your e-mail address as your permissionname.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
-          <p>With most services, your permissionname is a name you created, or that has been assigned to you. If you do not recall creating a permissionname,
-          (or don't remember the name you chose), try using your e-mail address as your permissionname.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
+          <p>We have many many actions on our system. Therefore, we split them into services, example : IoT, Storage, Authentication,etc. On service IoT, we have list actions about IoT such as manage Devices, Monitor gateways,etc.</p>
+          <p>Please choose a service then you can see the list actions of that service. You only choose 1 service for a permission. Go to the next step: SELECT ACTIONS.</p>
         </div>
         <div className='col-lg-8'>
           <h2>Choose a Service</h2>
@@ -41,7 +37,7 @@ class ServicePage extends React.Component {
                 onSearch={value => console.log(value)}
               // style={{ width: 200 }}
               />
-              <small className='font-italic text-right'>*Add permission to groups help you manage your permissions easier. You can add permission to many permissions by add permission to group instead.</small>
+              <small className='font-italic text-right'>*A service is represent by a list actions.</small>
             </div>
           </div>
           <div className='form-group'>

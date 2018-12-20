@@ -14,8 +14,13 @@ const TabPane = Tabs.TabPane;
     mapDispathToProps,
 )
 export class DetailTabPage extends React.Component {
-
+    componentWillMount() {
+        const { match, getOne } = this.props
+        getOne(match.params.id)
+    }
     render() {
+        const { update, detail } = this.props
+
         const handleButton = (
             <div className='text-right'>
                 <Button
@@ -30,6 +35,7 @@ export class DetailTabPage extends React.Component {
                     type='primary'
                     className='text-capitalize'
                     style={{ marginRight: '25px' }}
+                    onClick={() => update(detail.id, detail, true)}
                 >
                     Change
                         </Button>
@@ -79,7 +85,7 @@ export class DetailTabPage extends React.Component {
         )
         const tabDetail = (
             <div className='detail-tab'>
-                <DetailPage />
+                <DetailPage isEdit={true} />
                 {handleButton}
             </div>
         )
@@ -88,8 +94,8 @@ export class DetailTabPage extends React.Component {
             <div className='user-detail'>
                 <Tabs defaultActiveKey='1' >
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
-                    <TabPane tab={<span><Icon type='user' />Users</span>} key='2'>{moreTabContent('users', <UserList />)}</TabPane>
-                    <TabPane tab={<span><Icon type='profile' />Permissions</span>} key='3'>{moreTabContent('permissions', <PermissionList />)}</TabPane>
+                    <TabPane tab={<span><Icon type='user' />Users</span>} key='2'>{moreTabContent('users', <UserList groupId={(detail || {}).id} isEdit={true} />)}</TabPane>
+                    <TabPane tab={<span><Icon type='profile' />Permissions</span>} key='3'>{moreTabContent('permissions', <PermissionList groupIds={(detail || {}).id} isEdit={true}  />)}</TabPane>
                 </Tabs>
             </div>
         )

@@ -81,7 +81,7 @@ class Actions extends React.Component {
                 onSearch={value => console.log(value)}
               // style={{ width: 200 }}
               />
-              <small className='font-italic text-right'>*Add permission to groups help you manage your permissions easier. You can add permission to many permissions by add permission to group instead.</small>
+              <small className='font-italic text-right'>*We define permissions for an action regardless of the method that you use to perform the operation. For example, if a permission allows the GetUser action, then a user with that permission can get user information.</small>
             </div>
 
           </div>

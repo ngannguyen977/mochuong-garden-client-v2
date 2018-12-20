@@ -22,7 +22,7 @@ class ResourcePage extends React.Component {
     const { permissionCreate, create } = this.props
     const { resources } = this.state
     this.setState({
-      resources: permissionCreate.resourceType.map(x => ({
+      resources: ((permissionCreate || {}).resourceType || []).map(x => ({
         type: x,
         isAllowPermission: true
       }))
@@ -82,39 +82,27 @@ class ResourcePage extends React.Component {
         </div>
         <div className='col-lg-10'>
           <h2>Select resources</h2>
-          <small className='font-italic text-right'>*Add permission to groups help you manage your permissions easier. You can add permission to many permissions by add permission to group instead.</small>
-          <div className='row'>
-            <div className='user-detail-page row'>
-              <div className='col-lg-4 text-justify'>
-                <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-                     (or don't remember the name you chose), try using your e-mail address as your username.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
-                <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-                (or don't remember the name you chose), try using your e-mail address as your username.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
+          <small className='font-italic text-right'>*Describes a resource associated with a resource share. You can describe more than one resource by type comma between them. Using * for describe all resource.</small>
+          <div className='resource-list'>
+            {resources.map(x => (
+              <div className='form-group' key={x.type}>
+                <h5 className='text-black text-capitalize'><strong>{x.type}</strong></h5>
+                <Input
+                  id='permission-edit-title'
+                  placeholder='orn:[partition]:[service]:[region]:[account-id]:resource_type/name'
+                  defaultValue={x.value}
+                  onBlur={(e) => this.addResource(x.type, e.target.value, false)}
+                  addonAfter={<Checkbox onChange={(e) => this.addResource(x.type, `orn:*:*:*:*:${x.type}/*`, e.target.checked)}>Any</Checkbox>}
+                />
+                <Switch defaultChecked
+                  size='small'
+                  className='d-inline'
+                  checkedChildren={<Icon type='check' />}
+                  unCheckedChildren={<Icon type='close' />}
+                  onChange={(e) => this.changeTypePermission(x.type, e)} />
+                {x.isAllowPermission ? ' Allow Permission ' : ' Deny Permission '}
               </div>
-              <div className='col-lg-8'>
-                {resources.map(x => (
-                  <div className='form-group' key={x.type}>
-                    <h5 className='text-black text-capitalize'><strong>{x.type}</strong></h5>
-                    <Input
-                      id='permission-edit-title'
-                      placeholder='orn:[partition]:[service]:[region]:[account-id]:resource_type/name'
-                      defaultValue={x.value}
-                      onBlur={(e) => this.addResource(x.type, e.target.value, false)}
-                      addonAfter={<Checkbox onChange={(e) => this.addResource(x.type, `orn:*:*:*:*:${x.type}/*`, e.target.checked)}>Any</Checkbox>}
-                    />
-                    <Switch defaultChecked
-                      size='small'
-                      className='d-inline'
-                      checkedChildren={<Icon type='check' />}
-                      unCheckedChildren={<Icon type='close' />}
-                      onChange={(e) => this.changeTypePermission(x.type, e)} />
-                    {x.isAllowPermission ? ' Allow Permission ' : ' Deny Permission '}
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

@@ -3,15 +3,18 @@ export default {
     authen: {
       host: 'https://api-dev.onskycloud.com/authen/v1/api',
       login: 'auth/login',
+      info:'auth/me',
       register: 'customers',
       group: 'groups',
       user: 'users',
+      usersByGroup:'bygroup',
+      groupsByUser:'byuser',
       confirmEmail: 'customers/activate',
     },
     policy: {
-      host: 'http://localhost:8080/v1/api',
+      // host: 'http://localhost:8080/v1/api',
       token: 'sdcxcx22334632rwhczyr392yr02ud23r9t34uy23r9t3df932jhfo',
-      // host: 'https://api-dev.onskycloud.com/policy-service/v1/api',
+      host: 'https://api-dev.onskycloud.com/policy-service/v1/api',
       policy: 'policies',
       group: 'groups',
       user: 'users',
@@ -28,7 +31,7 @@ export default {
       serviceDisable: 'disable',
       serviceEnable: 'enable',
       serviceDelete: 'shortname',
-      serviceDeletes: 'deletes'
-    }
+      serviceDeletes: 'deletes',
+    },
   },
 }

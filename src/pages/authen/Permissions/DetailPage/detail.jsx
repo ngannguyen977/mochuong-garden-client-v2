@@ -16,27 +16,17 @@ export class DetailPage extends React.Component {
       description: ''
     }
   }
-
-  componentWillMount() {
+  componentDidUpdate() {
     const { detail, isEdit } = this.props
-
-    if (isEdit) {
-      if (!detail) {
-        setTimeout(() => {
-          this.setState({
-            name: (detail || {}).name,
-            description: (detail || {}).description,
-          })
-        }, 3000)
-      } else {
-        this.setState({
-          name: (detail || {}).name,
-          description: (detail || {}).description,
-        })
-      }
+    const { name } = this.state
+    if (isEdit && detail && (!name || name !== detail.name)) {
+      this.setState({
+        name: detail.name,
+        description: detail.description,
+      })
     }
-    console.log('reace', detail)
   }
+
   componentDidMount() {
     const { permissionCreate, isEdit } = this.props
     if (!isEdit) {
@@ -69,16 +59,14 @@ export class DetailPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.detail)
     return (
       <div className='user-detail-page row'>
         <div className='col-lg-4 text-justify'>
-          <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-               (or don't remember the name you chose), try using your e-mail address as your username.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
-          <p>With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-          (or don't remember the name you chose), try using your e-mail address as your username.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
+
+          <p> You manage access for users by creating permissions and attaching them to users or groups. A permission is an object, when associated with an entity or resource, defines their permissions. We evaluates these permissions when a principal, such as a user, makes a request. Permissions in the permissions determine whether the request is allowed or denied. Most permissions are stored in cloud as JSON documents.</p>
+          <p>
+            We define permissions for an action regardless of the method that you use to perform the operation. For example, if a permission allows the GetUser action, then a user with that permission can get user information. When you create a user, you can set up the user to allow console or programmatic access. The user can sign in to the console using a user name and password. Or they can use access keys to work on the website.
+            </p>
         </div>
         <div className='col-lg-8'>
           <div className='form-group'>
@@ -88,9 +76,7 @@ export class DetailPage extends React.Component {
               placeholder='eg. Read all list IoT'
               value={this.state.name}
               onChange={(evt) => this.updateInfo('name', evt.target.value)} />
-            <small className='font-italic text-right'> *With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-             (or don't remember the name you chose), try using your e-mail address as your username.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</small>
+            <small className='font-italic text-right'> *For example, if a permission allows the GetUser action, then a user with that permission can get user information..</small>
           </div>
           <div className='form-group'>
             <label htmlFor='permission-edit-title'>Description</label>
@@ -99,7 +85,7 @@ export class DetailPage extends React.Component {
               value={this.state.description}
               row={4}
               onChange={(evt) => this.updateInfo('description', evt.target.value)} />
-            <small className='font-italic text-right'>*The Password is require at least 8 characters, inclusion of both uppercase,lowercase and special characters. Use of at least one number</small>
+            <small className='font-italic text-right'>*Please describe a short text for this permission, it's very helpful for your users, they will easy to understand permissions you defined.</small>
           </div>
         </div>
       </div>)

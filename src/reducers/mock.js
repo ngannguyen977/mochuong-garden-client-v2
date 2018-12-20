@@ -686,38 +686,38 @@ export const services = {
           actions: [
             {
               name: 'iam:getUsers',
-              type: 'List'
+              type: 'List',
             },
             {
               name: 'iam:putUser',
-              type: 'Write'
-            }
-          ]
-        }
+              type: 'Write',
+            },
+          ],
+        },
       ],
       createdAt: '2018-12-14T01:48:37.514Z',
-      updatedAt: '2018-12-14T01:48:37.514Z'
-    }
-  ]
+      updatedAt: '2018-12-14T01:48:37.514Z',
+    },
+  ],
 }
 export const actions = {
-  "records": [
+  records: [
     {
-      "resourceTypes": [
+      resourceTypes: [
         {
-          "name": "users",
-          "actions": [
+          name: 'users',
+          actions: [
             {
-              "name": "iam:getUsers",
-              "type": "List"
+              name: 'iam:getUsers',
+              type: 'List',
             },
             {
-              "name": "iam:putUser",
-              "type": "Write"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              name: 'iam:putUser',
+              type: 'Write',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 }

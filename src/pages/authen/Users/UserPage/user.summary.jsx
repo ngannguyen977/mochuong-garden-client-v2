@@ -18,20 +18,58 @@ class UserSummaryList extends React.Component {
         total: -1,
         current: 1,
         pageSize: 0,
+      },
+      data: []
+    }
+  }
+  componentWillMount() {
+    const { totalItems, getList, isEdit, getUsersByGroup, usersInGroup, groupId } = this.props
+    if (isEdit) {
+      if (groupId && !usersInGroup) {
+        getUsersByGroup(groupId)
       }
+    }
+    else if (totalItems === -1) {
+      getList()
     }
   }
   componentDidMount() {
-    if(!this.props.users){
-      this.props.getList(100, 0)
-      this.setState({ ...this.state.pagination, total: this.props.totalItems })
+    this.setState({ ...this.state.pagination, total: this.props.totalItems })
+  }
+  componentDidUpdate() {
+    const { totalItems, data, getList, isEdit, getUsersByGroup, usersInGroup, groupId } = this.props
+    if (isEdit) {
+      console.log(groupId,usersInGroup,this.state.data)
+      if (groupId && usersInGroup && usersInGroup.users.length > 0 && this.state.data.length === 0) {
+        let _users = usersInGroup.users.filter(x => x.groupId === groupId)
+        console.log(groupId,usersInGroup,this.state.data,_users)
+        if (_users)
+          this.setState({
+            data: _users
+          })
+      }
+    } else if (totalItems > 0 && data
+      && data.length > 0 && this.state.data.length === 0) {
+      this.setState({
+        data
+      })
     }
   }
   render() {
-      const { summaryColumns } = this.props
+    const { summaryColumns, parent, groupCreate, createGroup } = this.props
+    const { pagination, loading, data } = this.state
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+        this.setState({
+          selectedRowKeys,
+        })
+        switch (parent) {
+          case 'group':
+            createGroup({ ...groupCreate, users: selectedRows })
+            break
+          default:
+            break
+        }
       },
       getCheckboxProps: record => ({
         disabled: record.name === 'Disabled User', // Column configuration not to be checked
@@ -43,11 +81,11 @@ class UserSummaryList extends React.Component {
       <Table
         rowSelection={rowSelection}
         rowKey={record => record.id}
-        pagination={this.state.pagination}
-        loading={this.state.loading}
+        pagination={pagination}
+        loading={loading}
         columns={summaryColumns}
         onChange={this.handleTableChange}
-        dataSource={this.props.users} />
+        dataSource={data} />
     )
   }
 }

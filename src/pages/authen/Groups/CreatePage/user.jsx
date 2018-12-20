@@ -21,12 +21,8 @@ class UserSummaryList extends React.Component {
     return (
       <div className='group-create add-users row'>
         <div className='col-lg-4 text-justify'>
-          <p>With most services, your groupname is a name you created, or that has been assigned to you. If you do not recall creating a groupname,
-               (or don't remember the name you chose), try using your e-mail address as your groupname.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
-          <p>With most services, your groupname is a name you created, or that has been assigned to you. If you do not recall creating a groupname,
-          (or don't remember the name you chose), try using your e-mail address as your groupname.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</p>
+          <p>A group can have one ore many users. </p>
+          <p>Add users to group help you manage your users easier. You can add permission to many users by add permission to group instead.</p>
         </div>
         <div className='col-lg-8'>
           <h2>Add users to Group</h2>
@@ -37,7 +33,7 @@ class UserSummaryList extends React.Component {
                 onSearch={value => console.log(value)}
               // style={{ width: 200 }}
               />
-              <small className='font-italic text-right'>*Add group to groups help you manage your groups easier. You can add permission to many groups by add permission to group instead.</small>
+              <small className='font-italic text-right'>*Add users to group help you manage your users easier. You can add permission to many users by add permission to group instead.</small>
             </div>
             <div className='col-lg-4 text-right'>
               <Button
@@ -52,7 +48,7 @@ class UserSummaryList extends React.Component {
             </div>
           </div>
           <div className='form-group'>
-          <UserList />
+          <UserList parent='group'/>
           </div>
         </div>
 

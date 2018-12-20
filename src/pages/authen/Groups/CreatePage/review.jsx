@@ -22,19 +22,22 @@ export class Review extends React.Component {
             }
         }
     }
+    componentDidMount() {
+
+    }
     render() {
-        const { reviewPermissionColumns,reviewUserColumns, groupCreate, data } = this.props
+        const { reviewPermissionColumns, reviewUserColumns, groupCreate, data } = this.props
         const { pagination, loading } = this.state
         return (
             <div className='group-create-step-1 '>
                 <div className='text-justify'>
                     <div className=' font-size-16 row'>
                         <div className='form-group col-lg-6'>
-                            <label htmlFor='product-edit-title'>Group name:</label>
+                            <h5 className='text-black'><strong>Group Name</strong></h5>
                             <p id='product-edit-title' > {groupCreate.name || 'group name is missing'}</p>
                         </div>
                         <div className='form-group col-lg-6'>
-                            <label htmlFor='product-edit-title'>Description:</label>
+                            <h5 className='text-black'><strong>Group Description</strong></h5>
                             <p id='product-edit-title' >  {groupCreate.description || 'description is missing'}</p>
                         </div>
                     </div>
@@ -49,7 +52,7 @@ export class Review extends React.Component {
                                 loading={loading}
                                 columns={reviewUserColumns}
                                 onChange={this.handleTableChange}
-                                dataSource={data} />
+                                dataSource={groupCreate.users} />
                         </div>
                     </div>
                     <div className='col-lg-6'>
@@ -61,7 +64,7 @@ export class Review extends React.Component {
                                 loading={loading}
                                 columns={reviewPermissionColumns}
                                 onChange={this.handleTableChange}
-                                dataSource={data} />
+                                dataSource={groupCreate.permissions} />
                         </div>
                     </div>
                 </div>

@@ -12,12 +12,14 @@ class HomeMenu extends React.Component {
               <div className='topbar__activity__title'>
                 <span className='pull-right'>now</span>
                 <a href='javascript: void(0);'>
-                  Update Status: <span className='badge badge-danger'>New</span>
+                  Security Calling: <span className='badge badge-danger'>New</span>
                 </a>
               </div>
               <div className='topbar__activity__descr'>
-                Failed to get available update data. To ensure the proper functioning of your
-                application, update now.
+                <span className='text-danger'> Security breach has been detected </span >
+              </div>
+              <div className='topbar__activity__descr'>
+                <span className='text-danger'> at meeting room in OS Vietnam Showroom. </span >
               </div>
             </div>
           </div>
@@ -27,54 +29,11 @@ class HomeMenu extends React.Component {
               <div className='topbar__activity__title'>
                 <span className='pull-right'>24 min ago</span>
                 <a href='javascript: void(0);'>
-                  Income: <span className='badge badge-default'>$299.00</span>
+                  Income
                 </a>
               </div>
               <div className='topbar__activity__descr'>
-                Failed to get available update data. To ensure the proper functioning of your
-                application, update now.
-              </div>
-            </div>
-          </div>
-          <div className='topbar__activity__item'>
-            <i className='topbar__activity__icon icmn-list' />
-            <div className='topbar__activity__inner'>
-              <div className='topbar__activity__title'>
-                <span className='pull-right'>30 min ago</span>
-                <a href='javascript: void(0);'>Inbox Message</a>
-              </div>
-              <div className='topbar__activity__descr'>
-                From: <a href='javascript: void(0);'>David Bowie</a>
-              </div>
-            </div>
-          </div>
-          <div className='topbar__activity__item'>
-            <i className='topbar__activity__icon icmn-home' />
-            <div className='topbar__activity__inner'>
-              <div className='topbar__activity__title'>
-                <span className='pull-right'>now</span>
-                <a href='javascript: void(0);'>
-                  Update Status: <span className='badge badge-primary'>New</span>
-                </a>
-              </div>
-              <div className='topbar__activity__descr'>
-                Failed to get available update data. To ensure the proper functioning of your
-                application, update now.
-              </div>
-            </div>
-          </div>
-          <div className='topbar__activity__item'>
-            <i className='topbar__activity__icon icmn-loop' />
-            <div className='topbar__activity__inner'>
-              <div className='topbar__activity__title'>
-                <span className='pull-right'>24 min ago</span>
-                <a href='javascript: void(0);'>
-                  Income: <span className='badge badge-warning'>$299.00</span>
-                </a>
-              </div>
-              <div className='topbar__activity__descr'>
-                Failed to get available update data. To ensure the proper functioning of your
-                application, update now.
+                Front Door motion detected.
               </div>
             </div>
           </div>
@@ -83,10 +42,62 @@ class HomeMenu extends React.Component {
             <div className='topbar__activity__inner'>
               <div className='topbar__activity__title'>
                 <span className='pull-right'>30 min ago</span>
-                <a href='javascript: void(0);'>Inbox Message</a>
+                <a href='javascript: void(0);'>Security Setting</a>
               </div>
               <div className='topbar__activity__descr'>
-                From: <a href='javascript: void(0);'>David Bowie</a>
+                <a href='javascript: void(0);'>Security mode has changed to Arm away</a>
+              </div>
+            </div>
+          </div>
+          <div className='topbar__activity__item'>
+            <i className='topbar__activity__icon icmn-cog utils__spin-delayed--pseudo-selector' />
+            <div className='topbar__activity__inner'>
+              <div className='topbar__activity__title'>
+                <span className='pull-right'>32 min ago</span>
+                <a href='javascript: void(0);'>Security Setting</a>
+              </div>
+              <div className='topbar__activity__descr'>
+                <a href='javascript: void(0);'>Security mode has changed to Off</a>
+              </div>
+            </div>
+          </div>
+          <div className='topbar__activity__item'>
+            <i className='topbar__activity__icon icmn-cog utils__spin-delayed--pseudo-selector' />
+            <div className='topbar__activity__inner'>
+              <div className='topbar__activity__title'>
+                <span className='pull-right'>34 min ago</span>
+                <a href='javascript: void(0);'>Security Setting</a>
+              </div>
+              <div className='topbar__activity__descr'>
+                <a href='javascript: void(0);'>Security mode has changed to Arm home</a>
+              </div>
+            </div>
+          </div>
+          <div className='topbar__activity__item'>
+            <i className='topbar__activity__icon icmn-stack' />
+            <div className='topbar__activity__inner'>
+              <div className='topbar__activity__title'>
+                <span className='pull-right'>1 hour ago</span>
+                <a href='javascript: void(0);'>
+                  Income
+                </a>
+              </div>
+              <div className='topbar__activity__descr'>
+                PlugS motion detected.
+              </div>
+            </div>
+          </div>
+          <div className='topbar__activity__item'>
+            <i className='topbar__activity__icon icmn-stack' />
+            <div className='topbar__activity__inner'>
+              <div className='topbar__activity__title'>
+                <span className='pull-right'>1 hour ago</span>
+                <a href='javascript: void(0);'>
+                  Income
+                </a>
+              </div>
+              <div className='topbar__activity__descr'>
+                PlugS motion detected.
               </div>
             </div>
           </div>

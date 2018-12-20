@@ -5,7 +5,7 @@ import DashboardAlpha from './DashboardAlpha'
 
 class DashboardAlphaPage extends React.Component {
   static defaultProps = {
-    pathName: 'Dashboard Alpha',
+    pathName: 'Dashboard',
     roles: ['agent', 'administrator'],
   }
 
@@ -13,7 +13,7 @@ class DashboardAlphaPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Dashboard Alpha' />
+        <Helmet title='Dashboard' />
         <DashboardAlpha />
       </Page>
     )

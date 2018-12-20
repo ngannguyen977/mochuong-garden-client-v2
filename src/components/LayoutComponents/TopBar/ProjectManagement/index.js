@@ -37,7 +37,7 @@ class ProjectManagement extends React.Component {
           <a className='ant-dropdown-link' href='/'>
             <i className='icmn-database mr-2 topbar__dropdownIcon' />
             <span className='d-none d-xl-inline'>
-              <strong>Project Management</strong>
+              {/* <strong>Project Management</strong> */}
             </span>
           </a>
         </Dropdown>

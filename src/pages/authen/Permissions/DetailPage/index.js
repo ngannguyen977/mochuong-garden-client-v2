@@ -13,7 +13,7 @@ class PermissionDetail extends React.Component {
     return (
       <Page {...props}>
         <Helmet title='Permission Details' />
-        <DetailTabPage location={props.location} match={props.match}/>
+        <DetailTabPage location={props.location} match={props.match} />
       </Page>
     )
   }
