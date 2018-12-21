@@ -35,11 +35,10 @@ class Register extends React.Component {
             <div className='col-xl-12'>
               <div className='register__block__promo text-white text-center'>
                 <h1 className='mb-3 text-white'>
-                  <strong>Welcome to OnSky Team</strong>
+                  <strong>Welcome to OnSky Family</strong>
                 </h1>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever since the 1500s.
+                  At OnSky, Security – Safety is our top priority. By owning the best current technology, we are confident to bring the most intelligent home experience to you and your family.
                 </p>
               </div>
               <div className='register__block__inner'>

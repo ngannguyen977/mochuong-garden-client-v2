@@ -50,9 +50,34 @@ export const changeStatus = (id, status) => (dispatch, getState) => {
       if (response && response.data) {
         let { groups, page, totalItems } = getState().group
         if (groups && Array.isArray(groups) && groups.length > 0) {
-          let group = groups.find(x => x.id === response.data.id)
-          if (group) {
-            group = response.data
+          let groupId = groups.findIndex(x => x.id === response.data.id)
+          if (groupId) {
+            groups[id=groupId] = response.data
+            dispatch(setGroupPage({ groups, page, totalItems }))
+            notification['success']({
+              message: 'Change status of users success!',
+              description:
+                'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
+            })
+          }
+        }
+      }
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'change status groups fail'
+      message.error(errorMessage)
+    })
+}
+export const changeUsers = (id, userIds) => (dispatch, getState) => {
+  axios
+    .patch(`${groupApi}/${id}`, { userIds: userIds })
+    .then(response => {
+      if (response && response.data) {
+        let { groups, page, totalItems } = getState().group
+        if (groups && Array.isArray(groups) && groups.length > 0) {
+          let groupId = groups.findIndex(x => x.id === response.data.id)
+          if (groupId) {
+            groups[id=groupId] = response.data
             dispatch(setGroupPage({ groups, page, totalItems }))
             notification['success']({
               message: 'Change status of users success!',

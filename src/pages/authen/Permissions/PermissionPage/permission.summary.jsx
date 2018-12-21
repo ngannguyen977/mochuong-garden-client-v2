@@ -23,46 +23,27 @@ class PermissionSummary extends React.Component {
     }
   }
   componentWillMount() {
-    const { permission, getList, userId, userPermission, getByUser, getByGroup, isEdit, userCreatePermission, groupIds } = this.props
-    if (isEdit) {
-      if (userId && !userPermission) {
-        getByUser(userId)
-      }
-      if (groupIds && !userCreatePermission) {
-        getByGroup(groupIds)
-      }
-    }
-    else if (!permission || permission.totalItems === -1) {
-      getList()
-    }
-  }
-  componentDidMount() {
-    this.setState({ ...this.state.pagination, total: this.props.totalItems })
+    const { getList, userId,groupIds,getByUser } = this.props
+    getList()
+    getByUser(userId,groupIds.join())
   }
   componentDidUpdate() {
-    const { userId, userPermission, userCreatePermission, groupIds, isEdit, permission } = this.props
-    if (isEdit) {
-      if (userId && userPermission && userPermission.length > 0 && this.state.data.length === 0) {
-        this.setState({
-          data: userPermission
-        })
-      }
-      if (groupIds && userCreatePermission && userCreatePermission.length > 0 && this.state.data.length === 0) {
-        this.setState({
-          data: userCreatePermission
-        })
-      }
-    } else if (permission && permission.totalItems > 0 && permission.permissions
-      && permission.permissions.length>0 && this.state.data.length === 0) {
+    const { selectedRowKeys, pagination } = this.state
+    const { userPermissions, totalItems } = this.props
+    if ( userPermissions && userPermissions.length > 0 && selectedRowKeys.length === 0) {
+      console.log(userPermissions.map(x=>x.policyId))
       this.setState({
-        data: permission.permissions
+        selectedRowKeys: userPermissions.map(x=>x.policyId),
+        ...pagination,
+        total: totalItems
       })
     }
   }
   render() {
-    const { summaryColumns, parent, userCreate, createUser, groupCreate, createGroup } = this.props
-    const { pagination, loading, data } = this.state
+    const { summaryColumns, parent, userCreate, createUser, groupCreate, createGroup,data } = this.props
+    const { pagination, loading ,selectedRowKeys } = this.state
     const rowSelection = {
+      selectedRowKeys,
       onChange: (selectedRowKeys, selectedRows) => {
         this.setState({
           selectedRowKeys,
@@ -87,7 +68,7 @@ class PermissionSummary extends React.Component {
     return (
       <Table
         rowSelection={rowSelection}
-        rowKey={record => record.name}
+        rowKey={record => record.policyId}
         pagination={pagination}
         loading={loading}
         columns={summaryColumns}

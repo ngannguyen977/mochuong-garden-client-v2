@@ -38,6 +38,8 @@ class Confirm extends React.Component {
 
   render() {
     const { backgroundImage } = this.state
+    const { code } = queryString.parse(this.props.location.search)
+
     return (
       <div
         onLoad={() => this.generateBackground()}
@@ -49,19 +51,22 @@ class Confirm extends React.Component {
             <div className='col-xl-12'>
               <div className='main-login__block__promo text-white text-center'>
                 <h1 className='mb-3 text-white'>
-                  <strong>Welcome to OnSky Team</strong>
+                  <strong>Welcome to OnSky Family</strong>
                 </h1>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever since the 1500s.
+                  At OnSky, Security – Safety is our top priority. By owning the best current technology, we are confident to bring the most intelligent home experience to you and your family.
                 </p>
               </div>
               <div className='main-login__block__inner'>
                 <div className='main-login__block__form'>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard dummy text ever since the 1500s.
-                  </p>
+                  {code && (<div><h4>
+                    Welcome to OnSky Family!
+                  </h4>
+                    <h5><i>Let make your house more modern and smart!</i></h5>
+                  </div>)}
+                  {!code && (<p>
+                    An email confirmation be sent to you. Please open your mail box then enter confirmation link from the inbox mail to active your account.
+                  </p>)}
                   <Button type='primary' href='/#/login'>
                     Go to Login
                   </Button>
@@ -74,19 +79,19 @@ class Confirm extends React.Component {
         <div className='main-login__footer text-center'>
           <ul className='list-unstyled list-inline'>
             <li className='list-inline-item'>
-              <a href='javascript: void(0);'>Terms of Use</a>
+              <a href='https://www.onskyinc.com'>Terms of Use</a>
             </li>
             <li className='active list-inline-item'>
-              <a href='javascript: void(0);'>Compliance</a>
+              <a href='https://www.onskyinc.com'>Compliance</a>
             </li>
             <li className='list-inline-item'>
-              <a href='javascript: void(0);'>Confidential Information</a>
+              <a href='https://www.onskyinc.com'>Confidential Information</a>
             </li>
             <li className='list-inline-item'>
-              <a href='javascript: void(0);'>Support</a>
+              <a href='https://www.onskyinc.com'>Support</a>
             </li>
             <li className='list-inline-item'>
-              <a href='javascript: void(0);'>Contacts</a>
+              <a href='https://www.onskyinc.com'>Contacts</a>
             </li>
           </ul>
         </div>

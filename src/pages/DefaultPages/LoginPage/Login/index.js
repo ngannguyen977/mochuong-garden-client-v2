@@ -37,11 +37,10 @@ class Login extends React.Component {
             <div className='col-xl-12'>
               <div className='main-login__block__promo text-white text-center'>
                 <h1 className='mb-3 text-white'>
-                  <strong>Welcome to OnSky Team</strong>
+                  <strong>Welcome to OnSky Family</strong>
                 </h1>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                  Ipsum has been the industry's standard dummy text ever since the 1500s.
+                At OnSky, Security – Safety is our top priority. By owning the best current technology, we are confident to bring the most intelligent home experience to you and your family.
                 </p>
               </div>
               <div className='main-login__block__inner'>
@@ -52,18 +51,17 @@ class Login extends React.Component {
                   <h4 className='main-login__block__sidebar__title text-white'>
                     <strong>OnSky Application</strong>
                     <br />
-                    <span>August 2018</span>
+                    <span>Intelligent Security</span>
                   </h4>
-                  <div className='main-login__block__sidebar__item'>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard dummy text ever since the 1500s.
+                  <div className='main-login__block__sidebar__item text-justify'>
+                  OnSky was founded by Mr. Hung C. Nguyen and a team of experts in Internet of Things (IoT).
                   </div>
-                  <div className='main-login__block__sidebar__item'>
-                    Ipsum has been the industry's standard dummy text ever since the 1500s.
+                  <div className='main-login__block__sidebar__item text-justify'>
+                  Holding over 35 patents, Mr. Nguyen desires to transform innovation and passion to practical applications that canserve humanity for the better. OnSky is his latest creation that aims to redefine smart home and security with IoT and Artificial Intelligence (AI) technologies.
                   </div>
                   <div className='main-login__block__sidebar__place'>
                     <i className='icmn-location mr-3' />
-                    Hồ Chí Minh, VN
+                    Brainy, Happy, Family.
                   </div>
                 </div>
               </div>
@@ -73,19 +71,19 @@ class Login extends React.Component {
         <div className='main-login__footer text-center'>
           <ul className='list-unstyled list-inline'>
             <li className='list-inline-item'>
-              <a href='javascript: void(0);'>Terms of Use</a>
+              <a href='https://www.onskyinc.com'>Terms of Use</a>
             </li>
             <li className='active list-inline-item'>
-              <a href='javascript: void(0);'>Compliance</a>
+              <a href='https://www.onskyinc.com'>Compliance</a>
             </li>
             <li className='list-inline-item'>
-              <a href='javascript: void(0);'>Confidential Information</a>
+              <a href='https://www.onskyinc.com'>Confidential Information</a>
             </li>
             <li className='list-inline-item'>
-              <a href='javascript: void(0);'>Support</a>
+              <a href='https://www.onskyinc.com'>Support</a>
             </li>
             <li className='list-inline-item'>
-              <a href='javascript: void(0);'>Contacts</a>
+              <a href='https://www.onskyinc.com'>Contacts</a>
             </li>
           </ul>
         </div>

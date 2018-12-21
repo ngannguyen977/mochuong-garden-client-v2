@@ -64,7 +64,7 @@ class LoginForm extends React.Component {
         <FormItem>
           <label className='form-label mb-0'>Password</label>
           {getFieldDecorator('password', {
-            initialValue: 'Onsky@$32!',
+            initialValue: '',
             rules: [{ required: true, message: 'Please input your Password!' }],
           })(
             <Input

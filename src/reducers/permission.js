@@ -4,6 +4,7 @@ import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
 import { getServices, getActions } from '../services/resource'
+import { getPermission } from "reducers/user";
 import { setUserState } from 'reducers/app'
 import {
   createPolicy,
@@ -173,15 +174,14 @@ export const getByGroup = groupIds => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const getByUser = userId => (dispatch, getState) => {
-  getPolicyByUserOrGroup(userId)
+export const getByUser = (userId, groupIds) => (dispatch, getState) => {
+  getPolicyByUserOrGroup(userId, groupIds)
     .then(response => {
-      console.log(response)
-      dispatch(getPermissionByUser(response))
+      dispatch(getPermission(response))
     })
     .catch(error => {
       let errorMessage =
-        ((error.response || {}).data || {}).message || 'get list permission by group fail'
+        ((error.response || {}).data || {}).message || 'get list permission by user fail'
       message.error(errorMessage)
     })
 }

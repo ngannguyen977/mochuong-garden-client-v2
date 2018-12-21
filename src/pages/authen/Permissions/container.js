@@ -149,7 +149,7 @@ export const mapDispathToProps = {
   update: (policyId, model, isUpdate) => update(policyId, model, isUpdate),
   getOne: id => getOne(id),
   createUser: (model, isCreate) => createUser(model, isCreate),
-  getByUser: userId => getByUser(userId),
+  getByUser: (userId,groupIds) => getByUser(userId,groupIds),
   getByGroup: groupIds => getByGroup(groupIds),
 }
 export const mapStateToProps = (state, props) => {
@@ -166,7 +166,7 @@ export const mapStateToProps = (state, props) => {
     serviceTotal: (permission.services || {}).total || 0,
     actions: permission.actions || [],
     actionTotal: (permission.actions || []).length,
-    userPermission: permission.userPermission,
+    userPermissions: state.user.permissions,
     steps: steps,
     type: type,
     summaryColumns: summaryColumns,

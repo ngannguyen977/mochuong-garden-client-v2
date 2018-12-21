@@ -55,14 +55,18 @@ class RegisterFormComponent extends React.Component {
     const { getFieldDecorator, isSubmitForm } = this.props.form
     return (
       <Form hideRequiredMark onSubmit={this.onSubmit(isSubmitForm)} className='login-form'>
-        <FormItem validateStatus='validating' className='col-md-12'>
+        <FormItem
+        validateStatus='validating'
+        className='col-md-12'
+        extra='alias or username should be a simple name. ex: onsky.'
+        >
           {getFieldDecorator('alias', {
             rules: [{ required: true, message: 'Please input your Alias name!' }],
           })(
             <Input
               prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder='Alias or Nickname'
-            />,
+              placeholder='Alias or Username'
+              />,
           )}
         </FormItem>
         <FormItem
@@ -160,7 +164,17 @@ class RegisterFormComponent extends React.Component {
             />,
           )}
         </FormItem>
-
+        <FormItem className='col-md-12' style={{ display: 'inline-block',marginBottom:'-20px' }}>
+          {getFieldDecorator('policy', {
+            rules: [
+              {
+                required: true,
+              }
+            ],
+          })(
+            <Checkbox>I have read the <a href='#'>agreement</a></Checkbox>
+          )}
+        </FormItem>
         <div className='form-actions'>
           <Button
             type='primary'

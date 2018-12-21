@@ -16,6 +16,7 @@ export const setUserPage = createAction(`${NS}SET_USER_PAGE`)
 export const setUserDetailPage = createAction(`${NS}SET_USER_DETAIL_PAGE`)
 export const createUserState = createAction(`${NS}CREATE_USER`)
 export const getUsersInGroup = createAction(`${NS}GET_USERS_GROUP`)
+export const getPermission = createAction(`${NS}GET_PERMISSION`)
 
 export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
@@ -75,9 +76,9 @@ export const changeStatus = (id, status) => (dispatch, getState) => {
       if (response && response.data) {
         let { users, page, totalItems } = getState().user
         if (users && Array.isArray(users) && users.length > 0) {
-          let user = users.find(x => x.id === response.data.id)
-          if (user) {
-            user = response.data
+          let userId = users.findIndex(x => x.id === response.data.id)
+          if (userId) {
+            users[id = userId] = response.data
             dispatch(setUserPage({ users, page, totalItems }))
             notification['success']({
               message: 'Change status of users success!',
@@ -90,6 +91,31 @@ export const changeStatus = (id, status) => (dispatch, getState) => {
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'change status user fail'
+      message.error(errorMessage)
+    })
+}
+export const changeGroups = (id, groupIds) => (dispatch, getState) => {
+  axios
+    .patch(`${userApi}/${id}`, { groupIds: groupIds })
+    .then(response => {
+      if (response && response.data) {
+        let { users, page, totalItems } = getState().user
+        if (users && Array.isArray(users) && users.length > 0) {
+          let userId = users.findIndex(x => x.id === response.data.id)
+          if (userId) {
+            users[id = userId] = response.data
+            dispatch(setUserPage({ users, page, totalItems }))
+            notification['success']({
+              message: 'Change groups of this user success!',
+              description:
+                'Users groups are update. Please re-check permission for this user.',
+            })
+          }
+        }
+      }
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'change groups for user fail'
       message.error(errorMessage)
     })
 }
@@ -187,12 +213,13 @@ const ACTION_HANDLES = {
   [setUserPage]: (state, { users, page, totalItems }) => ({ ...state, users, page, totalItems }),
   [createUserState]: (state, userCreate) => ({ ...state, userCreate }),
   [setUserDetailPage]: (state, detail) => ({ ...state, detail }),
+  [getPermission]: (state, permissions) => ({ ...state, permissions }),
   [getUsersInGroup]: (state, users) => {
-    const { usersInGroup } = state
-    if (!usersInGroup.find(x => x.groupId === users.groupId)) {
-      usersInGroup.push(users)
-    }
-    return usersInGroup
-  },
+  const { usersInGroup } = state
+  if (!usersInGroup.find(x => x.groupId === users.groupId)) {
+    usersInGroup.push(users)
+  }
+  return usersInGroup
+},
 }
 export default createReducer(ACTION_HANDLES, initialState)

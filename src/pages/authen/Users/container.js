@@ -1,5 +1,5 @@
 import { getList, getOne, changeStatus, create, destroy, getUsersByGroup } from 'reducers/user'
-import { getList as getPermissions, getByGroup as getPermissionByGroup } from 'reducers/permission'
+import { getList as getPermissions, getByGroup as getPermissionByGroup,getByUser as getPermissionByUser } from 'reducers/permission'
 import { getList as getGroups, create as createGroup } from 'reducers/group'
 import helper from '../../../helper'
 
@@ -101,6 +101,7 @@ export const mapDispathToProps = {
   getGroups: () => getGroups(),
   getPermissionByGroup: ids => getPermissionByGroup(ids),
   getUsersByGroup: groupId => getUsersByGroup(groupId),
+  getPermissionByUser: userId => getPermissionByUser(userId),
 }
 export const mapStateToProps = (state, props) => {
   let user = state.user || {}

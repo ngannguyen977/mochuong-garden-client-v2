@@ -22,26 +22,34 @@ class GroupSummaryList extends React.Component {
     }
   }
   componentWillMount() {
-    const { group, getList } = this.props
-    if (!group || group.totalItems === -1) {
+    const { getList } = this.props
       getList()
-    }
   }
+
   componentDidMount() {
-    this.setState({ ...this.state.pagination, total: this.props.totalItems })
+    const { selectedRowKeys, pagination } = this.state
+    const {  groupIds, totalItems } = this.props
+    if (groupIds && groupIds.length > 0 && selectedRowKeys.length === 0) {
+      this.setState({
+        selectedRowKeys: groupIds,
+        ...pagination,
+        total: totalItems
+      })
+    }
   }
 
   render() {
-    const { summaryColumns, data,parent,userCreate,createUser } = this.props
-    const { pagination,loading } = this.state
+    const { summaryColumns, data, parent, userCreate, createUser } = this.props
+    const { pagination, loading, selectedRowKeys } = this.state
     const rowSelection = {
+      selectedRowKeys,
       onChange: (selectedRowKeys, selectedRows) => {
         this.setState({
           selectedRowKeys,
         })
         switch (parent) {
           case 'user':
-          createUser({ ...userCreate,groups:selectedRowKeys })
+            createUser({ ...userCreate, groups: selectedRowKeys })
             break
           default:
             break
