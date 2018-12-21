@@ -127,22 +127,13 @@ class GroupPage extends React.Component {
     const content = (
       <div>
         <Popconfirm
-          title="Are you sure delete these users? You cannot rollback."
+          title="Are you sure delete these groups? You cannot rollback."
           onConfirm={() => handleActions(type.del)}
           onCancel={() => handleActions(type.del, false)}
           okText="Yes, I confirm"
           cancelText="No, I don't"
         >
-          <p className="link">Delete USERS</p>
-        </Popconfirm>
-        <Popconfirm
-          title="Are you sure change status these users?"
-          onConfirm={() => handleActions(type.changeStatus)}
-          onCancel={() => handleActions(type.changeStatus, false)}
-          okText="Active"
-          cancelText="Deactive"
-        >
-          <p className="link">Change STATUS</p>
+          <p className="link">Delete GROUPS</p>
         </Popconfirm>
         <p className="link" onClick={() => handleActions(type.attachPolicy)}>
           Attach POLICIES(come in soon)

@@ -7,7 +7,6 @@ import ChartistGraph from 'react-chartist'
 import Chartist from 'chartist'
 import { Line, Bar, Radar, Polar, Pie, Doughnut } from 'react-chartjs-2'
 
-
 class DashboardAlpha extends React.Component {
   state = {
     tableData: tableData,
@@ -15,7 +14,14 @@ class DashboardAlpha extends React.Component {
 
   render() {
     const pieData = {
-      labels: ['HaProxy', 'Security Calling Service', 'Authentication Services', 'Policy Service', 'Resource service', 'IoT service'],
+      labels: [
+        'HaProxy',
+        'Security Calling Service',
+        'Authentication Services',
+        'Policy Service',
+        'Resource service',
+        'IoT service',
+      ],
       datasets: [
         {
           data: [100, 50, 300, 200, 150, 600],
@@ -56,7 +62,7 @@ class DashboardAlpha extends React.Component {
 
     const animatonOptions = {
       axisX: {
-        labelInterpolationFnc: function (value, index) {
+        labelInterpolationFnc: function(value, index) {
           return index % 2 !== 0 ? !1 : value
         },
       },
@@ -98,89 +104,89 @@ class DashboardAlpha extends React.Component {
         name: 'Communication Service',
         status: ['CPU: 100% - unhealthy', 'Memory: 99% - unhealthy', 'Network: 100% - unhealthy'],
         icon: 'icmn-connection',
-        level: 'danger'
+        level: 'danger',
       },
       {
         name: 'Security Calling Service',
         status: ['CPU: 73% - unhealthy', 'Memory: 80% - unhealthy', 'Network: 60% - unhealthy'],
         icon: 'icmn-phone',
-        level: 'warning'
+        level: 'warning',
       },
       {
         name: 'Healthy check Service',
         status: ['CPU: 1% - healthy', 'Memory: 40% - healthy', 'Network: 2% - healthy'],
         icon: 'icmn-plus',
-        level: 'normal'
-      }
+        level: 'normal',
+      },
     ]
     const services2 = [
       {
         name: 'Authentication Service',
         status: ['CPU: 1% - healthy', 'Memory: 60% - healthy', 'Network: 5% - healthy'],
         icon: 'icmn-users',
-        level: 'normal'
+        level: 'normal',
       },
       {
         name: 'IoT Service',
         status: ['CPU: 30% - healthy', 'Memory: 60% - healthy', 'Network: 30% - healthy'],
         icon: 'icmn-podcast',
-        level: 'normal'
+        level: 'normal',
       },
       {
         name: 'Policy Service',
         status: ['CPU: 1% - healthy', 'Memory: 40% - healthy', 'Network: 2% - healthy'],
         icon: 'icmn-file-text2',
-        level: 'normal'
+        level: 'normal',
       },
       {
         name: 'Resource Service',
         status: ['CPU: 1% - healthy', 'Memory: 40% - healthy', 'Network: 2% - healthy'],
         icon: 'icmn-file-stack',
-        level: 'normal'
-      }
+        level: 'normal',
+      },
     ]
     const gateways = [
       {
         name: 'OS Vietnam Showroom',
         status: ['Status: Disalarm', 'Last Connected: 4:05 PM Today'],
         icon: 'icmn-library',
-        level: 'normal'
+        level: 'normal',
       },
       {
         name: 'OS Vietnam Office',
         status: ['Status: Alarm Away', 'Last Connected: 4:05 PM Today'],
         icon: 'icmn-office',
-        level: 'normal'
+        level: 'normal',
       },
       {
         name: 'OS Mr. Tung',
         status: ['Status: Disalarm', 'Last Connected: 4:05 PM Today'],
         icon: 'icmn-home',
-        level: 'normal'
-      }
+        level: 'normal',
+      },
     ]
     const customers = [
       {
         name: 'Alex Huynh',
         status: ['Status: Near expired', 'Expired on: 4:05 PM Saturday'],
         icon: 'icmn-user',
-        level: 'warning'
+        level: 'warning',
       },
       {
         name: 'Anh Tam',
         status: ['Status: Near expired', 'Expired on: 4:05 PM Saturday'],
         icon: 'icmn-user',
-        level: 'normal'
-      }
+        level: 'normal',
+      },
     ]
 
     return (
       <div>
-        <div className='utils__title utils__title--flat mb-3'>
-          <span className='text-uppercase font-size-16'>Statistics Overview</span>
+        <div className="utils__title utils__title--flat mb-3">
+          <span className="text-uppercase font-size-16">Statistics Overview</span>
         </div>
-        <div className='row'>
-          <div className='col-xl-4'>
+        <div className="row">
+          <div className="col-xl-4">
             <ChartCard
               title={'Transactions'}
               amount={'1240'}
@@ -199,7 +205,7 @@ class DashboardAlpha extends React.Component {
               }}
             />
           </div>
-          <div className='col-xl-4'>
+          <div className="col-xl-4">
             <ChartCard
               title={'Income'}
               amount={'290,240'}
@@ -218,7 +224,7 @@ class DashboardAlpha extends React.Component {
               }}
             />
           </div>
-          <div className='col-xl-4'>
+          <div className="col-xl-4">
             <ChartCard
               title={'Outcome'}
               amount={'284,056'}
@@ -238,50 +244,50 @@ class DashboardAlpha extends React.Component {
             />
           </div>
         </div>
-        <div className='row'>
-          <div className='card'>
-            <div className='card-header'>
-              <div className='utils__title'>
+        <div className="row">
+          <div className="card">
+            <div className="card-header">
+              <div className="utils__title">
                 <strong>Server Info</strong>
               </div>
-              <div className='utils__titleDescription'>
+              <div className="utils__titleDescription">
                 Block with important Server Info information
-                </div>
+              </div>
             </div>
-            <div className='card-body'>
-              <div className='row'>
-                <div className='col-lg-3'>
+            <div className="card-body">
+              <div className="row">
+                <div className="col-lg-3">
                   <SliderCard data={services} />
                 </div>
-                <div className='col-lg-3'>
+                <div className="col-lg-3">
                   <SliderCard data={gateways} />
                 </div>
-                <div className='col-lg-3'>
+                <div className="col-lg-3">
                   <SliderCard data={services2} />
                 </div>
-                <div className='col-lg-3'>
+                <div className="col-lg-3">
                   <SliderCard data={customers} />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className='row'>
-          <div className='col-lg-12'>
-            <div className='card'>
-              <div className='card-header'>
-                <div className='utils__title'>Gateway connect status</div>
-                <div className='utils__titleDescription'>
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="card">
+              <div className="card-header">
+                <div className="utils__title">Gateway connect status</div>
+                <div className="utils__titleDescription">
                   Recently, more 36 gateways are connected.
                 </div>
               </div>
-              <div className='card-body'>
-                <div className='mb-5'>
+              <div className="card-body">
+                <div className="mb-5">
                   <ChartistGraph
-                    className='height-300 chart-css-animations chartist-theme-dark chartist-animated'
+                    className="height-300 chart-css-animations chartist-theme-dark chartist-animated"
                     data={animationData}
                     options={animatonOptions}
-                    type='Line'
+                    type="Line"
                   />
                 </div>
               </div>
@@ -289,48 +295,46 @@ class DashboardAlpha extends React.Component {
           </div>
         </div>
 
-        <div className='row'>
-          <div className='col-lg-6'>
-            <div className='card'>
-              <div className='card-header'>
-                <div className='utils__title'>Customer Region</div>
-                <div className='utils__titleDescription'>
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="card">
+              <div className="card-header">
+                <div className="utils__title">Customer Region</div>
+                <div className="utils__titleDescription">
                   We are tracking all customer when they registered.
                 </div>
               </div>
-              <div className='card-body'>
-                <div className='mb-5'>
+              <div className="card-body">
+                <div className="mb-5">
                   <Polar data={polarData} options={polarOptions} width={400} height={200} />
                 </div>
               </div>
             </div>
           </div>
-          <div className='col-lg-6'>
-            <div className='card'>
-              <div className='card-header'>
-                <div className='utils__title'>Cost Transfer</div>
-                <div className='utils__titleDescription'>
-                  Cost for all service registered.
-                </div>
+          <div className="col-lg-6">
+            <div className="card">
+              <div className="card-header">
+                <div className="utils__title">Cost Transfer</div>
+                <div className="utils__titleDescription">Cost for all service registered.</div>
               </div>
-              <div className='card-body'>
-                <div className='mb-5'>
+              <div className="card-body">
+                <div className="mb-5">
                   <Pie data={pieData} options={pieOptions} width={400} height={200} />
                 </div>
               </div>
             </div>
           </div>
         </div>
-       <div className='row'>
-          <div className='col-lg-12'>
-            <div className='card'>
-              <div className='card-header'>
-                <div className='utils__title'>Recently Customer Registered</div>
-                <div className='utils__titleDescription'>
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="card">
+              <div className="card-header">
+                <div className="utils__title">Recently Customer Registered</div>
+                <div className="utils__titleDescription">
                   Recently, more 36 percent customer registration than last week.
                 </div>
               </div>
-              <div className='card-body'>
+              <div className="card-body">
                 <Table
                   rowKey={x => x.name}
                   columns={tableColumns}
@@ -341,10 +345,10 @@ class DashboardAlpha extends React.Component {
             </div>
           </div>
         </div>
-        <div className='row'>
-          <div className='col-lg-12'>
-            <div className='text-center pb-5'>
-              <Button type='primary' className='width-200' loading>
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="text-center pb-5">
+              <Button type="primary" className="width-200" loading>
                 Load More...
               </Button>
             </div>

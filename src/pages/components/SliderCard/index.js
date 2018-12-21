@@ -14,13 +14,15 @@ class SliderCard extends React.Component {
         <Carousel autoplay>
           {(data || []).map(x => (
             <div className={'sliderCard__item ' + x.level} key={x.name}>
-              <a href='javascript: void(0);' className='sliderCard__body'>
-                <div className='sliderCard__icon'>
+              <a href="javascript: void(0);" className="sliderCard__body">
+                <div className="sliderCard__icon">
                   <i className={x.icon} />
                 </div>
                 <h2>{x.name}</h2>
                 {(x.status || []).map(a => (
-                  <h6 className='text-child' key={a}>{a}</h6>
+                  <h6 className="text-child" key={a}>
+                    {a}
+                  </h6>
                 ))}
               </a>
             </div>
