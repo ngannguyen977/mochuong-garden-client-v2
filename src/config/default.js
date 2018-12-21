@@ -3,12 +3,12 @@ export default {
     authen: {
       host: 'https://api-dev.onskycloud.com/authen/v1/api',
       login: 'auth/login',
-      info:'auth/me',
+      info: 'auth/me',
       register: 'customers',
       group: 'groups',
       user: 'users',
-      usersByGroup:'bygroup',
-      groupsByUser:'byuser',
+      usersByGroup: 'bygroup',
+      groupsByUser: 'byuser',
       confirmEmail: 'customers/activate',
     },
     policy: {

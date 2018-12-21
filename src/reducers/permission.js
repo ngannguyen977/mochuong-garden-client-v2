@@ -12,7 +12,7 @@ import {
   updatePolicy,
   getPolicyById,
   getPolicyByGroup,
-  getPolicyByUserOrGroup
+  getPolicyByUserOrGroup,
 } from '../services/policy'
 
 export const REDUCER = 'permission'
@@ -92,7 +92,6 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
     if (!userState.id) {
       userState = JSON.parse(window.localStorage.getItem('app.userState'))
     }
-     console.log('user state',userState)
     createPolicy(userState.id, _model)
       .then(response => {
         let { permissions, page, totalItems } = getState().permission
@@ -207,7 +206,10 @@ const ACTION_HANDLES = {
     shortName: shortName,
     actions: actions,
   }),
-  [setPermissionPerGroup]: (state, permissions) => ({ ...state, userCreatePermission: permissions }),
+  [setPermissionPerGroup]: (state, permissions) => ({
+    ...state,
+    userCreatePermission: permissions,
+  }),
   [getPermissionByUser]: (state, permissions) => ({ ...state, userPermission: permissions }),
 }
 export default createReducer(ACTION_HANDLES, initialState)

@@ -10,7 +10,7 @@ class BitcoinPrice extends React.Component {
   render() {
     const { chartsData } = this.state
     return (
-      <div className='bitcoinPrice d-inline-block mr-4'>
+      <div className="bitcoinPrice d-inline-block mr-4">
         Devices ping:
         <span style={{ margin: '0 8px', position: 'relative', top: '3px' }}>
           <Line values={chartsData} />

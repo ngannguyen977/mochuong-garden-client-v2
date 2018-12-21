@@ -8,11 +8,12 @@ class SliderCard extends React.Component {
   }
 
   render() {
-    const { inverse } = this.props
+    const { inverse,level } = this.props
+
     return (
       <div className={`sliderCard ${inverse ? 'sliderCard--inverse' : ''}`}>
         <Carousel autoplay>
-          <div className='sliderCard__item'>
+          <div className={'sliderCard__item '+ level}>
             <a href='javascript: void(0);' className='sliderCard__body'>
               <div className='sliderCard__icon'>
                 <i className='icmn-accessibility' />

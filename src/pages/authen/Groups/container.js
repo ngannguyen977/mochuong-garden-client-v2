@@ -117,8 +117,8 @@ export const mapDispathToProps = {
   destroy: ids => destroy(ids),
   createUser: (model, isCreate) => createUser(model, isCreate),
   getPermissions: () => getPermissions(),
-  getOne: (id) => getOne(id),
-  update: (id, model,isUpdate) => update(id, model,isUpdate)
+  getOne: id => getOne(id),
+  update: (id, model, isUpdate) => update(id, model, isUpdate),
 }
 export const mapStateToProps = (state, props) => {
   let group = state.group || {}
@@ -136,7 +136,7 @@ export const mapStateToProps = (state, props) => {
     type: type,
     detail: group.detail,
     permission: state.permission,
-    groupCreatePermission: (state.permission || {}).groupCreatePermission
+    groupCreatePermission: (state.permission || {}).groupCreatePermission,
   }
 }
 

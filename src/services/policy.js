@@ -45,7 +45,7 @@ export const getPolicyByUserOrGroup = (userId, groupIds) =>
         reject(error)
       })
   })
-  export const getPolicyByGroup = (groupIds) =>
+export const getPolicyByGroup = groupIds =>
   new Promise((resolve, reject) => {
     instance
       .get(`${policyApi}/groups`, { params: { groupIds } })
@@ -67,7 +67,7 @@ export const createPolicy = (userId, document) =>
         reject(error)
       })
   })
-  export const createUserPolicy = (userId, document) =>
+export const createUserPolicy = (userId, document) =>
   new Promise((resolve, reject) => {
     instance
       .post(`${userApi}/${userId}`, document)
@@ -78,7 +78,7 @@ export const createPolicy = (userId, document) =>
         reject(error)
       })
   })
-  export const createGroupPolicy = (groupId, document) =>
+export const createGroupPolicy = (groupId, document) =>
   new Promise((resolve, reject) => {
     instance
       .post(`${groupApi}/${groupId}`, document)

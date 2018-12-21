@@ -3,9 +3,7 @@ import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
-import {
-  createUserPolicy
-} from '../services/policy'
+import { createUserPolicy } from '../services/policy'
 import { setPermissionPerGroup } from 'reducers/permission'
 
 export const REDUCER = 'user'
@@ -42,10 +40,7 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
       message.error(errorMessage)
     })
 }
-export const getUsersByGroup = (groupId) => (
-  dispatch,
-  getState,
-) => {
+export const getUsersByGroup = groupId => (dispatch, getState) => {
   axios
     .get(`${userApi}/${api.usersByGroup}/${groupId}`)
     .then(response => {
@@ -108,7 +103,13 @@ export const destroy = ids => (dispatch, getState) => {
           'These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
       })
       let { users, page, totalItems } = getState().user
-      dispatch(setUserPage({ users: users.filter(user => !ids.includes(user.id)), page, totalItems: totalItems - ids.length }))
+      dispatch(
+        setUserPage({
+          users: users.filter(user => !ids.includes(user.id)),
+          page,
+          totalItems: totalItems - ids.length,
+        }),
+      )
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'delete user fail'
@@ -119,7 +120,7 @@ export const changePassword = (id, model) => (dispatch, getState) => {
   let _model = {
     new_password: model.newPassword,
     new_password_confirm: model.confirm,
-    old_password: model.oldPassword
+    old_password: model.oldPassword,
   }
   axios
     .patch(`${userApi}/${id}/password`, _model)
@@ -148,7 +149,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       group_ids: model.groups,
       password: model.password,
       password_confirm: model.confirm,
-      username: model.username
+      username: model.username,
     }
     axios
       .post(userApi, _model)
@@ -157,12 +158,16 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
         users.push(response.data)
         dispatch(setUserPage({ users, page, totalItems: totalItems++ }))
         if (model.permissions && Array.isArray(model.permissions) && model.permissions.length > 0) {
-          createUserPolicy(response.data.id, { policyIds: model.permissions.map(x => x.policyId).join() }).then(
-            message.success('attach permission success')
-          ).catch(error => {
-            let errorMessage = ((error.response || {}).data || {}).message || `create permission for user ${model.username} fail`
-            message.error(errorMessage)
+          createUserPolicy(response.data.id, {
+            policyIds: model.permissions.map(x => x.policyId).join(),
           })
+            .then(message.success('attach permission success'))
+            .catch(error => {
+              let errorMessage =
+                ((error.response || {}).data || {}).message ||
+                `create permission for user ${model.username} fail`
+              message.error(errorMessage)
+            })
         }
         dispatch(createUserState({}))
       })
@@ -188,6 +193,6 @@ const ACTION_HANDLES = {
       usersInGroup.push(users)
     }
     return usersInGroup
-  }
+  },
 }
 export default createReducer(ACTION_HANDLES, initialState)

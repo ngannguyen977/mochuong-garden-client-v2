@@ -3,9 +3,7 @@ import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
-import {
-  createGroupPolicy
-} from '../services/policy'
+import { createGroupPolicy } from '../services/policy'
 export const REDUCER = 'group'
 
 const NS = `@@${REDUCER}/`
@@ -76,17 +74,20 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
     axios
       .post(groupApi, { name: model.name })
       .then(response => {
-
         let { users, page, totalItems } = getState().user
         users.push(response.data)
         dispatch(setGroupPage({ users, page, totalItems: totalItems++ }))
         if (model.permissions && Array.isArray(model.permissions) && model.permissions.length > 0) {
-          createGroupPolicy(response.data.id, { policyIds: model.permissions.map(x => x.policyId).join() }).then(
-            message.success('attach permission success')
-          ).catch(error => {
-            let errorMessage = ((error.response || {}).data || {}).message || `create permission for user ${model.username} fail`
-            message.error(errorMessage)
+          createGroupPolicy(response.data.id, {
+            policyIds: model.permissions.map(x => x.policyId).join(),
           })
+            .then(message.success('attach permission success'))
+            .catch(error => {
+              let errorMessage =
+                ((error.response || {}).data || {}).message ||
+                `create permission for user ${model.username} fail`
+              message.error(errorMessage)
+            })
           // todo: add users to group
         }
         dispatch(createGroupState({}))
@@ -106,8 +107,7 @@ export const update = (id, model, isUpdate) => (dispatch, getState) => {
       .then(response => {
         notification['success']({
           message: 'Update group success!',
-          description:
-            'These groups is updated successfully!',
+          description: 'These groups is updated successfully!',
         })
         let group = groups.find(x => x.id === response.data.id)
         if (group) {
@@ -131,7 +131,13 @@ export const destroy = ids => (dispatch, getState) => {
           'These groups will be delete permanly shortly in 1 month. In that time, if you re-create these group, we will revert information for them.',
       })
       let { groups, page, totalItems } = getState().group
-      dispatch(setGroupPage({ groups: groups.filter(group => !ids.includes(group.id)), page, totalItems: totalItems - ids.length }))
+      dispatch(
+        setGroupPage({
+          groups: groups.filter(group => !ids.includes(group.id)),
+          page,
+          totalItems: totalItems - ids.length,
+        }),
+      )
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'delete groups fail'

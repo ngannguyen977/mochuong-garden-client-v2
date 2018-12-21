@@ -54,7 +54,7 @@ class GroupPage extends React.Component {
         sorter: true,
         width: '30%',
         render: (text, record) => (
-          <a className='link' href={`#/groups/detail/${record.id}`}>
+          <a className="link" href={`#/groups/detail/${record.id}`}>
             {record.name}
           </a>
         ),
@@ -73,7 +73,7 @@ class GroupPage extends React.Component {
         render: (text, record) => (
           <Checkbox
             defaultChecked={true}
-          // checked={record.active}
+            // checked={record.active}
           />
         ),
       },
@@ -101,7 +101,6 @@ class GroupPage extends React.Component {
       }),
     }
     const handleActions = (actionType, status = true) => {
-
       if (!selectedRowKeys || selectedRowKeys.length === 0) {
         message.info('No group is selected!')
       } else {
@@ -128,65 +127,80 @@ class GroupPage extends React.Component {
     const content = (
       <div>
         <Popconfirm
-          title='Are you sure delete these users? You cannot rollback.'
+          title="Are you sure delete these users? You cannot rollback."
           onConfirm={() => handleActions(type.del)}
           onCancel={() => handleActions(type.del, false)}
-          okText='Yes, I confirm'
+          okText="Yes, I confirm"
           cancelText="No, I don't"
         >
-          <p className='link'>Delete USERS</p>
+          <p className="link">Delete USERS</p>
         </Popconfirm>
         <Popconfirm
-          title='Are you sure change status these users?'
+          title="Are you sure change status these users?"
           onConfirm={() => handleActions(type.changeStatus)}
           onCancel={() => handleActions(type.changeStatus, false)}
-          okText='Active'
-          cancelText='Deactive'
+          okText="Active"
+          cancelText="Deactive"
         >
-          <p className='link'>Change STATUS</p>
+          <p className="link">Change STATUS</p>
         </Popconfirm>
-        <p className='link' onClick={() => handleActions(type.attachPolicy)}>
+        <p className="link" onClick={() => handleActions(type.attachPolicy)}>
           Attach POLICIES(come in soon)
         </p>
-        <p className='link' onClick={() => handleActions(type.addToGroup)}>
+        <p className="link" onClick={() => handleActions(type.addToGroup)}>
           Add to GROUPS(come in soon)
         </p>
       </div>
     )
     return (
       <div>
-        <section className='card'>
-          <div className='card-header'>
-            <div className='utils__title'>
+        <section className="card">
+          <div className="card-header">
+            <div className="utils__title">
               <strong>Groups Management</strong>
             </div>
             <small>
-              Managing access between an employee and their permissions on a one-to-many basis becomes more difficult as your organization grows in size and scope. There are too many users and too many permissions to control. Grouping your users and permissions is the smart and easy way to deal with this complexity by enabling greater employee onboarding efficiencies to grant, or revoke, access instantly with a click to remove them. Here are the things you can do with thing groups:
+              Managing access between an employee and their permissions on a one-to-many basis
+              becomes more difficult as your organization grows in size and scope. There are too
+              many users and too many permissions to control. Grouping your users and permissions is
+              the smart and easy way to deal with this complexity by enabling greater employee
+              onboarding efficiencies to grant, or revoke, access instantly with a click to remove
+              them. Here are the things you can do with thing groups:
             </small>
-            <ul className='list-unstyled'>
-                <ul>
-                  <li><small>Create, describe or delete a group.</small></li>
-                  <li><small>List the groups you have created and permissions, users inside them.</small></li>
-                  <li><small>Attach or detach a permissions to or from a group.</small></li>
-                  <li><small>Add or remove a user to or from a group.</small></li>
-                </ul>
+            <ul className="list-unstyled">
+              <ul>
+                <li>
+                  <small>Create, describe or delete a group.</small>
+                </li>
+                <li>
+                  <small>
+                    List the groups you have created and permissions, users inside them.
+                  </small>
+                </li>
+                <li>
+                  <small>Attach or detach a permissions to or from a group.</small>
+                </li>
+                <li>
+                  <small>Add or remove a user to or from a group.</small>
+                </li>
+              </ul>
             </ul>
           </div>
-          <div className='card-body'>
-            {(totalItems && totalItems > 0) && (
-              <div className='table-responsive'>
+          <div className="card-body">
+            {totalItems && totalItems > 0 && (
+              <div className="table-responsive">
                 <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
-                    type='primary'
+                    type="primary"
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href='#/groups/create'
+                    href="#/groups/create"
                   >
                     Create Group
                   </Button>
-                  <Popover placement='bottomRight' content={content} trigger='click'>
-                    <Button type='primary' disabled={!hasSelected} loading={loading}>
-                      Actions <Icon type='down-circle' theme='filled' />
+                  <Popover placement="bottomRight" content={content} trigger="click">
+                    <Button type="primary" disabled={!hasSelected} loading={loading}>
+                      Actions <Icon type="down-circle" theme="filled" />
                     </Button>
                   </Popover>
                 </div>
@@ -205,7 +219,7 @@ class GroupPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name='Group' link='#/groups/create' />
+              <LockScreenPage name="Group" link="#/groups/create" />
             )}
           </div>
         </section>

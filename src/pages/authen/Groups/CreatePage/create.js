@@ -46,15 +46,15 @@ class GroupCreatePage extends React.Component {
     const { current } = this.state.step
     const { steps } = this.props
     return (
-      <div className='group-create'>
-        <StepProgress steps={steps} current={current} type='GROUP' />
-        <div className='card'>
-          <div className='card-header'>
-            <h4 className='text-black mb-3'>
+      <div className="group-create">
+        <StepProgress steps={steps} current={current} type="GROUP" />
+        <div className="card">
+          <div className="card-header">
+            <h4 className="text-black mb-3">
               <strong>{steps[current].subTitle}</strong>
             </h4>
           </div>
-          <div className='card-body'>
+          <div className="card-body">
             {current === 0 && <DetailPage />}
             {current === 1 && <UserSummaryList />}
             {current === 2 && <PermissionSummaryList />}
@@ -62,7 +62,7 @@ class GroupCreatePage extends React.Component {
             <ButtonStep
               steps={steps}
               current={current}
-              link='/groups'
+              link="/groups"
               changeStepState={this.changeStepState}
             />
           </div>

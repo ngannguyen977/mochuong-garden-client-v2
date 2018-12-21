@@ -66,7 +66,7 @@ const type = {
   attachPolicy: 'attach-policy',
   addToGroup: 'add-to-group',
   group: 'group',
-  permission: 'permission'
+  permission: 'permission',
 }
 const summaryColumns = [
   {
@@ -99,8 +99,8 @@ export const mapDispathToProps = {
   getOne: id => getOne(id),
   getPermissions: () => getPermissions(),
   getGroups: () => getGroups(),
-  getPermissionByGroup: (ids) => getPermissionByGroup(ids),
-  getUsersByGroup: (groupId) => getUsersByGroup(groupId)
+  getPermissionByGroup: ids => getPermissionByGroup(ids),
+  getUsersByGroup: groupId => getUsersByGroup(groupId),
 }
 export const mapStateToProps = (state, props) => {
   let user = state.user || {}
@@ -119,7 +119,7 @@ export const mapStateToProps = (state, props) => {
     permission: state.permission,
     group: state.group,
     userCreatePermission: (state.permission || {}).userCreatePermission,
-    usersInGroup: state.user.usersInGroup
+    usersInGroup: state.user.usersInGroup,
   }
 }
 

@@ -12,7 +12,7 @@ class UserCreate extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Users' />
+        <Helmet title="Users" />
         <CreatePage location={props.location} />
       </Page>
     )

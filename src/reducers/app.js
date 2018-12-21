@@ -51,30 +51,33 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        axios.get(infoApi).then(userInfo => {
-          dispatch(_setHideLogin(true))
-          dispatch(
-            setUserState({
-              userState: {
-                ...userInfo.data,
-                token: response.data.token,
-                refresh_token: response.data.refresh_token,
-                expires: response.data.expires,
-              },
-            }),
-          )
-          dispatch(push('/'))
-          notification.open({
-            type: 'success',
-            message: 'You have successfully logged in!',
-            description:
-              'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
+        axios
+          .get(infoApi)
+          .then(userInfo => {
+            dispatch(_setHideLogin(true))
+            dispatch(
+              setUserState({
+                userState: {
+                  ...userInfo.data,
+                  token: response.data.token,
+                  refresh_token: response.data.refresh_token,
+                  expires: response.data.expires,
+                },
+              }),
+            )
+            dispatch(push('/'))
+            notification.open({
+              type: 'success',
+              message: 'You have successfully logged in!',
+              description:
+                'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
+            })
+            return resolve(true)
           })
-          return resolve(true)
-        }).catch(error => {
-          console.log('GET INFO ERROR', error.message)
-          return resolve(false)
-        })
+          .catch(error => {
+            console.log('GET INFO ERROR', error.message)
+            return resolve(false)
+          })
       })
       .catch(error => {
         console.log('ERROR', error.message)
