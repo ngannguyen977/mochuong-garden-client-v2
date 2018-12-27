@@ -23,12 +23,12 @@ class GroupSummaryList extends React.Component {
   }
   componentWillMount() {
     const { getList } = this.props
-      getList()
+    getList()
   }
 
   componentDidMount() {
     const { selectedRowKeys, pagination } = this.state
-    const {  groupIds, totalItems } = this.props
+    const { groupIds, totalItems } = this.props
     if (groupIds && groupIds.length > 0 && selectedRowKeys.length === 0) {
       this.setState({
         selectedRowKeys: groupIds,
@@ -39,7 +39,7 @@ class GroupSummaryList extends React.Component {
   }
 
   render() {
-    const { summaryColumns, data, parent, userCreate, createUser } = this.props
+    const { summaryColumns, data, parent, userCreate, createUser, isEdit, changeGroupsForUser, userUpdate, userId } = this.props
     const { pagination, loading, selectedRowKeys } = this.state
     const rowSelection = {
       selectedRowKeys,
@@ -49,7 +49,12 @@ class GroupSummaryList extends React.Component {
         })
         switch (parent) {
           case 'user':
-            createUser({ ...userCreate, groups: selectedRowKeys })
+            if (isEdit) {
+              console.log('change group for user in group summary')
+              changeGroupsForUser(selectedRowKeys, userId)
+            } else {
+              createUser({ ...userCreate, groups: selectedRowKeys,fullGroups: selectedRows })
+            }
             break
           default:
             break

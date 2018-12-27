@@ -19,9 +19,23 @@ export class DetailTabPage extends React.Component {
         getOne(match.params.id)
     }
     render() {
-        const { update, detail } = this.props
-
-        const handleButton = (
+        const { update, detail, changeUsersForGroup, changePermissionsForGroup, groupUpdate } = this.props
+        const updateGroup = (type) => {
+            switch (type) {
+                case 'detail':
+                    update(detail.id, detail, true)
+                    break
+                case 'users':
+                    changeUsersForGroup(detail.id, groupUpdate.userIds, true)
+                    break
+                case 'permissions':
+                    changePermissionsForGroup(detail.uuid, groupUpdate.permissions, true)
+                    break
+                default:
+                    break
+            }
+        }
+        const handleButton = (type) => (
             <div className='text-right'>
                 <Button
                     type='default'
@@ -35,7 +49,7 @@ export class DetailTabPage extends React.Component {
                     type='primary'
                     className='text-capitalize'
                     style={{ marginRight: '25px' }}
-                    onClick={() => update(detail.id, detail, true)}
+                    onClick={() => updateGroup(type)}
                 >
                     Change
                         </Button>
@@ -79,14 +93,14 @@ export class DetailTabPage extends React.Component {
                     <div className='form-group'>
                         {dom}
                     </div>
-                    {handleButton}
+                    {handleButton(type)}
                 </div>
             </div>
         )
         const tabDetail = (
             <div className='detail-tab'>
                 <DetailPage isEdit={true} />
-                {handleButton}
+                {handleButton('detail')}
             </div>
         )
 
@@ -94,8 +108,18 @@ export class DetailTabPage extends React.Component {
             <div className='user-detail'>
                 <Tabs defaultActiveKey='1' >
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
-                    <TabPane tab={<span><Icon type='user' />Users</span>} key='2'>{moreTabContent('users', <UserList groupId={(detail || {}).id} isEdit={true} />)}</TabPane>
-                    <TabPane tab={<span><Icon type='profile' />Permissions</span>} key='3'>{moreTabContent('permissions', <PermissionList groupIds={(detail || {}).id} isEdit={true}  />)}</TabPane>
+                    <TabPane tab={<span><Icon type='user' />Users</span>} key='2'>
+                        {moreTabContent('users', <UserList
+                            parent='group'
+                            groupId={(detail || {}).id}
+                            groupUuid={(detail || {}).uuid}
+                            isEdit={true} />)}
+                    </TabPane>
+                    <TabPane tab={<span><Icon type='profile' />Permissions</span>} key='3'>
+                        {moreTabContent('permissions', <PermissionList
+                            parent='group'
+                            groupUuid={(detail || {}).uuid}
+                            isEdit={true} />)}</TabPane>
                 </Tabs>
             </div>
         )

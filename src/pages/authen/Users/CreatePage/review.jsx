@@ -27,8 +27,8 @@ export class Review extends React.Component {
     }
     componentWillMount() {
         const { getPermissionByGroup, userCreate } = this.props
-        if (userCreate.groups) {
-            getPermissionByGroup(userCreate.groups.join())
+        if (userCreate.fullGroups) {
+            getPermissionByGroup((userCreate.fullGroups || []).map(x => x.uuid).join())
 
         } else {
             this.setState({
@@ -39,7 +39,9 @@ export class Review extends React.Component {
     }
     componentDidUpdate() {
         const { userCreate, userCreatePermission } = this.props
-        if (userCreate.groups && !userCreate.permissions && !this.state.data) {
+        console.log('did', userCreatePermission)
+        if (userCreate.groups && !userCreate.permissions && !this.state.data
+            && this.state.data !== userCreatePermission) {
             this.setState({
                 data: userCreatePermission
             })
@@ -50,7 +52,7 @@ export class Review extends React.Component {
         changeStepState(0)
     }
     render() {
-        const { reviewColumns, userCreate,  changeStepState, steps } = this.props
+        const { reviewColumns, userCreate, changeStepState, steps } = this.props
         const { pagination, loading, data } = this.state
         return (
             <div className='user-create-step-1 row'>

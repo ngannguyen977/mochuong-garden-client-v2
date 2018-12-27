@@ -1,6 +1,11 @@
 import { getList, getOne, changeStatus, create, destroy, getUsersByGroup } from 'reducers/user'
-import { getList as getPermissions, getByGroup as getPermissionByGroup,getByUser as getPermissionByUser } from 'reducers/permission'
-import { getList as getGroups, create as createGroup } from 'reducers/group'
+import {
+  getList as getPermissions,
+  getByGroup as getPermissionByGroup,
+  getByUser as getPermissionByUser,
+  changePermissionsForUser
+} from 'reducers/permission'
+import { getList as getGroups, create as createGroup,changeGroupsForUser,changeUsersForGroup } from 'reducers/group'
 import helper from '../../../helper'
 
 const steps = [
@@ -102,25 +107,36 @@ export const mapDispathToProps = {
   getPermissionByGroup: ids => getPermissionByGroup(ids),
   getUsersByGroup: groupId => getUsersByGroup(groupId),
   getPermissionByUser: userId => getPermissionByUser(userId),
+  changeGroupsForUser: (groupIds, userId, isChange) => changeGroupsForUser(groupIds, userId, isChange),
+  changeUsersForGroup: (groupId, userIds, isChange) => changeUsersForGroup(groupId, userIds, isChange),
+  changePermissionsForUser: (permissionIds, userUuid, isChange) => changePermissionsForUser(permissionIds, userUuid, isChange)
 }
 export const mapStateToProps = (state, props) => {
   let user = state.user || {}
   return {
+    // master
+    user,
+    // page
     totalItems: user.totalItems,
     page: user.page,
-    data: user.users,
+    data: user.users || [],
+    // detail
+    detail: user.detail,
+    // model
+    steps,
+    reviewColumns,
+    summaryColumns,
+    type,
+    usersInGroup: (state.user.usersInGroup|| {}).users || [],
+    userCreatePermission: (state.group || {}).permissions || [],
     userCreate: user.userCreate || {},
+    userUpdate: (user.detail || {}).userUpdate || {},
+    // group
+    group: state.group,
     groupCreate: state.group.groupCreate || {},
     groups: state.group.groups,
-    steps: steps,
-    reviewColumns: reviewColumns,
-    summaryColumns: summaryColumns,
-    type: type,
-    detail: user.detail,
+    // permission
     permission: state.permission,
-    group: state.group,
-    userCreatePermission: (state.permission || {}).userCreatePermission,
-    usersInGroup: state.user.usersInGroup,
   }
 }
 

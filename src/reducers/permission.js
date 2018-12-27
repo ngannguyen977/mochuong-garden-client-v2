@@ -4,7 +4,8 @@ import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
 import { getServices, getActions } from '../services/resource'
-import { getPermission } from "reducers/user";
+import { getPermission, updateUserState } from 'reducers/user'
+import { getPermissions,updateGroupState } from 'reducers/group'
 import { setUserState } from 'reducers/app'
 import {
   createPolicy,
@@ -13,7 +14,10 @@ import {
   updatePolicy,
   getPolicyById,
   getPolicyByGroup,
-  getPolicyByUserOrGroup,
+  getPolicyByGroups,
+  getPolicyByUser,
+  updateUserPolicies,
+  updateGroupPolicies,
 } from '../services/policy'
 
 export const REDUCER = 'permission'
@@ -83,7 +87,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       description: model.description,
       resourceTypes: model.resources.map(x => ({
         name: x.type,
-        effect: x.isAllowPermission ? 'allow' : 'deny',
+        effect: x.isAllowPermission ? 'Allow' : 'Deny',
         actions: model.actions.filter(a => a.resourceType === x.type).map(a => a.name),
         resources: x.value.split(','),
       })),
@@ -162,10 +166,9 @@ export const getListActionOfService = shortName => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const getByGroup = groupIds => (dispatch, getState) => {
+export const getByGroups = groupIds => (dispatch, getState) => {
   getPolicyByGroup(groupIds)
     .then(response => {
-      console.log(response)
       dispatch(setPermissionPerGroup(response))
     })
     .catch(error => {
@@ -174,8 +177,19 @@ export const getByGroup = groupIds => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const getByUser = (userId, groupIds) => (dispatch, getState) => {
-  getPolicyByUserOrGroup(userId, groupIds)
+export const getByGroup = groupId => (dispatch, getState) => {
+  getPolicyByGroup(groupId)
+    .then(response => {
+      dispatch(getPermissions(response))
+    })
+    .catch(error => {
+      let errorMessage =
+        ((error.response || {}).data || {}).message || 'get list permission by group fail'
+      message.error(errorMessage)
+    })
+}
+export const getByUser = (userId) => (dispatch, getState) => {
+  getPolicyByUser(userId)
     .then(response => {
       dispatch(getPermission(response))
     })
@@ -184,6 +198,32 @@ export const getByUser = (userId, groupIds) => (dispatch, getState) => {
         ((error.response || {}).data || {}).message || 'get list permission by user fail'
       message.error(errorMessage)
     })
+}
+export const changePermissionsForUser = (permissionIds, userUuid, isChange) => (dispatch, getState) => {
+  console.log('change permission for user in group reducer', permissionIds, userUuid, isChange)
+  dispatch(updateUserState({ userUuid, permissions: permissionIds }))
+  if (isChange) {
+    // get current users in this group, then compare the list to detect add or remove
+    updateUserPolicies(userUuid, permissionIds.join()).then(response => {
+      dispatch(updateUserState({ userUuid, permissions: [] }))
+    }).catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'change groups for user fail'
+      message.error(errorMessage)
+    })
+  }
+}
+export const changePermissionsForGroup = (permissionIds, groupUuid, isChange) => (dispatch, getState) => {
+  console.log('change permission for group in group reducer', permissionIds, groupUuid, isChange)
+  dispatch(updateGroupState({ groupUuid, permissions: permissionIds }))
+  if (isChange) {
+    // get current groups in this group, then compare the list to detect add or remove
+    updateGroupPolicies(groupUuid, permissionIds.join()).then(response => {
+      dispatch(updateGroupState({ groupUuid, permissions: [] }))
+    }).catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'change groups for group fail'
+      message.error(errorMessage)
+    })
+  }
 }
 const initialState = {
   totalItems: -1,

@@ -8,6 +8,7 @@ import {
   getOne,
   getByUser,
   getByGroup,
+  changePermissionsForUser
 } from 'reducers/permission'
 import { create as createUser } from 'reducers/user'
 import { getList as getGroups, create as createGroup } from 'reducers/group'
@@ -149,32 +150,41 @@ export const mapDispathToProps = {
   update: (policyId, model, isUpdate) => update(policyId, model, isUpdate),
   getOne: id => getOne(id),
   createUser: (model, isCreate) => createUser(model, isCreate),
-  getByUser: (userId,groupIds) => getByUser(userId,groupIds),
+  getByUser: (userId, groupIds) => getByUser(userId, groupIds),
   getByGroup: groupIds => getByGroup(groupIds),
+  changePermissionsForUser: (permissionIds, userUuid, isChange) => changePermissionsForUser(permissionIds, userUuid, isChange)
 }
 export const mapStateToProps = (state, props) => {
   let permission = state.permission || {}
 
   return {
-    permission: permission,
+    // master
+    permission,
+    // page
     totalItems: permission.totalItems,
     page: permission.page,
     data: permission.permissions,
-    userCreate: state.user.userCreate || {},
+    // detail
+    detail: permission.detail,
+    // model
+    steps,
+    type,
+    summaryColumns,
+    actionColumns,
+    reviewColumns,
     permissionCreate: permission.permissionCreate || {},
     services: (permission.services || {}).records || [],
     serviceTotal: (permission.services || {}).total || 0,
     actions: permission.actions || [],
     actionTotal: (permission.actions || []).length,
+    // user
+    userCreate: state.user.userCreate || {},
     userPermissions: state.user.permissions,
-    steps: steps,
-    type: type,
-    summaryColumns: summaryColumns,
-    actionColumns: actionColumns,
-    reviewColumns: reviewColumns,
-    detail: permission.detail,
-    groupCreate: state.group.groupCreate,
+    userDetail: state.user.detail || {},
     userCreatePermission: permission.userCreatePermission,
+    // group
+    groupCreate: state.group.groupCreate,
+    groupPermissions: state.group.permissions
   }
 }
 

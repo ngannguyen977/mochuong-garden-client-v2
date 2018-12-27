@@ -15,8 +15,9 @@ const userApi = `${api.host}/${api.user}`
 export const setUserPage = createAction(`${NS}SET_USER_PAGE`)
 export const setUserDetailPage = createAction(`${NS}SET_USER_DETAIL_PAGE`)
 export const createUserState = createAction(`${NS}CREATE_USER`)
+export const updateUserState = createAction(`${NS}UPDATE_USER`)
 export const getUsersInGroup = createAction(`${NS}GET_USERS_GROUP`)
-export const getPermission = createAction(`${NS}GET_PERMISSION`)
+export const getPermission = createAction(`${NS}GET_USER_PERMISSION`)
 
 export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
@@ -25,19 +26,11 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
   axios
     .get(userApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
-      if (response && response.data) {
-        let { users, page, totalItems } = response.data
-        if (!totalItems || totalItems === 0) {
-          totalItems = users.length
-        }
-        if (!users) {
-          users = { customer: {}, groups: [] }
-        }
-        dispatch(setUserPage({ users, page, totalItems }))
-      }
+      let { users, page, totalItems } = response.data
+      dispatch(setUserPage({ users, page, totalItems }))
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get user fail'
+      let errorMessage = ((error.response || {}).data || {}).message || 'get user list fail'
       message.error(errorMessage)
     })
 }
@@ -45,14 +38,12 @@ export const getUsersByGroup = groupId => (dispatch, getState) => {
   axios
     .get(`${userApi}/${api.usersByGroup}/${groupId}`)
     .then(response => {
-      if (response && response.data) {
-        const { users, page, totalItems } = response.data
-
-        dispatch(getUsersInGroup({ users, page, totalItems, groupId }))
-      }
+      const { users } = response.data
+      dispatch(getUsersInGroup({ users, groupId }))
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get user fail'
+      console.log(error)
+      let errorMessage = ((error.response || {}).data || {}).message || 'get user by group fail'
       message.error(errorMessage)
     })
 }
@@ -60,9 +51,7 @@ export const getOne = id => (dispatch, getState) => {
   axios
     .get(`${userApi}/${id}`)
     .then(response => {
-      if (response && response.data) {
-        dispatch(setUserDetailPage(response.data))
-      }
+      dispatch(setUserDetailPage(response.data))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'get user fail'
@@ -73,19 +62,17 @@ export const changeStatus = (id, status) => (dispatch, getState) => {
   axios
     .patch(`${userApi}/${id}`, { active: status })
     .then(response => {
-      if (response && response.data) {
-        let { users, page, totalItems } = getState().user
-        if (users && Array.isArray(users) && users.length > 0) {
-          let userId = users.findIndex(x => x.id === response.data.id)
-          if (userId) {
-            users[id = userId] = response.data
-            dispatch(setUserPage({ users, page, totalItems }))
-            notification['success']({
-              message: 'Change status of users success!',
-              description:
-                'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
-            })
-          }
+      let { users, page, totalItems } = getState().user
+      if (users && Array.isArray(users) && users.length > 0) {
+        let userId = users.findIndex(x => x.id === response.data.id)
+        if (userId) {
+          users[(id = userId)] = response.data
+          dispatch(setUserPage({ users, page, totalItems }))
+          notification['success']({
+            message: 'Change status of users success!',
+            description:
+              'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
+          })
         }
       }
     })
@@ -98,24 +85,22 @@ export const changeGroups = (id, groupIds) => (dispatch, getState) => {
   axios
     .patch(`${userApi}/${id}`, { groupIds: groupIds })
     .then(response => {
-      if (response && response.data) {
-        let { users, page, totalItems } = getState().user
-        if (users && Array.isArray(users) && users.length > 0) {
-          let userId = users.findIndex(x => x.id === response.data.id)
-          if (userId) {
-            users[id = userId] = response.data
-            dispatch(setUserPage({ users, page, totalItems }))
-            notification['success']({
-              message: 'Change groups of this user success!',
-              description:
-                'Users groups are update. Please re-check permission for this user.',
-            })
-          }
+      let { users, page, totalItems } = getState().user
+      if (users && Array.isArray(users) && users.length > 0) {
+        let userId = users.findIndex(x => x.id === response.data.id)
+        if (userId) {
+          users[(id = userId)] = response.data
+          dispatch(setUserPage({ users, page, totalItems }))
+          notification['success']({
+            message: 'Change groups of this user success!',
+            description: 'Users groups are update. Please re-check permission for this user.',
+          })
         }
       }
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'change groups for user fail'
+      let errorMessage =
+        ((error.response || {}).data || {}).message || 'change groups for user fail'
       message.error(errorMessage)
     })
 }
@@ -156,12 +141,6 @@ export const changePassword = (id, model) => (dispatch, getState) => {
         description:
           'The password of this user is changed successfully!.Now, this user can login with new password!',
       })
-      let { groups, page, totalItems } = getState().group
-      let group = groups.find(x => x.id === response.data.id)
-      if (group) {
-        group = response.data
-      }
-      dispatch(setGroupPage({ groups, page, totalItems: totalItems }))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'update groups fail'
@@ -184,7 +163,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
         users.push(response.data)
         dispatch(setUserPage({ users, page, totalItems: totalItems++ }))
         if (model.permissions && Array.isArray(model.permissions) && model.permissions.length > 0) {
-          createUserPolicy(response.data.id, {
+          createUserPolicy(response.data.uuid, {
             policyIds: model.permissions.map(x => x.policyId).join(),
           })
             .then(message.success('attach permission success'))
@@ -204,6 +183,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
   }
   dispatch(setPermissionPerGroup(null))
 }
+
 const initialState = {
   totalItems: -1,
   page: 0,
@@ -212,14 +192,11 @@ const initialState = {
 const ACTION_HANDLES = {
   [setUserPage]: (state, { users, page, totalItems }) => ({ ...state, users, page, totalItems }),
   [createUserState]: (state, userCreate) => ({ ...state, userCreate }),
+  [updateUserState]: (state, userUpdate) => {
+    console.log('handle action update user',state,userUpdate)
+    return{ ...state, detail: { ...state.detail, userUpdate } }},
   [setUserDetailPage]: (state, detail) => ({ ...state, detail }),
   [getPermission]: (state, permissions) => ({ ...state, permissions }),
-  [getUsersInGroup]: (state, users) => {
-  const { usersInGroup } = state
-  if (!usersInGroup.find(x => x.groupId === users.groupId)) {
-    usersInGroup.push(users)
-  }
-  return usersInGroup
-},
+  [getUsersInGroup]: (state, usersInGroup) => ({ ...state, usersInGroup }),
 }
 export default createReducer(ACTION_HANDLES, initialState)

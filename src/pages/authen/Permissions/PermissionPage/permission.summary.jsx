@@ -23,24 +23,36 @@ class PermissionSummary extends React.Component {
     }
   }
   componentWillMount() {
-    const { getList, userId,groupIds,getByUser } = this.props
+    const { getList, userUuid,getByUser,groupUuid,getByGroup } = this.props
     getList()
-    getByUser(userId,groupIds.join())
+    if(userUuid){
+      getByUser(userUuid)
+    }
+    if(groupUuid){
+      getByGroup(groupUuid)
+    }
   }
   componentDidUpdate() {
     const { selectedRowKeys, pagination } = this.state
-    const { userPermissions, totalItems } = this.props
-    if ( userPermissions && userPermissions.length > 0 && selectedRowKeys.length === 0) {
-      console.log(userPermissions.map(x=>x.policyId))
+    const { userPermissions,groupPermissions, totalItems,groupUuid,userUuid } = this.props
+    console.log('user permission',userPermissions)
+    let _permissions
+    if(groupUuid){
+      _permissions =  groupPermissions
+    }
+    if(userUuid){
+      _permissions =  userPermissions
+    }
+    if ( _permissions && _permissions.length > 0 && selectedRowKeys.length === 0) {
       this.setState({
-        selectedRowKeys: userPermissions.map(x=>x.policyId),
+        selectedRowKeys: _permissions.map(x=>x.policyId),
         ...pagination,
         total: totalItems
       })
     }
   }
   render() {
-    const { summaryColumns, parent, userCreate, createUser, groupCreate, createGroup,data } = this.props
+    const { summaryColumns, parent, userCreate, createUser, groupCreate, createGroup,data,userUuid,isEdit,changePermissionsForUser } = this.props
     const { pagination, loading ,selectedRowKeys } = this.state
     const rowSelection = {
       selectedRowKeys,
@@ -50,7 +62,12 @@ class PermissionSummary extends React.Component {
         })
         switch (parent) {
           case 'user':
+          if (isEdit) {
+            console.log('change group for user in group summary',selectedRowKeys)
+            changePermissionsForUser(selectedRowKeys, userUuid)
+          } else {
             createUser({ ...userCreate, permissions: selectedRows })
+          }
             break
           case 'group':
             createGroup({ ...groupCreate, permissions: selectedRows })

@@ -18,54 +18,49 @@ class UserSummaryList extends React.Component {
         total: -1,
         current: 1,
         pageSize: 0,
-      },
-      data: []
+      }
     }
   }
   componentWillMount() {
-    const { totalItems, getList, isEdit, getUsersByGroup, usersInGroup, groupId } = this.props
-    if (isEdit) {
-      if (groupId && !usersInGroup) {
-        getUsersByGroup(groupId)
-      }
+    const { getList, isEdit, getUsersByGroup, groupId } = this.props
+    getList()
+    if (groupId) {
+      getUsersByGroup(groupId)
     }
-    else if (totalItems === -1) {
-      getList()
-    }
-  }
-  componentDidMount() {
-    this.setState({ ...this.state.pagination, total: this.props.totalItems })
   }
   componentDidUpdate() {
-    const { totalItems, data, getList, isEdit, getUsersByGroup, usersInGroup, groupId } = this.props
-    if (isEdit) {
-      console.log(groupId,usersInGroup,this.state.data)
-      if (groupId && usersInGroup && usersInGroup.users.length > 0 && this.state.data.length === 0) {
-        let _users = usersInGroup.users.filter(x => x.groupId === groupId)
-        console.log(groupId,usersInGroup,this.state.data,_users)
-        if (_users)
-          this.setState({
-            data: _users
-          })
+    const { selectedRowKeys, pagination } = this.state
+    const { usersInGroup, totalItems } = this.props
+    if (usersInGroup && usersInGroup.length > 0 && selectedRowKeys.length === 0) {
+      let userIds = usersInGroup.map(x => x.id)
+      console.log('select',selectedRowKeys,userIds,userIds !== selectedRowKeys)
+      if (userIds !== selectedRowKeys) {
+        this.setState({
+          selectedRowKeys: userIds,
+          ...pagination,
+          total: totalItems
+        })
       }
-    } else if (totalItems > 0 && data
-      && data.length > 0 && this.state.data.length === 0) {
-      this.setState({
-        data
-      })
     }
   }
+
   render() {
-    const { summaryColumns, parent, groupCreate, createGroup } = this.props
-    const { pagination, loading, data } = this.state
+    const { summaryColumns, isEdit, groupId, parent, groupCreate, createGroup, data, changeUsersForGroup } = this.props
+    const { pagination, loading ,selectedRowKeys } = this.state
     const rowSelection = {
+      selectedRowKeys,
       onChange: (selectedRowKeys, selectedRows) => {
         this.setState({
           selectedRowKeys,
         })
         switch (parent) {
           case 'group':
-            createGroup({ ...groupCreate, users: selectedRows })
+            if (isEdit) {
+              console.log('changeUsersForGroup in group summary')
+              changeUsersForGroup(groupId,selectedRowKeys)
+            } else {
+              createGroup({ ...groupCreate, users: selectedRows })
+            }
             break
           default:
             break

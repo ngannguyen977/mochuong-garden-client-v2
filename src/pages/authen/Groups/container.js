@@ -1,5 +1,5 @@
-import { getList, changeStatus, create, destroy, getOne, update } from 'reducers/group'
-import { getList as getPermissions } from 'reducers/permission'
+import { getList, changeStatus, create, destroy, getOne, update, changeGroupsForUser,changeUsersForGroup } from 'reducers/group'
+import { getList as getPermissions,changePermissionsForGroup } from 'reducers/permission'
 import { create as createUser } from 'reducers/user'
 import helper from '../../../helper'
 
@@ -119,22 +119,33 @@ export const mapDispathToProps = {
   getPermissions: () => getPermissions(),
   getOne: id => getOne(id),
   update: (id, model, isUpdate) => update(id, model, isUpdate),
+  changeGroupsForUser: (groupIds, userId, isChange) => changeGroupsForUser(groupIds, userId, isChange),
+  changeUsersForGroup: (groupId, userIds, isChange) => changeUsersForGroup(groupId, userIds, isChange),
+  changePermissionsForGroup: (permissionIds, groupUuid, isChange) => changePermissionsForGroup(permissionIds, groupUuid, isChange)
 }
 export const mapStateToProps = (state, props) => {
   let group = state.group || {}
   return {
-    totalItems: group.totalItems,
+    // master
     group: group,
+    // page
+    totalItems: group.totalItems,
     page: group.page,
     data: group.groups,
-    userCreate: state.user.userCreate || {},
+    // detail
+    detail: group.detail,
+    // model
     groupCreate: group.groupCreate || {},
     summaryColumns: summaryColumns,
     reviewPermissionColumns: reviewPermissionColumns,
     reviewUserColumns: reviewUserColumns,
     steps: steps,
     type: type,
-    detail: group.detail,
+    // user
+    userCreate: state.user.userCreate || {},
+    userUpdate: (state.user.detail || {}).userUpdate || {},
+    groupUpdate: (state.group.detail || {}).groupUpdate || {},
+    // permission
     permission: state.permission,
     groupCreatePermission: (state.permission || {}).groupCreatePermission,
   }
