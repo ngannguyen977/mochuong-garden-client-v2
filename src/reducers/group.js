@@ -17,7 +17,6 @@ export const createGroupState = createAction(`${NS}CREATE_GROUP`)
 export const getPermissions = createAction(`${NS}GET_GROUP_PERMISSION`)
 export const updateGroupState = createAction(`${NS}UPDATE_GROUP`)
 
-
 export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
   getState,
@@ -140,11 +139,12 @@ export const addUsers = (id, userIds) => (dispatch, getState) => {
       if (groups && Array.isArray(groups) && groups.length > 0) {
         let group = groups.find(x => x.id === id)
         if (group) {
-          ((detail || {}).groups || []).push(group)
+          ;((detail || {}).groups || []).push(group)
           dispatch(setUserDetailPage(detail))
         }
       }
-    }).catch(error => {
+    })
+    .catch(error => {
       console.log(error)
       let errorMessage = ((error.response || {}).data || {}).message || 'add user to group fail'
       message.error(errorMessage)
@@ -156,10 +156,13 @@ export const removeUsers = (id, userIds) => (dispatch, getState) => {
     .delete(`${groupApi}/${id}/removeusers?ids=${userIds}`)
     .then(response => {
       let { detail } = getState().user
-      if(detail){
-        dispatch(setUserDetailPage({ ...detail, groups: (detail.groups || []).filter(x => x.id !== id) }))
+      if (detail) {
+        dispatch(
+          setUserDetailPage({ ...detail, groups: (detail.groups || []).filter(x => x.id !== id) }),
+        )
       }
-    }).catch(error => {
+    })
+    .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'remove user to group fail'
       message.error(errorMessage)
     })
@@ -169,29 +172,33 @@ export const changeGroupsForUser = (groupIds, userId, isChange = false) => (disp
   dispatch(updateUserState({ userId, groups: groupIds }))
   if (isChange) {
     // get current users in this group, then compare the list to detect add or remove
-    axios.get(`${groupApi}/byuser/${userId}`).then(response => {
-      let groups = response.data.groups || []
-      let groupRemoves = groups.filter(x => !groupIds.includes(x.id)).map(x => x.id)
-      let groupAdds = groupIds.filter(x => !groups.find(a => a.id === x))
-      console.log(groupRemoves, groupAdds)
+    axios
+      .get(`${groupApi}/byuser/${userId}`)
+      .then(response => {
+        let groups = response.data.groups || []
+        let groupRemoves = groups.filter(x => !groupIds.includes(x.id)).map(x => x.id)
+        let groupAdds = groupIds.filter(x => !groups.find(a => a.id === x))
+        console.log(groupRemoves, groupAdds)
 
-      console.log('wait all promise...')
-      let result = Promise.all(groupAdds.map(x => dispatch(addUsers(x, userId)))).then(
-        data => Promise.all(groupRemoves.map(x => dispatch(removeUsers(x, userId))))
-      )
-      // reset when done
-      result.then(data => {
-        console.log('reset when done', data)
-        dispatch(updateUserState({ userId, groups: [] }))
-        notification['success']({
-          message: 'Change groups for user success!',
-          description: 'These groups is updated successfully!',
+        console.log('wait all promise...')
+        let result = Promise.all(groupAdds.map(x => dispatch(addUsers(x, userId)))).then(data =>
+          Promise.all(groupRemoves.map(x => dispatch(removeUsers(x, userId)))),
+        )
+        // reset when done
+        result.then(data => {
+          console.log('reset when done', data)
+          dispatch(updateUserState({ userId, groups: [] }))
+          notification['success']({
+            message: 'Change groups for user success!',
+            description: 'These groups is updated successfully!',
+          })
         })
       })
-    }).catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'change groups for user fail'
-      message.error(errorMessage)
-    })
+      .catch(error => {
+        let errorMessage =
+          ((error.response || {}).data || {}).message || 'change groups for user fail'
+        message.error(errorMessage)
+      })
   }
 }
 export const changeUsersForGroup = (groupId, userIds, isChange = false) => (dispatch, getState) => {
@@ -199,26 +206,30 @@ export const changeUsersForGroup = (groupId, userIds, isChange = false) => (disp
   dispatch(updateGroupState({ groupId, userIds }))
   if (isChange) {
     // get current users in this group, then compare the list to detect add or remove
-    axios.get(`${groupApi}/${groupId}`).then(response => {
-      let users = response.data.users || []
-      let userRemoves = users.filter(x => !userIds.includes(x.id)).map(x => x.id)
-      let userAdds = userIds.filter(x => !users.find(a => a.id === x))
-      console.log(userRemoves, userAdds)
-      if (userAdds && userAdds.length > 0) {
-        dispatch(addUsers(groupId, userAdds))
-      }
-      if (userRemoves && userRemoves.length > 0) {
-        dispatch(removeUsers(groupId, userRemoves))
-      }
-      dispatch(updateGroupState({ groupId, userIds: [] }))
-      notification['success']({
-        message: 'Change users for group success!',
-        description: 'This group is updated successfully!',
+    axios
+      .get(`${groupApi}/${groupId}`)
+      .then(response => {
+        let users = response.data.users || []
+        let userRemoves = users.filter(x => !userIds.includes(x.id)).map(x => x.id)
+        let userAdds = userIds.filter(x => !users.find(a => a.id === x))
+        console.log(userRemoves, userAdds)
+        if (userAdds && userAdds.length > 0) {
+          dispatch(addUsers(groupId, userAdds))
+        }
+        if (userRemoves && userRemoves.length > 0) {
+          dispatch(removeUsers(groupId, userRemoves))
+        }
+        dispatch(updateGroupState({ groupId, userIds: [] }))
+        notification['success']({
+          message: 'Change users for group success!',
+          description: 'This group is updated successfully!',
+        })
       })
-    }).catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'change users for group fail'
-      message.error(errorMessage)
-    })
+      .catch(error => {
+        let errorMessage =
+          ((error.response || {}).data || {}).message || 'change users for group fail'
+        message.error(errorMessage)
+      })
   }
 }
 export const destroy = ids => (dispatch, getState) => {

@@ -5,7 +5,7 @@ import constant from '../config/default'
 import { notification } from 'antd'
 import { getServices, getActions } from '../services/resource'
 import { getPermission, updateUserState } from 'reducers/user'
-import { getPermissions,updateGroupState } from 'reducers/group'
+import { getPermissions, updateGroupState } from 'reducers/group'
 import { setUserState } from 'reducers/app'
 import {
   createPolicy,
@@ -188,7 +188,7 @@ export const getByGroup = groupId => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const getByUser = (userId) => (dispatch, getState) => {
+export const getByUser = userId => (dispatch, getState) => {
   getPolicyByUser(userId)
     .then(response => {
       dispatch(getPermission(response))
@@ -199,30 +199,42 @@ export const getByUser = (userId) => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const changePermissionsForUser = (permissionIds, userUuid, isChange) => (dispatch, getState) => {
+export const changePermissionsForUser = (permissionIds, userUuid, isChange) => (
+  dispatch,
+  getState,
+) => {
   console.log('change permission for user in group reducer', permissionIds, userUuid, isChange)
   dispatch(updateUserState({ userUuid, permissions: permissionIds }))
   if (isChange) {
     // get current users in this group, then compare the list to detect add or remove
-    updateUserPolicies(userUuid, permissionIds.join()).then(response => {
-      dispatch(updateUserState({ userUuid, permissions: [] }))
-    }).catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'change groups for user fail'
-      message.error(errorMessage)
-    })
+    updateUserPolicies(userUuid, permissionIds.join())
+      .then(response => {
+        dispatch(updateUserState({ userUuid, permissions: [] }))
+      })
+      .catch(error => {
+        let errorMessage =
+          ((error.response || {}).data || {}).message || 'change groups for user fail'
+        message.error(errorMessage)
+      })
   }
 }
-export const changePermissionsForGroup = (permissionIds, groupUuid, isChange) => (dispatch, getState) => {
+export const changePermissionsForGroup = (permissionIds, groupUuid, isChange) => (
+  dispatch,
+  getState,
+) => {
   console.log('change permission for group in group reducer', permissionIds, groupUuid, isChange)
   dispatch(updateGroupState({ groupUuid, permissions: permissionIds }))
   if (isChange) {
     // get current groups in this group, then compare the list to detect add or remove
-    updateGroupPolicies(groupUuid, permissionIds.join()).then(response => {
-      dispatch(updateGroupState({ groupUuid, permissions: [] }))
-    }).catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'change groups for group fail'
-      message.error(errorMessage)
-    })
+    updateGroupPolicies(groupUuid, permissionIds.join())
+      .then(response => {
+        dispatch(updateGroupState({ groupUuid, permissions: [] }))
+      })
+      .catch(error => {
+        let errorMessage =
+          ((error.response || {}).data || {}).message || 'change groups for group fail'
+        message.error(errorMessage)
+      })
   }
 }
 const initialState = {

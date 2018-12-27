@@ -99,8 +99,8 @@ class MenuLeft extends React.Component {
     return items.map(menuItem => {
       if (menuItem.children) {
         let subMenuTitle = (
-          <span className='menuLeft__title-wrap' key={menuItem.key}>
-            <span className='menuLeft__item-title'>{menuItem.title}</span>
+          <span className="menuLeft__title-wrap" key={menuItem.key}>
+            <span className="menuLeft__item-title">{menuItem.title}</span>
             {menuItem.icon && <span className={menuItem.icon + ' menuLeft__icon'} />}
           </span>
         )
@@ -131,13 +131,13 @@ class MenuLeft extends React.Component {
               : undefined
           }
         >
-          <span className='menuLeft__item-title'>{title}</span>
+          <span className="menuLeft__item-title">{title}</span>
           {icon && <span className={icon + ' menuLeft__icon'} />}
         </Link>
       </Menu.Item>
     ) : (
       <Menu.Item key={key} disabled={disabled}>
-        <span className='menuLeft__item-title'>{title}</span>
+        <span className="menuLeft__item-title">{title}</span>
         {icon && <span className={icon + ' menuLeft__icon'} />}
       </Menu.Item>
     )
@@ -191,15 +191,15 @@ class MenuLeft extends React.Component {
     }
     const params = isMobile ? paramsMobile : paramsDesktop
     return (
-      <Sider {...params} className='menuLeft'>
-        <div className='menuLeft__logo'>
+      <Sider {...params} className="menuLeft">
+        <div className="menuLeft__logo">
           {params.collapsed ? (
-            <a href='#/' className='menuLeft__logoContainer menuLeft__logoContainer--collapsed'>
-              <img src='resources/images/logo-inverse-mobile.png' alt='' />
+            <a href="#/" className="menuLeft__logoContainer menuLeft__logoContainer--collapsed">
+              <img src="resources/images/logo-inverse-mobile.png" alt="" />
             </a>
           ) : (
-            <a href='#/' className='menuLeft__logoContainer'>
-              <img src='resources/images/logo-inverse.png' alt='' />
+            <a href="#/" className="menuLeft__logoContainer">
+              <img src="resources/images/logo-inverse.png" alt="" />
             </a>
           )}
         </div>
@@ -213,8 +213,8 @@ class MenuLeft extends React.Component {
             selectedKeys={[selectedKeys]}
             openKeys={openKeys}
             onOpenChange={this.onOpenChange}
-            mode='inline'
-            className='menuLeft__navigation'
+            mode="inline"
+            className="menuLeft__navigation"
           >
             {/* <Menu.Item key={'settings'}>
               <span className='menuLeft__item-title'>Theme Settings</span>

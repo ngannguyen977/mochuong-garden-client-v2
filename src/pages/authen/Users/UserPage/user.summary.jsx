@@ -28,22 +28,29 @@ class UserSummaryList extends React.Component {
       getUsersByGroup(groupId)
     }
   }
-  componentDidUpdate() {
-    const { selectedRowKeys, pagination } = this.state
+  componentWillReceiveProps(){
     const { usersInGroup, totalItems } = this.props
-    if (usersInGroup && usersInGroup.length > 0 && selectedRowKeys.length === 0) {
-      let userIds = usersInGroup.map(x => x.id)
-      console.log('select',selectedRowKeys,userIds,userIds !== selectedRowKeys)
-      if (userIds !== selectedRowKeys) {
-        this.setState({
-          selectedRowKeys: userIds,
-          ...pagination,
-          total: totalItems
-        })
-      }
+    console.log('componentWillReceiveProps',usersInGroup)
+    if(!usersInGroup || usersInGroup.length===0){
+      return
     }
+    const { selectedRowKeys, pagination } = this.state
+      if (usersInGroup && usersInGroup.length > 0 && selectedRowKeys.length === 0) {
+        let userIds = usersInGroup.map(x => x.id)
+        console.log('select',selectedRowKeys,userIds,userIds !== selectedRowKeys)
+        if (userIds !== selectedRowKeys) {
+          this.setState({
+            selectedRowKeys: userIds,
+            ...pagination,
+            total: totalItems
+          })
+        }
+      }
   }
+  componentDidUpdate() {
+    console.log('componentDidUpdate')
 
+  }
   render() {
     const { summaryColumns, isEdit, groupId, parent, groupCreate, createGroup, data, changeUsersForGroup } = this.props
     const { pagination, loading ,selectedRowKeys } = this.state

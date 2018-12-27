@@ -12,7 +12,7 @@ const instance = axios.create({
   timeout: 30000,
   headers: {
     Authorization: 'Bearer ' + constant.api.policy.token,
-    token: 'Bearer ' + token
+    token: 'Bearer ' + token,
   },
 })
 export const getPolicies = (keyword, keysort, types, skip, limit, isAsc) =>
@@ -39,7 +39,7 @@ export const getPolicyById = policyId =>
         reject(error)
       })
   })
-export const getPolicyByUser = (userUuid) =>
+export const getPolicyByUser = userUuid =>
   new Promise((resolve, reject) => {
     instance
       .get(`${policyApi}/users/${userUuid}`)
@@ -116,7 +116,7 @@ export const updateUserPolicies = (userUuid, policyIds) =>
         reject(error)
       })
   })
-  export const updateGroupPolicies = (groupUuid, policyIds) =>
+export const updateGroupPolicies = (groupUuid, policyIds) =>
   new Promise((resolve, reject) => {
     instance
       .put(`${groupApi}/${groupUuid}/permission?policyIds=${policyIds}`)

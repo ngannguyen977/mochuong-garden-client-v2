@@ -6,21 +6,60 @@ export default [
     icon: 'icmn icmn-stack',
   },
   {
+    divider: true,
+  },
+  {
     title: 'Users',
     key: 'users',
     url: '/users',
-    icon: 'icmn icmn-user',
+    icon: 'icmn icmn-man',
   },
   {
     title: 'Groups',
     key: 'groups',
     url: '/groups',
-    icon: 'icmn icmn-user',
+    icon: 'icmn icmn-man-woman',
   },
   {
-    title: 'Permission',
+    title: 'Permissions',
     key: 'permission',
     url: '/permissions',
     icon: 'icmn icmn-lock',
+  },
+  {
+    divider: true,
+  },
+  {
+    title: 'Projects',
+    key: 'project',
+    url: '/projects',
+    icon: 'icmn icmn-briefcase',
+  },
+  {
+    title: 'Templates',
+    key: 'template',
+    url: '/templates',
+    icon: 'icmn icmn-paragraph-left',
+  },
+  {
+    title: 'Things',
+    key: 'thing',
+    url: '/things',
+    icon: 'icmn icmn-yelp',
+  },
+  {
+    divider: true,
+  },
+  {
+    title: 'Policies',
+    key: 'policy',
+    url: '/policies',
+    icon: 'icmn icmn-file-text2',
+  },
+  {
+    title: 'Certificates',
+    key: 'certificate',
+    url: '/certificates',
+    icon: 'icmn icmn-key',
   },
 ]

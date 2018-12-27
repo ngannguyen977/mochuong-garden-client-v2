@@ -193,8 +193,9 @@ const ACTION_HANDLES = {
   [setUserPage]: (state, { users, page, totalItems }) => ({ ...state, users, page, totalItems }),
   [createUserState]: (state, userCreate) => ({ ...state, userCreate }),
   [updateUserState]: (state, userUpdate) => {
-    console.log('handle action update user',state,userUpdate)
-    return{ ...state, detail: { ...state.detail, userUpdate } }},
+    console.log('handle action update user', state, userUpdate)
+    return { ...state, detail: { ...state.detail, userUpdate } }
+  },
   [setUserDetailPage]: (state, detail) => ({ ...state, detail }),
   [getPermission]: (state, permissions) => ({ ...state, permissions }),
   [getUsersInGroup]: (state, usersInGroup) => ({ ...state, usersInGroup }),

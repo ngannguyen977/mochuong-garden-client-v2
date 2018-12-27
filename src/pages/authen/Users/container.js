@@ -3,9 +3,14 @@ import {
   getList as getPermissions,
   getByGroup as getPermissionByGroup,
   getByUser as getPermissionByUser,
-  changePermissionsForUser
+  changePermissionsForUser,
 } from 'reducers/permission'
-import { getList as getGroups, create as createGroup,changeGroupsForUser,changeUsersForGroup } from 'reducers/group'
+import {
+  getList as getGroups,
+  create as createGroup,
+  changeGroupsForUser,
+  changeUsersForGroup,
+} from 'reducers/group'
 import helper from '../../../helper'
 
 const steps = [
@@ -107,9 +112,12 @@ export const mapDispathToProps = {
   getPermissionByGroup: ids => getPermissionByGroup(ids),
   getUsersByGroup: groupId => getUsersByGroup(groupId),
   getPermissionByUser: userId => getPermissionByUser(userId),
-  changeGroupsForUser: (groupIds, userId, isChange) => changeGroupsForUser(groupIds, userId, isChange),
-  changeUsersForGroup: (groupId, userIds, isChange) => changeUsersForGroup(groupId, userIds, isChange),
-  changePermissionsForUser: (permissionIds, userUuid, isChange) => changePermissionsForUser(permissionIds, userUuid, isChange)
+  changeGroupsForUser: (groupIds, userId, isChange) =>
+    changeGroupsForUser(groupIds, userId, isChange),
+  changeUsersForGroup: (groupId, userIds, isChange) =>
+    changeUsersForGroup(groupId, userIds, isChange),
+  changePermissionsForUser: (permissionIds, userUuid, isChange) =>
+    changePermissionsForUser(permissionIds, userUuid, isChange),
 }
 export const mapStateToProps = (state, props) => {
   let user = state.user || {}
@@ -127,7 +135,7 @@ export const mapStateToProps = (state, props) => {
     reviewColumns,
     summaryColumns,
     type,
-    usersInGroup: (state.user.usersInGroup|| {}).users || [],
+    usersInGroup: (state.user.usersInGroup || {}).users || [],
     userCreatePermission: (state.group || {}).permissions || [],
     userCreate: user.userCreate || {},
     userUpdate: (user.detail || {}).userUpdate || {},

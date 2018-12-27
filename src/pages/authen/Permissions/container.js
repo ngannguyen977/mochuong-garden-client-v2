@@ -8,7 +8,7 @@ import {
   getOne,
   getByUser,
   getByGroup,
-  changePermissionsForUser
+  changePermissionsForUser,
 } from 'reducers/permission'
 import { create as createUser } from 'reducers/user'
 import { getList as getGroups, create as createGroup } from 'reducers/group'
@@ -152,7 +152,8 @@ export const mapDispathToProps = {
   createUser: (model, isCreate) => createUser(model, isCreate),
   getByUser: (userId, groupIds) => getByUser(userId, groupIds),
   getByGroup: groupIds => getByGroup(groupIds),
-  changePermissionsForUser: (permissionIds, userUuid, isChange) => changePermissionsForUser(permissionIds, userUuid, isChange)
+  changePermissionsForUser: (permissionIds, userUuid, isChange) =>
+    changePermissionsForUser(permissionIds, userUuid, isChange),
 }
 export const mapStateToProps = (state, props) => {
   let permission = state.permission || {}
@@ -184,7 +185,7 @@ export const mapStateToProps = (state, props) => {
     userCreatePermission: permission.userCreatePermission,
     // group
     groupCreate: state.group.groupCreate,
-    groupPermissions: state.group.permissions
+    groupPermissions: state.group.permissions,
   }
 }
 
