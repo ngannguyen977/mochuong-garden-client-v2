@@ -15,7 +15,7 @@ import ProjectCard from '../../../components/ProjectCard'
 )
 class ProjectPage extends React.Component {
   state = {
-    current: 0
+    current: 0,
   }
   componentWillMount() {
     const { getList } = this.props
@@ -23,19 +23,24 @@ class ProjectPage extends React.Component {
   }
 
   render() {
-    const { data,totalItems } = this.props
+    const { data, totalItems } = this.props
     const { current } = this.state
 
     return (
-      <div className='row'>
-        {data && data.map(x => (
-          <div className='col-md-3' key={x.id}>
-            <ProjectCard project={x || {}} type={current === 0 ? 'primary' : ''} onMouseEnter={() => this.setState({ current: 0 })} />
-          </div>
-        ))}
-         {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name='Project' link='#/projects/create' />
-            )}
+      <div className="row">
+        {data &&
+          data.map(x => (
+            <div className="col-md-3" key={x.id}>
+              <ProjectCard
+                project={x || {}}
+                type={current === 0 ? 'primary' : ''}
+                onMouseEnter={() => this.setState({ current: 0 })}
+              />
+            </div>
+          ))}
+        {(!totalItems || totalItems <= 0) && (
+          <LockScreenPage name="Project" link="#/projects/create" />
+        )}
       </div>
     )
   }

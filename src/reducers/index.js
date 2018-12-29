@@ -18,5 +18,5 @@ export default combineReducers({
   user,
   group,
   permission,
-  project
+  project,
 })

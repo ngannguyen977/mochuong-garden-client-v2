@@ -119,14 +119,18 @@ export const destroy = ids => (dispatch, getState) => {
     })
 }
 
-
 const initialState = {
   totalItems: -1,
   page: 0,
   projects: [],
 }
 const ACTION_HANDLES = {
-  [setProjectPage]: (state, { projects, page, totalItems }) => ({ ...state, projects, page, totalItems }),
+  [setProjectPage]: (state, { projects, page, totalItems }) => ({
+    ...state,
+    projects,
+    page,
+    totalItems,
+  }),
   [createProjectState]: (state, projectCreate) => ({ ...state, projectCreate }),
   [updateProjectState]: (state, projectUpdate) => {
     console.log('handle action update project', state, projectUpdate)
