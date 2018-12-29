@@ -33,5 +33,9 @@ export default {
       serviceDelete: 'shortname',
       serviceDeletes: 'deletes',
     },
+    iot:{
+      host:'https://api-dev.onskycloud.com/iot-service/v1/api',
+      project:'projects'
+    }
   },
 }
