@@ -6,7 +6,6 @@ const policyApi = `${api.host}/${api.policy}`
 const userApi = `${api.host}/${api.user}`
 const groupApi = `${api.host}/${api.group}`
 const token = JSON.parse(window.localStorage.getItem('app.token'))
-console.log('token from local storage', token)
 const instance = axios.create({
   baseURL: api.host,
   timeout: 30000,

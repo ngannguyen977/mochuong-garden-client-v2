@@ -1,23 +1,23 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import Detail from './detail'
+import ListPage from './ListPage'
 
-class DetailPage extends React.Component {
+
+class Policy extends React.Component {
   static defaultProps = {
-    pathName: 'Details',
+    pathName: 'Policies',
     roles: ['agent', 'administrator'],
   }
-
   render() {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Details' />
-        <Detail isEdit={true} location={props.location} match={props.match} />
+        <Helmet title='Policies' />
+        <ListPage location={props.location}/>
       </Page>
     )
   }
 }
 
-export default DetailPage
+export default Policy

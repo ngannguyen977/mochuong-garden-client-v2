@@ -12,8 +12,8 @@ class Project extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Projects" />
-        <ProjectPage location={props.location} />
+        <Helmet title='Projects' />
+        <ProjectPage history={props.history} location={props.location} />
       </Page>
     )
   }

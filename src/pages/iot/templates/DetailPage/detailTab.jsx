@@ -3,8 +3,6 @@ import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import DetailPage from './detail'
 import { Input, Button, Tabs, Icon } from 'antd'
-import GroupList from '../../Groups/GroupPage/group.summary'
-import PermissionList from '../../Permissions/PermissionPage/permission.summary'
 
 
 const Search = Input.Search;
@@ -22,15 +20,15 @@ export class DetailTabPage extends React.Component {
     }
 
     render() {
-        const { detail, changeGroupsForUser, userUpdate, changePermissionsForUser } = this.props
+        const { detail, changeGroupsForTemplate, templateUpdate, changePermissionsForTemplate } = this.props
         let groupIds = ((detail || {}).groups || []).map(x => x.id)
         const update = (type) => {
             switch (type) {
                 case 'groups':
-                    changeGroupsForUser(userUpdate.groups, detail.id, true)
+                    changeGroupsForTemplate(templateUpdate.groups, detail.id, true)
                     break
                 case 'permissions':
-                    changePermissionsForUser(userUpdate.permissions, detail.uuid, true)
+                    changePermissionsForTemplate(templateUpdate.permissions, detail.uuid, true)
                     break
                 default:
                     break
@@ -42,7 +40,7 @@ export class DetailTabPage extends React.Component {
                     type='default'
                     className='text-capitalize'
                     style={{ marginRight: '15px' }}
-                    href='#/users'
+                    href='#/templates'
                 >
                     Cancel
                         </Button>
@@ -61,12 +59,12 @@ export class DetailTabPage extends React.Component {
             <div className={type + ' row'}>
                 <div className='col-lg-4 text-justify'>
                     <div className='form-group'>
-                        <p>User permissions specify what tasks users can perform and what features users can access. For example, users with the “Handle Device is sense in third floor” permission can view Devices pages, and users can access any in third floor is sense.</p>
-                        <p>You can add this user to groups, then this user will have all permissions in these groups. Another way, you can set permissions for this user explicit by click on button switch to change to attach permission mode. </p>
+                        <p>Template permissions specify what tasks templates can perform and what features templates can access. For example, templates with the “Handle Device is sense in third floor” permission can view Devices pages, and templates can access any in third floor is sense.</p>
+                        <p>You can add this template to groups, then this template will have all permissions in these groups. Another way, you can set permissions for this template explicit by click on button switch to change to attach permission mode. </p>
                     </div>
                 </div>
                 <div className='col-lg-8'>
-                    <h3 className='text-capitalize'>{type} for this user</h3>
+                    <h3 className='text-capitalize'>{type} for this template</h3>
                     <div className='row'>
                         <div className='col-lg-9'>
                             <Search
@@ -74,7 +72,7 @@ export class DetailTabPage extends React.Component {
                                 onSearch={value => console.log(value)}
                             // style={{ width: 200 }}
                             />
-                            <small className='font-italic text-right'>*Add user to groups help you manage your users easier. You can add permission to many users by add permission to group instead.</small>
+                            <small className='font-italic text-right'>*Add template to groups help you manage your templates easier. You can add permission to many templates by add permission to group instead.</small>
                         </div>
                         <div className='col-lg-3 text-right'>
                             <Button
@@ -103,23 +101,9 @@ export class DetailTabPage extends React.Component {
         )
 
         return (
-            <div className='user-detail'>
+            <div className='template-detail'>
                 <Tabs defaultActiveKey='1' >
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
-                    <TabPane tab={<span><Icon type='team' />Groups</span>} key='2'>{moreTabContent('groups',
-                        <GroupList
-                            groupIds={groupIds}
-                            userId={(detail || {}).id}
-                            userUuid={(detail || {}).uuid}
-                            parent='user'
-                            isEdit={true}
-                        />)}</TabPane>
-                    <TabPane tab={<span><Icon type='profile' />Permissions</span>} key='3'>{moreTabContent('permissions', <PermissionList
-                        userUuid={(detail || {}).uuid}
-                        groupIds={groupIds}
-                        parent='user'
-                        isEdit={true}
-                        permissionIds={((detail || {}).permissions || []).map(x => x.policyId)} />)}</TabPane>
                 </Tabs>
             </div>
         )

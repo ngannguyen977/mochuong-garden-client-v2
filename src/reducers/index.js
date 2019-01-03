@@ -8,6 +8,8 @@ import user from './user'
 import group from './group'
 import permission from './permission'
 import project from './project'
+import policy from './policy'
+import template from './template'
 
 export default combineReducers({
   routing: routerReducer,
@@ -19,4 +21,6 @@ export default combineReducers({
   group,
   permission,
   project,
+  policy,
+  template
 })

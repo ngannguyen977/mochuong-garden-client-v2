@@ -14,17 +14,16 @@ class CreatePage extends React.Component {
 
     }
   }
-
   render() {
     return (
-      <div className="project-create">
-        <div className="card">
-          <div className="card-header">
-            <h4 className="text-black mb-3">
+      <div className='project-create'>
+        <div className='card'>
+          <div className='card-header'>
+            <h4 className='text-black mb-3'>
               <strong>Create a new Project</strong>
             </h4>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
             <DetailPage />
           </div>
         </div>

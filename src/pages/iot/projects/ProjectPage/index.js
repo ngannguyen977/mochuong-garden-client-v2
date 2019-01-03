@@ -23,23 +23,25 @@ class ProjectPage extends React.Component {
   }
 
   render() {
-    const { data, totalItems } = this.props
+    const { data, totalItems,remove,history } = this.props
     const { current } = this.state
 
     return (
-      <div className="row">
+      <div className='row'>
         {data &&
           data.map(x => (
-            <div className="col-md-3" key={x.id}>
+            <div className='col-md-3' key={x.id}>
               <ProjectCard
                 project={x || {}}
                 type={current === 0 ? 'primary' : ''}
                 onMouseEnter={() => this.setState({ current: 0 })}
+                remove = {remove}
+                push ={history.push}
               />
             </div>
           ))}
         {(!totalItems || totalItems <= 0) && (
-          <LockScreenPage name="Project" link="#/projects/create" />
+          <LockScreenPage name='Project' link='#/projects/create' />
         )}
       </div>
     )

@@ -13,16 +13,16 @@ export default {
     },
     policy: {
       // host: 'http://localhost:8080/v1/api',
-      token: 'sdcxcx22334632rwhczyr392yr02ud23r9t34uy23r9t3df932jhfo',
       host: 'https://api-dev.onskycloud.com/policy-service/v1/api',
+      token: 'sdcxcx22334632rwhczyr392yr02ud23r9t34uy23r9t3df932jhfo',
       policy: 'policies',
       group: 'groups',
       user: 'users',
     },
     resource: {
+      // host: 'http://localhost:8080/v1/api',
       host: 'https://api-dev.onskycloud.com/resource-service/v1/api',
       token: 'sdfiusfi98234632rwhczyr392yr02u-23r9t34uy23r9t3fsfskhfo',
-      // host: 'http://localhost:8080/v1/api',
       service: 'services',
       serviceSummary: 'summary',
       serviceGetByShortName: 'shortname',
@@ -36,6 +36,7 @@ export default {
     iot: {
       host: 'https://api-dev.onskycloud.com/iot-service/v1/api',
       project: 'projects',
+      template:'thing-templates',
     },
   },
 }

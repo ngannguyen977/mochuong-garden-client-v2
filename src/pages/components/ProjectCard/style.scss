@@ -1,10 +1,11 @@
 @import '../../../resources/mixins';
 
-.userCard {
+.project-card {
   background: $white;
   position: relative;
   border-radius: .25rem;
   border: 1px solid $gray-border;
+  margin-bottom: 15px;
 
   @media (max-width: $md-max-width) {
     margin-bottom: 1.35rem;
@@ -12,7 +13,7 @@
 
   &--typed {
 
-    .userCard {
+    .project-card {
 
       &__userName {
         color: $white;

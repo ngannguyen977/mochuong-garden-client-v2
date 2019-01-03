@@ -62,9 +62,35 @@ const loadableRoutes = {
   '/permissions/detail/:id': {
     component: loadable(() => import('pages/authen/Permissions/DetailPage')),
   },
-  // permissions
+  // projects
   '/projects': {
     component: loadable(() => import('pages/iot/projects')),
+  },
+  '/projects/create': {
+    component: loadable(() => import('pages/iot/projects/CreatePage')),
+  },
+  '/projects/:id': {
+    component: loadable(() => import('pages/iot/projects/DetailPage')),
+  },
+  // policies
+  '/policies': {
+    component: loadable(() => import('pages/iot/policies')),
+  },
+  '/policies/create': {
+    component: loadable(() => import('pages/iot/policies/CreatePage')),
+  },
+  '/policies/:id': {
+    component: loadable(() => import('pages/iot/policies/DetailPage')),
+  },
+  // templates
+  '/templates': {
+    component: loadable(() => import('pages/iot/templates')),
+  },
+  '/templates/create': {
+    component: loadable(() => import('pages/iot/templates/CreatePage')),
+  },
+  '/templates/:id': {
+    component: loadable(() => import('pages/iot/templates/DetailPage')),
   },
 }
 
@@ -87,7 +113,7 @@ class Routes extends React.Component {
   render() {
     return (
       <ConnectedSwitch>
-        <Route exact path="/" component={DashboardAlphaPage} />
+        <Route exact path='/' component={DashboardAlphaPage} />
         {Object.keys(loadableRoutes).map(path => {
           const { exact, ...props } = loadableRoutes[path]
           props.exact = exact === void 0 || exact || false // set true as default

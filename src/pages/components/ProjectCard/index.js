@@ -1,6 +1,6 @@
 import React from 'react'
 import { Radio } from 'antd'
-import { Button, Icon } from 'antd'
+import { Button, Icon, Popconfirm,message } from 'antd'
 import helper from '../../../helper'
 
 import './style.scss'
@@ -16,13 +16,10 @@ class UserCard extends React.Component {
       type: '',
     }
   }
-
   render() {
     const { type } = this.state
-    const { project } = this.props
-    console.log(project)
+    const { project, remove } = this.props
     let url = project.imageUrl || 'resources/images/iot.jpg'
-    console.log(url)
     const hover = type => {
       this.setState({
         type,
@@ -30,11 +27,11 @@ class UserCard extends React.Component {
     }
     return (
       <div
-        className={`userCard px-3 py-5 ${type.length > 0 ? 'userCard--typed bg-' + type : ''}`}
+        className={`project-card px-3 py-5 ${type.length > 0 ? 'project-card--typed bg-' + type : ''}`}
         onMouseEnter={() => hover('primary')}
         onMouseLeave={() => hover('')}
       >
-        <button className='userCard__plusBtn'>Add</button>
+        <a href='/#/projects/create' className='project-card__plusBtn'>Add</a>
         <Avatar
           src={url}
           border={true}
@@ -42,22 +39,37 @@ class UserCard extends React.Component {
           size='90'
         />
         <div className='my-3 text-center'>
-          <div className='userCard__userName font-size-18'>{project.name}</div>
-          <div className='userCard__post'>{project.description}</div>
-          <div className='userCard__time'>
+          <div className='project-card__userName font-size-18'>{project.name}</div>
+          <div className='project-card__post'>{project.description}</div>
+          <div className='project-card__time'>
             {helper.formatDate(new Date(project.created_at))} -  {helper.formatDate(new Date(project.updated_at))}
           </div>
         </div>
         <div className='text-center'>
           <div className='btn-group text-center'>
             <ButtonGroup>
-              <Button type={type ? 'default' : 'primary'} className='btn-edit'>
+              <Button
+                onClick={() => this.props.push('/projects/' + project.id)}
+                type={type ? 'default' : 'primary'}
+                className='btn-edit'
+              >
                 <Icon type='edit' />
                 Edit
               </Button>
-              <Button type='danger' className='btn-remove'>
-                <Icon type='delete' /> Remove
+              <Popconfirm
+                title='Are you sure delete these users? You cannot rollback.'
+                onConfirm={() => remove(project.id)}
+                onCancel={() => message.info('cancel deleted')}
+                okText='Yes, I confirm'
+                cancelText="No, I don't"
+              >
+                <Button
+                  type='danger'
+                  className='btn-remove'
+                >
+                  <Icon type='delete' /> Remove
               </Button>
+              </Popconfirm>
             </ButtonGroup>
           </div>
         </div>

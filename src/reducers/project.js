@@ -3,8 +3,7 @@ import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
-import { createProjectPolicy } from '../services/policy'
-import { setPermissionPerGroup } from 'reducers/permission'
+import { push } from 'react-router-redux'
 
 export const REDUCER = 'project'
 
@@ -45,73 +44,72 @@ export const getOne = id => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-
-export const create = (model, isCreate = false) => (dispatch, getState) => {
-  dispatch(createProjectState(model))
-  if (isCreate) {
-    let _model = {
-      group_ids: model.groups,
-      password: model.password,
-      password_confirm: model.confirm,
-      projectname: model.projectname,
-    }
-    axios
-      .post(projectApi, _model)
-      .then(response => {
-        let { projects, page, totalItems } = getState().project
-        projects.push(response.data)
-        dispatch(setProjectPage({ projects, page, totalItems: totalItems++ }))
-        dispatch(createProjectState({}))
-      })
-      .catch(error => {
-        let errorMessage = ((error.response || {}).data || {}).message || 'create project fail'
-        message.error(errorMessage)
-      })
-  }
-  dispatch(setPermissionPerGroup(null))
-}
-
-export const update = (model, isChange = false) => (dispatch, getState) => {
-  dispatch(updateProjectState(model))
-  if (isChange) {
-    let _model = {
-      group_ids: model.groups,
-      password: model.password,
-      password_confirm: model.confirm,
-      projectname: model.projectname,
-    }
-    axios
-      .post(projectApi, _model)
-      .then(response => {
-        let { projects, page, totalItems } = getState().project
-        projects[response.data.id] = response.data
-        dispatch(setProjectPage({ projects, page, totalItems }))
-        dispatch(createProjectState({}))
-      })
-      .catch(error => {
-        let errorMessage = ((error.response || {}).data || {}).message || 'create project fail'
-        message.error(errorMessage)
-      })
-  }
-  dispatch(setPermissionPerGroup(null))
-}
-export const destroy = ids => (dispatch, getState) => {
+export const create = (name, description) => (dispatch, getState) => {
   axios
-    .delete(`${projectApi}?ids=${ids}`)
+    .post(projectApi, { name, description })
     .then(response => {
+      notification['success']({
+        message: 'Create project success!',
+        description:
+          'The project was created successfully!',
+      })
+      dispatch(push('/projects'))
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'create project fail'
+      message.error(errorMessage)
+    })
+}
+export const update = (id, name, description) => (dispatch, getState) => {
+  axios
+    .patch(`${projectApi}/${id}`, { name, description })
+    .then(response => {
+      notification['success']({
+        message: 'Update project success!',
+        description:
+          'The project was updated successfully!',
+      })
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'create project fail'
+      message.error(errorMessage)
+    })
+}
+export const remove = id => (dispatch, getState) => {
+  axios
+    .delete(`${projectApi}?ids=${id}`)
+    .then(response => {
+      let { projects, page, totalItems } = getState().project
+      projects = projects.filter(x => x.id !== id)
+      totalItems -=1
+      dispatch(setProjectPage({ projects, page, totalItems }))
       notification['success']({
         message: 'Delete project success!',
         description:
-          'These projects will be delete permanly shortly in 1 month. In that time, if you re-create these project, we will revert information for them.',
+          'The project was permanly deleted.',
       })
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'delete project fail'
+      message.error(errorMessage)
+    })
+}
+export const destroy = ids => (dispatch, getState) => {
+  console.log('xxxxxxxxxxxxxxxxxxx', ids)
+  axios
+    .delete(`${projectApi}?ids=${ids}`)
+    .then(response => {
       let { projects, page, totalItems } = getState().project
-      dispatch(
-        setProjectPage({
-          projects: projects.filter(project => !ids.includes(project.id)),
-          page,
-          totalItems: totalItems - ids.length,
-        }),
-      )
+      let listId = ids.split(',')
+      console.log('project', projects, listId)
+      projects = projects.filter(x => !listId.includes(x.id))
+      totalItems -= listId.length
+      dispatch(setProjectPage({ projects, page, totalItems }))
+      notification['success']({
+        message: 'Delete project success!',
+        description:
+          'The project was permanly deleted.',
+      })
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'delete project fail'
@@ -133,7 +131,6 @@ const ACTION_HANDLES = {
   }),
   [createProjectState]: (state, projectCreate) => ({ ...state, projectCreate }),
   [updateProjectState]: (state, projectUpdate) => {
-    console.log('handle action update project', state, projectUpdate)
     return { ...state, detail: { ...state.detail, projectUpdate } }
   },
   [setProjectDetailPage]: (state, detail) => ({ ...state, detail }),
