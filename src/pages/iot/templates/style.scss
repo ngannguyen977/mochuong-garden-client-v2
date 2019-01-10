@@ -2,4 +2,46 @@
     &__btn-create{
         margin: 20px auto;
     }
+
 }
+.template-property{
+    .ant-select-selection__rendered{
+        // margin-left: 100px;
+        // margin-right:100px;
+        text-align: center;
+        // margin-left: 35%;
+    }
+    .property-item{
+        width: 20%;
+        margin-left: 15px;
+        &__title{
+            display: inline-block;
+        }
+        &__checkbox{
+            width: 20%;
+        }
+    }
+   .hidden-item{
+       display: none;
+   }
+   .checklist-item{
+    margin-top: -25px;
+    margin-left: 15px;
+   }
+}
+.dynamic-delete-button {
+    cursor: pointer;
+    position: relative;
+    top: 4px;
+    font-size: 24px;
+    color: #999;
+    // transition: all .3s;
+    margin-left: 10px;
+  }
+  .dynamic-delete-button:hover {
+    color: #777;
+  }
+  .dynamic-delete-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }

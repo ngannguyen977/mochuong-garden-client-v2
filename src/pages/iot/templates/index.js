@@ -3,7 +3,6 @@ import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
 import ListPage from './ListPage'
 
-
 class Template extends React.Component {
   static defaultProps = {
     pathName: 'Templates',
@@ -14,8 +13,8 @@ class Template extends React.Component {
     console.log(this)
     return (
       <Page {...props}>
-        <Helmet title='Templates' />
-        <ListPage history={props.history  } location={props.location} />
+        <Helmet title="Templates" />
+        <ListPage history={props.history} location={props.location} />
       </Page>
     )
   }

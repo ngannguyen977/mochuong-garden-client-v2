@@ -29,7 +29,7 @@ export class ButtonStep extends React.Component {
         }
     }
     render() {
-        const { current, steps, link, changeStepState } = this.props
+        const { current, steps, link, changeStepState,rule } = this.props
         const _changeStep = (index) => {
             let _current = index === 0 ? index : current + index
             if (_current >= steps.length) {
@@ -59,6 +59,7 @@ export class ButtonStep extends React.Component {
                         className='text-white'
                         type='primary'
                         onClick={() => _changeStep(1)}
+                        disabled={rule}
                     // href={current === steps.length ? link : null}
                     >
                         {steps[current].nextTitle}

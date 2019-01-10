@@ -42,6 +42,7 @@
     "react": "^16.4.0",
     "react-chartist": "^0.13.1",
     "react-chartjs-2": "^2.7.4",
+    "react-color": "^2.17.0",
     "react-container-query": "^0.11.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.4.0",

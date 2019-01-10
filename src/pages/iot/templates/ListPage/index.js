@@ -1,11 +1,10 @@
 import React from 'react'
-import { Table, Button } from 'antd'
+import { Pagination, Button } from 'antd'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
 import helper from '../../../../helper'
-import { Checkbox, Popover, Icon, Tag, Popconfirm, message } from 'antd'
 import '../../../../resources/style.scss'
 import '../style.scss'
 import TemplateCard from '../../../components/TemplateCard'
@@ -35,10 +34,15 @@ class ListPage extends React.Component {
       })
     }
   }
-
+  onChange = (page) => {
+    const { limit, sort, isAsc } = queryString.parse(this.props.location.search)
+    this.props.getList(limit, page - 1, sort, isAsc)
+    this.setState({
+      current: page,
+    });
+  }
   render() {
-
-    const { totalItems, page, data, type,history } = this.props
+    const { totalItems, destroy, data, type, history } = this.props
 
     return (
       <div className='template'>
@@ -50,13 +54,16 @@ class ListPage extends React.Component {
                   <strong>Templates Management</strong>
                 </div>
                 <small>
-                  Template management allow admins can control all templates. Administrators can create a new
-                  template, add a template to several groups, attach some permission, change status or delete
-                  templates. You also view detail a template, identify groups and permissions of a template.
-            </small>
+                  Template management allow admins can control all templates. Administrators can
+                  create a new template, add a template to several groups, attach some permission,
+                  change status or delete templates. You also view detail a template, identify
+                  groups and permissions of a template.
+                </small>
               </div>
               <div className='col-md-2 template__btn-create'>
-                <Button type='primary' onClick={()=>history.push('/foo')}>Create New Template</Button>
+                <Button type='primary' onClick={() => history.push('/templates/create')}>
+                  Create New Template
+                </Button>
               </div>
             </div>
           </div>
@@ -65,16 +72,20 @@ class ListPage extends React.Component {
               <div className='row'>
                 {data &&
                   data.map(x => (
-                    <div className='col-md-3' key={x.id}>
+                    <div className='col-md-2' key={x.id}>
                       <TemplateCard
                         data={x || {}}
                         type={type}
                         onMouseEnter={() => this.setState({ current: 0 })}
-                      //  remove = {remove}
-                      //  gotoEdit={gotoEdit}
+                        remove={destroy}
+                        push={history.push}
                       />
+
                     </div>
                   ))}
+                <div className='col-md-12 text-right'>
+                  <Pagination current={this.state.current} onChange={this.onChange} total={totalItems} pageSize={18} />
+                </div>
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (

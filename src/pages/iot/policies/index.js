@@ -3,7 +3,6 @@ import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
 import ListPage from './ListPage'
 
-
 class Policy extends React.Component {
   static defaultProps = {
     pathName: 'Policies',
@@ -13,8 +12,8 @@ class Policy extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Policies' />
-        <ListPage location={props.location}/>
+        <Helmet title="Policies" />
+        <ListPage location={props.location} />
       </Page>
     )
   }

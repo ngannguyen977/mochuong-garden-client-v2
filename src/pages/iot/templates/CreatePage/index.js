@@ -12,8 +12,8 @@ class TemplateCreate extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Templates" />
-        <CreatePage location={props.location} />
+        <Helmet title='Templates' />
+        <CreatePage location={props.location}  history={props.history}/>
       </Page>
     )
   }

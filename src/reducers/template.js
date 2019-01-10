@@ -1,4 +1,3 @@
-
 import { createAction, createReducer } from 'redux-act'
 import { message } from 'antd'
 import axios from 'axios'
@@ -11,6 +10,8 @@ export const REDUCER = 'template'
 const NS = `@@${REDUCER}/`
 const api = constant.api.iot
 const templateApi = `${api.host}/${api.template}`
+const templatePropertyApi = `${api.host}/${api.templateProperty}`
+const templateAlertApi = `${api.host}/${api.alertTemplate}`
 
 export const setTemplatePage = createAction(`${NS}SET_TEMPLATE_PAGE`)
 export const setTemplateDetailPage = createAction(`${NS}SET_TEMPLATE_DETAIL_PAGE`)
@@ -19,7 +20,7 @@ export const updateTemplateState = createAction(`${NS}UPDATE_TEMPLATE`)
 export const getTemplatesInGroup = createAction(`${NS}GET_TEMPLATES_GROUP`)
 export const getPermission = createAction(`${NS}GET_TEMPLATE_PERMISSION`)
 
-export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
+export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
   getState,
 ) => {
@@ -27,7 +28,7 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
     .get(templateApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
       let { thingTemplates, page, totalItems } = response.data
-      dispatch(setTemplatePage({ templates:thingTemplates, page, totalItems }))
+      dispatch(setTemplatePage({ templates: thingTemplates, page, totalItems }))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'get template list fail'
@@ -47,63 +48,117 @@ export const getOne = id => (dispatch, getState) => {
     })
 }
 export const create = (model, isCreate = false) => (dispatch, getState) => {
+  const dataTypes = [
+    {
+      id: 1,
+      name: 'Number'
+    },
+    {
+      id: 2,
+      name: 'String'
+    },
+    {
+      id: 3,
+      name: 'Json'
+    },
+    {
+      id: 4,
+      name: 'Picture'
+    },
+    {
+      id: 5,
+      name: 'Boolean'
+    }
+  ]
   dispatch(createTemplateState(model))
   if (isCreate) {
-    let _model = {
-      group_ids: model.groups,
-      password: model.password,
-      password_confirm: model.confirm,
-      templatename: model.templatename,
+    let templateModel = {
+      name: model.name,
+      description: model.description,
+      parentId: model.parent.id,
+      projectId: model.project.id,
+      type: model.type.id
     }
     axios
-      .post(templateApi, _model)
+      .post(templateApi, templateModel)
       .then(response => {
+        //create thing template property
+        if (model.properties && model.properties.length > 0) {
+          let templateId = response.data.id
+          console.log(model.properties, 'zzzzzzzzzzzzzzzzzzzzzz')
+          let propertyPromises = model.properties.map(property => {
+            let propertyModel = {
+              dataType: (dataTypes.find(x => x.name.toLowerCase() === (property.type || '').toLowerCase())
+                || { id: 0 }).id,
+              defaultValue: property.value,
+              description: property.description,
+              isLogged: property.isLogged,
+              isPersistent: property.isPersistent,
+              isReadOnly: property.isReadOnly,
+              name: property.name,
+              thingTemplateID: templateId
+            }
+            return axios.post(templatePropertyApi, propertyModel)
+          })
+          Promise.all(propertyPromises).then(res => {
+            const { priorities } = getState().priority
+            let alertPromises = res.map(x => {
+              let property = model.properties.find(a => a.name === (x.data || {}).name)
+
+              return ((property || {}).alerts || []).map(a => {
+                let alertModel = {
+                  defaultValue: a.value,
+                  description: a.description,
+                  name: a.name,
+                  priorityID: ((priorities || []).find(x => x.name === a.priority) || {}).id,
+                  propertyTemplateID: x.data.id
+                }
+                return axios.post(templateAlertApi, alertModel)
+              })
+            })
+            Promise.all(alertPromises).then(x => {
+              message.success('Create templace success!')
+            })
+          })
+        }
         let { templates, page, totalItems } = getState().template
         templates.push(response.data)
         dispatch(setTemplatePage({ templates, page, totalItems: totalItems++ }))
-        if (model.permissions && Array.isArray(model.permissions) && model.permissions.length > 0) {
-          createTemplatePolicy(response.data.uuid, {
-            policyIds: model.permissions.map(x => x.policyId).join(),
-          })
-            .then(message.success('attach permission success'))
-            .catch(error => {
-              let errorMessage =
-                ((error.response || {}).data || {}).message ||
-                `create permission for template ${model.templatename} fail`
-              message.error(errorMessage)
-            })
-        }
         dispatch(createTemplateState({}))
       })
       .catch(error => {
+        dispatch(createTemplateState({}))
         let errorMessage = ((error.response || {}).data || {}).message || 'create template fail'
         message.error(errorMessage)
       })
   }
-  dispatch(setPermissionPerGroup(null))
 }
-export const changeStatus = (id, status) => (dispatch, getState) => {
-  axios
-    .patch(`${templateApi}/${id}`, { active: status })
-    .then(response => {
-      let { templates, page, totalItems } = getState().template
-      if (templates && Array.isArray(templates) && templates.length > 0) {
-        let templateId = templates.findIndex(x => x.id === response.data.id)
-        if (templateId) {
-          templates[(id = templateId)] = response.data
-          dispatch(setTemplatePage({ templates, page, totalItems }))
-          notification['success']({
-            message: 'Change status of templates success!',
-            description:
-              'Templates status are updated. When templates was left their job, you will remove them by delete templates button or just deactive these templates.',
-          })
+export const update = (id, model, isUpdate) => (dispatch, getState) => {
+  dispatch(setTemplateDetailPage(model))
+  if (isUpdate) {
+    axios
+      .patch(`${templateApi}/${id}`, { description: model.description, name: model.name, imageId: model.imageId })
+      .then(response => {
+        let { templates, page, totalItems } = getState().template
+        if (templates && Array.isArray(templates) && templates.length > 0) {
+          let templateId = templates.findIndex(x => x.id === response.data.id)
+          if (templateId) {
+            templates[(id = templateId)] = response.data
+            dispatch(setTemplatePage({ templates, page, totalItems }))
+            notification['success']({
+              message: 'Update template information success!',
+              description:
+                'Templates status are updated. When templates was left their job, you will remove them by delete templates button or just deactive these templates.',
+            })
+          }
         }
-      }
-    })
-    .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'change status template fail'
-      message.error(errorMessage)
-    })
+      })
+      .catch(error => {
+        let errorMessage =
+          ((error.response || {}).data || {}).message || 'change status template fail'
+        message.error(errorMessage)
+      })
+  }
 }
 export const destroy = ids => (dispatch, getState) => {
   axios
@@ -115,11 +170,12 @@ export const destroy = ids => (dispatch, getState) => {
           'These templates will be delete permanly shortly in 1 month. In that time, if you re-create these template, we will revert information for them.',
       })
       let { templates, page, totalItems } = getState().template
+      let listId = ids.toString().split(',')
       dispatch(
         setTemplatePage({
-          templates: templates.filter(template => !ids.includes(template.id)),
+          templates: templates.filter(x => !listId.includes(x.id)),
           page,
-          totalItems: totalItems - ids.length,
+          totalItems: totalItems - listId.length,
         }),
       )
     })
@@ -135,7 +191,12 @@ const initialState = {
   templates: [],
 }
 const ACTION_HANDLES = {
-  [setTemplatePage]: (state, { templates, page, totalItems }) => ({ ...state, templates, page, totalItems }),
+  [setTemplatePage]: (state, { templates, page, totalItems }) => ({
+    ...state,
+    templates,
+    page,
+    totalItems,
+  }),
   [createTemplateState]: (state, templateCreate) => ({ ...state, templateCreate }),
   [updateTemplateState]: (state, templateUpdate) => {
     return { ...state, detail: { ...state.detail, templateUpdate } }

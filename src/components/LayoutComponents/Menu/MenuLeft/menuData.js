@@ -62,4 +62,25 @@ export default [
     url: '/certificates',
     icon: 'icmn icmn-key',
   },
+  {
+    divider: true,
+  },
+  {
+    title: 'Priorities',
+    key: 'priority',
+    url: '/priorities',
+    icon: 'icmn icmn-move-up',
+  },
+  {
+    title: 'Properties',
+    key: 'property',
+    url: '/properties',
+    icon: 'icmn icmn-leaf',
+  },
+  {
+    title: 'Alerts',
+    key: 'alert',
+    url: '/alerts',
+    icon: 'icmn icmn-warning',
+  },
 ]

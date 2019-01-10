@@ -10,6 +10,8 @@ import permission from './permission'
 import project from './project'
 import policy from './policy'
 import template from './template'
+import priority from './priority'
+import property from './property'
 
 export default combineReducers({
   routing: routerReducer,
@@ -22,5 +24,7 @@ export default combineReducers({
   permission,
   project,
   policy,
-  template
+  template,
+  priority,
+  property
 })

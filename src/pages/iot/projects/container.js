@@ -1,4 +1,4 @@
-import { getList, getOne, create, update,remove } from 'reducers/project'
+import { getList, getOne, create, update, remove } from 'reducers/project'
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),

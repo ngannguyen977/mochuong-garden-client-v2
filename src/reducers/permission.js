@@ -123,7 +123,7 @@ export const destroy = ids => (dispatch, getState) => {
         setPermissionPage({
           permissions: permissions.filter(x => !ids.includes(x.policyId)),
           page,
-          totalItems: totalItems-=ids.length,
+          totalItems: (totalItems -= ids.length),
         }),
       )
     })

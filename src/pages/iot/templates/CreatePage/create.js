@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import DetailPage from '../DetailPage/detail'
 import ButtonStep from '../../../components/buttonStep'
 import StepProgress from '../../../components/stepProgress'
-
+import Property from '../DetailPage/property'
 @connect(
   mapStateToProps,
   mapDispathToProps,
@@ -27,10 +27,10 @@ class CreatePage extends React.Component {
     }
   }
   changeStepState(current) {
-    const { create, templateCreate } = this.props
+    const { create, createModel } = this.props
     if (current === 3) {
       console.log('creating.....')
-      create(templateCreate, true)
+      create(createModel, true)
     }
     this.setState({
       step: {
@@ -44,7 +44,7 @@ class CreatePage extends React.Component {
     const { steps } = this.props
     return (
       <div className='template-create'>
-        <StepProgress steps={steps} current={current} type='USER' />
+        <StepProgress steps={steps} current={current} type='TEMPLATE' />
         <div className='card'>
           <div className='card-header'>
             <h4 className='text-black mb-3'>
@@ -52,6 +52,8 @@ class CreatePage extends React.Component {
             </h4>
           </div>
           <div className='card-body'>
+          {current === 0 && <Property history={this.props.history} match={this.props.match}/>}
+          {current === 1 && <DetailPage />}
             <ButtonStep
               steps={steps}
               current={current}

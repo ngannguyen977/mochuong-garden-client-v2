@@ -89,8 +89,32 @@ const loadableRoutes = {
   '/templates/create': {
     component: loadable(() => import('pages/iot/templates/CreatePage')),
   },
+  '/alerts/:property': {
+    component: loadable(() => import('pages/iot/alerts/create')),
+  },
   '/templates/:id': {
     component: loadable(() => import('pages/iot/templates/DetailPage')),
+  },
+
+  // priority
+  '/priorities': {
+    component: loadable(() => import('pages/iot/priorities')),
+  },
+  '/priorities/create': {
+    component: loadable(() => import('pages/iot/priorities/CreatePage')),
+  },
+  '/priorities/:id': {
+    component: loadable(() => import('pages/iot/priorities/DetailPage')),
+  },
+  // properties
+  '/properties': {
+    component: loadable(() => import('pages/iot/properties')),
+  },
+  '/properties/create': {
+    component: loadable(() => import('pages/iot/properties/CreatePage')),
+  },
+  '/properties/:id': {
+    component: loadable(() => import('pages/iot/properties/DetailPage')),
   },
 }
 

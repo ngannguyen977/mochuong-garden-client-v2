@@ -50,8 +50,7 @@ export const create = (name, description) => (dispatch, getState) => {
     .then(response => {
       notification['success']({
         message: 'Create project success!',
-        description:
-          'The project was created successfully!',
+        description: 'The project was created successfully!',
       })
       dispatch(push('/projects'))
     })
@@ -66,8 +65,7 @@ export const update = (id, name, description) => (dispatch, getState) => {
     .then(response => {
       notification['success']({
         message: 'Update project success!',
-        description:
-          'The project was updated successfully!',
+        description: 'The project was updated successfully!',
       })
     })
     .catch(error => {
@@ -81,12 +79,11 @@ export const remove = id => (dispatch, getState) => {
     .then(response => {
       let { projects, page, totalItems } = getState().project
       projects = projects.filter(x => x.id !== id)
-      totalItems -=1
+      totalItems -= 1
       dispatch(setProjectPage({ projects, page, totalItems }))
       notification['success']({
         message: 'Delete project success!',
-        description:
-          'The project was permanly deleted.',
+        description: 'The project was permanly deleted.',
       })
     })
     .catch(error => {
@@ -107,8 +104,7 @@ export const destroy = ids => (dispatch, getState) => {
       dispatch(setProjectPage({ projects, page, totalItems }))
       notification['success']({
         message: 'Delete project success!',
-        description:
-          'The project was permanly deleted.',
+        description: 'The project was permanly deleted.',
       })
     })
     .catch(error => {

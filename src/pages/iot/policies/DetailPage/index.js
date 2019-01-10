@@ -12,7 +12,7 @@ class PolicyDetail extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Policy Details' />
+        <Helmet title="Policy Details" />
         <DetailTabPage location={props.location} match={props.match} />
       </Page>
     )

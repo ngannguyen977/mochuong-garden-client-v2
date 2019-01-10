@@ -12,8 +12,8 @@ class TemplateDetail extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Template Details" />
-        <DetailTabPage location={props.location} match={props.match} />
+        <Helmet title='Template Details' />
+        <DetailTabPage location={props.location} history={props.history} match={props.match} />
       </Page>
     )
   }

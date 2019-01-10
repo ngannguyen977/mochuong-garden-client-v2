@@ -197,10 +197,7 @@ export const getByUser = userId => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const changePoliciesForUser = (policyIds, userUuid, isChange) => (
-  dispatch,
-  getState,
-) => {
+export const changePoliciesForUser = (policyIds, userUuid, isChange) => (dispatch, getState) => {
   console.log('change policy for user in group reducer', policyIds, userUuid, isChange)
   dispatch(updateUserState({ userUuid, policies: policyIds }))
   if (isChange) {
@@ -216,10 +213,7 @@ export const changePoliciesForUser = (policyIds, userUuid, isChange) => (
       })
   }
 }
-export const changePoliciesForGroup = (policyIds, groupUuid, isChange) => (
-  dispatch,
-  getState,
-) => {
+export const changePoliciesForGroup = (policyIds, groupUuid, isChange) => (dispatch, getState) => {
   console.log('change policy for group in group reducer', policyIds, groupUuid, isChange)
   dispatch(updateGroupState({ groupUuid, policies: policyIds }))
   if (isChange) {

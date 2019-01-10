@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.scss'
 import data from './data.json'
-import { Button } from 'antd'
+import { Button, Icon, Popconfirm, message } from 'antd'
 
 class ProductCard extends React.Component {
   state = {
@@ -16,30 +16,26 @@ class ProductCard extends React.Component {
   render() {
     const {
       productImg,
-      productName,
-      productPrice,
-      productOldPrice,
-      productNote,
       productStatus,
     } = this.state
 
-    const { data, type } = this.props
+    const { data, type, remove } = this.props
 
     let imageType
     switch (data.type) {
       case type.remote:
-     imageType = 'resources/iot/remote.png'
+        imageType = 'resources/iot/remote.png'
         break
-        case type.generic:
+      case type.generic:
         imageType = 'resources/iot/generic.png'
         break
-        case type.gateway:
+      case type.gateway:
         imageType = 'resources/iot/gateway.png'
         break
-        case type.camera:
+      case type.camera:
         imageType = 'resources/iot/camera.png'
         break
-        default:
+      default:
         break
     }
     return (
@@ -51,23 +47,34 @@ class ProductCard extends React.Component {
             </div>
           )}
 
-          <a href='javascript: void(0);'>
-            <img src={productImg} alt='' />
+          <a href={'/templates/' + data.id}>
+            <img className='img-responsive' src={productImg} alt='' />
           </a>
         </div>
         <div className='templateCard__title'>
-          <a href='javascript: void(0);'>{data.name}</a>
+          <a href={'/templates/' + data.id}>{data.name}</a>
           <div className='templateCard__price'>
-            <img src={imageType} width='50px' className='img-responsive' alt={data.type} />
+            {/* <img src={imageType} width='50px' className='img-responsive' alt={data.type} /> */}
           </div>
         </div>
-        <div className='templateCard__descr'>
-          {data.description}
-        </div>
+        <div className='templateCard__descr'>{data.description}</div>
         <div className='templateCard__btn-control'>
-        <Button type='primary'>Edit</Button><Button type='danger'>Remove</Button>
+          <Button type='primary'
+            onClick={() => this.props.push('/templates/' + data.id)}
+          >Edit</Button>
+          <Popconfirm
+            title='Are you sure delete this project? It cannot be rollback.'
+            onConfirm={() => remove(data.id)}
+            onCancel={() => message.info('cancel deleted')}
+            okText='Yes, I confirm'
+            cancelText="No, I don't"
+          >
+            <Button type='danger' className='btn-remove'>
+              Remove
+                </Button>
+          </Popconfirm>
         </div>
-      </div>
+      </div >
     )
   }
 }

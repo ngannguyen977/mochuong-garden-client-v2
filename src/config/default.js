@@ -35,8 +35,17 @@ export default {
     },
     iot: {
       host: 'https://api-dev.onskycloud.com/iot-service/v1/api',
+      alertTemplate:'alert-templates',
+      certificates:'certificates',
+      configures:'configures',
+      policies:'policies',
+      priority:'priorities',
       project: 'projects',
-      template:'thing-templates',
+      alertProperty:'property-alerts',
+      template: 'thing-templates',
+      templateProperty:'property-templates',
+      thingProperty:'thing-properties',
+      things:'things',
     },
   },
 }

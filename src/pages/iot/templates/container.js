@@ -1,33 +1,23 @@
-import { getList, getOne, changeStatus, create, destroy } from 'reducers/template'
-import {
-  getList as getPermissions,
-  getByGroup as getPermissionByGroup,
-  getByTemplate as getPermissionByTemplate,
-  changePermissionsForTemplate,
-} from 'reducers/permission'
-import {
-  getList as getGroups,
-  create as createGroup,
-  changeGroupsForTemplate,
-  changeTemplatesForGroup,
-} from 'reducers/group'
+import { getList, getOne, create, destroy, update } from 'reducers/template'
+import { getList as getProjects } from 'reducers/project'
+import { getList as getPropertiesByTemplate, update as updateProperty } from 'reducers/property'
 import helper from '../../../helper'
 
 const steps = [
   {
-    title: 'Adding details',
-    subTitle: 'Adding Template Information',
+    title: 'Adding Properties ',
+    subTitle: 'Add properties for Template',
     icon: 'loading',
-    iconDefault: 'template',
+    iconDefault: 'solution',
     status: 'process',
     index: 0,
-    nextTitle: 'Next: Permission',
+    nextTitle: 'Next: Details',
   },
   {
-    title: 'Set permission',
-    subTitle: 'Set Permission for Template',
+    title: 'Adding details',
+    subTitle: 'Adding Template Information',
     icon: 'solution',
-    iconDefault: 'solution',
+    iconDefault: 'template',
     status: 'wait',
     index: 1,
     nextTitle: 'Next: Review',
@@ -69,12 +59,7 @@ const reviewColumns = [
     width: '30%',
   },
 ]
-const type = {
-  generic: 1,
-  remote: 2,
-  gateway: 3,
-  camera: 4
-}
+
 const summaryColumns = [
   {
     title: 'Templatename',
@@ -96,19 +81,56 @@ const summaryColumns = [
     render: x => helper.formatDate(new Date(x)),
   },
 ]
-
+const type = [
+  {
+    id: 1,
+    text: 'generic'
+  },
+  {
+    id: 2,
+    text: 'remote'
+  },
+  {
+    id: 3,
+    text: 'gateway'
+  },
+  {
+    id: 4,
+    text: 'camera'
+  }
+]
+const propertyType = [
+  { id: 1, text: 'JSON' },
+  { id: 2, text: 'NUMBER' },
+  { id: 3, text: 'STRING' },
+  { id: 4, text: 'PICTURE' },
+  { id: 5, text: 'BOOLEAN' }
+]
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
-  changeStatus: (id, status) => changeStatus(id, status),
+  getProjects: (limit, page, sort, isAsc) => getProjects(limit, page, sort, isAsc),
   create: (model, iscreate) => create(model, iscreate),
-  createGroup: (model, iscreate) => createGroup(model, iscreate),
+  update: (id, model, isUpdate) => update(id, model, isUpdate),
+  updateProperty: (id) => updateProperty(id),
   destroy: ids => destroy(ids),
   getOne: id => getOne(id),
-  getPermissions: () => getPermissions(),
-  getGroups: () => getGroups(),
+  getPropertiesByTemplate: (type, parentId, limit, page, sort, isAsc) => getPropertiesByTemplate(type, parentId, limit, page, sort, isAsc),
 }
 export const mapStateToProps = (state, props) => {
   let template = state.template || {}
+  let property = state.property || {}
+  let properties = (property.properties || []).map(x => {
+    let dataType = (propertyType.find(a => a.id === x.dataType) || {}).text
+    return {
+      id: x.id,
+      name: x.name,
+      type: dataType,
+      value: x.defaultValue,
+      isPersistent: x.isPersistent,
+      isReadOnly: x.isReadOnly,
+      isLogged: x.isLogged
+    }
+  })
   return {
     // master
     template,
@@ -118,17 +140,15 @@ export const mapStateToProps = (state, props) => {
     data: template.templates || [],
     // detail
     detail: template.detail,
+    templateProperties: properties,
     // model
     steps,
     reviewColumns,
     summaryColumns,
     type,
-    // group
-    group: state.group,
-    groupCreate: state.group.groupCreate || {},
-    groups: state.group.groups,
-    // permission
-    permission: state.permission,
+    createModel: template.templateCreate || {},
+    // project
+    projects: (state.project || {}).projects || []
   }
 }
 

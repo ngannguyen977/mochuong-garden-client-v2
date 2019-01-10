@@ -8,7 +8,7 @@
   position: relative;
   background: $white;
   &__btn-control{
-    margin: 10px 0 -21px -20px;
+    margin: 10px -20px -21px -20px;
     button{
       border-radius: 0;
     }
@@ -38,14 +38,15 @@
   &__img {
     position: relative;
     text-align: center;
-    height: rem(250);
     overflow: hidden;
     a {
       display: block;
       img {
-        min-height: rem(250);
-        max-height: rem(250);
         max-width: 100%;
+        width: 200px;
+        height: auto;
+        min-height: auto;
+        max-height: 200px;
         transition: transform .4s ease-in-out;
       }
       &:hover {
@@ -64,14 +65,14 @@
     padding-right: rem(100);
     position: relative;
     a {
-      display: block;
+      // display: block;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
     }
   }
   &__descr {
-    padding-right: rem(100);
+    // padding-right: rem(100);
     font-style: italic;
     color: $black-lighten-more;
     &__sizes {
