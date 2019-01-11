@@ -6,9 +6,13 @@ import axios from 'axios'
 import constant from '../config/default'
 
 const api = constant.api.authen
+const configure = constant.api.configure
 const REDUCER = 'app'
 const NS = `@@${REDUCER}/`
 const loginApi = `${api.host}/${api.login}`
+const dataTypeApi = `${configure.host}/${configure.dataType}`
+const alertTypeApi = `${configure.host}/${configure.alertType}`
+const priorityApi = `${configure.host}/${configure.priority}`
 const infoApi = `${api.host}/${api.info}`
 
 export const _setFrom = createAction(`${NS}SET_FROM`)
@@ -22,6 +26,11 @@ export const deleteDialogForm = createAction(`${NS}DELETE_DIALOG_FORM`)
 export const addSubmitForm = createAction(`${NS}ADD_SUBMIT_FORM`)
 export const deleteSubmitForm = createAction(`${NS}DELETE_SUBMIT_FORM`)
 export const setLayoutState = createAction(`${NS}SET_LAYOUT_STATE`)
+
+export const setDataTypeState = createAction(`${NS}SET_DATATYPE_STATE`)
+export const setAlertTypeState = createAction(`${NS}SET_ALERTTYPE_STATE`)
+export const setPriorityState = createAction(`${NS}SET_PRIORITY_STATE`)
+
 
 export const setLoading = isLoading => {
   const action = _setLoading(isLoading)
@@ -51,33 +60,38 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        axios
-          .get(infoApi)
-          .then(userInfo => {
-            dispatch(_setHideLogin(true))
-            dispatch(
-              setUserState({
-                userState: {
-                  ...userInfo.data,
-                  token: response.data.token,
-                  refresh_token: response.data.refresh_token,
-                  expires: response.data.expires,
-                },
-              }),
-            )
-            dispatch(push('/'))
-            notification.open({
-              type: 'success',
-              message: 'You have successfully logged in!',
-              description:
-                'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
-            })
-            return resolve(true)
+        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi].map(x => axios.get(x, { limit: 100 }))
+        Promise.all(_promise).then(res => {
+          let dataTypes = res[0].data
+          let alertTypes = res[1].data
+          let priorites = res[2].data
+          let userInfo = res[3].data
+          dispatch(setDataTypeState(dataTypes))
+          dispatch(setAlertTypeState(alertTypes))
+          dispatch(setPriorityState(priorites))
+          dispatch(_setHideLogin(true))
+          dispatch(
+            setUserState({
+              userState: {
+                ...userInfo.data,
+                token: response.data.token,
+                refresh_token: response.data.refresh_token,
+                expires: response.data.expires,
+              },
+            }),
+          )
+          notification.open({
+            type: 'success',
+            message: 'You have successfully logged in!',
+            description:
+              'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
           })
-          .catch(error => {
-            console.log('GET INFO ERROR', error.message)
-            return resolve(false)
-          })
+          dispatch(push('/'))
+          return resolve(true)
+        }).catch(error => {
+          console.log('GET INFO ERROR', error.message)
+          return resolve(false)
+        })
       })
       .catch(error => {
         console.log('ERROR', error.message)
@@ -85,7 +99,9 @@ export const login = (customer, username, password, dispatch) =>
         return resolve(false)
       })
   })
+export const commonData = () => (dispatch, getState) => {
 
+}
 export const logout = () => (dispatch, getState) => {
   dispatch(
     setUserState({
@@ -142,6 +158,18 @@ export default createReducer(
       window.localStorage.setItem('app.token', JSON.stringify(userState.token))
       window.localStorage.setItem('app.userState', JSON.stringify(userState))
       return { ...state, userState }
+    },
+    [setDataTypeState]: (state, dataTypes) => {
+      window.localStorage.setItem('app.dataTypes', JSON.stringify(dataTypes))
+      return { ...state, dataTypes }
+    },
+    [setAlertTypeState]: (state, alertTypes) => {
+      window.localStorage.setItem('app.alertTypes', JSON.stringify(alertTypes))
+      return { ...state, alertTypes }
+    },
+    [setPriorityState]: (state, priority) => {
+      window.localStorage.setItem('app.priority', JSON.stringify(priority))
+      return { ...state, priority }
     },
     [setLayoutState]: (state, param) => {
       const layoutState = { ...state.layoutState, ...param }

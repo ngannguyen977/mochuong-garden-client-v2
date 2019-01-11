@@ -50,7 +50,7 @@ export const create = (name, description, color, project) => (dispatch, getState
     .then(response => {
       notification['success']({
         message: 'Create priority success!',
-        description: 'The priority was created successfully!'
+        description: 'The priority was created successfully!',
       })
       dispatch(push('/priorities'))
     })

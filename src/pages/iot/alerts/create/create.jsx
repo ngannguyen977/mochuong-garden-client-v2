@@ -1,6 +1,7 @@
 import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
+import queryString from 'query-string'
 import {
     Form, Input, InputNumber, DatePicker, Checkbox, Icon, Button, Select, Row, Col, message
 } from 'antd'
@@ -30,36 +31,43 @@ class DynamicFieldSet extends React.Component {
             moa: data.filter(x => x.key !== key)
         })
     }
-    add = (row = { name: '', operator: 'Equal', value: '' }) => {
-        const { createPropertyModel, form, match } = this.props
+    add = (row = { operator: 'Equal' }) => {
+        const { propertyId, templateId } = queryString.parse(this.props.location.search)
+        const { createPropertyModel, form, match, propery } = this.props
         const { getFieldValue, setFieldsValue } = form
-        const { properties } = createPropertyModel
+        const { properties } = (!propertyId || propertyId !== 'undefined') ? createPropertyModel : this.props
         let data = getFieldValue('data') || []
-        if (properties && properties.alerts) {
-            let property = properties.find(x => x.name === match.params.property) || {}
-            if (property.alerts)
-                data = property.alerts
+        console.log('add sao null', data, propertyId, properties)
+        let property = {}
+        if (propertyId && propertyId !== 'undefined') {
+            property = properties.find(x => x.id === +propertyId) || {}
+        } else if (properties && properties.alerts) {
+            property = properties.find(x => x.name === match.params.property) || {}
         }
+        if (property.alerts)
+            data = property.alerts
         data.push(row)
-
         setFieldsValue({
             moa: data
         })
     }
     componentWillMount() {
-        const { priorities, getPriorities } = this.props
-        if (!priorities || priorities.length === 0) {
-            getPriorities(100)
+        const { getList } = this.props
+
+        const { propertyId, templateId } = queryString.parse(this.props.location.search)
+        if (propertyId && propertyId !== 'undefined') {
+            getList('template', propertyId, templateId)
         }
     }
     componentDidMount() {
-        const { match, history, createPropertyModel } = this.props
+        const { match, history, createPropertyModel, isEdit } = this.props
+        const { propertyId, templateId } = queryString.parse(this.props.location.search)
         let propertyName = match.params.property
         if (!propertyName
             || propertyName === 'undefined'
-            || !createPropertyModel.properties
-            || !createPropertyModel.properties.find(x => x.name === propertyName)
-        ) {
+            || (!isEdit && (!createPropertyModel.properties
+                || !createPropertyModel.properties.find(x => x.name === propertyName)))
+            || (isEdit && (!propertyId || !templateId))) {
             message.warn('Please create property first!!!')
             history.goBack()
         } else {
@@ -69,22 +77,29 @@ class DynamicFieldSet extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { createProperty, createPropertyModel, match, history } = this.props
+        const { createProperty, createPropertyModel, match, history, createAlerts } = this.props
+        const { propertyId, templateId } = queryString.parse(this.props.location.search)
         this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-                let propertyName = match.params.property
-                let alerts = (values.data || []).filter(x => !undefined);
-                let properties = createPropertyModel.properties || []
-                let property = properties.find(x => x.name === propertyName)
-                if (property) {
-                    property.alerts = alerts
-                }
-                createProperty(createPropertyModel)
-                history.push('/templates/create')
-                message.info(`Create alerts for property ${propertyName} success!`)
+            if (err) {
+                return
+            }
+
+            console.log('Received values of form: ', values);
+            let propertyName = match.params.property
+            let alerts = (values.data || []).filter(x => !undefined);
+            let properties = createPropertyModel.properties || []
+            let property = properties.find(x => x.name === propertyName)
+            if (property) {
+                property.alerts = alerts
+            }
+            if (propertyId && propertyId !== 'undefined') {
+                // create for update property mode
+                createAlerts(propertyId, alerts)
             } else {
-                message.error(`${err}!`)
+                // create for create property mode
+                createProperty(createPropertyModel)
+                message.info(`Create alerts for property ${propertyName} success!`)
+                history.goBack()
             }
         });
     }
@@ -119,7 +134,7 @@ class DynamicFieldSet extends React.Component {
 
     render() {
         const { getFieldDecorator, getFieldValue, getFieldsValue } = this.props.form
-        const { createPropertyModel, match, priorities } = this.props
+        const { createPropertyModel, match, priorities, history } = this.props
         let property = (createPropertyModel.properties || []).find(x => x.name === match.params.property) || {}
         // const datas = getFieldValue('data') || []
         getFieldDecorator('moa', { initialValue: property.alerts || [] })
@@ -261,7 +276,7 @@ class DynamicFieldSet extends React.Component {
                         </Button>
                             </Form.Item>
                             <Form.Item className='btn-control text-right'>
-                                <a type='default' href='/#/templates/create'>Cancel</a>
+                                <Button type='default' style={{ marginRight: '10px' }} onClick={() => history.goBack()}>Back</Button>
                                 <Button type='primary' htmlType='submit'>Create Alerts</Button>
                             </Form.Item>
                         </Form>

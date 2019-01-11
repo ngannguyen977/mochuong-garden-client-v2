@@ -12,7 +12,7 @@ class Priority extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Priorities' />
+        <Helmet title="Priorities" />
         <ListPage history={props.history} location={props.location} />
       </Page>
     )

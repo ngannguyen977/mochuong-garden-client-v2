@@ -14,14 +14,14 @@ class CreatePage extends React.Component {
   }
   render() {
     return (
-      <div className='property-create'>
-        <div className='card'>
-          <div className='card-header'>
-            <h4 className='text-black mb-3'>
+      <div className="property-create">
+        <div className="card">
+          <div className="card-header">
+            <h4 className="text-black mb-3">
               <strong>Create a new Property</strong>
             </h4>
           </div>
-          <div className='card-body'>
+          <div className="card-body">
             <DetailPage />
           </div>
         </div>

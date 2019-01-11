@@ -9,7 +9,7 @@ export const REDUCER = 'alert'
 
 const NS = `@@${REDUCER}/`
 const api = constant.api.iot
-const alertApi = `${api.host}/${api.templateAlert}`
+const alertApi = `${api.host}/${api.alertTemplate}`
 const alertThingApi = `${api.host}/${api.thingAlert}`
 
 export const setAlertPage = createAction(`${NS}SET_ALERT_PAGE`)
@@ -19,12 +19,19 @@ export const updateAlertState = createAction(`${NS}UPDATE_ALERT`)
 export const getAlertsInGroup = createAction(`${NS}GET_ALERTS_GROUP`)
 export const getPermission = createAction(`${NS}GET_ALERT_PERMISSION`)
 
-export const getList = (type, parentid,templateid, limit = 10, page = 0, sort = 'name', isAsc = false) => (
-  dispatch,
-  getState,
-) => {
+export const getList = (
+  type,
+  parentid,
+  templateid,
+  limit = 10,
+  page = 0,
+  sort = 'name',
+  isAsc = false,
+) => (dispatch, getState) => {
   axios
-    .get(alertApi, { params: { parentid,templateid, limit: limit, page: page, sort: sort, isAsc: isAsc } })
+    .get(alertApi, {
+      params: { parentid, templateid, limit: limit, page: page, sort: sort, isAsc: isAsc },
+    })
     .then(response => {
       let { alertTemplates, page, totalItems } = response.data
       dispatch(setAlertPage({ alerts: alertTemplates, page, totalItems }))
@@ -45,21 +52,43 @@ export const getOne = id => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const create = (name, description, color, project) => (dispatch, getState) => {
+export const create = (name, defaultValue, priorityID, propertyTemplateID) => (dispatch, getState) => {
   axios
-    .post(alertApi, { name, description, color, project })
+    .post(alertApi, { name, defaultValue, priorityID, propertyTemplateID })
     .then(response => {
       notification['success']({
         message: 'Create alert success!',
-        description: 'The alert was created successfully!'
+        description: 'The alert was created successfully!',
       })
-      dispatch(push('/alerts'))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'create alert fail'
       message.error(errorMessage)
     })
 }
+export const createAlerts = (propertyId, alerts) => (dispatch, getState) => {
+  if (!alerts || alerts.length === 0) {
+    message.warn('No alert was created!')
+    return
+  }
+  const { priorities } = getState().app.priority || {}
+  let _promise = alerts.map(x => {
+    let priorityID = (priorities || []).find(a => a.name === x.priority).id
+    return axios.post(alertApi, { name: x.name, defaultValue: x.value, priorityID, propertyTemplateID: +propertyId })
+  })
+  Promise.all(_promise)
+    .then(response => {
+      notification['success']({
+        message: 'Create alert success!',
+        description: 'The alert was created successfully!',
+      })
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'create alert fail'
+      message.error(errorMessage)
+    })
+}
+
 export const update = (id, name, description) => (dispatch, getState) => {
   axios
     .patch(`${alertApi}/${id}`, { name, description })

@@ -62,7 +62,7 @@ class PriorityPage extends React.Component {
         sorter: true,
         width: '30%',
         render: (text, record) => (
-          <a className='link' href={`#/priorities/${record.id}`}>
+          <a className="link" href={`#/priorities/${record.id}`}>
             {record.name}
           </a>
         ),
@@ -79,7 +79,7 @@ class PriorityPage extends React.Component {
         sorter: true,
         width: '50%',
         render: (text, record) => (
-          <a className='link' href={`#/project/${record.projectId}`}>
+          <a className="link" href={`#/project/${record.projectId}`}>
             {record.projectId ? record.projectId : 'No Project'}
           </a>
         ),
@@ -119,55 +119,56 @@ class PriorityPage extends React.Component {
     const content = (
       <div>
         <Popconfirm
-          title='Are you sure delete these priorities? You cannot rollback.'
+          title="Are you sure delete these priorities? You cannot rollback."
           onConfirm={() => handleActions(type.del)}
           onCancel={() => handleActions(type.del, false)}
-          okText='Yes, I confirm'
+          okText="Yes, I confirm"
           cancelText="No, I don't"
         >
-          <p className='link'>Delete PRIORITIES</p>
+          <p className="link">Delete PRIORITIES</p>
         </Popconfirm>
       </div>
     )
     return (
       <div>
-        <section className='card'>
-          <div className='card-header'>
-            <div className='utils__title'>
+        <section className="card">
+          <div className="card-header">
+            <div className="utils__title">
               <strong>Priorities Management</strong>
             </div>
             <small>
               You manage access for users by creating priorities and attaching them to users or
               groups. A priority is an object, when associated with an entity or resource, defines
-              their priorities. We evaluates these priorities when a principal, such as a user, makes a
-              request. Priorities in the priorities determine whether the request is allowed or denied.
-              Most priorities are stored in cloud as JSON documents.
+              their priorities. We evaluates these priorities when a principal, such as a user,
+              makes a request. Priorities in the priorities determine whether the request is allowed
+              or denied. Most priorities are stored in cloud as JSON documents.
             </small>
             <p>
               <small>
                 We define priorities for an action regardless of the method that you use to perform
-                the operation. For example, if a priority allows the GetUser action, then a user with
-                that priority can get user information. When you create a user, you can set up the
-                user to allow console or programmatic access. The user can sign in to the console
-                using a user name and password. Or they can use access keys to work on the website.
+                the operation. For example, if a priority allows the GetUser action, then a user
+                with that priority can get user information. When you create a user, you can set up
+                the user to allow console or programmatic access. The user can sign in to the
+                console using a user name and password. Or they can use access keys to work on the
+                website.
               </small>
             </p>
           </div>
-          <div className='card-body'>
+          <div className="card-body">
             {totalItems && totalItems > 0 && (
-              <div className='table-responsive'>
+              <div className="table-responsive">
                 <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
-                    type='primary'
+                    type="primary"
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href='#/priorities/create'
+                    href="#/priorities/create"
                   >
                     Create Priority
                   </Button>
-                  <Popover placement='bottomRight' content={content} trigger='click'>
-                    <Button type='primary' disabled={!hasSelected} loading={loading}>
-                      Actions <Icon type='down-circle' theme='filled' />
+                  <Popover placement="bottomRight" content={content} trigger="click">
+                    <Button type="primary" disabled={!hasSelected} loading={loading}>
+                      Actions <Icon type="down-circle" theme="filled" />
                     </Button>
                   </Popover>
                 </div>
@@ -186,7 +187,7 @@ class PriorityPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name='Priority' link='#/priorities/create' />
+              <LockScreenPage name="Priority" link="#/priorities/create" />
             )}
           </div>
         </section>

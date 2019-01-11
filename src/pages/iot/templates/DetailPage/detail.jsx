@@ -13,22 +13,16 @@ export class DetailPage extends React.Component {
     super()
     this.state = {
       name: '',
-      password: '',
-      confirm: ''
     }
   }
   componentWillMount() {
     const { projects, getProjects, data, getList } = this.props
-    if (!projects || projects.length === 0) {
-      getProjects(100)
-    }
-    if (!data || data.length === 0) {
-      getList(100)
-    }
+
   }
-  componentWillReceiveProps() {
+  componentDidMount() {
     const { detail, isEdit, type } = this.props
     const { name } = this.state
+    console.log('componentDidMount',detail)
     if (isEdit && detail && (!name || name !== detail.name)) {
       this.setState({
         name: detail.name,

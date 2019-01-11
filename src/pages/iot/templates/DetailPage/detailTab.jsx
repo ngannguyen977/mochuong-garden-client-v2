@@ -18,7 +18,7 @@ export class DetailTabPage extends React.Component {
     componentWillMount() {
         const { match, getOne, getPropertiesByTemplate } = this.props
         getOne(match.params.id)
-        getPropertiesByTemplate('template', match.params.id)
+        // getPropertiesByTemplate('template', match.params.id)
     }
 
     render() {
@@ -46,7 +46,7 @@ export class DetailTabPage extends React.Component {
                     Cancel
                         </Button>
                 <Button
-                    disabled={!(detail || {}).name}
+                    disabled={type === 'property'}
                     type='primary'
                     className='text-capitalize'
                     style={{ marginRight: '25px' }}
@@ -65,7 +65,7 @@ export class DetailTabPage extends React.Component {
         )
         const tabProperty = (
             <div className='property-tab'>
-                <PropertyPage match={match} history={history} isEdit={true} />
+                <PropertyPage match={match} history={history} isEdit={true} _update={_update} />
                 {handleButton('property')}
             </div>
         )
@@ -73,8 +73,8 @@ export class DetailTabPage extends React.Component {
         return (
             <div className='template-detail'>
                 <Tabs defaultActiveKey='1' >
-                    <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
-                    <TabPane tab={<span><Icon type='project' />Properties</span>} key='2'>{tabProperty}</TabPane>
+                <TabPane tab={<span><Icon type='project' />Properties</span>} key='1'>{tabProperty}</TabPane>
+                    <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='2'>{tabDetail}</TabPane>
                 </Tabs>
             </div>
         )

@@ -20,6 +20,56 @@ const propertyType = [
 )
 class DynamicFieldSet extends React.Component {
 
+
+    componentDidUpdate() {
+        const { isEdit, detail } = this.props
+        const { getFieldValue, setFieldsValue } = this.props.form
+        let data = getFieldValue('moa') || []
+        console.log('componentDidMount', data, detail)
+        if (data.length === 0) {
+            if (isEdit && detail) {
+                this.add(undefined, true)
+            }
+            if (!isEdit) {
+                this.add()
+            }
+        }
+    }
+    createOrAddProperty = (key, item) => {
+        const { isEdit, match, createProperty, updateProperty, createModel, templateProperties } = this.props
+        const { getFieldValue, setFieldsValue } = this.props.form
+        let data = getFieldValue('data') || []
+        this.props.form.validateFields((err, values) => {
+            if (err) {
+                return
+            }
+        })
+        let _data = data.find(x => x.key === key) || {}
+        if (!_data.name) {
+            message.warn(`Bạn phải nhập gì vào chứ!`)
+            return
+        }
+        let model = {
+            ..._data,
+            dataType: _data.type,
+            defaultValue: _data.value,
+            parentId: match.params.id
+        }
+        if (_data.id !== item.id) {
+            message.warn(`Ky vay ta!`)
+            return
+        }
+        if (!item.id) {
+            createProperty({ ...model })
+            return
+        }
+        updateProperty(item.id, { ...model })
+
+        // can use data-binding to set
+        setFieldsValue({
+            moa: data
+        })
+    }
     remove = (key) => {
         const { getFieldValue, setFieldsValue } = this.props.form
         // can use data-binding to get
@@ -34,29 +84,24 @@ class DynamicFieldSet extends React.Component {
         })
     }
 
-    add = (row = { type: 'STRING' }) => {
-        const { isEdit, form, createModel, templateProperties } = this.props
+    add = (row = { type: 'STRING' }, isFirstLoad = false) => {
+        const { isEdit, form, createModel, detail, dataTypes } = this.props
         const { getFieldValue, setFieldsValue } = form
-        let properties = isEdit ? templateProperties : createModel.properties
+        let properties = isEdit ? (detail || {}).properties : createModel.properties
         let data = getFieldValue('data') || []
+        console.log('fill data', properties,data)
         if (properties) {
-            data = Object.assign(data,properties)
+            data = Object.assign(data, !isEdit ? properties : properties.map(x => ({ ...x, type: (dataTypes.find(a => a.id === x.id) || {}).name })))
         }
-        data.push(row)
-
+        if (!isFirstLoad) {
+            data.push(row)
+        }
+        console.log('add sao null', data)
         setFieldsValue({
             moa: data
         })
     }
-    componentWillMount() {
-        const { isEdit, getPropertiesByTemplate, templateProperties, match } = this.props
-        if (isEdit && !templateProperties) {
-            getPropertiesByTemplate('template', match.params.id)
-        }
-    }
-    componentDidMount() {
-        this.add()
-    }
+
     handleSubmit = (e, key, addAlert = false) => {
         e.preventDefault();
         const { create, createModel, history, match } = this.props
@@ -77,7 +122,7 @@ class DynamicFieldSet extends React.Component {
                 if (addAlert) {
                     let property = (properties.find(x => x.key === key) || {})
                     if (property && property.name) {
-                        history.push(`/alerts/${property.name}?templateId=${match.params.id}&propertyId=${property.id}`)
+                        history.push(`/alerts/${property.name}?templateId=${(match.params || {}).id}&propertyId=${property.id}`)
                     }
                 }
             } else {
@@ -85,7 +130,6 @@ class DynamicFieldSet extends React.Component {
             }
         });
     }
-
     changeType(key, type) {
         const { getFieldValue, setFieldsValue } = this.props.form
         let datas = getFieldValue('data') || []
@@ -111,6 +155,7 @@ class DynamicFieldSet extends React.Component {
         })
     }
     render() {
+        const { isEdit } = this.props
         const { getFieldDecorator, getFieldValue, getFieldsValue } = this.props.form
         const { properties } = this.props.createModel
         // console.log('render-data', initKeys, initData)
@@ -224,11 +269,18 @@ class DynamicFieldSet extends React.Component {
                     <Form.Item
                         required={false}
                         key={index + '_btn_alert'}
-                        className='d-inline-block property-item'
+                        className='d-inline-block property-item property-btn-control'
                     >
-                        <Button htmlType='submit' onClick={(e) => this.handleSubmit(e, index, true)}>Add Alerts</Button>
+                        <Button htmlType='submit' onClick={(e) => this.handleSubmit(e, index, true)}> {isEdit && item.id ? 'Manage Alerts' : 'Add Alerts'}</Button>
 
                     </Form.Item>
+                    {isEdit ? (
+                        <Icon
+                            className='dynamic-delete-button d-inline-block'
+                            type='check-circle'
+                            onClick={() => this.createOrAddProperty(index, item)}
+                        />
+                    ) : null}
                     {data.length > 1 ? (
                         <Icon
                             className='dynamic-delete-button d-inline-block'
@@ -283,11 +335,11 @@ class DynamicFieldSet extends React.Component {
         return (
             <div className='template-property' >
                 <div className='row'>
-                    <div className='col-lg-4 text-justify'>
+                    <div className='col-lg-2 text-justify'>
                         <p>Template information include templatename and password, these field are provide for accession.
                             After this template is created success, you can give these information for a person, so they can loged in.</p>
                     </div>
-                    <div className='col-md-8'>
+                    <div className='col-md-10'>
                         <div className='property-item property-item__title '>
                             <p className='property-title '>Property Name</p>
                         </div>
@@ -304,9 +356,9 @@ class DynamicFieldSet extends React.Component {
                                     <Icon type='plus' /> Add field
                         </Button>
                             </Form.Item>
-                            <Form.Item >
+                            {!isEdit && <Form.Item >
                                 <Button type='primary' htmlType='submit'>Submit</Button>
-                            </Form.Item>
+                            </Form.Item>}
                         </Form>
                     </div>
                 </div>

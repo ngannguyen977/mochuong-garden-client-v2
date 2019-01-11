@@ -12,6 +12,7 @@ import policy from './policy'
 import template from './template'
 import priority from './priority'
 import property from './property'
+import alert from './alert'
 
 export default combineReducers({
   routing: routerReducer,
@@ -26,5 +27,6 @@ export default combineReducers({
   policy,
   template,
   priority,
-  property
+  property,
+  alert
 })

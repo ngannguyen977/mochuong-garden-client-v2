@@ -26,6 +26,11 @@ class CreatePage extends React.Component {
       },
     }
   }
+  componentWillMount() {
+    const { getProjects, getList } = this.props
+    getProjects(100)
+    getList(20)
+  }
   changeStepState(current) {
     const { create, createModel } = this.props
     if (current === 3) {
@@ -52,8 +57,8 @@ class CreatePage extends React.Component {
             </h4>
           </div>
           <div className='card-body'>
-          {current === 0 && <Property history={this.props.history} match={this.props.match}/>}
-          {current === 1 && <DetailPage />}
+            {current === 0 && <Property history={this.props.history} match={this.props.match} />}
+            {current === 1 && <DetailPage />}
             <ButtonStep
               steps={steps}
               current={current}

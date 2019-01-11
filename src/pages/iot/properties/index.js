@@ -12,7 +12,7 @@ class Property extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Properties' />
+        <Helmet title="Properties" />
         <ListPage history={props.history} location={props.location} />
       </Page>
     )

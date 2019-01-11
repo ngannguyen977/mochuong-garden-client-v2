@@ -1,6 +1,6 @@
 import { getList, getOne, create, destroy, update } from 'reducers/template'
 import { getList as getProjects } from 'reducers/project'
-import { getList as getPropertiesByTemplate, update as updateProperty } from 'reducers/property'
+import { getList as getPropertiesByTemplate, update as updateProperty, create as createProperty } from 'reducers/property'
 import helper from '../../../helper'
 
 const steps = [
@@ -84,39 +84,43 @@ const summaryColumns = [
 const type = [
   {
     id: 1,
-    text: 'generic'
+    text: 'generic',
   },
   {
     id: 2,
-    text: 'remote'
+    text: 'remote',
   },
   {
     id: 3,
-    text: 'gateway'
+    text: 'gateway',
   },
   {
     id: 4,
-    text: 'camera'
-  }
+    text: 'camera',
+  },
 ]
 const propertyType = [
   { id: 1, text: 'JSON' },
   { id: 2, text: 'NUMBER' },
   { id: 3, text: 'STRING' },
   { id: 4, text: 'PICTURE' },
-  { id: 5, text: 'BOOLEAN' }
+  { id: 5, text: 'BOOLEAN' },
 ]
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   getProjects: (limit, page, sort, isAsc) => getProjects(limit, page, sort, isAsc),
   create: (model, iscreate) => create(model, iscreate),
   update: (id, model, isUpdate) => update(id, model, isUpdate),
-  updateProperty: (id) => updateProperty(id),
+  updateProperty: (id, model) => updateProperty(id, model),
   destroy: ids => destroy(ids),
   getOne: id => getOne(id),
-  getPropertiesByTemplate: (type, parentId, limit, page, sort, isAsc) => getPropertiesByTemplate(type, parentId, limit, page, sort, isAsc),
+  getPropertiesByTemplate: (type, parentId, limit, page, sort, isAsc) =>
+    getPropertiesByTemplate(type, parentId, limit, page, sort, isAsc),
+  createProperty: (model) =>
+    createProperty(model)
 }
 export const mapStateToProps = (state, props) => {
+  console.log(state.template.detail)
   let template = state.template || {}
   let property = state.property || {}
   let properties = (property.properties || []).map(x => {
@@ -128,7 +132,7 @@ export const mapStateToProps = (state, props) => {
       value: x.defaultValue,
       isPersistent: x.isPersistent,
       isReadOnly: x.isReadOnly,
-      isLogged: x.isLogged
+      isLogged: x.isLogged,
     }
   })
   return {
@@ -140,6 +144,8 @@ export const mapStateToProps = (state, props) => {
     data: template.templates || [],
     // detail
     detail: template.detail,
+    properties: (template.detail || {}).properties,
+    // detail: template.detail,
     templateProperties: properties,
     // model
     steps,
@@ -148,7 +154,9 @@ export const mapStateToProps = (state, props) => {
     type,
     createModel: template.templateCreate || {},
     // project
-    projects: (state.project || {}).projects || []
+    projects: (state.project || {}).projects || [],
+    //configure
+    dataTypes: state.app.dataTypes
   }
 }
 

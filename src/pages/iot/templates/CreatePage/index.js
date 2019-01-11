@@ -13,7 +13,7 @@ class TemplateCreate extends React.Component {
     return (
       <Page {...props}>
         <Helmet title='Templates' />
-        <CreatePage location={props.location}  history={props.history}/>
+        <CreatePage location={props.location} match={props.match} history={props.history} />
       </Page>
     )
   }

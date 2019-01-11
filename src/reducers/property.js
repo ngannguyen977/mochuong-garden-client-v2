@@ -18,7 +18,28 @@ export const createPropertyState = createAction(`${NS}CREATE_PROPERTY`)
 export const updatePropertyState = createAction(`${NS}UPDATE_PROPERTY`)
 export const getPropertiesInGroup = createAction(`${NS}GET_PROPERTYS_GROUP`)
 export const getPermission = createAction(`${NS}GET_PROPERTY_PERMISSION`)
-
+const dataTypes = [
+  {
+    id: 1,
+    name: 'Number',
+  },
+  {
+    id: 2,
+    name: 'String',
+  },
+  {
+    id: 3,
+    name: 'Json',
+  },
+  {
+    id: 4,
+    name: 'Picture',
+  },
+  {
+    id: 5,
+    name: 'Boolean',
+  },
+]
 export const getList = (type, parentid, limit = 10, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
   getState,
@@ -45,24 +66,26 @@ export const getOne = id => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const create = (name, description, color, project) => (dispatch, getState) => {
+export const create = (model) => (dispatch, getState) => {
+  let dataType = (dataTypes.find(x => x.name.toLowerCase() === model.dataType.toLowerCase()) || {}).id
   axios
-    .post(propertyApi, { name, description, color, project })
+    .post(propertyApi, { ...model, dataType, defaultValue: (model.defaultValue || '').toString() })
     .then(response => {
       notification['success']({
         message: 'Create property success!',
-        description: 'The property was created successfully!'
+        description: 'The property was created successfully!',
       })
-      dispatch(push('/properties'))
+      // dispatch(push('/properties'))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'create property fail'
       message.error(errorMessage)
     })
 }
-export const update = (id, name, description) => (dispatch, getState) => {
+export const update = (id, model) => (dispatch, getState) => {
+  let dataType = (dataTypes.find(x => (x.name || '').toLowerCase() === (model.dataType || '').toLowerCase()) || {}).id
   axios
-    .patch(`${propertyApi}/${id}`, { name, description })
+    .patch(`${propertyApi}/${id}?parentId=${model.parentId}`, { ...model, dataType })
     .then(response => {
       notification['success']({
         message: 'Update property success!',
@@ -70,7 +93,7 @@ export const update = (id, name, description) => (dispatch, getState) => {
       })
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'create property fail'
+      let errorMessage = ((error.response || {}).data || {}).message || 'update property fail'
       message.error(errorMessage)
     })
 }
@@ -78,15 +101,20 @@ export const updateProperty = (id, model, isUpdate) => (dispatch, getState) => {
   // TODO: create new
   // TODO: delete old
   // TODO: update if change
-  getList('template',id,1000).then(res =>{
+  getList('template', id, 1000).then(res => {
     let properties = res.data.propertyTemplates
-
   })
-  let response = model.map(x => axios
-    .patch(`${propertyApi}/${id}`, {
-      dataType: model.type, defaultValue: model.value,
-      name: model.name, description: model.description, isLogged: model.isLogged, isPersistent: model.isPersistent, isReadOnly: model.isReadOnly
-    }))
+  let response = model.map(x =>
+    axios.patch(`${propertyApi}/${id}`, {
+      dataType: model.type,
+      defaultValue: model.value,
+      name: model.name,
+      description: model.description,
+      isLogged: model.isLogged,
+      isPersistent: model.isPersistent,
+      isReadOnly: model.isReadOnly,
+    }),
+  )
   Promise.all(response)
     .then(response => {
       notification['success']({

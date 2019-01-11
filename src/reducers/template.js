@@ -12,7 +12,28 @@ const api = constant.api.iot
 const templateApi = `${api.host}/${api.template}`
 const templatePropertyApi = `${api.host}/${api.templateProperty}`
 const templateAlertApi = `${api.host}/${api.alertTemplate}`
-
+const dataTypes = [
+  {
+    id: 1,
+    name: 'Number',
+  },
+  {
+    id: 2,
+    name: 'String',
+  },
+  {
+    id: 3,
+    name: 'Json',
+  },
+  {
+    id: 4,
+    name: 'Picture',
+  },
+  {
+    id: 5,
+    name: 'Boolean',
+  },
+]
 export const setTemplatePage = createAction(`${NS}SET_TEMPLATE_PAGE`)
 export const setTemplateDetailPage = createAction(`${NS}SET_TEMPLATE_DETAIL_PAGE`)
 export const createTemplateState = createAction(`${NS}CREATE_TEMPLATE`)
@@ -40,6 +61,7 @@ export const getOne = id => (dispatch, getState) => {
   axios
     .get(`${templateApi}/${id}`)
     .then(response => {
+      console.log('get one done')
       dispatch(setTemplateDetailPage(response.data))
     })
     .catch(error => {
@@ -48,28 +70,7 @@ export const getOne = id => (dispatch, getState) => {
     })
 }
 export const create = (model, isCreate = false) => (dispatch, getState) => {
-  const dataTypes = [
-    {
-      id: 1,
-      name: 'Number'
-    },
-    {
-      id: 2,
-      name: 'String'
-    },
-    {
-      id: 3,
-      name: 'Json'
-    },
-    {
-      id: 4,
-      name: 'Picture'
-    },
-    {
-      id: 5,
-      name: 'Boolean'
-    }
-  ]
+
   dispatch(createTemplateState(model))
   if (isCreate) {
     let templateModel = {
@@ -77,7 +78,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       description: model.description,
       parentId: model.parent.id,
       projectId: model.project.id,
-      type: model.type.id
+      type: model.type.id,
     }
     axios
       .post(templateApi, templateModel)
@@ -88,15 +89,18 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
           console.log(model.properties, 'zzzzzzzzzzzzzzzzzzzzzz')
           let propertyPromises = model.properties.map(property => {
             let propertyModel = {
-              dataType: (dataTypes.find(x => x.name.toLowerCase() === (property.type || '').toLowerCase())
-                || { id: 0 }).id,
+              dataType: (
+                dataTypes.find(
+                  x => x.name.toLowerCase() === (property.type || '').toLowerCase(),
+                ) || { id: 0 }
+              ).id,
               defaultValue: property.value,
               description: property.description,
               isLogged: property.isLogged,
               isPersistent: property.isPersistent,
               isReadOnly: property.isReadOnly,
               name: property.name,
-              thingTemplateID: templateId
+              thingTemplateID: templateId,
             }
             return axios.post(templatePropertyApi, propertyModel)
           })
@@ -111,7 +115,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
                   description: a.description,
                   name: a.name,
                   priorityID: ((priorities || []).find(x => x.name === a.priority) || {}).id,
-                  propertyTemplateID: x.data.id
+                  propertyTemplateID: x.data.id,
                 }
                 return axios.post(templateAlertApi, alertModel)
               })
@@ -137,7 +141,11 @@ export const update = (id, model, isUpdate) => (dispatch, getState) => {
   dispatch(setTemplateDetailPage(model))
   if (isUpdate) {
     axios
-      .patch(`${templateApi}/${id}`, { description: model.description, name: model.name, imageId: model.imageId })
+      .patch(`${templateApi}/${id}`, {
+        description: model.description,
+        name: model.name,
+        imageId: model.imageId,
+      })
       .then(response => {
         let { templates, page, totalItems } = getState().template
         if (templates && Array.isArray(templates) && templates.length > 0) {
@@ -170,12 +178,11 @@ export const destroy = ids => (dispatch, getState) => {
           'These templates will be delete permanly shortly in 1 month. In that time, if you re-create these template, we will revert information for them.',
       })
       let { templates, page, totalItems } = getState().template
-      let listId = ids.toString().split(',')
       dispatch(
         setTemplatePage({
-          templates: templates.filter(x => !listId.includes(x.id)),
+          templates: templates.filter(x => x.id != ids),
           page,
-          totalItems: totalItems - listId.length,
+          totalItems: totalItems--,
         }),
       )
     })
