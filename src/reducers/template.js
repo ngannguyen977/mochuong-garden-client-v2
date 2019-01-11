@@ -70,7 +70,6 @@ export const getOne = id => (dispatch, getState) => {
     })
 }
 export const create = (model, isCreate = false) => (dispatch, getState) => {
-
   dispatch(createTemplateState(model))
   if (isCreate) {
     let templateModel = {

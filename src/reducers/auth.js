@@ -1,6 +1,12 @@
 import { push } from 'react-router-redux'
 import moment from 'moment'
-import { setUserState, setLoading, setDataTypeState, setAlertTypeState, setPriorityState } from 'reducers/app'
+import {
+  setUserState,
+  setLoading,
+  setDataTypeState,
+  setAlertTypeState,
+  setPriorityState,
+} from 'reducers/app'
 import { message } from 'antd'
 
 const ignoreAuth = ['/register', '/login', '/empty', '/customers/activate']

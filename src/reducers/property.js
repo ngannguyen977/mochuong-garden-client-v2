@@ -66,8 +66,9 @@ export const getOne = id => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const create = (model) => (dispatch, getState) => {
-  let dataType = (dataTypes.find(x => x.name.toLowerCase() === model.dataType.toLowerCase()) || {}).id
+export const create = model => (dispatch, getState) => {
+  let dataType = (dataTypes.find(x => x.name.toLowerCase() === model.dataType.toLowerCase()) || {})
+    .id
   axios
     .post(propertyApi, { ...model, dataType, defaultValue: (model.defaultValue || '').toString() })
     .then(response => {
@@ -83,7 +84,9 @@ export const create = (model) => (dispatch, getState) => {
     })
 }
 export const update = (id, model) => (dispatch, getState) => {
-  let dataType = (dataTypes.find(x => (x.name || '').toLowerCase() === (model.dataType || '').toLowerCase()) || {}).id
+  let dataType = (
+    dataTypes.find(x => (x.name || '').toLowerCase() === (model.dataType || '').toLowerCase()) || {}
+  ).id
   axios
     .patch(`${propertyApi}/${id}?parentId=${model.parentId}`, { ...model, dataType })
     .then(response => {

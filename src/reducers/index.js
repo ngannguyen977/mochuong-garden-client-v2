@@ -28,5 +28,5 @@ export default combineReducers({
   template,
   priority,
   property,
-  alert
+  alert,
 })

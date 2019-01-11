@@ -48,21 +48,21 @@ class CreatePage extends React.Component {
     const { current } = this.state.step
     const { steps } = this.props
     return (
-      <div className='template-create'>
-        <StepProgress steps={steps} current={current} type='TEMPLATE' />
-        <div className='card'>
-          <div className='card-header'>
-            <h4 className='text-black mb-3'>
+      <div className="template-create">
+        <StepProgress steps={steps} current={current} type="TEMPLATE" />
+        <div className="card">
+          <div className="card-header">
+            <h4 className="text-black mb-3">
               <strong>{steps[current].subTitle}</strong>
             </h4>
           </div>
-          <div className='card-body'>
+          <div className="card-body">
             {current === 0 && <Property history={this.props.history} match={this.props.match} />}
             {current === 1 && <DetailPage />}
             <ButtonStep
               steps={steps}
               current={current}
-              link='/templates'
+              link="/templates"
               changeStepState={this.changeStepState}
             />
           </div>

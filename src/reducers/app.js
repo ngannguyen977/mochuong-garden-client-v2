@@ -31,7 +31,6 @@ export const setDataTypeState = createAction(`${NS}SET_DATATYPE_STATE`)
 export const setAlertTypeState = createAction(`${NS}SET_ALERTTYPE_STATE`)
 export const setPriorityState = createAction(`${NS}SET_PRIORITY_STATE`)
 
-
 export const setLoading = isLoading => {
   const action = _setLoading(isLoading)
   action[pendingTask] = isLoading ? begin : end
@@ -60,38 +59,42 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi].map(x => axios.get(x, { limit: 100 }))
-        Promise.all(_promise).then(res => {
-          let dataTypes = res[0].data
-          let alertTypes = res[1].data
-          let priorites = res[2].data
-          let userInfo = res[3].data
-          dispatch(setDataTypeState(dataTypes))
-          dispatch(setAlertTypeState(alertTypes))
-          dispatch(setPriorityState(priorites))
-          dispatch(_setHideLogin(true))
-          dispatch(
-            setUserState({
-              userState: {
-                ...userInfo.data,
-                token: response.data.token,
-                refresh_token: response.data.refresh_token,
-                expires: response.data.expires,
-              },
-            }),
-          )
-          notification.open({
-            type: 'success',
-            message: 'You have successfully logged in!',
-            description:
-              'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
+        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi].map(x =>
+          axios.get(x, { limit: 100 }),
+        )
+        Promise.all(_promise)
+          .then(res => {
+            let dataTypes = res[0].data
+            let alertTypes = res[1].data
+            let priorites = res[2].data
+            let userInfo = res[3].data
+            dispatch(setDataTypeState(dataTypes))
+            dispatch(setAlertTypeState(alertTypes))
+            dispatch(setPriorityState(priorites))
+            dispatch(_setHideLogin(true))
+            dispatch(
+              setUserState({
+                userState: {
+                  ...userInfo.data,
+                  token: response.data.token,
+                  refresh_token: response.data.refresh_token,
+                  expires: response.data.expires,
+                },
+              }),
+            )
+            notification.open({
+              type: 'success',
+              message: 'You have successfully logged in!',
+              description:
+                'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
+            })
+            dispatch(push('/'))
+            return resolve(true)
           })
-          dispatch(push('/'))
-          return resolve(true)
-        }).catch(error => {
-          console.log('GET INFO ERROR', error.message)
-          return resolve(false)
-        })
+          .catch(error => {
+            console.log('GET INFO ERROR', error.message)
+            return resolve(false)
+          })
       })
       .catch(error => {
         console.log('ERROR', error.message)
@@ -99,9 +102,7 @@ export const login = (customer, username, password, dispatch) =>
         return resolve(false)
       })
   })
-export const commonData = () => (dispatch, getState) => {
-
-}
+export const commonData = () => (dispatch, getState) => {}
 export const logout = () => (dispatch, getState) => {
   dispatch(
     setUserState({

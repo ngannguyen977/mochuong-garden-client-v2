@@ -19,11 +19,15 @@ const alertOperator = [
 )
 class DynamicFieldSet extends React.Component {
     remove = (key) => {
+        const { remove } = this.props
         const { getFieldValue, setFieldsValue } = this.props.form
         // can use data-binding to get
         let data = getFieldValue('data') || []
-        // We need at least one passenger
-        if (data.length === 1) {
+
+        let _data = data.find(x => x.key === key)
+        if (_data && _data.id) {
+            remove(_data.id)
+        } else if (data.length === 1) {
             return
         }
         // can use data-binding to set

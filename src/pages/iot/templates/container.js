@@ -1,6 +1,10 @@
 import { getList, getOne, create, destroy, update } from 'reducers/template'
 import { getList as getProjects } from 'reducers/project'
-import { getList as getPropertiesByTemplate, update as updateProperty, create as createProperty } from 'reducers/property'
+import {
+  getList as getPropertiesByTemplate,
+  update as updateProperty,
+  create as createProperty,
+} from 'reducers/property'
 import helper from '../../../helper'
 
 const steps = [
@@ -116,8 +120,7 @@ export const mapDispathToProps = {
   getOne: id => getOne(id),
   getPropertiesByTemplate: (type, parentId, limit, page, sort, isAsc) =>
     getPropertiesByTemplate(type, parentId, limit, page, sort, isAsc),
-  createProperty: (model) =>
-    createProperty(model)
+  createProperty: model => createProperty(model),
 }
 export const mapStateToProps = (state, props) => {
   console.log(state.template.detail)
@@ -156,7 +159,7 @@ export const mapStateToProps = (state, props) => {
     // project
     projects: (state.project || {}).projects || [],
     //configure
-    dataTypes: state.app.dataTypes
+    dataTypes: state.app.dataTypes,
   }
 }
 

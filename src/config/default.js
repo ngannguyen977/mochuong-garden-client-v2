@@ -52,6 +52,6 @@ export default {
       dataType: 'configures/data-types',
       alertType: 'configures/alert-types',
       priority: 'priorities',
-    }
+    },
   },
 }

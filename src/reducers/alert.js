@@ -52,7 +52,10 @@ export const getOne = id => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const create = (name, defaultValue, priorityID, propertyTemplateID) => (dispatch, getState) => {
+export const create = (name, defaultValue, priorityID, propertyTemplateID) => (
+  dispatch,
+  getState,
+) => {
   axios
     .post(alertApi, { name, defaultValue, priorityID, propertyTemplateID })
     .then(response => {
@@ -73,8 +76,16 @@ export const createAlerts = (propertyId, alerts) => (dispatch, getState) => {
   }
   const { priorities } = getState().app.priority || {}
   let _promise = alerts.map(x => {
-    let priorityID = (priorities || []).find(a => a.name === x.priority).id
-    return axios.post(alertApi, { name: x.name, defaultValue: x.value, priorityID, propertyTemplateID: +propertyId })
+    if (!x.id) {
+      let priorityID = (priorities || []).find(a => a.name === x.priority).id
+      return axios.post(alertApi, {
+        name: x.name,
+        defaultValue: x.value,
+        priorityID,
+        propertyTemplateID: +propertyId,
+      })
+    }
+    return null
   })
   Promise.all(_promise)
     .then(response => {
