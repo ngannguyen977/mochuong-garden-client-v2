@@ -8,7 +8,7 @@ export const mapDispathToProps = {
   createAlerts: (propertyId, alerts) => createAlerts(propertyId, alerts),
   getList: (type, parentid, templateid, limit, page, sort, isAsc) =>
     getList(type, parentid, templateid, limit, page, sort, isAsc),
-  remove: id => remove(id)
+  remove: id => remove(id),
 }
 export const mapStateToProps = (state, props) => {
   return {

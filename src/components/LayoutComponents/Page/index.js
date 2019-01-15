@@ -5,6 +5,9 @@ import { initAuth, setLoading, setUpdatingContent, resetHideLogin } from 'reduce
 import { authorize } from 'reducers/auth'
 import axios from 'axios'
 import NotFoundPage from 'pages/DefaultPages/NotFoundPage'
+import 'core-js/es6/promise'
+import 'core-js/es6/map'
+import 'core-js/es6/set'
 
 let source = null
 

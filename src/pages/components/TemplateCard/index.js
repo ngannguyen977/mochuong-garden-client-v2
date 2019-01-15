@@ -18,55 +18,38 @@ class ProductCard extends React.Component {
 
     const { data, type, remove } = this.props
 
-    let imageType
-    switch (data.type) {
-      case type.remote:
-        imageType = 'resources/iot/remote.png'
-        break
-      case type.generic:
-        imageType = 'resources/iot/generic.png'
-        break
-      case type.gateway:
-        imageType = 'resources/iot/gateway.png'
-        break
-      case type.camera:
-        imageType = 'resources/iot/camera.png'
-        break
-      default:
-        break
-    }
     return (
-      <div className="templateCard">
-        <div className="templateCard__img">
+      <div className='templateCard'>
+        <div className='templateCard__img'>
           {productStatus === 'new' && (
-            <div className="templateCard__status">
-              <span className="templateCard__status__title">active</span>
+            <div className='templateCard__status'>
+              <span className='templateCard__status__title'>active</span>
             </div>
           )}
 
           <a href={'/templates/' + data.id}>
-            <img className="img-responsive" src={productImg} alt="" />
+            <img className='img-responsive' src={productImg} alt='' />
           </a>
         </div>
-        <div className="templateCard__title">
+        <div className='templateCard__title'>
           <a href={'/templates/' + data.id}>{data.name}</a>
-          <div className="templateCard__price">
+          <div className='templateCard__price'>
             {/* <img src={imageType} width='50px' className='img-responsive' alt={data.type} /> */}
           </div>
         </div>
-        <div className="templateCard__descr">{data.description}</div>
-        <div className="templateCard__btn-control">
-          <Button type="primary" onClick={() => this.props.push('/templates/' + data.id)}>
+        <div className='templateCard__descr'>{data.description || 'no description'}</div>
+        <div className='templateCard__btn-control'>
+          <Button type='primary' onClick={() => this.props.push('/templates/' + data.id)}>
             Edit
           </Button>
           <Popconfirm
-            title="Are you sure delete this project? It cannot be rollback."
+            title='Are you sure delete this project? It cannot be rollback.'
             onConfirm={() => remove(data.id)}
             onCancel={() => message.info('cancel deleted')}
-            okText="Yes, I confirm"
+            okText='Yes, I confirm'
             cancelText="No, I don't"
           >
-            <Button type="danger" className="btn-remove">
+            <Button type='danger' className='btn-remove'>
               Remove
             </Button>
           </Popconfirm>

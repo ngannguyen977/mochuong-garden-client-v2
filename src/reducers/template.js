@@ -3,7 +3,6 @@ import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
-import { setPermissionPerGroup } from 'reducers/permission'
 
 export const REDUCER = 'template'
 
@@ -12,28 +11,7 @@ const api = constant.api.iot
 const templateApi = `${api.host}/${api.template}`
 const templatePropertyApi = `${api.host}/${api.templateProperty}`
 const templateAlertApi = `${api.host}/${api.alertTemplate}`
-const dataTypes = [
-  {
-    id: 1,
-    name: 'Number',
-  },
-  {
-    id: 2,
-    name: 'String',
-  },
-  {
-    id: 3,
-    name: 'Json',
-  },
-  {
-    id: 4,
-    name: 'Picture',
-  },
-  {
-    id: 5,
-    name: 'Boolean',
-  },
-]
+
 export const setTemplatePage = createAction(`${NS}SET_TEMPLATE_PAGE`)
 export const setTemplateDetailPage = createAction(`${NS}SET_TEMPLATE_DETAIL_PAGE`)
 export const createTemplateState = createAction(`${NS}CREATE_TEMPLATE`)
@@ -83,9 +61,9 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       .post(templateApi, templateModel)
       .then(response => {
         //create thing template property
+        const { dataTypes } = getState().app
         if (model.properties && model.properties.length > 0) {
           let templateId = response.data.id
-          console.log(model.properties, 'zzzzzzzzzzzzzzzzzzzzzz')
           let propertyPromises = model.properties.map(property => {
             let propertyModel = {
               dataType: (
@@ -93,7 +71,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
                   x => x.name.toLowerCase() === (property.type || '').toLowerCase(),
                 ) || { id: 0 }
               ).id,
-              defaultValue: property.value,
+              defaultValue: (property.value||'').toString(),
               description: property.description,
               isLogged: property.isLogged,
               isPersistent: property.isPersistent,
@@ -132,6 +110,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       .catch(error => {
         dispatch(createTemplateState({}))
         let errorMessage = ((error.response || {}).data || {}).message || 'create template fail'
+        console.log(error.response.data)
         message.error(errorMessage)
       })
   }

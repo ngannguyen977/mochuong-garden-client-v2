@@ -21,7 +21,7 @@ export class Review extends React.Component {
             }
         }
     }
-    componentDidMount() {
+    componentWillMount() {
 
     }
     render() {

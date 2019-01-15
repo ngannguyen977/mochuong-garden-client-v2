@@ -5,6 +5,7 @@ import DetailPage from '../DetailPage/detail'
 import ButtonStep from '../../../components/buttonStep'
 import StepProgress from '../../../components/stepProgress'
 import Property from '../DetailPage/property'
+import Review from './review'
 @connect(
   mapStateToProps,
   mapDispathToProps,
@@ -48,21 +49,22 @@ class CreatePage extends React.Component {
     const { current } = this.state.step
     const { steps } = this.props
     return (
-      <div className="template-create">
-        <StepProgress steps={steps} current={current} type="TEMPLATE" />
-        <div className="card">
-          <div className="card-header">
-            <h4 className="text-black mb-3">
+      <div className='template-create'>
+        <StepProgress steps={steps} current={current} type='TEMPLATE' />
+        <div className='card'>
+          <div className='card-header'>
+            <h4 className='text-black mb-3'>
               <strong>{steps[current].subTitle}</strong>
             </h4>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
             {current === 0 && <Property history={this.props.history} match={this.props.match} />}
             {current === 1 && <DetailPage />}
+            {(current === 2 || current === 3) && <Review />}
             <ButtonStep
               steps={steps}
               current={current}
-              link="/templates"
+              link='/templates'
               changeStepState={this.changeStepState}
             />
           </div>
