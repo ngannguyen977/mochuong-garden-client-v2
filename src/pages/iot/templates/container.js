@@ -1,4 +1,4 @@
-import { getList, getOne, create, destroy, update } from 'reducers/template'
+import { getList, getOne, create, destroy, update, setCurrentTab } from 'reducers/template'
 import { getList as getProjects } from 'reducers/project'
 import {
   getList as getPropertiesByTemplate,
@@ -9,19 +9,19 @@ import helper from '../../../helper'
 
 const steps = [
   {
-    title: 'Adding Properties ',
-    subTitle: 'Add properties for Template',
-    icon: 'loading',
-    iconDefault: 'solution',
-    status: 'process',
-    index: 0,
-    nextTitle: 'Next: Details',
-  },
-  {
     title: 'Adding details',
     subTitle: 'Adding Template Information',
-    icon: 'solution',
+    icon: 'loading',
     iconDefault: 'template',
+    status: 'process',
+    index: 0,
+    nextTitle: 'Next: Properties',
+  },
+  {
+    title: 'Adding Properties ',
+    subTitle: 'Add properties for Template',
+    icon: 'solution',
+    iconDefault: 'solution',
     status: 'wait',
     index: 1,
     nextTitle: 'Next: Review',
@@ -46,23 +46,7 @@ const steps = [
   },
 ]
 
-const reviewColumns = [
-  {
-    title: 'Policy name',
-    dataIndex: 'name',
-    width: '20%',
-  },
-  {
-    title: 'Type',
-    dataIndex: 'type',
-    width: '10%',
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    width: '30%',
-  },
-]
+
 
 const summaryColumns = [
   {
@@ -103,13 +87,7 @@ const type = [
     text: 'camera',
   },
 ]
-const propertyType = [
-  { id: 1, text: 'JSON' },
-  { id: 2, text: 'NUMBER' },
-  { id: 3, text: 'STRING' },
-  { id: 4, text: 'PICTURE' },
-  { id: 5, text: 'BOOLEAN' },
-]
+
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   getProjects: (limit, page, sort, isAsc) => getProjects(limit, page, sort, isAsc),
@@ -121,23 +99,30 @@ export const mapDispathToProps = {
   getPropertiesByTemplate: (type, parentId, limit, page, sort, isAsc) =>
     getPropertiesByTemplate(type, parentId, limit, page, sort, isAsc),
   createProperty: model => createProperty(model),
+  setCurrentTab: (id, tab) => setCurrentTab(id, tab)
 }
 export const mapStateToProps = (state, props) => {
-  console.log(state.template.detail)
   let template = state.template || {}
-  let property = state.property || {}
-  let properties = (property.properties || []).map(x => {
-    let dataType = (propertyType.find(a => a.id === x.dataType) || {}).text
-    return {
-      id: x.id,
-      name: x.name,
-      type: dataType,
-      value: x.defaultValue,
-      isPersistent: x.isPersistent,
-      isReadOnly: x.isReadOnly,
-      isLogged: x.isLogged,
+  let properties = (template.detail || {}).properties || []
+
+  //create
+  let inheritCreateProperties = (state.property || {}).properties || []
+  //edit
+  let inheritProperties = properties.map(x => {
+    if ((x.parent || {}).id && x.parent.id !== (template.detail || {}).id) {
+      return x
     }
-  })
+    return null
+  }).filter(x => x)
+  let customProperties = properties.map(x => {
+    if ((x.parent || {}).id && x.parent.id === (template.detail || {}).id) {
+      return x
+    }
+    return null
+  }).filter(x => x)
+
+
+
   return {
     // master
     template,
@@ -148,14 +133,15 @@ export const mapStateToProps = (state, props) => {
     // detail
     detail: template.detail,
     properties: (template.detail || {}).properties,
-    // detail: template.detail,
-    templateProperties: properties,
+    tabs: template.tabs || [],
     // model
     steps,
-    reviewColumns,
     summaryColumns,
     type,
     createModel: template.templateCreate || {},
+    customProperties,
+    inheritProperties,
+    inheritCreateProperties,
     // project
     projects: (state.project || {}).projects || [],
     //configure

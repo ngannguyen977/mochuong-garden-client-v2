@@ -21,13 +21,15 @@ const loadableRoutes = {
   '/login': {
     component: loadable(() => import('pages/DefaultPages/LoginPage')),
   },
-  '/empty': {
-    component: loadable(() => import('pages/DefaultPages/EmptyPage')),
-  },
   '/customers/activate': {
     component: loadable(() => import('pages/DefaultPages/ConfirmPage')),
   },
-
+  '/profile': {
+    component: loadable(() => import('pages/DefaultPages/ProfilePage')),
+  },
+  '/empty': {
+    component: loadable(() => import('pages/DefaultPages/EmptyPage')),
+  },
   // Dashboards
   '/home': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
@@ -137,7 +139,7 @@ class Routes extends React.Component {
   render() {
     return (
       <ConnectedSwitch>
-        <Route exact path="/" component={DashboardAlphaPage} />
+        <Route exact path='/' component={DashboardAlphaPage} />
         {Object.keys(loadableRoutes).map(path => {
           const { exact, ...props } = loadableRoutes[path]
           props.exact = exact === void 0 || exact || false // set true as default

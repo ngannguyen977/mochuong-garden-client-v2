@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button, Icon } from 'antd'
 import { Redirect } from 'react-router'
+import { mapStateToProps, mapDispathToProps } from './container'
+import { connect } from 'react-redux'
 
 const ButtonGroup = Button.Group
 
@@ -20,16 +22,50 @@ export const changeStepProgressBar = (current, steps) => {
         }
     }
 }
-
+@connect(
+    mapStateToProps,
+    mapDispathToProps,
+)
 export class ButtonStep extends React.Component {
     constructor() {
         super()
         this.state = {
-            redirect: false
+            redirect: false,
+            disable: false
+        }
+    }
+    componentWillReceiveProps() {
+        const { current, page, templateCreate } = this.props
+        switch (page) {
+            case 'template':
+                switch (current) {
+                    case 0:
+                        break
+                    case 1:
+                        if (!templateCreate
+                            || !templateCreate.properties
+                            || templateCreate.properties.length === 0) {
+                            this.setState({ disable: true })
+                        } else {
+                            this.setState({ disable: false })
+                        }
+                        break
+                    case 2:
+                        break
+                    default:
+                        this.setState({ disable: false })
+                        break
+                }
+
+                break
+            default:
+                break
         }
     }
     render() {
-        const { current, steps, link, changeStepState,rule } = this.props
+        const { current, steps, link, changeStepState, rule, page, templateCreate } = this.props
+        const { redirect, disable } = this.state
+
         const _changeStep = (index) => {
             let _current = index === 0 ? index : current + index
             if (_current >= steps.length) {
@@ -39,8 +75,8 @@ export class ButtonStep extends React.Component {
             changeStepState(_current)
             changeStepProgressBar(_current, steps)
         }
-        if (this.state.redirect) {
-            return <Redirect push to={link} />;
+        if (redirect) {
+            return <Redirect push to={link} />
         }
         return (<div className='col-md-12 text-right'>
             <ButtonGroup className=''>
@@ -59,7 +95,7 @@ export class ButtonStep extends React.Component {
                         className='text-white'
                         type='primary'
                         onClick={() => _changeStep(1)}
-                        disabled={rule}
+                        disabled={disable}
                     // href={current === steps.length ? link : null}
                     >
                         {steps[current].nextTitle}

@@ -13,31 +13,27 @@ export class DetailPage extends React.Component {
     super()
     this.state = {
       name: '',
+      isLoaded: false
     }
   }
-  componentWillMount() {
-    const { projects, getProjects, data, getList } = this.props
 
-  }
-  componentDidMount() {
+  componentDidUpdate() {
     const { detail, isEdit, type } = this.props
-    const { name } = this.state
-    console.log('componentDidMount',detail)
-    if (isEdit && detail && (!name || name !== detail.name)) {
+    const { name, isLoaded } = this.state
+    if (!isLoaded && isEdit && detail && (!name || name !== detail.name)) {
       this.setState({
         name: detail.name,
         description: detail.description,
         project: detail.project,
         parent: detail.parent_id,
-        type: type.find(x => x.id === detail.templateType)
+        type: type.find(x => x.id === detail.templateType),
+        isLoaded: true
       })
     }
   }
 
-
-
   updateInfo(type, value) {
-    const { create, update, createModel, detail, isEdit, id } = this.props
+    const { create, update, createModel, detail, isEdit, id, getPropertiesByTemplate } = this.props
     console.log(isEdit)
     switch (type) {
       case 'name':
@@ -69,11 +65,13 @@ export class DetailPage extends React.Component {
         })
         break
       case 'parent':
-        isEdit ? update(id, { ...detail, parent: value })
-          : create({ ...createModel, parent: value })
-        this.setState({
-          parent: value
-        })
+        if (!isEdit) {
+          getPropertiesByTemplate('template', value.id, 100)
+          create({ ...createModel, parent: value })
+          this.setState({
+            parent: value
+          })
+        }
         break
       default:
         break
@@ -133,7 +131,7 @@ export class DetailPage extends React.Component {
           <div className='form-group'>
             <label htmlFor='project-template'>Project</label>
             <div>
-              <Dropdown disabled={isEdit}  overlay={<Menu>{projects}</Menu>} trigger={['click']}>
+              <Dropdown disabled={isEdit} overlay={<Menu>{projects}</Menu>} trigger={['click']}>
                 <Button>
                   {project ? project.name : 'Please choose a project'}<Icon type='down' />
                 </Button>
@@ -154,7 +152,7 @@ export class DetailPage extends React.Component {
             <div className='form-group col-md-6'>
               <label htmlFor='thing-template-type'>Template Type</label>
               <div>
-                <Dropdown disabled={isEdit}  overlay={<Menu>{types}</Menu>} trigger={['click']}>
+                <Dropdown disabled={isEdit} overlay={<Menu>{types}</Menu>} trigger={['click']}>
                   <Button>
                     {type ? type.text : 'Please choose a type for this template'}<Icon type='down' />
                   </Button>

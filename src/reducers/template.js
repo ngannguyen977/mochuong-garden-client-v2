@@ -18,6 +18,7 @@ export const createTemplateState = createAction(`${NS}CREATE_TEMPLATE`)
 export const updateTemplateState = createAction(`${NS}UPDATE_TEMPLATE`)
 export const getTemplatesInGroup = createAction(`${NS}GET_TEMPLATES_GROUP`)
 export const getPermission = createAction(`${NS}GET_TEMPLATE_PERMISSION`)
+export const currentTab = createAction(`${NS}SET_CURRENT_TAB`)
 
 export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
@@ -47,6 +48,7 @@ export const getOne = id => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
+
 export const create = (model, isCreate = false) => (dispatch, getState) => {
   dispatch(createTemplateState(model))
   if (isCreate) {
@@ -71,7 +73,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
                   x => x.name.toLowerCase() === (property.type || '').toLowerCase(),
                 ) || { id: 0 }
               ).id,
-              defaultValue: (property.value||'').toString(),
+              defaultValue: (property.value || '').toString(),
               description: property.description,
               isLogged: property.isLogged,
               isPersistent: property.isPersistent,
@@ -169,7 +171,12 @@ export const destroy = ids => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-
+export const setCurrentTab = (id = 0, tab = '1') => (
+  dispatch,
+  getState,
+) => {
+  dispatch(currentTab({ id, tab }))
+}
 const initialState = {
   totalItems: -1,
   page: 0,
@@ -189,5 +196,17 @@ const ACTION_HANDLES = {
   [setTemplateDetailPage]: (state, detail) => ({ ...state, detail }),
   [getPermission]: (state, permissions) => ({ ...state, permissions }),
   [getTemplatesInGroup]: (state, templatesInGroup) => ({ ...state, templatesInGroup }),
+  [currentTab]: (state, { id, tab }) => {
+    if (!state.tabs) {
+      state.tabs = []
+    }
+    let _tab = state.tabs.find(x => x.id === id)
+    if (_tab) {
+      _tab.tab = tab
+    } else {
+      state.tabs.push({ id, tab })
+    }
+    return state
+  }
 }
 export default createReducer(ACTION_HANDLES, initialState)

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import DetailPage from './detail'
 import PropertyPage from './property'
 import { Input, Button, Tabs, Icon } from 'antd'
+import queryString from 'query-string'
 
 
 const Search = Input.Search;
@@ -14,15 +15,15 @@ const TabPane = Tabs.TabPane;
     mapDispathToProps,
 )
 export class DetailTabPage extends React.Component {
-
     componentWillMount() {
-        const { match, getOne, getPropertiesByTemplate } = this.props
+        const { match, getOne } = this.props
         getOne(match.params.id)
-        // getPropertiesByTemplate('template', match.params.id)
     }
-
+    handleTab(tab,id) {
+        this.props.setCurrentTab(id,tab)
+    }
     render() {
-        const { detail, update, updateProperty, match, history } = this.props
+        const { detail, update, updateProperty, match, history, tabs } = this.props
         const _update = (type) => {
             switch (type) {
                 case 'detail':
@@ -72,9 +73,10 @@ export class DetailTabPage extends React.Component {
 
         return (
             <div className='template-detail'>
-                <Tabs defaultActiveKey='1' >
-                <TabPane tab={<span><Icon type='project' />Properties</span>} key='1'>{tabProperty}</TabPane>
-                    <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='2'>{tabDetail}</TabPane>
+                <Tabs defaultActiveKey={(tabs.find(x => x.id === match.params.id) || {}).tab || '1'}
+                    onTabClick={(tab) => this.handleTab(tab, match.params.id)}>
+                    <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
+                    <TabPane tab={<span><Icon type='project' />Properties</span>} key='2'>{tabProperty}</TabPane>
                 </Tabs>
             </div>
         )

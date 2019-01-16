@@ -19,49 +19,15 @@ class DynamicFieldSet extends React.Component {
         }
     }
 
-    componentWillMount() {
-
-        const { detail } = this.props
-        if (detail && !this.state.isLoaded) {
-            this.add(undefined, true)
+    componentDidMount() {
+        if (!this.state.isLoaded) {
+            this.add()
             this.setState({
                 isLoaded: true
             })
         }
     }
-    createOrUpdateProperty = (key, item) => {
-        const { match, createProperty, updateProperty } = this.props
-        const { getFieldValue, setFieldsValue } = this.props.form
-        let data = getFieldValue('data') || []
-        this.props.form.validateFields((err, values) => {
-            if (err) {
-                return
-            }
-        })
-        let _data = data.find(x => x.key === key) || {}
-        if (!_data.name) {
-            message.warn(`Bạn phải nhập gì vào chứ!`)
-            return
-        }
-        let model = {
-            ..._data,
-            dataType: _data.dataType,
-            defaultValue: _data.defaultValue,
-            parentId: +match.params.id,
-            thingTemplateID: +match.params.id
-        }
-        //TODO: id alway null
-        if (!item.id) {
-            createProperty({ ...model })
-            return
-        }
-        updateProperty(item.id, { ...model })
 
-        // can use data-binding to set
-        setFieldsValue({
-            formData: data
-        })
-    }
     remove = (key) => {
         const { getFieldValue, setFieldsValue } = this.props.form
         // can use data-binding to get
@@ -74,24 +40,23 @@ class DynamicFieldSet extends React.Component {
         setFieldsValue({
             formData: data.filter(x => x.key !== key)
         })
-        //TODO: call api remove
     }
 
-    add = (row, isFirstLoad = false) => {
-        const { form, dataTypes, customProperties } = this.props
+    add = (row) => {
+        console.log('add')
+        const { form, createModel, dataTypes } = this.props
         const { getFieldValue, setFieldsValue } = form
         if (!row) {
             row = {
                 dataType: dataTypes.find(x => x.name === 'String')
             }
         }
+        let properties = createModel.properties
         let data = getFieldValue('data') || []
-        if (customProperties) {
-            data = Object.assign(data, customProperties.map(x => ({ ...x, dataType: (dataTypes.find(a => a.id === x.dataType) || {}) })))
+        if (properties) {
+            data = Object.assign(data, properties.map(x => ({ ...x, dataType: (dataTypes.find(a => a.id === x.dataType) || {}) }))) || []
         }
-        if (!isFirstLoad) {
-            data.push(row)
-        }
+        data.push(row)
         setFieldsValue({
             formData: data
         })
@@ -116,7 +81,7 @@ class DynamicFieldSet extends React.Component {
                 if (addAlert) {
                     let property = (properties.find(x => x.key === key) || {})
                     if (property && property.name) {
-                        history.push(`/alerts/${property.name}?templateId=${(match.params || {}).id}&propertyId=${property.id}`)
+                        history.push(`/alerts/${property.name}`)
                     }
                 }
             } else {
@@ -147,7 +112,7 @@ class DynamicFieldSet extends React.Component {
         this.handleSubmit(null, key)
     }
     render() {
-        const { inheritProperties, dataTypes, createModel } = this.props
+        const { isEdit, dataTypes, createModel, inheritCreateProperties } = this.props
         const { getFieldDecorator, getFieldValue } = this.props.form
         const { properties } = createModel
         getFieldDecorator('formData', { initialValue: properties ? properties : [] })
@@ -246,31 +211,15 @@ class DynamicFieldSet extends React.Component {
                         )}
 
                     </Form.Item>
-                    <Form.Item
-                        required={false}
-                        key={index + '_id'}
-                        className='hidden-item'
-                    >
-                        {getFieldDecorator(`data[${index}][id]`, {
-                            initialValue: item.id,
-                        })(
-                            <Input type='hidden' name={`data[${index}][id]`} />
-                        )}
 
-                    </Form.Item>
                     <Form.Item
                         required={false}
                         key={index + '_btn_alert'}
                         className='d-inline-block property-item property-btn-control'
                     >
-                        <Button htmlType='submit' onClick={(e) => this.handleSubmit(e, index, true)}>Manage Alerts</Button>
+                        <Button htmlType='submit' onClick={(e) => this.handleSubmit(e, index, true)}> Add Alerts</Button>
 
                     </Form.Item>
-                    <Icon
-                        className='dynamic-delete-button d-inline-block'
-                        type='check-circle'
-                        onClick={() => this.createOrUpdateProperty(index, item)}
-                    />
                     {data.length > 1 ? (
                         <Icon
                             className='dynamic-delete-button d-inline-block'
@@ -333,7 +282,7 @@ class DynamicFieldSet extends React.Component {
                     <div className='col-md-10'>
                         <div className='inherit-property'>
                             <h4>Inherit Properties</h4>
-                            {inheritProperties.length > 0 && <table className='inherit-properties'>
+                            {inheritCreateProperties.length > 0 && <table className='inherit-properties'>
                                 <tbody>
                                     <tr>
                                         <th>Property Name</th>
@@ -341,7 +290,7 @@ class DynamicFieldSet extends React.Component {
                                         <th>Property Value</th>
                                     </tr>
                                 </tbody>
-                                {inheritProperties.map(x => (
+                                {inheritCreateProperties.map(x => (
                                     <tbody key={x.id}>
                                         <tr>
                                             <td><Input name='property-name' disabled={true} value={x.name} /></td>
@@ -349,14 +298,14 @@ class DynamicFieldSet extends React.Component {
                                             <td><Input name='property-value' disabled={true} value={x.defaultValue} /></td>
                                         </tr>
                                         <tr>
-                                            <td> <Checkbox className='check-box' name='property-isPersistent' defaultChecked={x.isPersistent}>Persistent</Checkbox></td>
-                                            <td> <Checkbox className='check-box' name='property-isLogged' defaultChecked={x.isLogged}>Logged</Checkbox></td>
-                                            <td> <Checkbox className='check-box' name='property-isReadOnly' defaultChecked={x.isReadOnly}>ReadOnly</Checkbox></td>
+                                            <td> <Checkbox className='check-box' name='property-isPersistent' checked={x.isPersistent}>Persistent</Checkbox></td>
+                                            <td> <Checkbox className='check-box' name='property-isLogged' checked={x.isLogged}>Logged</Checkbox></td>
+                                            <td> <Checkbox className='check-box' name='property-isReadOnly' checked={x.isReadOnly}>ReadOnly</Checkbox></td>
                                         </tr>
                                     </tbody>
                                 ))}
                             </table>}
-                            {inheritProperties.length <= 0 && <h6><i>No inherit properties</i></h6>}
+                            {inheritCreateProperties.length <= 0 && <h6><i>No inherit properties</i></h6>}
                         </div>
                         <Divider />
                         <div className='custom-property'>
@@ -377,6 +326,9 @@ class DynamicFieldSet extends React.Component {
                                         <Icon type='plus' /> Add field
                         </Button>
                                 </Form.Item>
+                                {!isEdit && <Form.Item >
+                                    <Button type='primary' htmlType='submit'>Submit</Button>
+                                </Form.Item>}
                             </Form>
                         </div>
                     </div>

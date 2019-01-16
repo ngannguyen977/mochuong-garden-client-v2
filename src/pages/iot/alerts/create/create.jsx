@@ -32,7 +32,7 @@ class DynamicFieldSet extends React.Component {
         }
         // can use data-binding to set
         setFieldsValue({
-            moa: data.filter(x => x.key !== key)
+            formData: data.filter(x => x.key !== key)
         })
     }
     add = (row = { operator: 'Equal' }) => {
@@ -41,7 +41,6 @@ class DynamicFieldSet extends React.Component {
         const { getFieldValue, setFieldsValue } = form
         const { properties } = (!propertyId || propertyId !== 'undefined') ? createPropertyModel : this.props
         let data = getFieldValue('data') || []
-        console.log('add sao null', data, propertyId, properties)
         let property = {}
         if (propertyId && propertyId !== 'undefined') {
             property = properties.find(x => x.id === +propertyId) || {}
@@ -52,7 +51,7 @@ class DynamicFieldSet extends React.Component {
             data = property.alerts
         data.push(row)
         setFieldsValue({
-            moa: data
+            formData: data
         })
     }
     componentWillMount() {
@@ -88,7 +87,6 @@ class DynamicFieldSet extends React.Component {
                 return
             }
 
-            console.log('Received values of form: ', values);
             let propertyName = match.params.property
             let alerts = (values.data || []).filter(x => !undefined);
             let properties = createPropertyModel.properties || []
@@ -103,7 +101,7 @@ class DynamicFieldSet extends React.Component {
                 // create for create property mode
                 createProperty(createPropertyModel)
                 message.info(`Create alerts for property ${propertyName} success!`)
-                history.goBack()
+                history.push('/templates/create?step=1')
             }
         });
     }
@@ -118,7 +116,7 @@ class DynamicFieldSet extends React.Component {
             data.operator = operator
         }
         setFieldsValue({
-            moa: datas
+            formData: datas
         })
     }
     changePriority = (key, priority) => {
@@ -132,7 +130,7 @@ class DynamicFieldSet extends React.Component {
             data.priority = priority
         }
         setFieldsValue({
-            moa: datas
+            formData: datas
         })
     }
 
@@ -141,9 +139,8 @@ class DynamicFieldSet extends React.Component {
         const { createPropertyModel, match, priorities, history } = this.props
         let property = (createPropertyModel.properties || []).find(x => x.name === match.params.property) || {}
         // const datas = getFieldValue('data') || []
-        getFieldDecorator('moa', { initialValue: property.alerts || [] })
-        const data = getFieldValue('moa') || []
-        console.log(getFieldsValue(), property, createPropertyModel)
+        getFieldDecorator('formData', { initialValue: property.alerts || [] })
+        const data = getFieldValue('formData') || []
 
         const dataTypes = (key) => (
             <Select name='data-operator' placeholder='operator' width='100px'

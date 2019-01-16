@@ -27,7 +27,7 @@ class ProductCard extends React.Component {
             </div>
           )}
 
-          <a href={'/templates/' + data.id}>
+          <a href={'/#/templates/' + data.id}>
             <img className='img-responsive' src={productImg} alt='' />
           </a>
         </div>

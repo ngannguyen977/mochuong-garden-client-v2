@@ -18,28 +18,7 @@ export const createPropertyState = createAction(`${NS}CREATE_PROPERTY`)
 export const updatePropertyState = createAction(`${NS}UPDATE_PROPERTY`)
 export const getPropertiesInGroup = createAction(`${NS}GET_PROPERTYS_GROUP`)
 export const getPermission = createAction(`${NS}GET_PROPERTY_PERMISSION`)
-const dataTypes = [
-  {
-    id: 1,
-    name: 'Number',
-  },
-  {
-    id: 2,
-    name: 'String',
-  },
-  {
-    id: 3,
-    name: 'Json',
-  },
-  {
-    id: 4,
-    name: 'Picture',
-  },
-  {
-    id: 5,
-    name: 'Boolean',
-  },
-]
+
 export const getList = (type, parentid, limit = 10, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
   getState,
@@ -67,10 +46,8 @@ export const getOne = id => (dispatch, getState) => {
     })
 }
 export const create = model => (dispatch, getState) => {
-  let dataType = (dataTypes.find(x => x.name.toLowerCase() === model.dataType.toLowerCase()) || {})
-    .id
   axios
-    .post(propertyApi, { ...model, dataType, defaultValue: (model.defaultValue || '').toString() })
+    .post(propertyApi, { ...model, defaultValue: (model.defaultValue || '').toString() })
     .then(response => {
       notification['success']({
         message: 'Create property success!',
@@ -84,11 +61,8 @@ export const create = model => (dispatch, getState) => {
     })
 }
 export const update = (id, model) => (dispatch, getState) => {
-  let dataType = (
-    dataTypes.find(x => (x.name || '').toLowerCase() === (model.dataType || '').toLowerCase()) || {}
-  ).id
   axios
-    .patch(`${propertyApi}/${id}?parentId=${model.parentId}`, { ...model, dataType })
+    .patch(`${propertyApi}/${id}?parentId=${model.parentId}`, { ...model })
     .then(response => {
       notification['success']({
         message: 'Update property success!',
