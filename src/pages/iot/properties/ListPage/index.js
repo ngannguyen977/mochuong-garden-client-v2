@@ -61,7 +61,7 @@ class PropertyPage extends React.Component {
         sorter: true,
         width: '30%',
         render: (text, record) => (
-          <a className='link' href={`#/properties/${record.id}`}>
+          <a className="link" href={`#/properties/${record.id}`}>
             {record.name}
           </a>
         ),
@@ -78,7 +78,7 @@ class PropertyPage extends React.Component {
         sorter: true,
         width: '50%',
         render: (text, record) => (
-          <a className='link' href={`#/project/${record.projectId}`}>
+          <a className="link" href={`#/project/${record.projectId}`}>
             {record.projectId ? record.projectId : 'No Project'}
           </a>
         ),
@@ -118,21 +118,21 @@ class PropertyPage extends React.Component {
     const content = (
       <div>
         <Popconfirm
-          title='Are you sure delete these properties? You cannot rollback.'
+          title="Are you sure delete these properties? You cannot rollback."
           onConfirm={() => handleActions(type.del)}
           onCancel={() => handleActions(type.del, false)}
-          okText='Yes, I confirm'
+          okText="Yes, I confirm"
           cancelText="No, I don't"
         >
-          <p className='link'>Delete PRIORITIES</p>
+          <p className="link">Delete PRIORITIES</p>
         </Popconfirm>
       </div>
     )
     return (
       <div>
-        <section className='card'>
-          <div className='card-header'>
-            <div className='utils__title'>
+        <section className="card">
+          <div className="card-header">
+            <div className="utils__title">
               <strong>Properties Management</strong>
             </div>
             <small>
@@ -153,21 +153,21 @@ class PropertyPage extends React.Component {
               </small>
             </p>
           </div>
-          <div className='card-body'>
+          <div className="card-body">
             {totalItems && totalItems > 0 && (
-              <div className='table-responsive'>
+              <div className="table-responsive">
                 <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
-                    type='primary'
+                    type="primary"
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href='#/properties/create'
+                    href="#/properties/create"
                   >
                     Create Property
                   </Button>
-                  <Popover placement='bottomRight' content={content} trigger='click'>
-                    <Button type='primary' disabled={!hasSelected} loading={loading}>
-                      Actions <Icon type='down-circle' theme='filled' />
+                  <Popover placement="bottomRight" content={content} trigger="click">
+                    <Button type="primary" disabled={!hasSelected} loading={loading}>
+                      Actions <Icon type="down-circle" theme="filled" />
                     </Button>
                   </Popover>
                 </div>
@@ -186,7 +186,7 @@ class PropertyPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name='Property' link='#/properties/create' />
+              <LockScreenPage name="Property" link="#/properties/create" />
             )}
           </div>
         </section>

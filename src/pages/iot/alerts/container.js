@@ -13,6 +13,7 @@ export const mapDispathToProps = {
 export const mapStateToProps = (state, props) => {
   return {
     createPropertyModel: state.template.templateCreate || {},
+    createThingPropertyModel: state.thing.thingCreate || {},
     priorities: (state.app.priority || {}).priorities || [],
     properties: (state.template.detail || {}).properties || [],
   }

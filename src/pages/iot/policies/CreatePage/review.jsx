@@ -32,7 +32,6 @@ export class Review extends React.Component {
             return { ...x, resource: _resource.value }
         })
         let reviewData = {
-            serviceName: policyCreate.service.name,
             name: policyCreate.name,
             description: policyCreate.description,
             actions: _actions
@@ -50,10 +49,6 @@ export class Review extends React.Component {
                     <div className='form-group'>
                         <strong>Policy Name</strong>
                         <h5 className='text-black'><strong>{reviewData.name}</strong></h5>
-                    </div>
-                    <div className='form-group'>
-                        <strong>Service</strong>
-                        <h5 className='text-black'><strong>{reviewData.serviceName}</strong></h5>
                     </div>
                     <div className='form-group'>
                         <strong>Description</strong>

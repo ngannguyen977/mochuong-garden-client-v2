@@ -21,6 +21,10 @@ class Actions extends React.Component {
       isAllowPolicy: true
     }
   }
+  componentWillMount() {
+    const { getListActionOfService } = this.props
+    getListActionOfService('iot')
+  }
   changeTypePolicy(value) {
     const { create, policyCreate } = this.props
     create({ ...policyCreate, isAllowPolicy: value })
@@ -34,7 +38,7 @@ class Actions extends React.Component {
     }
     return (
       <div className='policy policy action-step row'>
-        <div className='col-lg-2 text-justify'>
+        <div className=' col-md-4 text-justify'>
           <div className='policy__list'>
             <Affix offsetTop={20}>
               <a onClick={() => chooseActionType(0)} className={'policy__listItem ' + (this.state.current === 0 && 'policy__listItem--current')}>
@@ -72,19 +76,14 @@ class Actions extends React.Component {
             </Affix>
           </div>
         </div>
-        <div className='col-lg-10'>
+        <div className='col-md-8'>
           <h2>Select actions</h2>
-          <div className='row'>
-            <div className='col-lg-8'>
-              <Search
-                placeholder='search actions'
-                onSearch={value => console.log(value)}
-              // style={{ width: 200 }}
-              />
-              <small className='font-italic text-right'>*We define policies for an action regardless of the method that you use to perform the operation. For example, if a policy allows the GetUser action, then a user with that policy can get user information.</small>
-            </div>
-
-          </div>
+          <Search
+            placeholder='search actions'
+            onSearch={value => console.log(value)}
+          // style={{ width: 200 }}
+          />
+          <small className='font-italic text-right'>*We define policies for an action regardless of the method that you use to perform the operation. For example, if a policy allows the GetUser action, then a user with that policy can get user information.</small>
           <div className='form-group'>
             <ActionList />
           </div>

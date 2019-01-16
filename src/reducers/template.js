@@ -63,16 +63,11 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       .post(templateApi, templateModel)
       .then(response => {
         //create thing template property
-        const { dataTypes } = getState().app
         if (model.properties && model.properties.length > 0) {
           let templateId = response.data.id
           let propertyPromises = model.properties.map(property => {
             let propertyModel = {
-              dataType: (
-                dataTypes.find(
-                  x => x.name.toLowerCase() === (property.type || '').toLowerCase(),
-                ) || { id: 0 }
-              ).id,
+              dataType: property.dataType,
               defaultValue: (property.value || '').toString(),
               description: property.description,
               isLogged: property.isLogged,

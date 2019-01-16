@@ -1,5 +1,5 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from '../container'
+import { mapStateToProps, mapDispathToProps } from '../../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import {
@@ -36,10 +36,10 @@ class DynamicFieldSet extends React.Component {
         })
     }
     add = (row = { operator: 'Equal' }) => {
-        const { propertyId, templateId } = queryString.parse(this.props.location.search)
-        const { createPropertyModel, form, match, propery } = this.props
+        const { propertyId } = queryString.parse(this.props.location.search)
+        const { createThingPropertyModel, form, match } = this.props
         const { getFieldValue, setFieldsValue } = form
-        const { properties } = (!propertyId || propertyId !== 'undefined') ? createPropertyModel : this.props
+        const { properties } = (!propertyId || propertyId !== 'undefined') ? createThingPropertyModel : this.props
         let data = getFieldValue('data') || []
         let property = {}
         if (propertyId && propertyId !== 'undefined') {
@@ -57,20 +57,20 @@ class DynamicFieldSet extends React.Component {
     componentWillMount() {
         const { getList } = this.props
 
-        const { propertyId, templateId } = queryString.parse(this.props.location.search)
+        const { propertyId, thingId } = queryString.parse(this.props.location.search)
         if (propertyId && propertyId !== 'undefined') {
-            getList('template', propertyId, templateId)
+            getList('thing', propertyId, thingId)
         }
     }
     componentDidMount() {
-        const { match, history, createPropertyModel, isEdit } = this.props
-        const { propertyId, templateId } = queryString.parse(this.props.location.search)
+        const { match, history, createThingPropertyModel, isEdit } = this.props
+        const { propertyId, thingId } = queryString.parse(this.props.location.search)
         let propertyName = match.params.property
         if (!propertyName
             || propertyName === 'undefined'
-            || (!isEdit && (!createPropertyModel.properties
-                || !createPropertyModel.properties.find(x => x.name === propertyName)))
-            || (isEdit && (!propertyId || !templateId))) {
+            || (!isEdit && (!createThingPropertyModel.properties
+                || !createThingPropertyModel.properties.find(x => x.name === propertyName)))
+            || (isEdit && (!propertyId || !thingId))) {
             message.warn('Please create property first!!!')
             history.goBack()
         } else {
@@ -80,8 +80,8 @@ class DynamicFieldSet extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { createProperty, createPropertyModel, match, history, createAlerts } = this.props
-        const { propertyId, templateId } = queryString.parse(this.props.location.search)
+        const { createProperty, createThingPropertyModel, match, history, createAlerts } = this.props
+        const { propertyId } = queryString.parse(this.props.location.search)
         this.props.form.validateFields((err, values) => {
             if (err) {
                 return
@@ -89,7 +89,7 @@ class DynamicFieldSet extends React.Component {
 
             let propertyName = match.params.property
             let alerts = (values.data || []).filter(x => !undefined);
-            let properties = createPropertyModel.properties || []
+            let properties = createThingPropertyModel.properties || []
             let property = properties.find(x => x.name === propertyName)
             if (property) {
                 property.alerts = alerts
@@ -99,9 +99,9 @@ class DynamicFieldSet extends React.Component {
                 createAlerts(propertyId, alerts)
             } else {
                 // create for create property mode
-                createProperty(createPropertyModel)
+                createProperty(createThingPropertyModel)
                 message.info(`Create alerts for property ${propertyName} success!`)
-                history.push('/templates/create?step=1')
+                history.push('/things/create?step=1')
             }
         });
     }
@@ -135,9 +135,9 @@ class DynamicFieldSet extends React.Component {
     }
 
     render() {
-        const { getFieldDecorator, getFieldValue, getFieldsValue } = this.props.form
-        const { createPropertyModel, match, priorities, history } = this.props
-        let property = (createPropertyModel.properties || []).find(x => x.name === match.params.property) || {}
+        const { getFieldDecorator, getFieldValue } = this.props.form
+        const { createThingPropertyModel, match, priorities, history } = this.props
+        let property = (createThingPropertyModel.properties || []).find(x => x.name === match.params.property) || {}
         // const datas = getFieldValue('data') || []
         getFieldDecorator('formData', { initialValue: property.alerts || [] })
         const data = getFieldValue('formData') || []
@@ -254,7 +254,7 @@ class DynamicFieldSet extends React.Component {
             <div className='alert-create' >
                 <div className='row'>
                     <div className='col-lg-4 text-justify'>
-                        <p>Alert is alert. After this template is created success, you can give these information for a person, so they can loged in.</p>
+                        <p>Alert is alert. After this thing is created success, you can give these information for a person, so they can loged in.</p>
                     </div>
                     <div className='col-md-8'>
                         <div className='alert-item alert-item__title '>
@@ -269,7 +269,7 @@ class DynamicFieldSet extends React.Component {
                         <div className='alert-item alert-item__title '>
                             <p className='alert-title '>Alert Value</p>
                         </div>
-                        <Form onSubmit={this.handleSubmit} className='col-md-12 template-dynamic-form' >
+                        <Form onSubmit={this.handleSubmit} className='col-md-12 thing-dynamic-form' >
                             {formItems}
                             <Form.Item >
                                 <Button type='dashed' onClick={() => this.add()} style={{ width: '60%' }}>

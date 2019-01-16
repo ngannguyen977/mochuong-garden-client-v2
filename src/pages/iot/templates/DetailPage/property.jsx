@@ -116,7 +116,7 @@ class DynamicFieldSet extends React.Component {
                 if (addAlert) {
                     let property = (properties.find(x => x.key === key) || {})
                     if (property && property.name) {
-                        history.push(`/alerts/${property.name}?templateId=${(match.params || {}).id}&propertyId=${property.id}`)
+                        history.push(`/alerts/${property.name}/template?templateId=${(match.params || {}).id}&propertyId=${property.id}`)
                     }
                 }
             } else {

@@ -58,7 +58,7 @@ class ResourcePage extends React.Component {
     const { resources } = this.state
     return (
       <div className='policy policy-step-2 row'>
-        <div className='col-lg-2 text-justify'>
+        <div className='col-md-3 text-justify'>
           <div className='policy__list'>
             <Affix offsetTop={20}>
               <a href='javascript: void(0);' className='policy__listItem policy__listItem--current'>
@@ -80,7 +80,7 @@ class ResourcePage extends React.Component {
             </Affix>
           </div>
         </div>
-        <div className='col-lg-10'>
+        <div className='col-md-9'>
           <h2>Select resources</h2>
           <small className='font-italic text-right'>*Describes a resource associated with a resource share. You can describe more than one resource by type comma between them. Using * for describe all resource.</small>
           <div className='resource-list'>

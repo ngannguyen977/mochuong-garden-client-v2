@@ -45,24 +45,23 @@ class CreatePage extends React.Component {
     const { current } = this.state.step
     const { steps } = this.props
     return (
-      <div className="policy-create">
-        <StepProgress steps={steps} current={current} type="POLICY" />
-        <div className="card">
-          <div className="card-header">
-            <h4 className="text-black mb-3">
+      <div className='policy-create'>
+        <StepProgress steps={steps} current={current} type='POLICY' />
+        <div className='card'>
+          <div className='card-header'>
+            <h4 className='text-black mb-3'>
               <strong>{steps[current].subTitle}</strong>
             </h4>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
             {current === 0 && <DetailPage />}
-            {current === 1 && <ServicePage />}
-            {current === 2 && <ActionPage />}
-            {current === 3 && <ResourcePage />}
-            {(current === 4 || current === 5) && <Review />}
+            {current === 1 && <ActionPage />}
+            {current === 2 && <ResourcePage />}
+            {current >= 3 && <Review />}
             <ButtonStep
               steps={steps}
               current={current}
-              link="/policies"
+              link='/policies'
               changeStepState={this.changeStepState}
             />
           </div>

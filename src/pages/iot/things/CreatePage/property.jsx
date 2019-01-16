@@ -30,12 +30,19 @@ class DynamicFieldSet extends React.Component {
 
     remove = (key) => {
         const { getFieldValue, setFieldsValue } = this.props.form
+        const { form, createModel, dataTypes } = this.props
         // can use data-binding to get
+        let properties = createModel.properties
         let data = getFieldValue('data') || []
+
+
         // We need at least one passenger
         if (data.length === 1) {
             return
         }
+        // if (properties) {
+        //     data = Object.assign(data, properties.map(x => ({ ...x, dataType: (dataTypes.find(a => a.id === x.dataType) || {}) }))) || []
+        // }
         // can use data-binding to set
         setFieldsValue({
             formData: data.filter(x => x.key !== key)
@@ -80,7 +87,7 @@ class DynamicFieldSet extends React.Component {
                 if (addAlert) {
                     let property = (properties.find(x => x.key === key) || {})
                     if (property && property.name) {
-                        history.push(`/alerts/${property.name}/template`)
+                        history.push(`/alerts/${property.name}/thing`)
                     }
                 }
             } else {
@@ -272,11 +279,11 @@ class DynamicFieldSet extends React.Component {
         ))
 
         return (
-            <div className='template-property' >
+            <div className='thing-property' >
                 <div className='row'>
                     <div className='col-lg-2 text-justify'>
-                        <p>Template information include templatename and password, these field are provide for accession.
-                            After this template is created success, you can give these information for a person, so they can loged in.</p>
+                        <p>Thing information include thingname and password, these field are provide for accession.
+                            After this thing is created success, you can give these information for a person, so they can loged in.</p>
                     </div>
                     <div className='col-md-10'>
                         <div className='inherit-property'>
@@ -318,7 +325,7 @@ class DynamicFieldSet extends React.Component {
                             <div className='property-item property-item__title '>
                                 <strong className='property-title '>Property Value</strong>
                             </div>
-                            <Form onSubmit={this.handleSubmit} ref='form' name='createForm' className='col-md-12 template-dynamic-form' >
+                            <Form onSubmit={this.handleSubmit} ref='form' name='createForm' className='col-md-12 thing-dynamic-form' >
                                 {formItems}
                                 <Form.Item>
                                     <Button type='dashed' onClick={() => this.add()} style={{ width: '60%' }}>

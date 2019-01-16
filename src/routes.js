@@ -91,9 +91,7 @@ const loadableRoutes = {
   '/templates/create': {
     component: loadable(() => import('pages/iot/templates/CreatePage')),
   },
-  '/alerts/:property': {
-    component: loadable(() => import('pages/iot/alerts/create')),
-  },
+
   '/templates/:id': {
     component: loadable(() => import('pages/iot/templates/DetailPage')),
   },
@@ -118,6 +116,23 @@ const loadableRoutes = {
   '/properties/:id': {
     component: loadable(() => import('pages/iot/properties/DetailPage')),
   },
+  // things
+  '/things': {
+    component: loadable(() => import('pages/iot/things')),
+  },
+  '/things/create': {
+    component: loadable(() => import('pages/iot/things/CreatePage')),
+  },
+  '/things/:id': {
+    component: loadable(() => import('pages/iot/things/DetailPage')),
+  },
+  // alert
+  '/alerts/:property/thing': {
+    component: loadable(() => import('pages/iot/alerts/create/things')),
+  },
+  '/alerts/:property/template': {
+    component: loadable(() => import('pages/iot/alerts/create/templates')),
+  },
 }
 
 class Routes extends React.Component {
@@ -139,7 +154,7 @@ class Routes extends React.Component {
   render() {
     return (
       <ConnectedSwitch>
-        <Route exact path="/" component={DashboardAlphaPage} />
+        <Route exact path='/' component={DashboardAlphaPage} />
         {Object.keys(loadableRoutes).map(path => {
           const { exact, ...props } = loadableRoutes[path]
           props.exact = exact === void 0 || exact || false // set true as default

@@ -21,15 +21,6 @@ const steps = [
     iconDefault: 'info',
     status: 'process',
     index: 0,
-    nextTitle: 'Next: Services',
-  },
-  {
-    title: 'Select Service',
-    subTitle: 'Choose a Service',
-    icon: 'customer-service',
-    iconDefault: 'customer-service',
-    status: 'wait',
-    index: 1,
     nextTitle: 'Next: Actions',
   },
   {
@@ -38,7 +29,7 @@ const steps = [
     icon: 'coffee',
     iconDefault: 'coffee',
     status: 'wait',
-    index: 2,
+    index: 1,
     nextTitle: 'Next: Resources',
   },
   {
@@ -47,7 +38,7 @@ const steps = [
     icon: 'menu-unfold',
     iconDefault: 'menu-unfold',
     status: 'wait',
-    index: 3,
+    index: 2,
     nextTitle: 'Review',
   },
   {
@@ -56,7 +47,7 @@ const steps = [
     icon: 'sync',
     iconDefault: 'sync',
     status: 'wait',
-    index: 4,
+    index: 3,
     nextTitle: 'Create Policy',
   },
   {
@@ -65,7 +56,7 @@ const steps = [
     icon: 'check-circle',
     iconDefault: 'check-circle',
     status: 'wait',
-    index: 5,
+    index: 4,
     nextTitle: 'Go to Policies List',
   },
 ]

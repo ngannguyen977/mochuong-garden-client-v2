@@ -24,12 +24,11 @@ class ActionList extends React.Component {
   componentWillMount() {
     const { create, actions, actionTotal, policy, policyCreate, getListActionOfService } = this.props
     if (policyCreate && policyCreate.service && (!actions || actionTotal === 0
-      || policy.shortName !== policyCreate.service.shortName)) {
+      || policy.shortName !== 'iot')) {
       create({ ...policyCreate, actions: [],resourceType:[] })
       this.setState({
         selectedRowKeys: []
       })
-      getListActionOfService(policyCreate.service.shortName)
     }
   }
   componentDidMount() {
