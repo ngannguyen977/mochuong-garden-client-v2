@@ -46,8 +46,6 @@ const steps = [
   },
 ]
 
-
-
 const summaryColumns = [
   {
     title: 'Templatename',
@@ -99,7 +97,7 @@ export const mapDispathToProps = {
   getPropertiesByTemplate: (type, parentId, limit, page, sort, isAsc) =>
     getPropertiesByTemplate(type, parentId, limit, page, sort, isAsc),
   createProperty: model => createProperty(model),
-  setCurrentTab: (id, tab) => setCurrentTab(id, tab)
+  setCurrentTab: (id, tab) => setCurrentTab(id, tab),
 }
 export const mapStateToProps = (state, props) => {
   let template = state.template || {}
@@ -108,20 +106,22 @@ export const mapStateToProps = (state, props) => {
   //create
   let inheritCreateProperties = (state.property || {}).properties || []
   //edit
-  let inheritProperties = properties.map(x => {
-    if ((x.parent || {}).id && x.parent.id !== (template.detail || {}).id) {
-      return x
-    }
-    return null
-  }).filter(x => x)
-  let customProperties = properties.map(x => {
-    if ((x.parent || {}).id && x.parent.id === (template.detail || {}).id) {
-      return x
-    }
-    return null
-  }).filter(x => x)
-
-
+  let inheritProperties = properties
+    .map(x => {
+      if ((x.parent || {}).id && x.parent.id !== (template.detail || {}).id) {
+        return x
+      }
+      return null
+    })
+    .filter(x => x)
+  let customProperties = properties
+    .map(x => {
+      if ((x.parent || {}).id && x.parent.id === (template.detail || {}).id) {
+        return x
+      }
+      return null
+    })
+    .filter(x => x)
 
   return {
     // master

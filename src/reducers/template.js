@@ -171,10 +171,7 @@ export const destroy = ids => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const setCurrentTab = (id = 0, tab = '1') => (
-  dispatch,
-  getState,
-) => {
+export const setCurrentTab = (id = 0, tab = '1') => (dispatch, getState) => {
   dispatch(currentTab({ id, tab }))
 }
 const initialState = {
@@ -207,6 +204,6 @@ const ACTION_HANDLES = {
       state.tabs.push({ id, tab })
     }
     return state
-  }
+  },
 }
 export default createReducer(ACTION_HANDLES, initialState)

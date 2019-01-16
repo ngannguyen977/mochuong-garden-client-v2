@@ -19,7 +19,7 @@ class CreatePage extends React.Component {
     this.state = {
       step: {
         current: 0,
-      }
+      },
     }
   }
   componentWillMount() {
@@ -27,11 +27,11 @@ class CreatePage extends React.Component {
     getProjects(100)
     getList(20)
     const { step } = queryString.parse(this.props.location.search)
-    if(step){
+    if (step) {
       this.setState({
-        step:{
-          current: +step
-        }
+        step: {
+          current: +step,
+        },
       })
     }
   }
@@ -54,24 +54,24 @@ class CreatePage extends React.Component {
     const { steps, createModel, history, match } = this.props
     console.log('current', current)
     return (
-      <div className='template-create'>
-        <StepProgress steps={steps} current={current} type='TEMPLATE' />
-        <div className='card'>
-          <div className='card-header'>
-            <h4 className='text-black mb-3'>
+      <div className="template-create">
+        <StepProgress steps={steps} current={current} type="TEMPLATE" />
+        <div className="card">
+          <div className="card-header">
+            <h4 className="text-black mb-3">
               <strong>{steps[current].subTitle}</strong>
             </h4>
           </div>
-          <div className='card-body'>
+          <div className="card-body">
             {current === 0 && <DetailPage />}
             {current === 1 && <Property history={history} match={match} />}
             {(current === 2 || current === 3) && <Review />}
             <ButtonStep
               steps={steps}
               current={current}
-              link='/templates'
+              link="/templates"
               changeStepState={this.changeStepState}
-              page='template'
+              page="template"
             />
           </div>
         </div>
