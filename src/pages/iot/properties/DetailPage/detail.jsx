@@ -73,7 +73,6 @@ export class Detail extends React.Component {
   render() {
     const { name, description, color, project } = this.state
     const { isEdit, detail } = this.props
-console.log(this.state)
     return (
       <div className='property property-detail-page row'>
         <div className='col-lg-4 text-justify'>

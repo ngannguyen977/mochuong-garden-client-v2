@@ -62,7 +62,6 @@ class SummaryPage extends React.Component {
         switch (parent) {
           case 'user':
           if (isEdit) {
-            console.log('change group for user in group summary',selectedRowKeys)
             changePoliciesForUser(selectedRowKeys, userUuid)
           } else {
             createUser({ ...userCreate, policies: selectedRows })

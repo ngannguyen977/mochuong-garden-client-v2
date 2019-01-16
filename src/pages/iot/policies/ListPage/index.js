@@ -39,7 +39,6 @@ class PolicyPage extends React.Component {
     }
   }
   handleTableChange = (pagination, filters, sorter) => {
-    console.log('hanlde table change', (pagination, filters, sorter))
     const pager = { ...this.state.pagination }
     pager.current = pagination.current
     this.setState({
@@ -62,7 +61,7 @@ class PolicyPage extends React.Component {
         sorter: true,
         width: '30%',
         render: (text, record) => (
-          <a className="link" href={`#/policies/detail/${record.policyId}`}>
+          <a className='link' href={`#/policies/detail/${record.policyId}`}>
             {record.name}
           </a>
         ),
@@ -118,27 +117,27 @@ class PolicyPage extends React.Component {
     const content = (
       <div>
         <Popconfirm
-          title="Are you sure delete these policies? You cannot rollback."
+          title='Are you sure delete these policies? You cannot rollback.'
           onConfirm={() => handleActions(type.del)}
           onCancel={() => handleActions(type.del, false)}
-          okText="Yes, I confirm"
+          okText='Yes, I confirm'
           cancelText="No, I don't"
         >
-          <p className="link">Delete POLICIES</p>
+          <p className='link'>Delete POLICIES</p>
         </Popconfirm>
-        <p className="link" onClick={() => handleActions(type.addToUser)}>
+        <p className='link' onClick={() => handleActions(type.addToUser)}>
           Add to USERS(come in soon)
         </p>
-        <p className="link" onClick={() => handleActions(type.addToGroup)}>
+        <p className='link' onClick={() => handleActions(type.addToGroup)}>
           Add to GROUPS(come in soon)
         </p>
       </div>
     )
     return (
       <div>
-        <section className="card">
-          <div className="card-header">
-            <div className="utils__title">
+        <section className='card'>
+          <div className='card-header'>
+            <div className='utils__title'>
               <strong>Policies Management</strong>
             </div>
             <small>
@@ -158,21 +157,21 @@ class PolicyPage extends React.Component {
               </small>
             </p>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
             {totalItems && totalItems > 0 && (
-              <div className="table-responsive">
+              <div className='table-responsive'>
                 <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
-                    type="primary"
+                    type='primary'
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href="#/policies/create"
+                    href='#/policies/create'
                   >
                     Create Policy
                   </Button>
-                  <Popover placement="bottomRight" content={content} trigger="click">
-                    <Button type="primary" disabled={!hasSelected} loading={loading}>
-                      Actions <Icon type="down-circle" theme="filled" />
+                  <Popover placement='bottomRight' content={content} trigger='click'>
+                    <Button type='primary' disabled={!hasSelected} loading={loading}>
+                      Actions <Icon type='down-circle' theme='filled' />
                     </Button>
                   </Popover>
                 </div>
@@ -191,7 +190,7 @@ class PolicyPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name="Policy" link="#/policies/create" />
+              <LockScreenPage name='Policy' link='#/policies/create' />
             )}
           </div>
         </section>

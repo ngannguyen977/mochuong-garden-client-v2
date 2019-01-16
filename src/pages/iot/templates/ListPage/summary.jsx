@@ -30,14 +30,12 @@ class TemplateSummaryList extends React.Component {
   }
   componentWillReceiveProps(){
     const { templatesInGroup, totalItems } = this.props
-    console.log('componentWillReceiveProps',templatesInGroup)
     if(!templatesInGroup || templatesInGroup.length===0){
       return
     }
     const { selectedRowKeys, pagination } = this.state
       if (templatesInGroup && templatesInGroup.length > 0 && selectedRowKeys.length === 0) {
         let templateIds = templatesInGroup.map(x => x.id)
-        console.log('select',selectedRowKeys,templateIds,templateIds !== selectedRowKeys)
         if (templateIds !== selectedRowKeys) {
           this.setState({
             selectedRowKeys: templateIds,
@@ -47,10 +45,7 @@ class TemplateSummaryList extends React.Component {
         }
       }
   }
-  componentDidUpdate() {
-    console.log('componentDidUpdate')
 
-  }
   render() {
     const { summaryColumns, isEdit, groupId, parent, groupCreate, createGroup, data, changeTemplatesForGroup } = this.props
     const { pagination, loading ,selectedRowKeys } = this.state
@@ -63,7 +58,6 @@ class TemplateSummaryList extends React.Component {
         switch (parent) {
           case 'group':
             if (isEdit) {
-              console.log('changeTemplatesForGroup in group summary')
               changeTemplatesForGroup(groupId,selectedRowKeys)
             } else {
               createGroup({ ...groupCreate, templates: selectedRows })

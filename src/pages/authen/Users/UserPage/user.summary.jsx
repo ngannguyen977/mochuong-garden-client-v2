@@ -30,14 +30,12 @@ class UserSummaryList extends React.Component {
   }
   componentWillReceiveProps(){
     const { usersInGroup, totalItems } = this.props
-    console.log('componentWillReceiveProps',usersInGroup)
     if(!usersInGroup || usersInGroup.length===0){
       return
     }
     const { selectedRowKeys, pagination } = this.state
       if (usersInGroup && usersInGroup.length > 0 && selectedRowKeys.length === 0) {
         let userIds = usersInGroup.map(x => x.id)
-        console.log('select',selectedRowKeys,userIds,userIds !== selectedRowKeys)
         if (userIds !== selectedRowKeys) {
           this.setState({
             selectedRowKeys: userIds,
@@ -47,10 +45,7 @@ class UserSummaryList extends React.Component {
         }
       }
   }
-  componentDidUpdate() {
-    console.log('componentDidUpdate')
 
-  }
   render() {
     const { summaryColumns, isEdit, groupId, parent, groupCreate, createGroup, data, changeUsersForGroup } = this.props
     const { pagination, loading ,selectedRowKeys } = this.state
@@ -63,7 +58,6 @@ class UserSummaryList extends React.Component {
         switch (parent) {
           case 'group':
             if (isEdit) {
-              console.log('changeUsersForGroup in group summary')
               changeUsersForGroup(groupId,selectedRowKeys)
             } else {
               createGroup({ ...groupCreate, users: selectedRows })

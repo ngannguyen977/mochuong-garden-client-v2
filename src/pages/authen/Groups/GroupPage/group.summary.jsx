@@ -50,7 +50,6 @@ class GroupSummaryList extends React.Component {
         switch (parent) {
           case 'user':
             if (isEdit) {
-              console.log('change group for user in group summary')
               changeGroupsForUser(selectedRowKeys, userId)
             } else {
               createUser({ ...userCreate, groups: selectedRowKeys,fullGroups: selectedRows })

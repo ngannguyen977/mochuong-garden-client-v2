@@ -39,7 +39,6 @@ class CreatePage extends React.Component {
   changeStepState(current) {
     const { create, createModel } = this.props
     if (current === 3) {
-      console.log('creating.....')
       create(createModel, true)
     }
     this.setState({
@@ -52,7 +51,6 @@ class CreatePage extends React.Component {
   render() {
     const { current } = this.state.step
     const { steps, createModel, history, match } = this.props
-    console.log('current', current)
     return (
       <div className="template-create">
         <StepProgress steps={steps} current={current} type="TEMPLATE" />

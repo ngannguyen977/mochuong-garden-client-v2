@@ -10,10 +10,9 @@ class Template extends React.Component {
   }
   render() {
     const props = this.props
-    console.log(this)
     return (
       <Page {...props}>
-        <Helmet title="Templates" />
+        <Helmet title='Templates' />
         <ListPage history={props.history} location={props.location} />
       </Page>
     )

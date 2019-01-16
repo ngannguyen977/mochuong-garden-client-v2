@@ -34,7 +34,6 @@ export class DetailPage extends React.Component {
 
   updateInfo(type, value) {
     const { create, update, createModel, detail, isEdit, id, getPropertiesByTemplate } = this.props
-    console.log(isEdit)
     switch (type) {
       case 'name':
         isEdit ? update(id, { ...detail, name: value })

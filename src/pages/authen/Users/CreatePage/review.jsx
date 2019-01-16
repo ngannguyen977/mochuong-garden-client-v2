@@ -39,7 +39,6 @@ export class Review extends React.Component {
     }
     componentDidUpdate() {
         const { userCreate, userCreatePermission } = this.props
-        console.log('did', userCreatePermission)
         if (userCreate.groups && !userCreate.permissions && !this.state.data
             && this.state.data !== userCreatePermission) {
             this.setState({

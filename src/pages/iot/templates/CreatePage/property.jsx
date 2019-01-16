@@ -43,7 +43,6 @@ class DynamicFieldSet extends React.Component {
     }
 
     add = (row) => {
-        console.log('add')
         const { form, createModel, dataTypes } = this.props
         const { getFieldValue, setFieldsValue } = form
         if (!row) {

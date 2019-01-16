@@ -51,7 +51,6 @@ class PolicyList extends React.Component {
   render() {
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
       },
       getCheckboxProps: record => ({
         disabled: record.name === 'Disabled Policy', // Column configuration not to be checked

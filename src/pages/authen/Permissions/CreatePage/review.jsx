@@ -37,7 +37,6 @@ export class Review extends React.Component {
             description: permissionCreate.description,
             actions: _actions
         }
-        console.log(reviewData)
         this.setState({
             reviewData
         })
