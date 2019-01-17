@@ -15,12 +15,27 @@ const TabPane = Tabs.TabPane;
     mapDispathToProps,
 )
 export class DetailTabPage extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            loadedTemplateProperties: false
+        }
+    }
     componentWillMount() {
         const { match, getOne } = this.props
         getOne(match.params.id)
     }
-    handleTab(tab,id) {
-        this.props.setCurrentTab(id,tab)
+    componentDidUpdate() {
+        const { detail, getPropertiesByTemplate } = this.props
+        if (!this.state.loadedTemplateProperties && detail) {
+            getPropertiesByTemplate('thing',detail.templateId)
+            this.setState({
+                loadedTemplateProperties: true
+            })
+        }
+    }
+    handleTab(tab, id) {
+        this.props.setCurrentTab(id, tab)
     }
     render() {
         const { detail, update, updateProperty, match, history, tabs } = this.props

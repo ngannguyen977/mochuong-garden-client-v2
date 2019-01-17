@@ -47,7 +47,7 @@ export default {
       //thing
       thing: 'things',
       thingProperty: 'thing-properties',
-      alertThing: 'alert-properties',
+      alertThing: 'property-alerts',
     },
     configure: {
       host: 'https://api-dev.onskycloud.com/iot-service/v1/api',

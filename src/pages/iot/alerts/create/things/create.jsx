@@ -121,16 +121,13 @@ class DynamicFieldSet extends React.Component {
     }
     changePriority = (key, priority) => {
         const { getFieldValue, setFieldsValue } = this.props.form
-
+        const { priorities } = this.props
         // reset alert value
         // setFieldsValue(`data[${row}][value]`,)
         let datas = getFieldValue('data') || []
-        let data = datas.find(x => x.key === key)
-        if (data) {
-            data.priority = priority
-        }
+
         setFieldsValue({
-            formData: datas
+            formData: datas.map(x => ({ ...x, priority: priorities.find(a => a.id === x.priority) }))
         })
     }
 
@@ -155,7 +152,7 @@ class DynamicFieldSet extends React.Component {
                 onChange={(value) => this.changePriority(key, value)}
             >
                 {priorities.map(x => (
-                    <Option key={x.id} value={x.name}>{x.name}</Option>
+                    <Option key={x.id} value={x.id}>{x.name}</Option>
                 ))}
             </Select>)
 
@@ -167,12 +164,12 @@ class DynamicFieldSet extends React.Component {
                     className='d-inline-block alert-item'
                 >
                     {getFieldDecorator(`data[${index}][priority]`, {
-                        initialValue: item.priority,
+                        initialValue: (item.priority || {}).id,
                         validateTrigger: ['onChange', 'onBlur'],
                         rules: [{
                             required: true,
                             message: "Please input alert's priority or delete this row.",
-                            type: 'string'
+                            type: 'number'
                         }],
                     })(
                         priorityElement(index)

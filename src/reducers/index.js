@@ -30,5 +30,5 @@ export default combineReducers({
   priority,
   property,
   alert,
-  thing
+  thing,
 })

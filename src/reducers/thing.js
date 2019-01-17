@@ -27,8 +27,8 @@ export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
   axios
     .get(thingApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
-      let { thingThings, page, totalItems } = response.data
-      dispatch(setThingPage({ things: thingThings, page, totalItems }))
+      let { things, page, totalItems } = response.data
+      dispatch(setThingPage({ things, page, totalItems }))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
@@ -78,7 +78,6 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
             return axios.post(thingPropertyApi, propertyModel)
           })
           Promise.all(propertyPromises).then(res => {
-            const { priorities } = getState().priority
             let alertPromises = res.map(x => {
               let property = model.properties.find(a => a.name === (x.data || {}).name)
 
@@ -87,14 +86,14 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
                   defaultValue: a.value,
                   description: a.description,
                   name: a.name,
-                  priorityID: ((priorities || []).find(x => x.name === a.priority) || {}).id,
-                  propertyThingID: x.data.id,
+                  priorityId: a.priority,
+                  parentId: x.data.id,
                 }
                 return axios.post(thingAlertApi, alertModel)
               })
             })
             Promise.all(alertPromises).then(x => {
-              message.success('Create templace success!')
+              message.success('Create thing success!')
             })
           })
         }
@@ -135,8 +134,7 @@ export const update = (id, model, isUpdate) => (dispatch, getState) => {
         }
       })
       .catch(error => {
-        let errorMessage =
-          ((error.response || {}).data || {}).message || 'change status thing fail'
+        let errorMessage = ((error.response || {}).data || {}).message || 'change status thing fail'
         message.error(errorMessage)
       })
   }

@@ -19,37 +19,37 @@ class ProductCard extends React.Component {
     const { data, type, remove } = this.props
 
     return (
-      <div className='thingCard'>
-        <div className='thingCard__img'>
+      <div className="thingCard">
+        <div className="thingCard__img">
           {productStatus === 'new' && (
-            <div className='thingCard__status'>
-              <span className='thingCard__status__title'>active</span>
+            <div className="thingCard__status">
+              <span className="thingCard__status__title">active</span>
             </div>
           )}
 
           <a href={'/#/things/' + data.id}>
-            <img className='img-responsive' src={productImg} alt='' />
+            <img className="img-responsive" src={productImg} alt="" />
           </a>
         </div>
-        <div className='thingCard__title'>
+        <div className="thingCard__title">
           <a href={'/things/' + data.id}>{data.name}</a>
-          <div className='thingCard__price'>
+          <div className="thingCard__price">
             {/* <img src={imageType} width='50px' className='img-responsive' alt={data.type} /> */}
           </div>
         </div>
-        <div className='thingCard__descr'>{data.description || 'no description'}</div>
-        <div className='thingCard__btn-control'>
-          <Button type='primary' onClick={() => this.props.push('/things/' + data.id)}>
+        <div className="thingCard__descr">{data.description || 'no description'}</div>
+        <div className="thingCard__btn-control">
+          <Button type="primary" onClick={() => this.props.push('/things/' + data.id)}>
             Edit
           </Button>
           <Popconfirm
-            title='Are you sure delete this project? It cannot be rollback.'
+            title="Are you sure delete this project? It cannot be rollback."
             onConfirm={() => remove(data.id)}
             onCancel={() => message.info('cancel deleted')}
-            okText='Yes, I confirm'
+            okText="Yes, I confirm"
             cancelText="No, I don't"
           >
-            <Button type='danger' className='btn-remove'>
+            <Button type="danger" className="btn-remove">
               Remove
             </Button>
           </Popconfirm>
