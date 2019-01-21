@@ -82,7 +82,7 @@ export class DetailPage extends React.Component {
     const { isEdit, data } = this.props
     let types = this.props.type.map(x => (
       <Menu.Item key={x.id}>
-        <a href='javascript:void(0)' onClick={() => this.updateInfo('type', x)}>{x.text}</a>
+        <a href='javascript:void(0)' onClick={() => this.updateInfo('type', x)}>{x.name}</a>
       </Menu.Item>
     ))
     let projects = this.props.projects.map(x => (

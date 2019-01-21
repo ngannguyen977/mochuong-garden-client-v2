@@ -1,7 +1,8 @@
 import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import { Input } from 'antd'
+import { Input, Menu, Dropdown, Icon, Button } from 'antd'
+
 const { TextArea } = Input
 
 @connect(
@@ -53,12 +54,26 @@ export class DetailPage extends React.Component {
           description: value
         })
         break
+        case 'project':
+        isEdit ? update(policyId, { ...detail, project: value })
+          : create({ ...policyCreate, project: value })
+        this.setState({
+          project: value
+        })
+        break
       default:
         break
     }
   }
 
   render() {
+    const { name, description,  project } = this.state
+    const { isEdit } = this.props
+    let projects = this.props.projects.map(x => (
+      <Menu.Item key={x.id}>
+        <a href='javascript:void(0)' onClick={() => this.updateInfo('project', x)}>{x.name}</a>
+      </Menu.Item>
+    ))
     return (
       <div className='user-detail-page row'>
         <div className='col-lg-4 text-justify'>
@@ -87,6 +102,16 @@ export class DetailPage extends React.Component {
               onChange={(evt) => this.updateInfo('description', evt.target.value)} />
             <small className='font-italic text-right'>*Please describe a short text for this policy, it's very helpful for your users, they will easy to understand policies you defined.</small>
           </div>
+          <div className='form-group '>
+              <label htmlFor='project'>Project</label>
+              <div>
+                <Dropdown disabled={this.props.isEdit} overlay={<Menu>{projects}</Menu>} trigger={['click']}>
+                  <Button>
+                    {project ? project.name : 'Please choose a project'}<Icon type='down' />
+                  </Button>
+                </Dropdown>
+              </div>
+            </div>
         </div>
       </div>)
   }

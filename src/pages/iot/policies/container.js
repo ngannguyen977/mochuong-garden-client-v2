@@ -12,6 +12,7 @@ import {
 } from 'reducers/policy'
 import { create as createUser } from 'reducers/user'
 import { getList as getGroups, create as createGroup } from 'reducers/group'
+import { getList as getProjects } from 'reducers/project'
 
 const steps = [
   {
@@ -145,7 +146,8 @@ export const mapDispathToProps = {
   getByGroup: groupIds => getByGroup(groupIds),
   changePoliciesForUser: (policyIds, userUuid, isChange) =>
     changePoliciesForUser(policyIds, userUuid, isChange),
-}
+    getProjects: (limit, page, sort, isAsc) => getProjects(limit, page, sort, isAsc),
+  }
 export const mapStateToProps = (state, props) => {
   let policy = state.policy || {}
 
@@ -177,6 +179,7 @@ export const mapStateToProps = (state, props) => {
     // group
     groupCreate: state.group.groupCreate,
     groupPolicies: state.group.policies,
+    projects: (state.project || {}).projects || [],
   }
 }
 

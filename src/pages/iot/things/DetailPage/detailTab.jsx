@@ -25,15 +25,7 @@ export class DetailTabPage extends React.Component {
         const { match, getOne } = this.props
         getOne(match.params.id)
     }
-    componentDidUpdate() {
-        const { detail, getPropertiesByTemplate } = this.props
-        if (!this.state.loadedTemplateProperties && detail) {
-            getPropertiesByTemplate('thing',detail.templateId)
-            this.setState({
-                loadedTemplateProperties: true
-            })
-        }
-    }
+ 
     handleTab(tab, id) {
         this.props.setCurrentTab(id, tab)
     }

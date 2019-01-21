@@ -68,24 +68,6 @@ const summaryColumns = [
     render: x => helper.formatDate(new Date(x)),
   },
 ]
-const type = [
-  {
-    id: 1,
-    text: 'generic',
-  },
-  {
-    id: 2,
-    text: 'remote',
-  },
-  {
-    id: 3,
-    text: 'gateway',
-  },
-  {
-    id: 4,
-    text: 'camera',
-  },
-]
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
@@ -110,21 +92,31 @@ export const mapStateToProps = (state, props) => {
   //edit
   let inheritProperties = properties
     .map(x => {
-      if ((x.parent || {}).id && x.parent.id !== (thing.detail || {}).id) {
-        return x
+      if (x.template) {
+        return {
+          ...x,
+          name: x.template.name,
+          dataType: x.template.dataType,
+          defaultValue: x.template.defaultValue,
+          isPersistent: x.template.isPersistent,
+          isReadOnly: x.template.isReadOnly,
+          isLogged: x.template.isLogged
+        }
       }
       return null
     })
     .filter(x => x)
   let customProperties = properties
     .map(x => {
-      if ((x.parent || {}).id && x.parent.id === (thing.detail || {}).id) {
-        return x
+      if (!x.template) {
+        return {
+          ...x,
+          defaultValue: x.value
+        }
       }
       return null
     })
     .filter(x => x)
-
   return {
     // master
     thing,
@@ -139,7 +131,7 @@ export const mapStateToProps = (state, props) => {
     // model
     steps,
     summaryColumns,
-    type,
+    type: state.app.thingTypes,
     createModel: thing.thingCreate || {},
     customProperties,
     inheritProperties,

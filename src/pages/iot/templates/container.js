@@ -67,24 +67,7 @@ const summaryColumns = [
     render: x => helper.formatDate(new Date(x)),
   },
 ]
-const type = [
-  {
-    id: 1,
-    text: 'generic',
-  },
-  {
-    id: 2,
-    text: 'remote',
-  },
-  {
-    id: 3,
-    text: 'gateway',
-  },
-  {
-    id: 4,
-    text: 'camera',
-  },
-]
+
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
@@ -137,7 +120,7 @@ export const mapStateToProps = (state, props) => {
     // model
     steps,
     summaryColumns,
-    type,
+    type: state.app.thingTypes,
     createModel: template.templateCreate || {},
     customProperties,
     inheritProperties,

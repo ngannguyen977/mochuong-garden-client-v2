@@ -4,17 +4,11 @@ import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
 import { getServices, getActions } from '../services/resource'
-import { getPermissions as getPolicyFromUser, updateUserState } from 'reducers/user'
-import { getPermissions as getPolicyFromGroup, updateGroupState } from 'reducers/group'
-import { setUserState } from 'reducers/app'
+import { updateUserState } from 'reducers/user'
+import { updateGroupState } from 'reducers/group'
 import {
-  createPolicy,
   getPolicies,
-  deletePolicy,
-  updatePolicy,
-  getPolicyById,
   getPolicyByGroup,
-  getPolicyByGroups,
   getPolicyByUser,
   updateUserPolicies,
   updateGroupPolicies,
@@ -23,6 +17,8 @@ import {
 export const REDUCER = 'policy'
 
 const NS = `@@${REDUCER}/`
+const api = constant.api.iot
+const policyApi = `${api.host}/${api.policies}`
 
 export const setPolicyPage = createAction(`${NS}SET_POLICY_PAGE`)
 export const setServiceList = createAction(`${NS}SET_POLICY_SERVICES`)
@@ -32,11 +28,10 @@ export const createPolicyState = createAction(`${NS}CREATE_POLICY_STATE`)
 export const updatePolicyState = createAction(`${NS}UPDATE_POLICY_STATE`)
 export const setPolicyPerGroup = createAction(`${NS}SET_POLICY_GROUP_STATE`)
 
-export const getList = (keyword, keysort, types, skip = 0, limit = 10, isAsc = false) => (
+export const getList = (limit = 10, page = 0, sort, isAsc = false) => (
   dispatch,
-  getState,
 ) => {
-  getPolicies(keyword, keysort, types, skip, limit, isAsc)
+  axios.get(policyApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
       let { records, page, total } = response
 
@@ -47,8 +42,8 @@ export const getList = (keyword, keysort, types, skip = 0, limit = 10, isAsc = f
       message.error(errorMessage)
     })
 }
-export const getOne = id => (dispatch, getState) => {
-  getPolicyById(id)
+export const getOne = id => (dispatch) => {
+  axios.get(`${policyApi}/${id}`)
     .then(response => {
       dispatch(setPolicyDetailPage(response))
     })
@@ -59,9 +54,8 @@ export const getOne = id => (dispatch, getState) => {
 }
 export const update = (policyId, model, isUpdate) => (dispatch, getState) => {
   dispatch(updatePolicyState(model))
-  console.log('update', model)
   if (isUpdate) {
-    updatePolicy(policyId, model)
+    axios.patch(`${policyApi}/${policyId}`, model)
       .then(response => {
         let { policies, page, totalItems } = getState().policy
         policies = policies.filter(x => x.policyId !== response.policyId)
@@ -78,24 +72,19 @@ export const update = (policyId, model, isUpdate) => (dispatch, getState) => {
 }
 export const create = (model, isCreate = false) => (dispatch, getState) => {
   dispatch(createPolicyState(model))
-  console.log(model)
+
   if (isCreate) {
     let _model = {
       name: model.name,
       description: model.description,
-      resourceTypes: model.resources.map(x => ({
-        name: x.type,
-        effect: x.isAllowPolicy ? 'Allow' : 'Deny',
-        actions: model.actions.filter(a => a.resourceType === x.type).map(a => a.name),
-        resources: x.value.split(','),
-      })),
+      action: model.actions[0].name,
+      projectID: model.project.id,
+      effect: true,
+      resources: [
+        model.resources[0].value
+      ]
     }
-
-    let { userState } = getState().app
-    if (!userState.id) {
-      userState = JSON.parse(window.localStorage.getItem('app.userState'))
-    }
-    createPolicy(userState.id, _model)
+    axios.post(policyApi, _model)
       .then(response => {
         let { policies, page, totalItems } = getState().policy
         policies.push(response)
@@ -109,30 +98,47 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
   }
 }
 export const destroy = ids => (dispatch, getState) => {
-  deletePolicy(ids)
-    .then(response => {
+  axios.delete(`${policyApi}?ids=${ids}`)
+    .then(() => {
       notification['success']({
         message: 'Delete policy success!',
-        description:
-          'These policies will be delete permanly shortly in 1 month. In that time, if you re-create these policy, we will revert information for them.',
-      })
-      let { policies, page, totalItems } = getState().policy
-      dispatch(
-        setPolicyPage({
-          policies: policies.filter(x => !ids.includes(x.policyId)),
-          page,
-          totalItems: totalItems--,
-        }),
-      )
+        description: 'These policies will be delete permanly shortly in 1 month. In that time, if you re-create these policy, we will revert information for them.',
+      });
+      let { policies, page, totalItems } = getState().policy;
+      dispatch(setPolicyPage({
+        policies: policies.filter(x => !ids.includes(x.policyId)),
+        page,
+        totalItems: totalItems--,
+      }));
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'delete policy fail'
       message.error(errorMessage)
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const getListService = (keyword, keysort, skip, count, orderDescending) => (
   dispatch,
-  getState,
 ) => {
   getServices(keyword, keysort, skip, count, orderDescending)
     .then(response => {
@@ -148,7 +154,7 @@ export const getListService = (keyword, keysort, skip, count, orderDescending) =
       message.error(errorMessage)
     })
 }
-export const getListActionOfService = shortName => (dispatch, getState) => {
+export const getListActionOfService = shortName => (dispatch) => {
   getActions(shortName)
     .then(response => {
       dispatch(setActionList({ shortName, actions: response }))
@@ -164,7 +170,7 @@ export const getListActionOfService = shortName => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const getByGroups = groupIds => (dispatch, getState) => {
+export const getByGroups = groupIds => (dispatch) => {
   getPolicyByGroup(groupIds)
     .then(response => {
       dispatch(setPolicyPerGroup(response))
@@ -175,7 +181,7 @@ export const getByGroups = groupIds => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const getByGroup = groupId => (dispatch, getState) => {
+export const getByGroup = groupId => (dispatch) => {
   getPolicyByGroup(groupId)
     .then(response => {
       dispatch(getPolicies(response))
@@ -186,7 +192,7 @@ export const getByGroup = groupId => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const getByUser = userId => (dispatch, getState) => {
+export const getByUser = userId => (dispatch) => {
   getPolicyByUser(userId)
     .then(response => {
       dispatch(getPolicy(response))
@@ -197,14 +203,14 @@ export const getByUser = userId => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const changePoliciesForUser = (policyIds, userUuid, isChange) => (dispatch, getState) => {
+export const changePoliciesForUser = (policyIds, userUuid, isChange) => (dispatch) => {
   console.log('change policy for user in group reducer', policyIds, userUuid, isChange)
   dispatch(updateUserState({ userUuid, policies: policyIds }))
   if (isChange) {
     // get current users in this group, then compare the list to detect add or remove
     updateUserPolicies(userUuid, policyIds.join())
-      .then(response => {
-        dispatch(updateUserState({ userUuid, policies: [] }))
+      .then(() => {
+        dispatch(updateUserState({ userUuid, policies: [] }));
       })
       .catch(error => {
         let errorMessage =
@@ -213,14 +219,14 @@ export const changePoliciesForUser = (policyIds, userUuid, isChange) => (dispatc
       })
   }
 }
-export const changePoliciesForGroup = (policyIds, groupUuid, isChange) => (dispatch, getState) => {
+export const changePoliciesForGroup = (policyIds, groupUuid, isChange) => (dispatch) => {
   console.log('change policy for group in group reducer', policyIds, groupUuid, isChange)
   dispatch(updateGroupState({ groupUuid, policies: policyIds }))
   if (isChange) {
     // get current groups in this group, then compare the list to detect add or remove
     updateGroupPolicies(groupUuid, policyIds.join())
-      .then(response => {
-        dispatch(updateGroupState({ groupUuid, policies: [] }))
+      .then(() => {
+        dispatch(updateGroupState({ groupUuid, policies: [] }));
       })
       .catch(error => {
         let errorMessage =

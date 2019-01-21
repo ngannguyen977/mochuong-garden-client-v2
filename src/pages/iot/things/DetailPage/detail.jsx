@@ -25,7 +25,7 @@ export class DetailPage extends React.Component {
         name: detail.name,
         description: detail.description,
         project: detail.project,
-        template: detail.template_id,
+        template: detail.template,
         type: type.find(x => x.id === detail.thingType),
         isLoaded: true
       })
@@ -103,7 +103,7 @@ export class DetailPage extends React.Component {
             <label htmlFor='name-edit-title'>Thing name</label>
             <Input
               id='name-edit-title'
-              placeholder='thing thing name'
+              placeholder='thing name'
               value={name}
               onChange={(evt) => this.updateInfo('name', evt.target.value)} />
             <small className='font-italic text-right'> *With most services, your name is a name you created, or that has been assigned to you. If you do not recall creating a name,

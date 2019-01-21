@@ -13,6 +13,7 @@ const loginApi = `${api.host}/${api.login}`
 const dataTypeApi = `${configure.host}/${configure.dataType}`
 const alertTypeApi = `${configure.host}/${configure.alertType}`
 const priorityApi = `${configure.host}/${configure.priority}`
+const thingTypeApi = `${configure.host}/${configure.thingType}`
 const infoApi = `${api.host}/${api.info}`
 
 export const _setFrom = createAction(`${NS}SET_FROM`)
@@ -30,6 +31,7 @@ export const setLayoutState = createAction(`${NS}SET_LAYOUT_STATE`)
 export const setDataTypeState = createAction(`${NS}SET_DATATYPE_STATE`)
 export const setAlertTypeState = createAction(`${NS}SET_ALERTTYPE_STATE`)
 export const setPriorityState = createAction(`${NS}SET_PRIORITY_STATE`)
+export const setThingTypeState = createAction(`${NS}SET_THING_TYPE_STATE`)
 
 export const setLoading = isLoading => {
   const action = _setLoading(isLoading)
@@ -59,7 +61,7 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi].map(x =>
+        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi,thingTypeApi].map(x =>
           axios.get(x, { limit: 100 }),
         )
         Promise.all(_promise)
@@ -68,9 +70,11 @@ export const login = (customer, username, password, dispatch) =>
             let alertTypes = res[1].data
             let priorites = res[2].data
             let userInfo = res[3].data
+            let thingTypes = res[4].data
             dispatch(setDataTypeState(dataTypes))
             dispatch(setAlertTypeState(alertTypes))
             dispatch(setPriorityState(priorites))
+            dispatch(setThingTypeState(thingTypes))
             dispatch(_setHideLogin(true))
             dispatch(
               setUserState({
@@ -159,6 +163,10 @@ export default createReducer(
       window.localStorage.setItem('app.token', JSON.stringify(userState.token))
       window.localStorage.setItem('app.userState', JSON.stringify(userState))
       return { ...state, userState }
+    },
+    [setThingTypeState]: (state, thingTypes) => {
+      window.localStorage.setItem('app.thingTypes', JSON.stringify(thingTypes))
+      return { ...state, thingTypes }
     },
     [setDataTypeState]: (state, dataTypes) => {
       window.localStorage.setItem('app.dataTypes', JSON.stringify(dataTypes))

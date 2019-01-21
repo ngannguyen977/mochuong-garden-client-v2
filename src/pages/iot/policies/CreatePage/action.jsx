@@ -44,6 +44,7 @@ class ActionList extends React.Component {
     const { selectedRowKeys } = this.state
     const rowSelection = {
       selectedRowKeys,
+      type:'radio',
       onChange: (selectedRowKeys, selectedRows) => {
         create({ ...policyCreate, actions: selectedRows,resourceType:selectedRows.map(x=>x.resourceType).filter(onlyUnique) })
         this.setState({ selectedRowKeys })

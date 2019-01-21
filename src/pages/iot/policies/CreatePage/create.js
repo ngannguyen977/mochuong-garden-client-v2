@@ -29,9 +29,14 @@ class CreatePage extends React.Component {
       },
     }
   }
+  componentWillMount(){
+    const {getProjects} = this.props
+    getProjects(100)
+  }
   changeStepState(current) {
     const { create, policyCreate } = this.props
-    if (current === 5) {
+    if (current === 4) {
+      console.log(policyCreate)
       create(policyCreate, true)
     }
     this.setState({
