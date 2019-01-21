@@ -61,7 +61,7 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi,thingTypeApi].map(x =>
+        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi, thingTypeApi].map(x =>
           axios.get(x, { limit: 100 }),
         )
         Promise.all(_promise)

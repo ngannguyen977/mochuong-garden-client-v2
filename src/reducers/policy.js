@@ -28,10 +28,9 @@ export const createPolicyState = createAction(`${NS}CREATE_POLICY_STATE`)
 export const updatePolicyState = createAction(`${NS}UPDATE_POLICY_STATE`)
 export const setPolicyPerGroup = createAction(`${NS}SET_POLICY_GROUP_STATE`)
 
-export const getList = (limit = 10, page = 0, sort, isAsc = false) => (
-  dispatch,
-) => {
-  axios.get(policyApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
+export const getList = (limit = 10, page = 0, sort, isAsc = false) => dispatch => {
+  axios
+    .get(policyApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
       let { records, page, total } = response
 
@@ -42,8 +41,9 @@ export const getList = (limit = 10, page = 0, sort, isAsc = false) => (
       message.error(errorMessage)
     })
 }
-export const getOne = id => (dispatch) => {
-  axios.get(`${policyApi}/${id}`)
+export const getOne = id => dispatch => {
+  axios
+    .get(`${policyApi}/${id}`)
     .then(response => {
       dispatch(setPolicyDetailPage(response))
     })
@@ -55,7 +55,8 @@ export const getOne = id => (dispatch) => {
 export const update = (policyId, model, isUpdate) => (dispatch, getState) => {
   dispatch(updatePolicyState(model))
   if (isUpdate) {
-    axios.patch(`${policyApi}/${policyId}`, model)
+    axios
+      .patch(`${policyApi}/${policyId}`, model)
       .then(response => {
         let { policies, page, totalItems } = getState().policy
         policies = policies.filter(x => x.policyId !== response.policyId)
@@ -80,11 +81,10 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       action: model.actions[0].name,
       projectID: model.project.id,
       effect: true,
-      resources: [
-        model.resources[0].value
-      ]
+      resources: [model.resources[0].value],
     }
-    axios.post(policyApi, _model)
+    axios
+      .post(policyApi, _model)
       .then(response => {
         let { policies, page, totalItems } = getState().policy
         policies.push(response)
@@ -98,18 +98,22 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
   }
 }
 export const destroy = ids => (dispatch, getState) => {
-  axios.delete(`${policyApi}?ids=${ids}`)
+  axios
+    .delete(`${policyApi}?ids=${ids}`)
     .then(() => {
       notification['success']({
         message: 'Delete policy success!',
-        description: 'These policies will be delete permanly shortly in 1 month. In that time, if you re-create these policy, we will revert information for them.',
-      });
-      let { policies, page, totalItems } = getState().policy;
-      dispatch(setPolicyPage({
-        policies: policies.filter(x => !ids.includes(x.policyId)),
-        page,
-        totalItems: totalItems--,
-      }));
+        description:
+          'These policies will be delete permanly shortly in 1 month. In that time, if you re-create these policy, we will revert information for them.',
+      })
+      let { policies, page, totalItems } = getState().policy
+      dispatch(
+        setPolicyPage({
+          policies: policies.filter(x => !ids.includes(x.policyId)),
+          page,
+          totalItems: totalItems--,
+        }),
+      )
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'delete policy fail'
@@ -117,29 +121,7 @@ export const destroy = ids => (dispatch, getState) => {
     })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const getListService = (keyword, keysort, skip, count, orderDescending) => (
-  dispatch,
-) => {
+export const getListService = (keyword, keysort, skip, count, orderDescending) => dispatch => {
   getServices(keyword, keysort, skip, count, orderDescending)
     .then(response => {
       dispatch(setServiceList(response))
@@ -154,7 +136,7 @@ export const getListService = (keyword, keysort, skip, count, orderDescending) =
       message.error(errorMessage)
     })
 }
-export const getListActionOfService = shortName => (dispatch) => {
+export const getListActionOfService = shortName => dispatch => {
   getActions(shortName)
     .then(response => {
       dispatch(setActionList({ shortName, actions: response }))
@@ -170,7 +152,7 @@ export const getListActionOfService = shortName => (dispatch) => {
       message.error(errorMessage)
     })
 }
-export const getByGroups = groupIds => (dispatch) => {
+export const getByGroups = groupIds => dispatch => {
   getPolicyByGroup(groupIds)
     .then(response => {
       dispatch(setPolicyPerGroup(response))
@@ -181,7 +163,7 @@ export const getByGroups = groupIds => (dispatch) => {
       message.error(errorMessage)
     })
 }
-export const getByGroup = groupId => (dispatch) => {
+export const getByGroup = groupId => dispatch => {
   getPolicyByGroup(groupId)
     .then(response => {
       dispatch(getPolicies(response))
@@ -192,7 +174,7 @@ export const getByGroup = groupId => (dispatch) => {
       message.error(errorMessage)
     })
 }
-export const getByUser = userId => (dispatch) => {
+export const getByUser = userId => dispatch => {
   getPolicyByUser(userId)
     .then(response => {
       dispatch(getPolicy(response))
@@ -203,14 +185,14 @@ export const getByUser = userId => (dispatch) => {
       message.error(errorMessage)
     })
 }
-export const changePoliciesForUser = (policyIds, userUuid, isChange) => (dispatch) => {
+export const changePoliciesForUser = (policyIds, userUuid, isChange) => dispatch => {
   console.log('change policy for user in group reducer', policyIds, userUuid, isChange)
   dispatch(updateUserState({ userUuid, policies: policyIds }))
   if (isChange) {
     // get current users in this group, then compare the list to detect add or remove
     updateUserPolicies(userUuid, policyIds.join())
       .then(() => {
-        dispatch(updateUserState({ userUuid, policies: [] }));
+        dispatch(updateUserState({ userUuid, policies: [] }))
       })
       .catch(error => {
         let errorMessage =
@@ -219,14 +201,14 @@ export const changePoliciesForUser = (policyIds, userUuid, isChange) => (dispatc
       })
   }
 }
-export const changePoliciesForGroup = (policyIds, groupUuid, isChange) => (dispatch) => {
+export const changePoliciesForGroup = (policyIds, groupUuid, isChange) => dispatch => {
   console.log('change policy for group in group reducer', policyIds, groupUuid, isChange)
   dispatch(updateGroupState({ groupUuid, policies: policyIds }))
   if (isChange) {
     // get current groups in this group, then compare the list to detect add or remove
     updateGroupPolicies(groupUuid, policyIds.join())
       .then(() => {
-        dispatch(updateGroupState({ groupUuid, policies: [] }));
+        dispatch(updateGroupState({ groupUuid, policies: [] }))
       })
       .catch(error => {
         let errorMessage =

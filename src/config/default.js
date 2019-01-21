@@ -54,7 +54,7 @@ export default {
       dataType: 'configures/data-types',
       alertType: 'configures/alert-types',
       priority: 'priorities',
-      thingType: 'configures/thing-types'
+      thingType: 'configures/thing-types',
     },
   },
 }

@@ -29,8 +29,8 @@ class CreatePage extends React.Component {
       },
     }
   }
-  componentWillMount(){
-    const {getProjects} = this.props
+  componentWillMount() {
+    const { getProjects } = this.props
     getProjects(100)
   }
   changeStepState(current) {

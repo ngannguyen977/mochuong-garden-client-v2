@@ -100,7 +100,7 @@ export const mapStateToProps = (state, props) => {
           defaultValue: x.template.defaultValue,
           isPersistent: x.template.isPersistent,
           isReadOnly: x.template.isReadOnly,
-          isLogged: x.template.isLogged
+          isLogged: x.template.isLogged,
         }
       }
       return null
@@ -111,7 +111,7 @@ export const mapStateToProps = (state, props) => {
       if (!x.template) {
         return {
           ...x,
-          defaultValue: x.value
+          defaultValue: x.value,
         }
       }
       return null

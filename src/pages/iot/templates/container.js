@@ -68,7 +68,6 @@ const summaryColumns = [
   },
 ]
 
-
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   getProjects: (limit, page, sort, isAsc) => getProjects(limit, page, sort, isAsc),
