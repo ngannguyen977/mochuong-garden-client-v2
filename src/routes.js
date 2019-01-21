@@ -123,6 +123,9 @@ const loadableRoutes = {
   '/things/create': {
     component: loadable(() => import('pages/iot/things/CreatePage')),
   },
+  '/things/:id/attach': {
+    component: loadable(() => import('pages/iot/things/DetailPage/attachs')),
+  },
   '/things/:id': {
     component: loadable(() => import('pages/iot/things/DetailPage')),
   },

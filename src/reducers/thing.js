@@ -13,6 +13,7 @@ const thingPropertyApi = `${api.host}/${api.thingProperty}`
 const thingAlertApi = `${api.host}/${api.alertThing}`
 
 export const setThingPage = createAction(`${NS}SET_THING_PAGE`)
+export const setThingChildrenPage = createAction(`${NS}SET_THING_CHILDREN_PAGE`)
 export const setThingDetailPage = createAction(`${NS}SET_THING_DETAIL_PAGE`)
 export const createThingState = createAction(`${NS}CREATE_THING`)
 export const updateThingState = createAction(`${NS}UPDATE_THING`)
@@ -26,6 +27,21 @@ export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
 ) => {
   axios
     .get(thingApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
+    .then(response => {
+      let { things, page, totalItems } = response.data
+      dispatch(setThingPage({ things, page, totalItems }))
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
+      message.error(errorMessage)
+    })
+}
+export const getThingChildrenList = (id, limit = 18, page = 0, sort = 'name', isAsc = false) => (
+  dispatch,
+  getState,
+) => {
+  axios
+    .get(`${thingApi}/gateway/${id}`, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
       let { things, page, totalItems } = response.data
       dispatch(setThingPage({ things, page, totalItems }))
@@ -162,6 +178,21 @@ export const destroy = ids => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
+export const attachThing = (parentId, ids) => (dispatch, getState) => {
+  axios
+    .post(`${thingApi}/${parentId}/addthings?ids=${ids}`)
+    .then(response => {
+      notification['success']({
+        message: 'Attach thing success!',
+        description:
+          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+      })
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'attach thing fail'
+      message.error(errorMessage)
+    })
+}
 export const setCurrentTab = (id = 0, tab = '1') => (dispatch, getState) => {
   dispatch(currentTab({ id, tab }))
 }
@@ -178,6 +209,7 @@ const ACTION_HANDLES = {
     totalItems,
   }),
   [createThingState]: (state, thingCreate) => ({ ...state, thingCreate }),
+  [setThingChildrenPage]: (state, children) => ({ ...state, children }),
   [updateThingState]: (state, thingUpdate) => {
     return { ...state, detail: { ...state.detail, thingUpdate } }
   },

@@ -26,7 +26,7 @@ export class DetailPage extends React.Component {
         description: detail.description,
         project: detail.project,
         template: detail.template,
-        type: type.find(x => x.id === detail.thingType),
+        type: type.find(x => x.id === detail.template.type),
         isLoaded: true
       })
     }

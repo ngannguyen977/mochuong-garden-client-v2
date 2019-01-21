@@ -134,4 +134,20 @@
     top: rem(10);
     right: rem(15);
   }
+  &__btn{
+    cursor: pointer;
+    border: 1px solid #d0cccc;
+    font-size: 20px;
+    color: #595959;
+  }
+  .btn-remove{
+    :hover{
+      color: #ff4d4f;
+    }
+  }
+  .btn-edit{
+    :hover{
+      color: #1890ff;
+    }
+  }
 }

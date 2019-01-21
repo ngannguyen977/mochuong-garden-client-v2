@@ -39,19 +39,22 @@ class ProductCard extends React.Component {
         </div>
         <div className="templateCard__descr">{data.description || 'no description'}</div>
         <div className="templateCard__btn-control">
-          <Button type="primary" onClick={() => this.props.push('/templates/' + data.id)}>
-            Edit
-          </Button>
+          <Icon
+            type="edit"
+            theme="filled"
+            className="templateCard__btn btn-edit"
+            onClick={() => this.props.push('/templates/' + data.id)}>Edit</Icon>
           <Popconfirm
-            title="Are you sure delete this project? It cannot be rollback."
+            title="Are you sure delete this template? It cannot be undone."
             onConfirm={() => remove(data.id)}
             onCancel={() => message.info('cancel deleted')}
             okText="Yes, I confirm"
             cancelText="No, I don't"
           >
-            <Button type="danger" className="btn-remove">
-              Remove
-            </Button>
+            <Icon
+              type="delete"
+              theme="filled"
+              className="templateCard__btn btn-remove">Remove</Icon>
           </Popconfirm>
         </div>
       </div>

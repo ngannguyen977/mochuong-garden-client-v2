@@ -1,4 +1,4 @@
-import { getList, getOne, create, destroy, update, setCurrentTab } from 'reducers/thing'
+import { getList, getOne, create, destroy, update, setCurrentTab, getThingChildrenList, attachThing } from 'reducers/thing'
 import { getList as getProjects } from 'reducers/project'
 import {
   getList as getPropertiesByTemplate,
@@ -71,6 +71,7 @@ const summaryColumns = [
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
+  getThingChildrenList: (id, limit, page, sort, isAsc) => getThingChildrenList(id, limit, page, sort, isAsc),
   getTemplates: (limit, page, sort, isAsc) => getTemplates(limit, page, sort, isAsc),
   getProjects: (limit, page, sort, isAsc) => getProjects(limit, page, sort, isAsc),
   create: (model, iscreate) => create(model, iscreate),
@@ -82,6 +83,7 @@ export const mapDispathToProps = {
     getPropertiesByTemplate(type, parentId, limit, page, sort, isAsc),
   createProperty: model => createProperty(model),
   setCurrentTab: (id, tab) => setCurrentTab(id, tab),
+  attachThing: (id) => attachThing(id)
 }
 export const mapStateToProps = (state, props) => {
   let thing = state.thing || {}
@@ -128,6 +130,7 @@ export const mapStateToProps = (state, props) => {
     detail: thing.detail,
     properties: (thing.detail || {}).properties,
     tabs: thing.tabs || [],
+    child: thing.children,
     // model
     steps,
     summaryColumns,

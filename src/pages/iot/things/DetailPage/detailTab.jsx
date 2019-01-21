@@ -3,8 +3,8 @@ import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import DetailPage from './detail'
 import PropertyPage from './property'
+import ThingChildrenPage from './things'
 import { Input, Button, Tabs, Icon } from 'antd'
-import queryString from 'query-string'
 
 
 const Search = Input.Search;
@@ -25,12 +25,12 @@ export class DetailTabPage extends React.Component {
         const { match, getOne } = this.props
         getOne(match.params.id)
     }
- 
+
     handleTab(tab, id) {
         this.props.setCurrentTab(id, tab)
     }
     render() {
-        const { detail, update, updateProperty, match, history, tabs } = this.props
+        const { detail, update, updateProperty, match, history, location, tabs } = this.props
         const _update = (type) => {
             switch (type) {
                 case 'detail':
@@ -77,13 +77,21 @@ export class DetailTabPage extends React.Component {
                 {handleButton('property')}
             </div>
         )
-
+        const tabThing = (
+            <div className='property-tab'>
+                <ThingChildrenPage match={match} history={history} location={location} isEdit={true} _update={_update} />
+                {handleButton('thing')}
+            </div>
+        )
         return (
             <div className='thing-detail'>
                 <Tabs defaultActiveKey={(tabs.find(x => x.id === match.params.id) || {}).tab || '1'}
                     onTabClick={(tab) => this.handleTab(tab, match.params.id)}>
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
                     <TabPane tab={<span><Icon type='project' />Properties</span>} key='2'>{tabProperty}</TabPane>
+                    <TabPane tab={<span><Icon type='share-alt' />Things</span>} key='3'>{tabThing}</TabPane>
+                    <TabPane tab={<span><Icon type='profile' />Certificates</span>} key='4'>{tabProperty}</TabPane>
+                    <TabPane tab={<span><Icon type='loading-3-quarters' />Activity Logs</span>} key='5'></TabPane>
                 </Tabs>
             </div>
         )

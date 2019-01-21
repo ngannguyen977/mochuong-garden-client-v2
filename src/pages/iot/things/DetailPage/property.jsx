@@ -19,7 +19,7 @@ class DynamicFieldSet extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         const { detail } = this.props
         if (detail && !this.state.isLoaded) {

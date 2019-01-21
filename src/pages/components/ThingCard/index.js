@@ -16,8 +16,10 @@ class ProductCard extends React.Component {
   render() {
     const { productImg, productStatus } = this.state
 
-    const { data, type, remove } = this.props
-
+    const { data, type, remove, isAttach, attachThing, parentId } = this.props
+    const attach = (id) => {
+      attachThing(parentId, id)
+    }
     return (
       <div className="thingCard">
         <div className="thingCard__img">
@@ -38,22 +40,34 @@ class ProductCard extends React.Component {
           </div>
         </div>
         <div className="thingCard__descr">{data.description || 'no description'}</div>
-        <div className="thingCard__btn-control">
-          <Button type="primary" onClick={() => this.props.push('/things/' + data.id)}>
-            Edit
-          </Button>
-          <Popconfirm
-            title="Are you sure delete this project? It cannot be rollback."
-            onConfirm={() => remove(data.id)}
-            onCancel={() => message.info('cancel deleted')}
-            okText="Yes, I confirm"
-            cancelText="No, I don't"
-          >
-            <Button type="danger" className="btn-remove">
-              Remove
-            </Button>
-          </Popconfirm>
-        </div>
+        {isAttach && <div className="thingCard__btn-control">
+          <Icon
+            type="api"
+            theme="filled"
+            className="thingCard__btn btn-edit"
+            onClick={() => attach(data.id)} />
+
+        </div>}
+        {!isAttach &&
+          <div className="thingCard__btn-control">
+            <Icon
+              type="edit"
+              theme="filled"
+              className="thingCard__btn btn-edit"
+              onClick={() => this.props.push('/things/' + data.id)}>Edit</Icon>
+            <Popconfirm
+              title="Are you sure delete this thing? It cannot be undone."
+              onConfirm={() => remove(data.id)}
+              onCancel={() => message.info('cancel deleted')}
+              okText="Yes, I confirm"
+              cancelText="No, I don't"
+            >
+              <Icon
+                type="delete"
+                theme="filled"
+                className="thingCard__btn btn-remove">Remove</Icon>
+            </Popconfirm>
+          </div>}
       </div>
     )
   }

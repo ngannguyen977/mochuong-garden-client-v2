@@ -153,7 +153,7 @@ export class DetailPage extends React.Component {
               <div>
                 <Dropdown disabled={isEdit} overlay={<Menu>{types}</Menu>} trigger={['click']}>
                   <Button>
-                    {type ? type.text : 'Please choose a type for this template'}<Icon type='down' />
+                    {type ? type.name : 'Please choose a type for this template'}<Icon type='down' />
                   </Button>
                 </Dropdown>
               </div>
