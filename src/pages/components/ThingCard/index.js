@@ -17,7 +17,8 @@ class ProductCard extends React.Component {
     const { productImg, productStatus } = this.state
 
     const { data, type, remove, isAttach, attachThing, parentId } = this.props
-    const attach = (id) => {
+    const attach = id => {
+      console.log('attach', parentId, id)
       attachThing(parentId, id)
     }
     return (
@@ -40,21 +41,26 @@ class ProductCard extends React.Component {
           </div>
         </div>
         <div className="thingCard__descr">{data.description || 'no description'}</div>
-        {isAttach && <div className="thingCard__btn-control">
-          <Icon
-            type="api"
-            theme="filled"
-            className="thingCard__btn btn-edit"
-            onClick={() => attach(data.id)} />
-
-        </div>}
-        {!isAttach &&
+        {isAttach && (
+          <div className="thingCard__btn-control">
+            <Icon
+              type="api"
+              theme="filled"
+              className="thingCard__btn btn-edit"
+              onClick={() => attach(data.id)}
+            />
+          </div>
+        )}
+        {!isAttach && (
           <div className="thingCard__btn-control">
             <Icon
               type="edit"
               theme="filled"
               className="thingCard__btn btn-edit"
-              onClick={() => this.props.push('/things/' + data.id)}>Edit</Icon>
+              onClick={() => this.props.push('/things/' + data.id)}
+            >
+              Edit
+            </Icon>
             <Popconfirm
               title="Are you sure delete this thing? It cannot be undone."
               onConfirm={() => remove(data.id)}
@@ -62,12 +68,12 @@ class ProductCard extends React.Component {
               okText="Yes, I confirm"
               cancelText="No, I don't"
             >
-              <Icon
-                type="delete"
-                theme="filled"
-                className="thingCard__btn btn-remove">Remove</Icon>
+              <Icon type="delete" theme="filled" className="thingCard__btn btn-remove">
+                Remove
+              </Icon>
             </Popconfirm>
-          </div>}
+          </div>
+        )}
       </div>
     )
   }

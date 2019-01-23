@@ -1,11 +1,7 @@
 import React from 'react'
-import { Table, Button } from 'antd'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
-import helper from '../../../../helper'
-import { Checkbox, Popover, Icon, Tag, Popconfirm, message } from 'antd'
 import '../../../../resources/style.scss'
 import ProjectCard from '../../../components/ProjectCard'
 
@@ -41,7 +37,11 @@ class ProjectPage extends React.Component {
             </div>
           ))}
         {(!totalItems || totalItems <= 0) && (
-          <LockScreenPage name="Project" link="#/projects/create" />
+          <div className='col-md-12 row'>
+            <div className='col-md-4' />
+            <LockScreenPage className='col-md-4' name="Project" link="#/projects/create" />
+            <div className='col-md-4' />
+          </div>
         )}
       </div>
     )

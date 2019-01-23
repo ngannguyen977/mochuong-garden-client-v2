@@ -43,7 +43,10 @@ class ProductCard extends React.Component {
             type="edit"
             theme="filled"
             className="templateCard__btn btn-edit"
-            onClick={() => this.props.push('/templates/' + data.id)}>Edit</Icon>
+            onClick={() => this.props.push('/templates/' + data.id)}
+          >
+            Edit
+          </Icon>
           <Popconfirm
             title="Are you sure delete this template? It cannot be undone."
             onConfirm={() => remove(data.id)}
@@ -51,10 +54,9 @@ class ProductCard extends React.Component {
             okText="Yes, I confirm"
             cancelText="No, I don't"
           >
-            <Icon
-              type="delete"
-              theme="filled"
-              className="templateCard__btn btn-remove">Remove</Icon>
+            <Icon type="delete" theme="filled" className="templateCard__btn btn-remove">
+              Remove
+            </Icon>
           </Popconfirm>
         </div>
       </div>

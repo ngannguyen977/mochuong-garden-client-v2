@@ -1,13 +1,12 @@
 import React from 'react'
 import { Pagination, Button } from 'antd'
-import { mapStateToProps, mapDispathToProps } from '../container'
+import { mapStateToProps, mapDispathToProps } from '../../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
-import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
-import helper from '../../../../helper'
-import '../../../../resources/style.scss'
-import '../style.scss'
-import ThingCard from '../../../components/ThingCard'
+import LockScreenPage from '../../../../DefaultPages/LockscreenPage/Lockscreen'
+import '../../../../../resources/style.scss'
+import '../../style.scss'
+import ThingCard from '../../../../components/ThingCard'
 
 @connect(
   mapStateToProps,
@@ -19,7 +18,7 @@ class ListPage extends React.Component {
   }
   componentWillMount() {
     const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search)
-    this.props.getList(limit, page, sort, isAsc)
+    this.props.getByType(limit, page, sort, isAsc)
   }
   componentWillReceiveProps() {
     const { totalItems } = this.props

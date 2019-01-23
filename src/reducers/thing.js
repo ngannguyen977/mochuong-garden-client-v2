@@ -20,6 +20,8 @@ export const updateThingState = createAction(`${NS}UPDATE_THING`)
 export const getThingsInGroup = createAction(`${NS}GET_THINGS_GROUP`)
 export const getPermission = createAction(`${NS}GET_THING_PERMISSION`)
 export const currentTab = createAction(`${NS}SET_CURRENT_TAB`)
+export const setCertificate = createAction(`${NS}SET_THING_CERTIFICATES`)
+
 
 export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
@@ -41,7 +43,9 @@ export const getThingChildrenList = (id, limit = 18, page = 0, sort = 'name', is
   getState,
 ) => {
   axios
-    .get(`${thingApi}/gateway/${id}`, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
+    .get(`${thingApi}/gateway/${id}`, {
+      params: { limit: limit, page: page, sort: sort, isAsc: isAsc },
+    })
     .then(response => {
       let { things, page, totalItems } = response.data
       dispatch(setThingPage({ things, page, totalItems }))
@@ -51,6 +55,29 @@ export const getThingChildrenList = (id, limit = 18, page = 0, sort = 'name', is
       message.error(errorMessage)
     })
 }
+export const getByType = (limit = 18, page = 0, sort = 'name', isAsc = false,
+  query) => (
+    dispatch,
+    getState,
+  ) => {
+    const { thingTypes } = getState().app
+    let type = (thingTypes.find(x => x.name !== 'Gateway') || {}).id
+    if (!query) {
+      query = `{pages(types:"${type}"){page,totalItems, things{id,name,description,imageUrl,isActive,parentId}}}`
+    }
+    axios
+      .get(`${thingApi}/availibility/by-types`, {
+        params: { limit, page, sort, isAsc, query },
+      })
+      .then(response => {
+        let { things, page, totalItems } = ((response.data || {}).data || {}).pages || {}
+        dispatch(setThingPage({ things, page, totalItems }))
+      })
+      .catch(error => {
+        let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
+        message.error(errorMessage)
+      })
+  }
 
 export const getOne = id => (dispatch, getState) => {
   axios
@@ -196,6 +223,11 @@ export const attachThing = (parentId, ids) => (dispatch, getState) => {
 export const setCurrentTab = (id = 0, tab = '1') => (dispatch, getState) => {
   dispatch(currentTab({ id, tab }))
 }
+export const removeCertificate = (id) => (dispatch, getState) => {
+  let { detail } = getState().thing
+  let certificates = (detail || {}).certificates || []
+  dispatch(setCertificate(certificates.filter(x => x.id !== id)))
+}
 const initialState = {
   totalItems: -1,
   page: 0,
@@ -228,5 +260,6 @@ const ACTION_HANDLES = {
     }
     return state
   },
+  [setCertificate]: (state, certificates) => ({ ...state, detail: { ...state.detail, certificates } })
 }
 export default createReducer(ACTION_HANDLES, initialState)

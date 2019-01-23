@@ -35,7 +35,7 @@ export default {
     },
     iot: {
       host: 'https://api-dev.onskycloud.com/iot-service/v1/api',
-      certificates: 'certificates',
+      certificate: 'certificates',
       configures: 'configures',
       policies: 'policies',
       priority: 'priorities',

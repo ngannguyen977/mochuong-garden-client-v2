@@ -56,12 +56,12 @@ export default [
     url: '/policies',
     icon: 'icmn icmn-file-text2',
   },
-  {
-    title: 'Certificates',
-    key: 'certificate',
-    url: '/certificates',
-    icon: 'icmn icmn-key',
-  },
+  // {
+  //   title: 'Certificates',
+  //   key: 'certificate',
+  //   url: '/certificates',
+  //   icon: 'icmn icmn-key',
+  // },
   {
     divider: true,
   },
@@ -71,16 +71,16 @@ export default [
     url: '/priorities',
     icon: 'icmn icmn-move-up',
   },
-  {
-    title: 'Properties',
-    key: 'property',
-    url: '/properties',
-    icon: 'icmn icmn-leaf',
-  },
-  {
-    title: 'Alerts',
-    key: 'alert',
-    url: '/alerts',
-    icon: 'icmn icmn-warning',
-  },
+  // {
+  //   title: 'Properties',
+  //   key: 'property',
+  //   url: '/properties',
+  //   icon: 'icmn icmn-leaf',
+  // },
+  // {
+  //   title: 'Alerts',
+  //   key: 'alert',
+  //   url: '/alerts',
+  //   icon: 'icmn icmn-warning',
+  // },
 ]

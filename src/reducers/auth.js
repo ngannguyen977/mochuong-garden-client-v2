@@ -6,7 +6,7 @@ import {
   setDataTypeState,
   setAlertTypeState,
   setPriorityState,
-  setThingTypeState
+  setThingTypeState,
 } from 'reducers/app'
 import { message } from 'antd'
 

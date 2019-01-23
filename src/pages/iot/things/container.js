@@ -1,4 +1,14 @@
-import { getList, getOne, create, destroy, update, setCurrentTab, getThingChildrenList, attachThing } from 'reducers/thing'
+import {
+  getList,
+  getOne,
+  create,
+  destroy,
+  update,
+  setCurrentTab,
+  getThingChildrenList,
+  attachThing,
+  getByType
+} from 'reducers/thing'
 import { getList as getProjects } from 'reducers/project'
 import {
   getList as getPropertiesByTemplate,
@@ -7,6 +17,7 @@ import {
 } from 'reducers/property'
 import { getList as getTemplates } from 'reducers/template'
 import helper from '../../../helper'
+import { create as generateCertificate, remove as removeCertificate } from 'reducers/certificate'
 
 const steps = [
   {
@@ -71,7 +82,8 @@ const summaryColumns = [
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
-  getThingChildrenList: (id, limit, page, sort, isAsc) => getThingChildrenList(id, limit, page, sort, isAsc),
+  getThingChildrenList: (id, limit, page, sort, isAsc) =>
+    getThingChildrenList(id, limit, page, sort, isAsc),
   getTemplates: (limit, page, sort, isAsc) => getTemplates(limit, page, sort, isAsc),
   getProjects: (limit, page, sort, isAsc) => getProjects(limit, page, sort, isAsc),
   create: (model, iscreate) => create(model, iscreate),
@@ -83,7 +95,10 @@ export const mapDispathToProps = {
     getPropertiesByTemplate(type, parentId, limit, page, sort, isAsc),
   createProperty: model => createProperty(model),
   setCurrentTab: (id, tab) => setCurrentTab(id, tab),
-  attachThing: (id) => attachThing(id)
+  attachThing: (parentId, id) => attachThing(parentId, id),
+  generateCertificate: (thingId) => generateCertificate(thingId),
+  removeCertificate: (id) => removeCertificate(id),
+  getByType: (limit, page, sort, isAsc, query) => getByType(limit, page, sort, isAsc, query)
 }
 export const mapStateToProps = (state, props) => {
   let thing = state.thing || {}
@@ -144,6 +159,7 @@ export const mapStateToProps = (state, props) => {
     projects: (state.project || {}).projects || [],
     //configure
     dataTypes: state.app.dataTypes,
+    certificates: (thing.detail || {}).certificates || []
   }
 }
 

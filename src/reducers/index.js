@@ -14,6 +14,7 @@ import priority from './priority'
 import property from './property'
 import alert from './alert'
 import thing from './thing'
+import certificate from './certificate'
 
 export default combineReducers({
   routing: routerReducer,
@@ -31,4 +32,5 @@ export default combineReducers({
   property,
   alert,
   thing,
+  certificate
 })

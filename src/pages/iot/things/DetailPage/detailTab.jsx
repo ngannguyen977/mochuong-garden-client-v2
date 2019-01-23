@@ -3,6 +3,7 @@ import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import DetailPage from './detail'
 import PropertyPage from './property'
+import CertificatePage from './certificate'
 import ThingChildrenPage from './things'
 import { Input, Button, Tabs, Icon } from 'antd'
 
@@ -54,7 +55,7 @@ export class DetailTabPage extends React.Component {
                     Cancel
                         </Button>
                 <Button
-                    disabled={type === 'property'}
+                    disabled={type !== 'detail'}
                     type='primary'
                     className='text-capitalize'
                     style={{ marginRight: '25px' }}
@@ -83,6 +84,12 @@ export class DetailTabPage extends React.Component {
                 {handleButton('thing')}
             </div>
         )
+        const tabCertificate = (
+            <div className='property-tab'>
+                <CertificatePage match={match} history={history} location={location} isEdit={true} _update={_update} />
+                {handleButton('certificate')}
+            </div>
+        )
         return (
             <div className='thing-detail'>
                 <Tabs defaultActiveKey={(tabs.find(x => x.id === match.params.id) || {}).tab || '1'}
@@ -90,7 +97,7 @@ export class DetailTabPage extends React.Component {
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
                     <TabPane tab={<span><Icon type='project' />Properties</span>} key='2'>{tabProperty}</TabPane>
                     <TabPane tab={<span><Icon type='share-alt' />Things</span>} key='3'>{tabThing}</TabPane>
-                    <TabPane tab={<span><Icon type='profile' />Certificates</span>} key='4'>{tabProperty}</TabPane>
+                    <TabPane tab={<span><Icon type='profile' />Certificates</span>} key='4'>{tabCertificate}</TabPane>
                     <TabPane tab={<span><Icon type='loading-3-quarters' />Activity Logs</span>} key='5'></TabPane>
                 </Tabs>
             </div>

@@ -49,13 +49,13 @@ class Lockscreen extends React.Component {
                       <Avatar src='resources/images/avatars/1.jpg' border='true' size='90' />
                     </div>
                     <h2 style={{ color: '#514d6a' }} className='text-center'>
-                    <i className='icmn-lock' />
+                      <i className='icmn-lock' />
                       <strong>Empty {this.props.name}</strong>
                     </h2>
                     <br />
                     <Divider />
-                    <Button type='primary' href={this.props.link}>
-                      Create {this.props.name}<Icon type='right' />
+                    <Button type='primary' href={this.props.link} onClick={() => this.props.action()}>
+                      Create&nbsp;{this.props.name}<Icon type='right' />
                     </Button>
                   </form>
                 </div>

@@ -124,7 +124,7 @@ const loadableRoutes = {
     component: loadable(() => import('pages/iot/things/CreatePage')),
   },
   '/things/:id/attach': {
-    component: loadable(() => import('pages/iot/things/DetailPage/attachs')),
+    component: loadable(() => import('pages/iot/things/DetailPage/attach')),
   },
   '/things/:id': {
     component: loadable(() => import('pages/iot/things/DetailPage')),
@@ -135,6 +135,16 @@ const loadableRoutes = {
   },
   '/alerts/:property/template': {
     component: loadable(() => import('pages/iot/alerts/create/templates')),
+  },
+  // certificates
+  '/certificates': {
+    component: loadable(() => import('pages/iot/certificates')),
+  },
+  '/certificates/create': {
+    component: loadable(() => import('pages/iot/certificates/CreatePage')),
+  },
+  '/certificates/:id': {
+    component: loadable(() => import('pages/iot/certificates/DetailPage')),
   },
 }
 
