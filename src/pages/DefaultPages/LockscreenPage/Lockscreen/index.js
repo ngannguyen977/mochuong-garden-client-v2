@@ -25,7 +25,7 @@ class Lockscreen extends React.Component {
     return (
       <div
         onLoad={() => this.generateBackground()}
-        className='login'
+        className="login"
       // style={{ backgroundImage: backgroundImage }}
       >
         {/* <div className="login__header">
@@ -39,23 +39,33 @@ class Lockscreen extends React.Component {
             </div>
           </div>
         </div> */}
-        <div className='login__block mb-5'>
-          <div className='row'>
-            <div className='col-xl-12'>
-              <div className='login__block__inner'>
-                <div className='login__block__form'>
-                  <form id='form-validation' name='form-validation' method='POST' className='text-center'>
-                    <div className='text-center mb-3'>
-                      <Avatar src='resources/images/avatars/1.jpg' border='true' size='90' />
+        <div className="login__block mb-5">
+          <div className="row">
+            <div className="col-xl-12">
+              <div className="login__block__inner">
+                <div className="login__block__form">
+                  <form
+                    id="form-validation"
+                    name="form-validation"
+                    method="POST"
+                    className="text-center"
+                  >
+                    <div className="text-center mb-3">
+                      <Avatar src="resources/images/avatars/1.jpg" border="true" size="90" />
                     </div>
-                    <h2 style={{ color: '#514d6a' }} className='text-center'>
-                      <i className='icmn-lock' />
+                    <h2 style={{ color: '#514d6a' }} className="text-center">
+                      <i className="icmn-lock" />
                       <strong>Empty {this.props.name}</strong>
                     </h2>
                     <br />
                     <Divider />
-                    <Button type='primary' href={this.props.link} onClick={() => this.props.action()}>
-                      Create&nbsp;{this.props.name}<Icon type='right' />
+                    <Button
+                      type="primary"
+                      href={this.props.link}
+                      onClick={this.props.action}
+                    >
+                      Create&nbsp;{this.props.name}
+                      <Icon type="right" />
                     </Button>
                   </form>
                 </div>

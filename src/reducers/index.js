@@ -32,5 +32,5 @@ export default combineReducers({
   property,
   alert,
   thing,
-  certificate
+  certificate,
 })

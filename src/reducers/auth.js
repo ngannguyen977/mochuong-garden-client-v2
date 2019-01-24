@@ -7,6 +7,7 @@ import {
   setAlertTypeState,
   setPriorityState,
   setThingTypeState,
+  setIotActionState,
 } from 'reducers/app'
 import { message } from 'antd'
 
@@ -24,6 +25,7 @@ export const authorize = () => (dispatch, getState) => {
     const alertTypes = JSON.parse(window.localStorage.getItem('app.alertTypes'))
     const priority = JSON.parse(window.localStorage.getItem('app.priority'))
     const thingTypes = JSON.parse(window.localStorage.getItem('app.thingTypes'))
+    const iotActions = JSON.parse(window.localStorage.getItem('app.iotActions'))
     if (token) {
       //set app state
       let userState = { ...app.userState, token: token }
@@ -32,6 +34,7 @@ export const authorize = () => (dispatch, getState) => {
       dispatch(setAlertTypeState(alertTypes))
       dispatch(setPriorityState(priority))
       dispatch(setThingTypeState(thingTypes))
+      dispatch(setIotActionState(iotActions))
 
       return Promise.resolve(true)
     }

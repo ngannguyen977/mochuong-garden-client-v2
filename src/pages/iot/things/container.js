@@ -7,7 +7,8 @@ import {
   setCurrentTab,
   getThingChildrenList,
   attachThing,
-  getByType
+  getByType,
+  removeThing
 } from 'reducers/thing'
 import { getList as getProjects } from 'reducers/project'
 import {
@@ -96,9 +97,10 @@ export const mapDispathToProps = {
   createProperty: model => createProperty(model),
   setCurrentTab: (id, tab) => setCurrentTab(id, tab),
   attachThing: (parentId, id) => attachThing(parentId, id),
-  generateCertificate: (thingId) => generateCertificate(thingId),
-  removeCertificate: (id) => removeCertificate(id),
-  getByType: (limit, page, sort, isAsc, query) => getByType(limit, page, sort, isAsc, query)
+  removeThing: (parentId, id) => removeThing(parentId, id),
+  generateCertificate: thingId => generateCertificate(thingId),
+  removeCertificate: id => removeCertificate(id),
+  getByType: (limit, page, sort, isAsc, query) => getByType(limit, page, sort, isAsc, query),
 }
 export const mapStateToProps = (state, props) => {
   let thing = state.thing || {}
@@ -145,7 +147,6 @@ export const mapStateToProps = (state, props) => {
     detail: thing.detail,
     properties: (thing.detail || {}).properties,
     tabs: thing.tabs || [],
-    child: thing.children,
     // model
     steps,
     summaryColumns,
@@ -159,7 +160,7 @@ export const mapStateToProps = (state, props) => {
     projects: (state.project || {}).projects || [],
     //configure
     dataTypes: state.app.dataTypes,
-    certificates: (thing.detail || {}).certificates || []
+    certificates: (thing.detail || {}).certificates || [],
   }
 }
 

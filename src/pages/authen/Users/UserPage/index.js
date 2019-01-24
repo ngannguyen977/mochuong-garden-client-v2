@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
 import helper from '../../../../helper'
-import { Checkbox, Popover, Icon, Tag, Popconfirm, message } from 'antd'
+import { Checkbox, Popover, Icon, Popconfirm, message } from 'antd'
 import '../../../../resources/style.scss'
 
 @connect(
@@ -63,7 +63,7 @@ class UserPage extends React.Component {
         dataIndex: 'username',
         sorter: true,
         width: '30%',
-        render: (text, record) => (
+        render: (record) => (
           <a className="link" href={`#/users/detail/${record.id}`}>
             {record.username}
           </a>
@@ -80,7 +80,7 @@ class UserPage extends React.Component {
         dataIndex: 'active',
         sorter: true,
         width: '7%',
-        render: (text, record) => (
+        render: (record) => (
           <Checkbox defaultChecked={record.active} checked={record.active} />
         ),
       },
@@ -100,11 +100,11 @@ class UserPage extends React.Component {
       },
     ]
     const { loading, selectedRowKeys } = this.state
-    const { totalItems, page, data, type } = this.props
+    const { totalItems, data, type } = this.props
     const hasSelected = selectedRowKeys.length > 0
     // rowSelection object indicates the need for row selection
     const rowSelection = {
-      onChange: (selectedRowKeys, selectedRows) => {
+      onChange: (selectedRowKeys) => {
         this.setState({
           selectedRowKeys,
         })

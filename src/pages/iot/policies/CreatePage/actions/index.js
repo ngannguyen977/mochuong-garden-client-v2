@@ -1,10 +1,10 @@
 import React from 'react'
-import { mapStateToProps, mapDispathToProps } from '../container'
+import { mapStateToProps, mapDispathToProps } from '../../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import { Input, Checkbox, Button, Switch, Icon, message, Steps, Affix } from 'antd'
 import ActionList from './action'
-import './style.scss'
+import '../style.scss'
 const Search = Input.Search;
 
 
@@ -21,10 +21,7 @@ class Actions extends React.Component {
       isAllowPolicy: true
     }
   }
-  componentWillMount() {
-    const { getListActionOfService } = this.props
-    getListActionOfService('iot')
-  }
+
   changeTypePolicy(value) {
     const { create, policyCreate } = this.props
     create({ ...policyCreate, isAllowPolicy: value })

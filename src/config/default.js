@@ -55,6 +55,7 @@ export default {
       alertType: 'configures/alert-types',
       priority: 'priorities',
       thingType: 'configures/thing-types',
+      iotAction: 'configures/iot-actions'
     },
   },
 }

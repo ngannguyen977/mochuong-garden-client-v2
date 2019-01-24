@@ -1,8 +1,9 @@
 import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import { Table, Tag, Checkbox, Input,Divider } from 'antd'
+import { Table, Tag, Checkbox, Input, Divider } from 'antd'
 import Avatar from 'components/CleanComponents/Avatar'
+import helper from '../../../../helper'
 
 @connect(
     mapStateToProps,
@@ -25,7 +26,7 @@ export class Review extends React.Component {
     }
 
     render() {
-        const { createModel, inheritCreateProperties,dataTypes } = this.props
+        const { createModel, inheritCreateProperties, dataTypes } = this.props
         const { pagination, loading, data } = this.state
         const reviewColumns = [
             { title: 'Property name', dataIndex: 'name' },
@@ -98,9 +99,9 @@ export class Review extends React.Component {
                                         <th>Type</th>
                                     </tr>
                                     <tr>
-                                        <td><Tag color='magenta'> {(createModel.project || {}).name}</Tag></td>
-                                        <td><Tag color='green'>{(createModel.parent || {}).name}</Tag></td>
-                                        <td><Tag color='purple'> {(createModel.type || {}).text}</Tag></td>
+                                        <td><Tag color={helper.colorFull()}> {(createModel.project || {}).name}</Tag></td>
+                                        <td><Tag color={helper.colorFull()}>{(createModel.parent || {}).name}</Tag></td>
+                                        <td><Tag color={helper.colorFull()}> {(createModel.type || {}).text}</Tag></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -137,7 +138,7 @@ export class Review extends React.Component {
                     </div>
                     <Divider />
                     <div className='form-group'>
-                    <h4>Custom Properties</h4>
+                        <h4>Custom Properties</h4>
                         <Table
                             rowKey={record => record.name}
                             pagination={pagination}

@@ -137,19 +137,19 @@ class CertificatePage extends React.Component {
             </div>
             <small>
               You manage access for users by creating certificates and attaching them to users or
-              groups. A certificate is an object, when associated with an entity or resource, defines
-              their certificates. We evaluates these certificates when a principal, such as a user,
-              makes a request. Certificates in the certificates determine whether the request is allowed
-              or denied. Most certificates are stored in cloud as JSON documents.
+              groups. A certificate is an object, when associated with an entity or resource,
+              defines their certificates. We evaluates these certificates when a principal, such as
+              a user, makes a request. Certificates in the certificates determine whether the
+              request is allowed or denied. Most certificates are stored in cloud as JSON documents.
             </small>
             <p>
               <small>
-                We define certificates for an action regardless of the method that you use to perform
-                the operation. For example, if a certificate allows the GetUser action, then a user
-                with that certificate can get user information. When you create a user, you can set up
-                the user to allow console or programmatic access. The user can sign in to the
-                console using a user name and password. Or they can use access keys to work on the
-                website.
+                We define certificates for an action regardless of the method that you use to
+                perform the operation. For example, if a certificate allows the GetUser action, then
+                a user with that certificate can get user information. When you create a user, you
+                can set up the user to allow console or programmatic access. The user can sign in to
+                the console using a user name and password. Or they can use access keys to work on
+                the website.
               </small>
             </p>
           </div>

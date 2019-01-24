@@ -41,8 +41,10 @@ class ListPage extends React.Component {
     })
   }
   render() {
-    const { destroy, child, type, history, detail } = this.props
-
+    const { match, data, type, history, detail, totalItems, removeThing } = this.props
+    const remove = (id) => {
+      removeThing(match.params.id, id)
+    }
     return (
       <div className="thing">
         <section className="card">
@@ -67,17 +69,18 @@ class ListPage extends React.Component {
             </div>
           </div>
           <div className="card-body">
-            {child && child.totalItems && child.totalItems > 0 && (
+            {totalItems && totalItems > 0 && (
               <div className="row">
-                {child && child.things && child.things.length > 0 &&
-                  child.things.map(x => (
+                {data && data.length > 0 &&
+                  data.map(x => (
                     <div className="col-md-2" key={x.id}>
                       <ThingCard
                         data={x || {}}
                         type={type}
                         onMouseEnter={() => this.setState({ current: 0 })}
-                        remove={destroy}
+                        remove={remove}
                         push={history.push}
+                        dontEdit={true}
                       />
                     </div>
                   ))}
@@ -91,7 +94,7 @@ class ListPage extends React.Component {
                 </div>
               </div>
             )}
-            {(!child || !child.totalItems || child.totalItems <= 0) && (
+            {(!data || !totalItems || totalItems <= 0) && (
               <LockScreenPage name=" Thing" link={`/#/things/${(detail || {}).id}/attach`} />
             )}
           </div>

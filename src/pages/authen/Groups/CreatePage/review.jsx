@@ -1,7 +1,7 @@
 import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import { Table, TreeSelect, Tag, Button, Upload, Icon, message, Steps, Divider } from 'antd'
+import { Table } from 'antd'
 
 
 @connect(
@@ -26,7 +26,7 @@ export class Review extends React.Component {
 
     }
     render() {
-        const { reviewPermissionColumns, reviewUserColumns, groupCreate, data } = this.props
+        const { reviewPermissionColumns, reviewUserColumns, groupCreate } = this.props
         const { pagination, loading } = this.state
         return (
             <div className='group-create-step-1 '>

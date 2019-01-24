@@ -19,7 +19,6 @@ export const updateCertificateState = createAction(`${NS}UPDATE_CERTIFICATE`)
 export const getCertificatesInGroup = createAction(`${NS}GET_CERTIFICATES_GROUP`)
 export const getPermission = createAction(`${NS}GET_CERTIFICATE_PERMISSION`)
 
-
 export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
   getState,
@@ -46,7 +45,7 @@ export const getOne = id => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const create = (thingId) => (dispatch, getState) => {
+export const create = thingId => (dispatch, getState) => {
   axios
     .post(certificateApi, { thingId: +thingId })
     .then(response => {

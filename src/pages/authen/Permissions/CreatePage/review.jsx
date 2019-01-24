@@ -1,7 +1,7 @@
 import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import { Table, TreeSelect, Tag, Button, Upload, Icon, message, Steps, Divider } from 'antd'
+import { Table } from 'antd'
 
 
 

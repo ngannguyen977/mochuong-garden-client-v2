@@ -2,6 +2,7 @@ import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import { Table, Tag } from 'antd'
+import helper from '../../../../helper'
 
 @connect(
     mapStateToProps,
@@ -47,7 +48,7 @@ export class ResourceList extends React.Component {
                 width: '30%',
                 render: tags => (
                     <span>
-                        {tags.map(tag => <Tag color='blue' key={tag}>{tag}</Tag>)}
+                        {tags.map(tag => <Tag color={helper.colorFull()} key={tag}>{tag}</Tag>)}
                     </span>
                 ),
             },
@@ -57,7 +58,7 @@ export class ResourceList extends React.Component {
                 width: '30%',
                 render: tags => (
                     <span>
-                        {tags.map(tag => <Tag color='blue' key={tag}>{tag}</Tag>)}
+                        {tags.map(tag => <Tag color={helper.colorFull()} key={tag}>{tag}</Tag>)}
                     </span>
                 ),
             }

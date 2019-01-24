@@ -15,6 +15,7 @@ const alertTypeApi = `${configure.host}/${configure.alertType}`
 const priorityApi = `${configure.host}/${configure.priority}`
 const thingTypeApi = `${configure.host}/${configure.thingType}`
 const infoApi = `${api.host}/${api.info}`
+const iotActionApi = `${configure.host}/${configure.iotAction}`
 
 export const _setFrom = createAction(`${NS}SET_FROM`)
 export const _setLoading = createAction(`${NS}SET_LOADING`)
@@ -32,6 +33,7 @@ export const setDataTypeState = createAction(`${NS}SET_DATATYPE_STATE`)
 export const setAlertTypeState = createAction(`${NS}SET_ALERTTYPE_STATE`)
 export const setPriorityState = createAction(`${NS}SET_PRIORITY_STATE`)
 export const setThingTypeState = createAction(`${NS}SET_THING_TYPE_STATE`)
+export const setIotActionState = createAction(`${NS}SET_IOT_ACTION_STATE`)
 
 export const setLoading = isLoading => {
   const action = _setLoading(isLoading)
@@ -61,7 +63,7 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi, thingTypeApi].map(x =>
+        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi, thingTypeApi, iotActionApi].map(x =>
           axios.get(x, { limit: 100 }),
         )
         Promise.all(_promise)
@@ -71,10 +73,12 @@ export const login = (customer, username, password, dispatch) =>
             let priorites = res[2].data
             let userInfo = res[3].data
             let thingTypes = res[4].data
+            let iotActions = res[5].data
             dispatch(setDataTypeState(dataTypes))
             dispatch(setAlertTypeState(alertTypes))
             dispatch(setPriorityState(priorites))
             dispatch(setThingTypeState(thingTypes))
+            dispatch(setIotActionState(iotActions))
             dispatch(_setHideLogin(true))
             dispatch(
               setUserState({
@@ -106,7 +110,7 @@ export const login = (customer, username, password, dispatch) =>
         return resolve(false)
       })
   })
-export const commonData = () => (dispatch, getState) => {}
+export const commonData = () => (dispatch, getState) => { }
 export const logout = () => (dispatch, getState) => {
   dispatch(
     setUserState({
@@ -179,6 +183,10 @@ export default createReducer(
     [setPriorityState]: (state, priority) => {
       window.localStorage.setItem('app.priority', JSON.stringify(priority))
       return { ...state, priority }
+    },
+    [setIotActionState]: (state, iotActions) => {
+      window.localStorage.setItem('app.iotActions', JSON.stringify(iotActions))
+      return { ...state, iotActions }
     },
     [setLayoutState]: (state, param) => {
       const layoutState = { ...state.layoutState, ...param }

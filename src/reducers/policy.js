@@ -32,9 +32,9 @@ export const getList = (limit = 10, page = 0, sort, isAsc = false) => dispatch =
   axios
     .get(policyApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
     .then(response => {
-      let { records, page, total } = response
+      const { policies, page, totalItems } = response.data
 
-      dispatch(setPolicyPage({ policies: records, page, totalItems: total }))
+      dispatch(setPolicyPage({ policies, page, totalItems }))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'get policy fail'

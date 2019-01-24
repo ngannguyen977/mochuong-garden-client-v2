@@ -16,7 +16,7 @@ class ProductCard extends React.Component {
   render() {
     const { productImg, productStatus } = this.state
 
-    const { data, type, remove, isAttach, attachThing, parentId } = this.props
+    const { data, type, remove, isAttach, attachThing, parentId, dontEdit } = this.props
     const attach = id => {
       console.log('attach', parentId, id)
       attachThing(parentId, id)
@@ -53,14 +53,14 @@ class ProductCard extends React.Component {
         )}
         {!isAttach && (
           <div className="thingCard__btn-control">
-            <Icon
+            {!dontEdit && <Icon
               type="edit"
               theme="filled"
               className="thingCard__btn btn-edit"
               onClick={() => this.props.push('/things/' + data.id)}
             >
               Edit
-            </Icon>
+            </Icon>}
             <Popconfirm
               title="Are you sure delete this thing? It cannot be undone."
               onConfirm={() => remove(data.id)}

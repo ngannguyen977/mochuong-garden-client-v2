@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
 import helper from '../../../../helper'
-import { Checkbox, Popover, Icon, Tag, Popconfirm, message, Table, Button } from 'antd'
+import { Checkbox, Popover, Icon, Popconfirm, message, Table, Button } from 'antd'
 
 @connect(
   mapStateToProps,
@@ -60,7 +60,7 @@ class GroupPage extends React.Component {
         dataIndex: 'name',
         sorter: true,
         width: '30%',
-        render: (text, record) => (
+        render: (record) => (
           <a className="link" href={`#/groups/detail/${record.id}`}>
             {record.name}
           </a>
@@ -77,10 +77,10 @@ class GroupPage extends React.Component {
         dataIndex: 'active',
         sorter: true,
         width: '7%',
-        render: (text, record) => (
+        render: () => (
           <Checkbox
             defaultChecked={true}
-            // checked={record.active}
+          // checked={record.active}
           />
         ),
       },
@@ -93,11 +93,11 @@ class GroupPage extends React.Component {
       },
     ]
     const { loading, selectedRowKeys, pagination } = this.state
-    const { totalItems, page, data, type, destroy, changeStatus } = this.props
+    const { totalItems, data, type, destroy, changeStatus } = this.props
     const hasSelected = selectedRowKeys.length > 0
     // rowSelection object indicates the need for row selection
     const rowSelection = {
-      onChange: (selectedRowKeys, selectedRows) => {
+      onChange: (selectedRowKeys) => {
         this.setState({
           selectedRowKeys,
         })

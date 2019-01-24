@@ -3,7 +3,8 @@ import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
-import { Popover, Icon, Popconfirm, message, Table, Button } from 'antd'
+import { Popover, Icon, Popconfirm, message, Table, Button, Tag, Checkbox } from 'antd'
+import helper from '../../../../helper';
 
 @connect(
   mapStateToProps,
@@ -12,6 +13,7 @@ import { Popover, Icon, Popconfirm, message, Table, Button } from 'antd'
 class PolicyPage extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
+    selectedRows: {},
     loading: false,
     pagination: {
       defaultCurrent: 1,
@@ -56,10 +58,10 @@ class PolicyPage extends React.Component {
   render() {
     const columns = [
       {
-        title: 'Policy name',
+        title: 'Name',
         dataIndex: 'name',
         sorter: true,
-        width: '30%',
+        width: '20%',
         render: (text, record) => (
           <a className="link" href={`#/policies/detail/${record.policyId}`}>
             {record.name}
@@ -67,24 +69,39 @@ class PolicyPage extends React.Component {
         ),
       },
       {
-        title: 'Type',
-        dataIndex: 'type',
-        sorter: true,
-        width: '20%',
-      },
-      {
         title: 'Description',
         dataIndex: 'description',
+        width: '25%',
+      },
+      {
+        title: 'Effect',
+        dataIndex: 'effect',
         sorter: true,
-        width: '50%',
+        width: '7%',
+        render: (text, record) => (
+          <Checkbox defaultChecked={record.effect} checked={record.effect} />
+        ),
+      },
+      {
+        title: 'Action',
+        dataIndex: 'action',
+        sorter: true,
+        width: '20%',
+      }, {
+        title: 'Resource',
+        dataIndex: 'resources',
+        sorter: true,
+        width: '23%',
+        render: (text, record) => (record.resources || []).map(x => (<Tag key={x} color={helper.colorFull()}>{x}</Tag>))
       },
     ]
-    const { loading, selectedRowKeys } = this.state
+    const { loading, selectedRowKeys, selectedRows } = this.state
     const { totalItems, page, data, type } = this.props
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
         this.setState({
           selectedRowKeys,
+          selectedRows
         })
       },
       getCheckboxProps: record => ({
@@ -93,17 +110,18 @@ class PolicyPage extends React.Component {
       }),
     }
     const hasSelected = selectedRowKeys.length > 0
-    const handleActions = (actionType, status = true) => {
+    const handleActions = (actionType) => {
       if (!selectedRowKeys || selectedRowKeys.length === 0) {
         message.info('No row is selected!')
       } else {
         switch (actionType) {
           case type.del:
-            if (status) {
-              this.props.destroy(selectedRowKeys)
-            } else {
-              message.info('canceled delete')
+            if (selectedRows && Array.isArray(selectedRows) && selectedRows.length > 0) {
+              this.props.destroy(selectedRows[0].id)
             }
+            break
+          case type.cancel:
+            message.info('canceled delete')
             break
           case type.addToUser:
             break
@@ -119,7 +137,7 @@ class PolicyPage extends React.Component {
         <Popconfirm
           title="Are you sure delete these policies? You cannot rollback."
           onConfirm={() => handleActions(type.del)}
-          onCancel={() => handleActions(type.del, false)}
+          onCancel={() => handleActions(type.cancel)}
           okText="Yes, I confirm"
           cancelText="No, I don't"
         >

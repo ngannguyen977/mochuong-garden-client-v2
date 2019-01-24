@@ -37,10 +37,10 @@ class ProjectPage extends React.Component {
             </div>
           ))}
         {(!totalItems || totalItems <= 0) && (
-          <div className='col-md-12 row'>
-            <div className='col-md-4' />
-            <LockScreenPage className='col-md-4' name="Project" link="#/projects/create" />
-            <div className='col-md-4' />
+          <div className="col-md-12 row">
+            <div className="col-md-4" />
+            <LockScreenPage className="col-md-4" name="Project" link="#/projects/create" />
+            <div className="col-md-4" />
           </div>
         )}
       </div>

@@ -22,7 +22,6 @@ export const getPermission = createAction(`${NS}GET_THING_PERMISSION`)
 export const currentTab = createAction(`${NS}SET_CURRENT_TAB`)
 export const setCertificate = createAction(`${NS}SET_THING_CERTIFICATES`)
 
-
 export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
   dispatch,
   getState,
@@ -55,29 +54,28 @@ export const getThingChildrenList = (id, limit = 18, page = 0, sort = 'name', is
       message.error(errorMessage)
     })
 }
-export const getByType = (limit = 18, page = 0, sort = 'name', isAsc = false,
-  query) => (
-    dispatch,
-    getState,
-  ) => {
-    const { thingTypes } = getState().app
-    let type = (thingTypes.find(x => x.name !== 'Gateway') || {}).id
-    if (!query) {
-      query = `{pages(types:"${type}"){page,totalItems, things{id,name,description,imageUrl,isActive,parentId}}}`
-    }
-    axios
-      .get(`${thingApi}/availibility/by-types`, {
-        params: { limit, page, sort, isAsc, query },
-      })
-      .then(response => {
-        let { things, page, totalItems } = ((response.data || {}).data || {}).pages || {}
-        dispatch(setThingPage({ things, page, totalItems }))
-      })
-      .catch(error => {
-        let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
-        message.error(errorMessage)
-      })
+export const getByType = (limit = 18, page = 0, sort = 'name', isAsc = false, query) => (
+  dispatch,
+  getState,
+) => {
+  const { thingTypes } = getState().app
+  let type = (thingTypes.find(x => x.name !== 'Gateway') || {}).id
+  if (!query) {
+    query = `{pages(types:"${type}"){page,totalItems, things{id,name,description,imageUrl,isActive,parentId}}}`
   }
+  axios
+    .get(`${thingApi}/availibility/by-types`, {
+      params: { limit, page, sort, isAsc, query },
+    })
+    .then(response => {
+      let { things, page, totalItems } = ((response.data || {}).data || {}).pages || {}
+      dispatch(setThingPage({ things, page, totalItems }))
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
+      message.error(errorMessage)
+    })
+}
 
 export const getOne = id => (dispatch, getState) => {
   axios
@@ -220,10 +218,33 @@ export const attachThing = (parentId, ids) => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
+export const removeThing = (parentId, id) => (dispatch, getState) => {
+  axios
+    .delete(`${thingApi}/${parentId}/removethings?ids=${id}`)
+    .then(response => {
+      let { things, page, totalItems } = getState().thing
+      dispatch(
+        setThingPage({
+          things: things.filter(x => x.id != id),
+          page,
+          totalItems: totalItems--
+        }),
+      )
+      notification['success']({
+        message: 'Remove thing success!',
+        description:
+          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+      })
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'remove thing fail'
+      message.error(errorMessage)
+    })
+}
 export const setCurrentTab = (id = 0, tab = '1') => (dispatch, getState) => {
   dispatch(currentTab({ id, tab }))
 }
-export const removeCertificate = (id) => (dispatch, getState) => {
+export const removeCertificate = id => (dispatch, getState) => {
   let { detail } = getState().thing
   let certificates = (detail || {}).certificates || []
   dispatch(setCertificate(certificates.filter(x => x.id !== id)))
@@ -260,6 +281,9 @@ const ACTION_HANDLES = {
     }
     return state
   },
-  [setCertificate]: (state, certificates) => ({ ...state, detail: { ...state.detail, certificates } })
+  [setCertificate]: (state, certificates) => ({
+    ...state,
+    detail: { ...state.detail, certificates },
+  }),
 }
 export default createReducer(ACTION_HANDLES, initialState)

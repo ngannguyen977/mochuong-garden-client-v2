@@ -4,12 +4,11 @@ import { stats, commerceStats } from './data.json'
 import helper from '../../../helper'
 import { Popover, Icon, Popconfirm, message, Table, Button } from 'antd'
 
-
 class InfoCard extends React.Component {
   static defaultProps = {
     form: 'bordered',
     icon: 'key',
-    type: 'secondary',// &--default, &--primary, &--secondary,&--success, &--info, &--warning, &--danger empty
+    type: 'secondary', // &--default, &--primary, &--secondary,&--success, &--info, &--warning, &--danger empty
     btnType: 'default',
   }
 
@@ -18,19 +17,21 @@ class InfoCard extends React.Component {
     const className = `infoCard ${type.length > 0 ? 'infoCard--' + type : ''}`
 
     return (
-      <div className='certificate-card pointer'>
+      <div className="certificate-card pointer">
         {form === 'bordered' && data && (
-          <div key={data.id} className={className + ' infoCard--bordered '} >
+          <div key={data.id} className={className + ' infoCard--bordered '}>
             {icon !== false && (
-              <span className='infoCard__digit pointer'>
+              <span className="infoCard__digit pointer">
                 <i className={'icmn-' + icon} />
               </span>
             )}
-            <div className='infoCard__desc'>
-              <span className='infoCard__title'>{helper.formatDate(new Date(data.created_at))}</span>
+            <div className="infoCard__desc">
+              <span className="infoCard__title">
+                {helper.formatDate(new Date(data.created_at))}
+              </span>
               <p>{stats.descr}</p>
             </div>
-            <div className='certificate-card__btn-control text-right'>
+            <div className="certificate-card__btn-control text-right">
               <Icon type="info-circle" onClick={() => handleActions('info', data.id)} />
               <Icon type="download" onClick={() => handleActions('download', data.id)} />
               <Popconfirm
