@@ -8,7 +8,7 @@ import {
   getThingChildrenList,
   attachThing,
   getByType,
-  removeThing
+  removeThing,
 } from 'reducers/thing'
 import { getList as getProjects } from 'reducers/project'
 import {

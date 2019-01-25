@@ -29,7 +29,7 @@ export class Review extends React.Component {
         const { policyCreate } = this.props
         let _actions = policyCreate.actions.map(x => {
             let _resource = policyCreate.resources.find(a => a.type === x.resourceType)
-            return { ...x, resource: _resource.value }
+            return { ...x, resource: (_resource || {}).value }
         })
         let reviewData = {
             name: policyCreate.name,

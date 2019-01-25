@@ -130,7 +130,7 @@ const type = {
   changeStatus: 'change-status',
   addToGroup: 'add-to-group',
   addToUser: 'add-to-user',
-  cancel: 'cancel'
+  cancel: 'cancel',
 }
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
@@ -181,7 +181,7 @@ export const mapStateToProps = (state, props) => {
     groupPolicies: state.group.policies,
     projects: (state.project || {}).projects || [],
     //
-    iotActions: state.app.iotActions
+    iotActions: state.app.iotActions,
   }
 }
 

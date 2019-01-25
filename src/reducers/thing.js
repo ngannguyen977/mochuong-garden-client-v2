@@ -227,7 +227,7 @@ export const removeThing = (parentId, id) => (dispatch, getState) => {
         setThingPage({
           things: things.filter(x => x.id != id),
           page,
-          totalItems: totalItems--
+          totalItems: totalItems--,
         }),
       )
       notification['success']({

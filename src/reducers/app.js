@@ -63,9 +63,14 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        let _promise = [dataTypeApi, alertTypeApi, priorityApi, infoApi, thingTypeApi, iotActionApi].map(x =>
-          axios.get(x, { limit: 100 }),
-        )
+        let _promise = [
+          dataTypeApi,
+          alertTypeApi,
+          priorityApi,
+          infoApi,
+          thingTypeApi,
+          iotActionApi,
+        ].map(x => axios.get(x, { limit: 100 }))
         Promise.all(_promise)
           .then(res => {
             let dataTypes = res[0].data
@@ -110,7 +115,7 @@ export const login = (customer, username, password, dispatch) =>
         return resolve(false)
       })
   })
-export const commonData = () => (dispatch, getState) => { }
+export const commonData = () => (dispatch, getState) => {}
 export const logout = () => (dispatch, getState) => {
   dispatch(
     setUserState({

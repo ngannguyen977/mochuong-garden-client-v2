@@ -26,7 +26,7 @@ class Lockscreen extends React.Component {
       <div
         onLoad={() => this.generateBackground()}
         className="login"
-      // style={{ backgroundImage: backgroundImage }}
+        // style={{ backgroundImage: backgroundImage }}
       >
         {/* <div className="login__header">
           <div className="row">
@@ -59,11 +59,7 @@ class Lockscreen extends React.Component {
                     </h2>
                     <br />
                     <Divider />
-                    <Button
-                      type="primary"
-                      href={this.props.link}
-                      onClick={this.props.action}
-                    >
+                    <Button type="primary" href={this.props.link} onClick={this.props.action}>
                       Create&nbsp;{this.props.name}
                       <Icon type="right" />
                     </Button>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import queryString from 'query-string'
 import { Input, Radio, Button, Switch, Icon, message, Checkbox, Affix } from 'antd'
 import './style.scss'
+import helper from '../../../../helper';
 const Search = Input.Search;
 
 
@@ -84,8 +85,8 @@ class ResourcePage extends React.Component {
           <h2>Select resources</h2>
           <small className='font-italic text-right'>*Describes a resource associated with a resource share. You can describe more than one resource by type comma between them. Using * for describe all resource.</small>
           <div className='resource-list'>
-            {resources.map(x => (
-              <div className='form-group' key={x.type}>
+            {resources.map((x, index) => (
+              <div className='form-group' key={helper.colorFull() + index}>
                 <h5 className='text-black text-capitalize'><strong>{x.type}</strong></h5>
                 <Input
                   id='policy-edit-title'

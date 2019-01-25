@@ -63,7 +63,7 @@ class UserPage extends React.Component {
         dataIndex: 'username',
         sorter: true,
         width: '30%',
-        render: (record) => (
+        render: record => (
           <a className="link" href={`#/users/detail/${record.id}`}>
             {record.username}
           </a>
@@ -80,9 +80,7 @@ class UserPage extends React.Component {
         dataIndex: 'active',
         sorter: true,
         width: '7%',
-        render: (record) => (
-          <Checkbox defaultChecked={record.active} checked={record.active} />
-        ),
+        render: record => <Checkbox defaultChecked={record.active} checked={record.active} />,
       },
       {
         title: 'Last Activity',
@@ -104,7 +102,7 @@ class UserPage extends React.Component {
     const hasSelected = selectedRowKeys.length > 0
     // rowSelection object indicates the need for row selection
     const rowSelection = {
-      onChange: (selectedRowKeys) => {
+      onChange: selectedRowKeys => {
         this.setState({
           selectedRowKeys,
         })

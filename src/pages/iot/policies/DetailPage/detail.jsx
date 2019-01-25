@@ -1,7 +1,8 @@
 import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import { Input, Menu, Dropdown, Icon, Button } from 'antd'
+import { Input, Menu, Dropdown, Icon, Button, Tag } from 'antd'
+import helper from '../../../../helper';
 
 const { TextArea } = Input
 
@@ -19,11 +20,12 @@ export class DetailPage extends React.Component {
   }
   componentDidUpdate() {
     const { detail, isEdit } = this.props
-    const { name } = this.state
-    if (isEdit && detail && (!name || name !== detail.name)) {
+    const { name, isLoaded } = this.state
+    if (isEdit && detail && !isLoaded) {
       this.setState({
         name: detail.name,
         description: detail.description,
+        isLoaded: true
       })
     }
   }
@@ -54,7 +56,7 @@ export class DetailPage extends React.Component {
           description: value
         })
         break
-        case 'project':
+      case 'project':
         isEdit ? update(policyId, { ...detail, project: value })
           : create({ ...policyCreate, project: value })
         this.setState({
@@ -67,8 +69,8 @@ export class DetailPage extends React.Component {
   }
 
   render() {
-    const { name, description,  project } = this.state
-    const { isEdit } = this.props
+    const { name, description, project } = this.state
+    const { isEdit, detail } = this.props
     let projects = this.props.projects.map(x => (
       <Menu.Item key={x.id}>
         <a href='javascript:void(0)' onClick={() => this.updateInfo('project', x)}>{x.name}</a>
@@ -102,16 +104,31 @@ export class DetailPage extends React.Component {
               onChange={(evt) => this.updateInfo('description', evt.target.value)} />
             <small className='font-italic text-right'>*Please describe a short text for this policy, it's very helpful for your users, they will easy to understand policies you defined.</small>
           </div>
-          <div className='form-group '>
+          <div className='row'>
+            <div className='col-md-6 col-xs-12 form-group'>
               <label htmlFor='project'>Project</label>
               <div>
-                <Dropdown disabled={this.props.isEdit} overlay={<Menu>{projects}</Menu>} trigger={['click']}>
+                <Dropdown disabled={isEdit} overlay={<Menu>{projects}</Menu>} trigger={['click']}>
                   <Button>
                     {project ? project.name : 'Please choose a project'}<Icon type='down' />
                   </Button>
                 </Dropdown>
               </div>
             </div>
+            {isEdit && (<div className='col-md-6 col-xs-12 form-group'>
+              <label htmlFor='project'>Action</label>
+              <div>
+                <Input readOnly={true} value={(detail || {}).action} />
+              </div>
+            </div>)}
+          </div>
+          {isEdit && (<div className='form-group'>
+            <label htmlFor='project'>Resources</label>
+            <div>
+              {detail && detail.resources && detail.resources.length > 0
+                && detail.resources.map(x => (<Tag color={helper.colorFull()} >{x}</Tag>))}
+            </div>
+          </div>)}
         </div>
       </div>)
   }

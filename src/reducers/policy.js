@@ -45,7 +45,7 @@ export const getOne = id => dispatch => {
   axios
     .get(`${policyApi}/${id}`)
     .then(response => {
-      dispatch(setPolicyDetailPage(response))
+      dispatch(setPolicyDetailPage(response.data))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'get policy fail'
@@ -59,10 +59,10 @@ export const update = (policyId, model, isUpdate) => (dispatch, getState) => {
       .patch(`${policyApi}/${policyId}`, model)
       .then(response => {
         let { policies, page, totalItems } = getState().policy
-        policies = policies.filter(x => x.policyId !== response.policyId)
-        policies.push(response)
+        policies = policies.filter(x => x.policyId !== response.data.policyId)
+        policies.push(response.data)
         dispatch(setPolicyPage({ policies, page, totalItems }))
-        dispatch(setPolicyDetailPage(response))
+        dispatch(setPolicyDetailPage(response.data))
         dispatch(updatePolicyState({}))
       })
       .catch(error => {
@@ -81,14 +81,19 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       action: model.actions[0].name,
       projectID: model.project.id,
       effect: true,
-      resources: [model.resources[0].value],
+      resources: [(model.resources[0] || {}).value],
     }
     axios
       .post(policyApi, _model)
       .then(response => {
-        let { policies, page, totalItems } = getState().policy
-        policies.push(response)
-        dispatch(setPolicyPage({ policies, page, totalItems: totalItems++ }))
+        notification['success']({
+          message: 'Create policy success!',
+          description:
+            'These policies will be delete permanly shortly in 1 month. In that time, if you re-create these policy, we will revert information for them.',
+        })
+        // let { policies, page, totalItems } = getState().policy
+        // policies.push(response)
+        // dispatch(setPolicyPage({ policies, page, totalItems: totalItems++ }))
         dispatch(createPolicyState({}))
       })
       .catch(error => {
@@ -107,15 +112,17 @@ export const destroy = ids => (dispatch, getState) => {
           'These policies will be delete permanly shortly in 1 month. In that time, if you re-create these policy, we will revert information for them.',
       })
       let { policies, page, totalItems } = getState().policy
+      let listId = ids.toString().split(',')
       dispatch(
         setPolicyPage({
-          policies: policies.filter(x => !ids.includes(x.policyId)),
+          policies: policies.filter(x => !listId.includes(x.id)),
           page,
-          totalItems: totalItems--,
+          totalItems: totalItems - listId.length,
         }),
       )
     })
     .catch(error => {
+      console.log(error)
       let errorMessage = ((error.response || {}).data || {}).message || 'delete policy fail'
       message.error(errorMessage)
     })
@@ -124,7 +131,7 @@ export const destroy = ids => (dispatch, getState) => {
 export const getListService = (keyword, keysort, skip, count, orderDescending) => dispatch => {
   getServices(keyword, keysort, skip, count, orderDescending)
     .then(response => {
-      dispatch(setServiceList(response))
+      dispatch(setServiceList(response.data))
       notification['success']({
         message: 'Get list services success!',
         description:
@@ -139,7 +146,7 @@ export const getListService = (keyword, keysort, skip, count, orderDescending) =
 export const getListActionOfService = shortName => dispatch => {
   getActions(shortName)
     .then(response => {
-      dispatch(setActionList({ shortName, actions: response }))
+      dispatch(setActionList({ shortName, actions: response.data }))
       notification['success']({
         message: 'Get list actions of service success!',
         description:
@@ -155,7 +162,7 @@ export const getListActionOfService = shortName => dispatch => {
 export const getByGroups = groupIds => dispatch => {
   getPolicyByGroup(groupIds)
     .then(response => {
-      dispatch(setPolicyPerGroup(response))
+      dispatch(setPolicyPerGroup(response.data))
     })
     .catch(error => {
       let errorMessage =
@@ -166,7 +173,7 @@ export const getByGroups = groupIds => dispatch => {
 export const getByGroup = groupId => dispatch => {
   getPolicyByGroup(groupId)
     .then(response => {
-      dispatch(getPolicies(response))
+      dispatch(getPolicies(response.data))
     })
     .catch(error => {
       let errorMessage =
@@ -177,7 +184,7 @@ export const getByGroup = groupId => dispatch => {
 export const getByUser = userId => dispatch => {
   getPolicyByUser(userId)
     .then(response => {
-      dispatch(getPolicy(response))
+      dispatch(getPolicy(response.data))
     })
     .catch(error => {
       let errorMessage =

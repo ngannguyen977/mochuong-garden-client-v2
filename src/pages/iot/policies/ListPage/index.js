@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
 import { Popover, Icon, Popconfirm, message, Table, Button, Tag, Checkbox } from 'antd'
-import helper from '../../../../helper';
+import helper from '../../../../helper'
 
 @connect(
   mapStateToProps,
@@ -63,7 +63,7 @@ class PolicyPage extends React.Component {
         sorter: true,
         width: '20%',
         render: (text, record) => (
-          <a className="link" href={`#/policies/detail/${record.policyId}`}>
+          <a className="link" href={`#/policies/${record.id}`}>
             {record.name}
           </a>
         ),
@@ -87,12 +87,18 @@ class PolicyPage extends React.Component {
         dataIndex: 'action',
         sorter: true,
         width: '20%',
-      }, {
+      },
+      {
         title: 'Resource',
         dataIndex: 'resources',
         sorter: true,
         width: '23%',
-        render: (text, record) => (record.resources || []).map(x => (<Tag key={x} color={helper.colorFull()}>{x}</Tag>))
+        render: (text, record) =>
+          (record.resources || []).map(x => (
+            <Tag key={x} color={helper.colorFull()}>
+              {x}
+            </Tag>
+          )),
       },
     ]
     const { loading, selectedRowKeys, selectedRows } = this.state
@@ -101,7 +107,7 @@ class PolicyPage extends React.Component {
       onChange: (selectedRowKeys, selectedRows) => {
         this.setState({
           selectedRowKeys,
-          selectedRows
+          selectedRows,
         })
       },
       getCheckboxProps: record => ({
@@ -110,7 +116,7 @@ class PolicyPage extends React.Component {
       }),
     }
     const hasSelected = selectedRowKeys.length > 0
-    const handleActions = (actionType) => {
+    const handleActions = actionType => {
       if (!selectedRowKeys || selectedRowKeys.length === 0) {
         message.info('No row is selected!')
       } else {
@@ -198,7 +204,7 @@ class PolicyPage extends React.Component {
                 </span>
                 <Table
                   rowSelection={rowSelection}
-                  rowKey={record => record.policyId}
+                  rowKey={record => record.id}
                   pagination={this.state.pagination}
                   loading={this.state.loading}
                   columns={columns}

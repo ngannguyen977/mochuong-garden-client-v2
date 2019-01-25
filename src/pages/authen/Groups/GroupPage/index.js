@@ -60,7 +60,7 @@ class GroupPage extends React.Component {
         dataIndex: 'name',
         sorter: true,
         width: '30%',
-        render: (record) => (
+        render: record => (
           <a className="link" href={`#/groups/detail/${record.id}`}>
             {record.name}
           </a>
@@ -80,7 +80,7 @@ class GroupPage extends React.Component {
         render: () => (
           <Checkbox
             defaultChecked={true}
-          // checked={record.active}
+            // checked={record.active}
           />
         ),
       },
@@ -97,7 +97,7 @@ class GroupPage extends React.Component {
     const hasSelected = selectedRowKeys.length > 0
     // rowSelection object indicates the need for row selection
     const rowSelection = {
-      onChange: (selectedRowKeys) => {
+      onChange: selectedRowKeys => {
         this.setState({
           selectedRowKeys,
         })
