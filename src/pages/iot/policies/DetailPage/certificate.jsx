@@ -35,10 +35,10 @@ class CertificatePage extends React.Component {
     }
     return (
       <div className='certificate'>
-        <div className="row">
+        <div className='row'>
           {certificates &&
             certificates.map(x => (
-              <div className="col-md-3 col-sm-6 col-xs-12" key={x.id}>
+              <div className='col-md-3 col-sm-6 col-xs-12' key={x.id}>
                 <CertificateCard
                   data={x || {}}
                   handleActions={handleActions}
@@ -46,9 +46,23 @@ class CertificatePage extends React.Component {
               </div>
             ))}
           {(!certificates || certificates.length <= 0) && (
-            <div className=' text-justify'>
-              <ProfileHeadCard />
-            </div>
+           <div className='card'>
+           <div className='card-header'>
+             <div className='utils__title'>
+               <strong>Account Information</strong>
+             </div>
+             <div className='utils__titleDescription'>
+               Block with important Account information
+             </div>
+           </div>
+           <div className='card-body'>
+             <div className='row'>
+               <div className='col-xl-12'>
+                 <ProfileHeadCard />
+               </div>
+             </div>
+           </div>
+         </div>
           )}
         </div>
       </div>
