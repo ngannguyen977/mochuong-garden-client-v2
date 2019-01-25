@@ -67,8 +67,8 @@ class ListPage extends React.Component {
           <div className='card-body'>
             {totalItems && totalItems > 0 && (
               <div className='row'>
-                {data && data.length > 0 &&
-                  data.map(x => (
+               {detail && detail.things && detail.things.length > 0 &&
+                  detail.things.map(x => (
                     <div className='col-md-2' key={x.id}>
                       <ThingCard
                         data={x || {}}

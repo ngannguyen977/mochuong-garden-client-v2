@@ -13,8 +13,13 @@ class DetailPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Details' />
-        <Detail isEdit={true} location={props.location} history={props.history} match={props.match} />
+        <Helmet title="Details" />
+        <Detail
+          isEdit={true}
+          location={props.location}
+          history={props.history}
+          match={props.match}
+        />
       </Page>
     )
   }

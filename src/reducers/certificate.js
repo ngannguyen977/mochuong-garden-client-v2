@@ -4,8 +4,8 @@ import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
 import { push } from 'react-router-redux'
-import { setThingDetailPage, removeCertificate } from 'reducers/thing'
-
+import { setThingDetailPage, removeCertificate,setThingPage } from 'reducers/thing'
+import {setPolicyPage} from 'reducers/policy'
 export const REDUCER = 'certificate'
 
 const NS = `@@${REDUCER}/`
@@ -171,15 +171,12 @@ export const attachPolicy = (parentId, ids) => (dispatch, getState) => {
 }
 export const removePolicy = (parentId, id) => (dispatch, getState) => {
   axios
-    .delete(`${certificateApi}/${parentId}/removepolicys?ids=${id}`)
+    .delete(`${certificateApi}/${parentId}/removepolicies?ids=${id}`)
     .then(response => {
-      let { policys, page, totalItems } = getState().policy
+      let { detail } = getState().certificate || {}
+      (detail.policies||[]).filter(x => x.id != id)
       dispatch(
-        setThingPage({
-          policys: policys.filter(x => x.id != id),
-          page,
-          totalItems: totalItems--,
-        }),
+        setCertificateDetailPage(detail,id),
       )
       notification['success']({
         message: 'Remove policy success!',
@@ -188,6 +185,7 @@ export const removePolicy = (parentId, id) => (dispatch, getState) => {
       })
     })
     .catch(error => {
+      console.log(error)
       let errorMessage = ((error.response || {}).data || {}).message || 'remove policy fail'
       message.error(errorMessage)
     })

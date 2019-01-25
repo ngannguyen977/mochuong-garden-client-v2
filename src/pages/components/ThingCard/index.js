@@ -16,7 +16,16 @@ class ProductCard extends React.Component {
   render() {
     const { productImg, productStatus } = this.state
 
-    const { data, type, remove, isAttach, attachThing, removeThing, parentId, dontEdit } = this.props
+    const {
+      data,
+      type,
+      remove,
+      isAttach,
+      attachThing,
+      removeThing,
+      parentId,
+      dontEdit,
+    } = this.props
     const attach = id => {
       console.log('attach', parentId, id)
       attachThing(parentId, id)

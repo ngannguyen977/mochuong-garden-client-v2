@@ -1,4 +1,15 @@
-import { getList, getOne, create, update, destroy, setCurrentTab, attachThing, removeThing, attachPolicy, removePolicy } from 'reducers/certificate'
+import {
+  getList,
+  getOne,
+  create,
+  update,
+  destroy,
+  setCurrentTab,
+  attachThing,
+  removeThing,
+  attachPolicy,
+  removePolicy,
+} from 'reducers/certificate'
 import { getList as getThings } from 'reducers/thing'
 import { getList as getPolicies } from 'reducers/policy'
 const type = {

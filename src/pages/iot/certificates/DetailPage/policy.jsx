@@ -65,10 +65,9 @@ class ListPage extends React.Component {
             </div>
           </div>
           <div className="card-body">
-            {totalItems && totalItems > 0 && (
               <div className="row">
-                {data && data.length > 0 &&
-                  data.map(x => (
+                {detail && detail.policies && detail.policies.length > 0 &&
+                  detail.policies.map(x => (
                     <div className="col-md-2" key={x.id}>
                       <PolicyCard
                         data={x || {}}
@@ -89,8 +88,7 @@ class ListPage extends React.Component {
                   />
                 </div>
               </div>
-            )}
-            {(!data || !totalItems || totalItems <= 0) && (
+            {(!detail || !detail.policies || detail.policies.length <= 0) && (
               <LockScreenPage name=" Policy" link={`/#/policies/${(detail || {}).id}/attach`} />
             )}
           </div>
