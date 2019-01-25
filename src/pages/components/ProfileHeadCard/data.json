@@ -1,10 +1,10 @@
 {
   "user": {
-    "name": "Helen Maggie",
-    "link": "@helen_m",
-    "avatar": "resources/images/avatars/5.jpg",
-    "cover": "resources/images/photos/5.jpeg",
-    "mind": "Clean. Simple. Responsive",
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+    "name": "Mr. Hung Nguyen",
+    "link": "@hungnguyen",
+    "avatar": "resources/iot/avatar.png",
+    "cover": "resources/iot/background.png",
+    "mind": "OnSky Security",
+    "description": "OnSky was founded by Mr. Hung C. Nguyen and a team of experts in Internet of Things (IoT). Holding over 35 patents, Mr. Nguyen desires to transform innovation and passion to practical applications that canserve humanity for the better. OnSky is his latest creation that aims to redefine smart home and security with IoT and Artificial Intelligence (AI) technologies."
   }
 }

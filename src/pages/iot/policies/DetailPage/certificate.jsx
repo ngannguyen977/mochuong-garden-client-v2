@@ -49,10 +49,10 @@ class CertificatePage extends React.Component {
            <div className='card'>
            <div className='card-header'>
              <div className='utils__title'>
-               <strong>Account Information</strong>
+               <strong>No Certificate</strong>
              </div>
              <div className='utils__titleDescription'>
-               Block with important Account information
+               This policy have not certificates yet, please go to thing => certificates then attach policies if you want.
              </div>
            </div>
            <div className='card-body'>

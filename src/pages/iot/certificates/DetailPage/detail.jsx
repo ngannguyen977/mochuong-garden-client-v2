@@ -3,6 +3,7 @@ import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import { Input, Button, Tabs, Icon, Select } from 'antd'
 import { SketchPicker } from 'react-color'
+import DetailCertificate from '../../../components/DetailCertificateCard'
 import '../style.scss'
 
 const { TextArea } = Input
@@ -19,12 +20,6 @@ export class Detail extends React.Component {
       description: '',
       color: '#fff',
       isLoaded: false
-    }
-  }
-  componentWillMount() {
-    const { match, getOne, isEdit } = this.props
-    if (isEdit) {
-      getOne(match.params.id)
     }
   }
 
@@ -77,79 +72,12 @@ export class Detail extends React.Component {
     const { isEdit, detail } = this.props
     return (
       <div className='certificate certificate-detail-page row'>
-        <div className='col-lg-4 text-justify'>
-          <p>Certificate management is the application of processes, methods, knowledge, skills and experience to achieve the certificate objectives.</p>
-        </div>
-        <div className='col-lg-8'>
-          <div className='form-group'>
-            <label htmlFor='name-edit-title'>Name</label>
-            <Input
-              id='name-edit-title'
-              placeholder='OnSky Smarthome'
-              value={name}
-              onChange={(evt) => this.update('name', evt.target.value)} />
-            <small className='font-italic text-right'> *With most services, your username is a name you created, or that has been assigned to you. If you do not recall creating a username,
-             (or don't remember the name you chose), try using your e-mail address as your username.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</small>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='group-edit-title'>Certificate Color</label>
-            <div className='row'>
-              <div className='select-color col-md-5'>
-                <SketchPicker
-                  color={color}
-                  onChangeComplete={(evt) => this.update('color', evt.hex)} />
-              </div>
-              <div className='col-md-7 text-justify	'>
-                <small className='font-italic '>*Description is the pattern of narrative development that aims to make vivid a place, object, character, or group.[1] Description is one of four rhetorical modes (also known as modes of discourse), along with exposition, argumentation, and narration.[2] In practice it would be difficult to write literature that drew on just one of the four basic modes.</small>
-              </div>
+        <div className='col-md-3' >
+              <DetailCertificate
+                onMouseEnter={() => this.setState({ current: 0 })}
+                data={detail|| {}}
+              />
             </div>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='group-edit-title'>Project</label>
-            <div>
-              <Select
-                value={project}
-                onChange={(value) => this.update('project', value)}
-                style={{ with: '100%' }}
-                className='select-project'
-              >
-                <Option value=''>
-                  No Project
-              </Option>
-              </Select>
-            </div>
-            <small className='font-italic text-right'>*Description is the pattern of narrative development that aims to make vivid a place, object, character, or group.[1] Description is one of four rhetorical modes (also known as modes of discourse), along with exposition, argumentation, and narration.[2] In practice it would be difficult to write literature that drew on just one of the four basic modes.</small>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='group-edit-title'>Certificate Description</label>
-            <TextArea
-              rows={4}
-              value={description}
-              onChange={(evt) => this.update('description', evt.target.value)} />
-            <small className='font-italic text-right'>*Description is the pattern of narrative development that aims to make vivid a place, object, character, or group.[1] Description is one of four rhetorical modes (also known as modes of discourse), along with exposition, argumentation, and narration.[2] In practice it would be difficult to write literature that drew on just one of the four basic modes.</small>
-          </div>
-
-          <div className='text-right'>
-            <Button
-              type='default'
-              className='text-capitalize'
-              style={{ marginRight: '15px' }}
-              href='#/certificates'
-            >
-              Cancel
-                        </Button>
-            <Button
-              disabled={!name || !description}
-              type='primary'
-              className='text-capitalize'
-              style={{ marginRight: '25px' }}
-              onClick={() => this.update(null, null, true)}
-            >
-              {isEdit ? 'Update' : 'Create'}
-            </Button>
-          </div>
-        </div>
       </div>)
   }
 }

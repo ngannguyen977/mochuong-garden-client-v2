@@ -1,23 +1,22 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import Detail from './detailTab'
+import AttachPage from './attach'
 
-class DetailPage extends React.Component {
+class ThingDetail extends React.Component {
   static defaultProps = {
-    pathName: 'Details',
+    pathName: 'Things Details',
     roles: ['agent', 'administrator'],
   }
-
   render() {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Details' />
-        <Detail isEdit={true} location={props.location} history={props.history} match={props.match} />
+        <Helmet title="Thing Details" />
+        <AttachPage location={props.location} history={props.history} match={props.match} />
       </Page>
     )
   }
 }
 
-export default DetailPage
+export default ThingDetail
