@@ -128,6 +128,7 @@ export const mapStateToProps = (state, props) => {
     projects: (state.project || {}).projects || [],
     //configure
     dataTypes: state.app.dataTypes,
+    token: state.app.userState.token
   }
 }
 

@@ -4,8 +4,8 @@ import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
 import { push } from 'react-router-redux'
-import { setThingDetailPage, removeCertificate,setThingPage } from 'reducers/thing'
-import {setPolicyPage} from 'reducers/policy'
+import { setThingDetailPage, removeCertificate, setThingPage } from 'reducers/thing'
+import { setPolicyPage } from 'reducers/policy'
 export const REDUCER = 'certificate'
 
 const NS = `@@${REDUCER}/`
@@ -173,11 +173,8 @@ export const removePolicy = (parentId, id) => (dispatch, getState) => {
   axios
     .delete(`${certificateApi}/${parentId}/removepolicies?ids=${id}`)
     .then(response => {
-      let { detail } = getState().certificate || {}
-      (detail.policies||[]).filter(x => x.id != id)
-      dispatch(
-        setCertificateDetailPage(detail,id),
-      )
+      let { detail } = getState().certificate || {}(detail.policies || []).filter(x => x.id != id)
+      dispatch(setCertificateDetailPage(detail, id))
       notification['success']({
         message: 'Remove policy success!',
         description:

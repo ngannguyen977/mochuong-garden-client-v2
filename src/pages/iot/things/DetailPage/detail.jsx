@@ -2,6 +2,7 @@ import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import { Input, Menu, Dropdown, Icon, Button } from 'antd'
+import UploadImage from '../../../components/upload'
 
 const { TextArea } = Input
 @connect(
@@ -76,7 +77,15 @@ export class DetailPage extends React.Component {
         break
     }
   }
-
+  uploadSuccess = (image) => {
+    const { create, createModel } = this.props
+    message.info('upload deeeee')
+    console.log(image)
+    create({ ...createModel, image })
+    this.setState({
+      image
+    })
+  }
   render() {
     const { name, description,  project, template } = this.state
     const { isEdit } = this.props
@@ -97,6 +106,10 @@ export class DetailPage extends React.Component {
         <div className='col-lg-4 text-justify'>
           <p>Thing information include name and password, these field are provide for accession. After this thing is created success, you can give these information for a person, so they can loged in.</p>
           {!isEdit && (<p>About the permission, please go to the next step: SET PERMISSION.</p>)}
+          <div className='upload-image text-center'>
+            <UploadImage onSuccess={this.uploadSuccess} token={this.props.token} imageUrl={(this.state.image || {}).url} />
+            <label>Upload Image</label>
+          </div>
         </div>
         <div className='col-lg-8'>
           <div className='form-group'>

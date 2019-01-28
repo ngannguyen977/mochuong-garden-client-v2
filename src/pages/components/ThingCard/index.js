@@ -43,7 +43,7 @@ class ProductCard extends React.Component {
           )}
 
           <a href={'/#/things/' + data.id}>
-            <img className="img-responsive" src={productImg} alt="" />
+            <img className="img-responsive" src={data.imageUrl || productImg} alt="" />
           </a>
         </div>
         <div className="thingCard__title">

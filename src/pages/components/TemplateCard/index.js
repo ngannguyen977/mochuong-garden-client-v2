@@ -17,7 +17,6 @@ class ProductCard extends React.Component {
     const { productImg, productStatus } = this.state
 
     const { data, type, remove } = this.props
-
     return (
       <div className="templateCard">
         <div className="templateCard__img">
@@ -28,7 +27,7 @@ class ProductCard extends React.Component {
           )}
 
           <a href={'/#/templates/' + data.id}>
-            <img className="img-responsive" src={productImg} alt="" />
+            <img className="img-responsive" src={data.imageUrl || productImg} alt="" />
           </a>
         </div>
         <div className="templateCard__title">

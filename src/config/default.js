@@ -57,9 +57,8 @@ export default {
       thingType: 'configures/thing-types',
       iotAction: 'configures/iot-actions',
     },
-    upload:{
+    upload: {
       host: 'https://api-dev.onskycloud.com/storage-service/v1/api/storages',
-
-    }
+    },
   },
 }
