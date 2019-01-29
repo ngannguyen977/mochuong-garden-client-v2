@@ -31,7 +31,6 @@ class UploadImage extends React.Component {
     }
   }
 
-
   handleChange = info => {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true })
@@ -69,9 +68,9 @@ class UploadImage extends React.Component {
         onSuccess={onSuccess}
         beforeUpload={beforeUpload}
         onChange={this.handleChange}
-        accept='image/*'
+        accept="image/*"
       >
-        {imageUrl ? <img className='img-responsive' src={imageUrl} alt="avatar" /> : uploadButton}
+        {imageUrl ? <img className="img-responsive" src={imageUrl} alt="avatar" /> : uploadButton}
       </Upload>
     )
   }

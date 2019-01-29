@@ -98,7 +98,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       description: model.description,
       templateID: (model.template || {}).id,
       projectID: (model.project || {}).id,
-      imageId: (model.image || {}).uuid
+      imageId: (model.image || {}).uuid,
     }
     axios
       .post(thingApi, thingModel)

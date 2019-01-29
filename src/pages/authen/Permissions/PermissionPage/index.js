@@ -61,7 +61,7 @@ class PermissionPage extends React.Component {
         sorter: true,
         width: '30%',
         render: (text, record) => (
-          <a className="link" href={`#/permissions/detail/${record.policyId}`}>
+          <a className="link" href={`#/permissions/${record.policyId}`}>
             {record.name}
           </a>
         ),

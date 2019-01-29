@@ -2,7 +2,7 @@ export default {
   api: {
     authen: {
       host: 'https://api-dev.onskycloud.com/authen/v1/api',
-      login: 'auth/login',
+      login: 'auth/customer',
       info: 'auth/me',
       register: 'customers',
       group: 'groups',

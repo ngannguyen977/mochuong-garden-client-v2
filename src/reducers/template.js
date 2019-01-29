@@ -58,7 +58,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       parentId: (model.parent || {}).id,
       projectId: (model.project || {}).id,
       type: (model.type || {}).id,
-      imageId: (model.image || {}).uuid
+      imageId: (model.image || {}).uuid,
     }
     axios
       .post(templateApi, templateModel)

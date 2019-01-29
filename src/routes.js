@@ -41,7 +41,7 @@ const loadableRoutes = {
   '/groups/create': {
     component: loadable(() => import('pages/authen/Groups/CreatePage')),
   },
-  '/groups/detail/:id': {
+  '/groups/:id': {
     component: loadable(() => import('pages/authen/Groups/DetailPage')),
   },
   // users
@@ -51,7 +51,7 @@ const loadableRoutes = {
   '/users/create': {
     component: loadable(() => import('pages/authen/Users/CreatePage')),
   },
-  '/users/detail/:id': {
+  '/users/:id': {
     component: loadable(() => import('pages/authen/Users/DetailPage')),
   },
   // permissions
@@ -61,7 +61,7 @@ const loadableRoutes = {
   '/permissions/create': {
     component: loadable(() => import('pages/authen/Permissions/CreatePage')),
   },
-  '/permissions/detail/:id': {
+  '/permissions/:id': {
     component: loadable(() => import('pages/authen/Permissions/DetailPage')),
   },
   // projects

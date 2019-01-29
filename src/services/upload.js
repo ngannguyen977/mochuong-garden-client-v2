@@ -9,7 +9,7 @@ const instance = axios.create({
   headers: {
     accept: 'multipart/form-data',
     'Content-Type': 'multipart/form-data',
-    Authorization: 'Bearer ' + token.toString().replace(/['"]+/g, '')
+    Authorization: 'Bearer ' + token.toString().replace(/['"]+/g, ''),
   },
 })
 export const getList = (limit, page, sort, isAsc) =>
@@ -38,7 +38,7 @@ export const getOne = id =>
   })
 export const create = file =>
   new Promise((resolve, reject) => {
-    console.log('fieeeeeeeee',file)
+    console.log('fieeeeeeeee', file)
     instance
       .post('', { file })
       .then(response => {
