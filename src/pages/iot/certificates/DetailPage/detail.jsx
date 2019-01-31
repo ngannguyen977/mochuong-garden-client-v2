@@ -67,17 +67,19 @@ export class Detail extends React.Component {
       isEdit ? update(detail.id, name, description, color, project) : create(name, description, color, project)
     }
   }
+
   render() {
     const { name, description, color, project } = this.state
     const { isEdit, detail } = this.props
     return (
       <div className='certificate certificate-detail-page row'>
         <div className='col-md-3' >
-              <DetailCertificate
-                onMouseEnter={() => this.setState({ current: 0 })}
-                data={detail|| {}}
-              />
-            </div>
+          <DetailCertificate
+            onMouseEnter={() => this.setState({ current: 0 })}
+            data={detail || {}}
+            // handleActions={this.downloadTxtFile}
+          />
+        </div>
       </div>)
   }
 }

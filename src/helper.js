@@ -78,4 +78,5 @@ const colorFull = (type = 'all') => {
 
   return allColor[Math.floor(Math.random() * allColor.length)]
 }
+
 export default { formatDate, onlyUnique, download, colorFull }

@@ -60,7 +60,7 @@ class GroupPage extends React.Component {
         dataIndex: 'name',
         sorter: true,
         width: '30%',
-        render: (name,record) => (
+        render: (name, record) => (
           <a className="link" href={`#/groups/${record.id}`}>
             {record.name}
           </a>

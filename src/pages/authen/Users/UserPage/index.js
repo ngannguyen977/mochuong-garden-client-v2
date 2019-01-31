@@ -63,12 +63,13 @@ class UserPage extends React.Component {
         dataIndex: 'username',
         sorter: true,
         width: '30%',
-        render: (name,record) => {
-          return(
-          <a className="link" href={`#/users/${record.id}`}>
-            {record.username}
-          </a>
-        )},
+        render: (name, record) => {
+          return (
+            <a className="link" href={`#/users/${record.id}`}>
+              {record.username}
+            </a>
+          )
+        },
       },
       {
         title: 'Role',
@@ -183,7 +184,7 @@ class UserPage extends React.Component {
             </small>
           </div>
           <div className="card-body">
-            { totalItems > 0 && (
+            {totalItems > 0 && (
               <div className="table-responsive">
                 <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
