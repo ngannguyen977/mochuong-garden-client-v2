@@ -2,9 +2,9 @@ export default {
   api: {
     authen: {
       host: 'https://api-dev.onskycloud.com/authen/v1/api',
-      login: 'auth/customer',
+      login: 'auth/client',
       info: 'auth/me',
-      register: 'customers',
+      register: 'clients',
       group: 'groups',
       user: 'users',
       usersByGroup: 'bygroup',
@@ -61,4 +61,7 @@ export default {
       host: 'https://api-dev.onskycloud.com/storage-service/v1/api/storages',
     },
   },
+  customer: {
+    number: '1968819478737191938'
+  }
 }

@@ -38,21 +38,9 @@ class LoginForm extends React.Component {
         className='login-form'
       >
         <FormItem>
-          <label className='form-label mb-0'>Alias</label>
-          {getFieldDecorator('alias', {
-            initialValue: 'admin',
-            rules: [{ required: true, message: 'Please input your alias!' }],
-          })(
-            <Input
-              prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder='Username'
-            />,
-          )}
-        </FormItem>
-        <FormItem>
           <label className='form-label mb-0'>Username</label>
           {getFieldDecorator('userName', {
-            initialValue: 'admin',
+            initialValue: '',
             rules: [{ required: true, message: 'Please input your username!' }],
           })(
             <Input

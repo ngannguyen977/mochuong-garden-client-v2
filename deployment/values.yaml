@@ -7,7 +7,7 @@ replicaCount: 1
 namespace: iot
 
 image:
-  repository: 754404031763.dkr.ecr.ap-southeast-1.amazonaws.com/iot-frontend
+  repository: 754404031763.dkr.ecr.ap-southeast-1.amazonaws.com/iot-client
   tag: latest
   pullPolicy: Always
 

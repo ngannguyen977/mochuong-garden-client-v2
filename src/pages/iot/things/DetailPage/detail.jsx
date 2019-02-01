@@ -32,59 +32,8 @@ export class DetailPage extends React.Component {
       })
     }
   }
+  uploadSuccess(){
 
-  updateInfo(type, value) {
-    const { create, update, createModel, detail, isEdit, id, getPropertiesByTemplate } = this.props
-    switch (type) {
-      case 'name':
-        isEdit ? update(id, { ...detail, name: value })
-          : create({ ...createModel, name: value })
-        this.setState({
-          name: value
-        })
-        break
-      case 'description':
-        isEdit ? update(id, { ...detail, description: value })
-          : create({ ...createModel, description: value })
-        this.setState({
-          description: value
-        })
-        break
-      case 'type':
-        isEdit ? update(id, { ...detail, type: value })
-          : create({ ...createModel, type: value })
-        this.setState({
-          type: value
-        })
-        break
-      case 'project':
-        isEdit ? update(id, { ...detail, project: value })
-          : create({ ...createModel, project: value })
-        this.setState({
-          project: value
-        })
-        break
-      case 'template':
-        if (!isEdit) {
-          getPropertiesByTemplate('template', value.id, 100)
-          create({ ...createModel, template: value })
-          this.setState({
-            template: value
-          })
-        }
-        break
-      default:
-        break
-    }
-  }
-  uploadSuccess = (image) => {
-    const { create, createModel } = this.props
-    message.info('upload deeeee')
-    console.log(image)
-    create({ ...createModel, image })
-    this.setState({
-      image
-    })
   }
   render() {
     const { name, description,  project, template } = this.state
@@ -117,6 +66,7 @@ export class DetailPage extends React.Component {
             <Input
               id='name-edit-title'
               placeholder='thing name'
+              disabled={true}
               value={name}
               onChange={(evt) => this.updateInfo('name', evt.target.value)} />
             <small className='font-italic text-right'> *With most services, your name is a name you created, or that has been assigned to you. If you do not recall creating a name,
@@ -127,6 +77,7 @@ export class DetailPage extends React.Component {
             <label htmlFor='description-edit-title'>Description</label>
             <TextArea
               rows={4}
+              disabled={true}
               placeholder='thing description'
               value={description}
               onChange={(evt) => this.updateInfo('description', evt.target.value)} />
@@ -136,9 +87,9 @@ export class DetailPage extends React.Component {
             <div className='form-group col-md-6'>
               <label htmlFor='template-thing'>Thing Template</label>
               <div>
-                <Dropdown disabled={isEdit} overlay={<Menu>{templates}</Menu>} trigger={['click']}>
+                <Dropdown disabled={true} overlay={<Menu>{templates}</Menu>} trigger={['click']}>
                   <Button>
-                    {template ? template.name : 'Please choose a template'}<Icon type='down' />
+                    {template ? template.name : 'None Template'}<Icon type='down' />
                   </Button>
                 </Dropdown>
               </div>
@@ -146,9 +97,9 @@ export class DetailPage extends React.Component {
             <div className='form-group col-md-6'>
               <label htmlFor='thing-thing-type'>Project</label>
               <div>
-                <Dropdown disabled={isEdit} overlay={<Menu>{projects}</Menu>} trigger={['click']}>
+                <Dropdown disabled={true} overlay={<Menu>{projects}</Menu>} trigger={['click']}>
                   <Button>
-                    {project ? project.name : 'Please choose a project'}<Icon type='down' />
+                    {project ? project.name : 'None Project'}<Icon type='down' />
                   </Button>
                 </Dropdown>
               </div>

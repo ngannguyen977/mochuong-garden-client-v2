@@ -54,15 +54,6 @@ export class DetailTabPage extends React.Component {
                 >
                     Cancel
                         </Button>
-                <Button
-                    disabled={type !== 'detail'}
-                    type='primary'
-                    className='text-capitalize'
-                    style={{ marginRight: '25px' }}
-                    onClick={() => _update(type)}
-                >
-                    Change
-                        </Button>
             </div>
         )
 
@@ -96,9 +87,7 @@ export class DetailTabPage extends React.Component {
                     onTabClick={(tab) => this.handleTab(tab, match.params.id)}>
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='1'>{tabDetail}</TabPane>
                     <TabPane tab={<span><Icon type='project' />Properties</span>} key='2'>{tabProperty}</TabPane>
-                    <TabPane tab={<span><Icon type='share-alt' />Things</span>} key='3'>{tabThing}</TabPane>
-                    <TabPane tab={<span><Icon type='profile' />Certificates</span>} key='4'>{tabCertificate}</TabPane>
-                    <TabPane tab={<span><Icon type='loading-3-quarters' />Activity Logs</span>} key='5'></TabPane>
+                    <TabPane tab={<span><Icon type='loading-3-quarters' />Activity Logs</span>} key='3'></TabPane>
                 </Tabs>
             </div>
         )

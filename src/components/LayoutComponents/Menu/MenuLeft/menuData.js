@@ -29,48 +29,48 @@ export default [
   {
     divider: true,
   },
-  {
-    title: 'Projects',
-    key: 'project',
-    url: '/projects',
-    icon: 'icmn icmn-briefcase',
-  },
-  {
-    title: 'Templates',
-    key: 'template',
-    url: '/templates',
-    icon: 'icmn icmn-paragraph-left',
-  },
+  // {
+  //   title: 'Projects',
+  //   key: 'project',
+  //   url: '/projects',
+  //   icon: 'icmn icmn-briefcase',
+  // },
+  // {
+  //   title: 'Templates',
+  //   key: 'template',
+  //   url: '/templates',
+  //   icon: 'icmn icmn-paragraph-left',
+  // },
   {
     title: 'Things',
     key: 'thing',
     url: '/things',
     icon: 'icmn icmn-yelp',
   },
-  {
-    divider: true,
-  },
-  {
-    title: 'Policies',
-    key: 'policy',
-    url: '/policies',
-    icon: 'icmn icmn-file-text2',
-  },
+  // {
+  //   divider: true,
+  // },
+  // {
+  //   title: 'Policies',
+  //   key: 'policy',
+  //   url: '/policies',
+  //   icon: 'icmn icmn-file-text2',
+  // },
   // {
   //   title: 'Certificates',
   //   key: 'certificate',
   //   url: '/certificates',
   //   icon: 'icmn icmn-key',
   // },
-  {
-    divider: true,
-  },
-  {
-    title: 'Priorities',
-    key: 'priority',
-    url: '/priorities',
-    icon: 'icmn icmn-move-up',
-  },
+  // {
+  //   divider: true,
+  // },
+  // {
+  //   title: 'Priorities',
+  //   key: 'priority',
+  //   url: '/priorities',
+  //   icon: 'icmn icmn-move-up',
+  // },
   // {
   //   title: 'Properties',
   //   key: 'property',

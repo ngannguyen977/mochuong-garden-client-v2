@@ -45,12 +45,12 @@ class ListPage extends React.Component {
     const { totalItems, destroy, data, type, history } = this.props
 
     return (
-      <div className="thing">
-        <section className="card">
-          <div className="card-header">
-            <div className="row">
-              <div className="col-md 10">
-                <div className="utils__title">
+      <div className='thing'>
+        <section className='card'>
+          <div className='card-header'>
+            <div className='row'>
+              <div className='col-md 12'>
+                <div className='utils__title'>
                   <strong>Things Management</strong>
                 </div>
                 <small>
@@ -60,19 +60,14 @@ class ListPage extends React.Component {
                   thing.
                 </small>
               </div>
-              <div className="col-md-2 thing__btn-create">
-                <Button type="primary" onClick={() => history.push('/things/create')}>
-                  Create New Thing
-                </Button>
-              </div>
             </div>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
             {totalItems && totalItems > 0 && (
-              <div className="row">
+              <div className='row'>
                 {data &&
                   data.map(x => (
-                    <div className="col-md-2" key={x.id}>
+                    <div className='col-md-2' key={x.id}>
                       <ThingCard
                         data={x || {}}
                         type={type}
@@ -82,7 +77,7 @@ class ListPage extends React.Component {
                       />
                     </div>
                   ))}
-                <div className="col-md-12 text-right">
+                <div className='col-md-12 text-right'>
                   <Pagination
                     current={this.state.current}
                     onChange={this.onChange}
@@ -93,7 +88,7 @@ class ListPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name="Thing" link="#/things/create" />
+              <LockScreenPage name='Thing' link='#/things/create' />
             )}
           </div>
         </section>
