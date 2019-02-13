@@ -25,6 +25,7 @@ export class DetailTabPage extends React.Component {
         const { detail, changeGroupsForUser, userUpdate, changePermissionsForUser } = this.props
         let groupIds = ((detail || {}).groups || []).map(x => x.id)
         const update = (type) => {
+            console.log('sssssssssssssssssss',type)
             switch (type) {
                 case 'groups':
                     changeGroupsForUser(userUpdate.groups, detail.id, true)

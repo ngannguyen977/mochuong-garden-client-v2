@@ -23,6 +23,7 @@
   "dependencies": {
     "@rowno/sparkline": "^3.0.1",
     "antd": "^3.5.3",
+    "antd-password-input-strength": "^1.1.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "chart.js": "^2.7.3",

@@ -2,6 +2,7 @@ import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import { Input } from 'antd'
+import { PasswordInput } from 'antd-password-input-strength'
 
 @connect(
   mapStateToProps,
@@ -38,34 +39,29 @@ export class DetailPage extends React.Component {
     }
   }
   updateInfo(type, value) {
-    const { create, update, userCreate, detail, isEdit, id } = this.props
-    switch (type) {
-      case 'user':
-        isEdit ? update(id, { ...detail, username: value })
-          : create({ ...userCreate, username: value })
+    const { create, userCreate, isEdit } = this.props
+    if(!isEdit){
+      switch (type) {
+        case 'user':
+        create({ ...userCreate, username: value })
         this.setState({
           username: value
         })
-        break
-      case 'password':
-        isEdit ? update(id, { ...detail, password: value })
-          : create({ ...userCreate, password: value })
-        this.setState({
-          password: value
-        })
-        break
-      case 'confirm':
-        if (!isEdit) {
-          create({ ...userCreate, confirm: value })
-        }
-        break
-      default:
-        break
+          break
+        case 'password':
+        create({ ...userCreate, username: value })
+          this.setState({
+            username: value
+          })
+          break
+        default:
+          break
+      }
     }
   }
 
   render() {
-    const { username, password, confirm } = this.state
+    const { username, password } = this.state
     const { isEdit } = this.props
     return (
       <div className='user-detail-page row'>
@@ -88,21 +84,14 @@ export class DetailPage extends React.Component {
           </div>
           <div className='form-group'>
             <label htmlFor='password-edit-title'>Password</label>
-            <Input
-              id='password-edit-title'
-              value={password}
-              placeholder='********'
-              onChange={(evt) => this.updateInfo('password', evt.target.value)} />
+            <PasswordInput
+            id='password-edit-title'
+            value={password}
+            type='password'
+            placeholder='********'
+            onChange={(evt) => this.updateInfo('password', evt.target.value)} />
             <small className='font-italic text-right'>*The Password is require at least 8 characters, inclusion of both uppercase,lowercase and special characters. Use of at least one number</small>
           </div>
-          {!isEdit && (<div className='form-group'>
-            <label htmlFor='confirm-edit-title'>Confirm Password</label>
-            <Input
-              id='confirm-edit-title'
-              placeholder='********'
-              onBlur={(evt) => this.updateInfo('confirm', evt.target.value)} />
-            <small className='font-italic text-right'>*It’s time to lay confirm password fields to rest. What was once a common convention on sign up forms has evolved into something better.</small>
-          </div>)}
         </div>
       </div>)
   }

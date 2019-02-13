@@ -104,6 +104,7 @@ export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   changeStatus: (id, status) => changeStatus(id, status),
   create: (model, iscreate) => create(model, iscreate),
+  // update: (model, iscreate) => update(model, iscreate),
   createGroup: (model, iscreate) => createGroup(model, iscreate),
   destroy: ids => destroy(ids),
   getOne: id => getOne(id),

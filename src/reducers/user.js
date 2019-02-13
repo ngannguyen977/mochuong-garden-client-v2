@@ -153,7 +153,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
     let _model = {
       group_ids: model.groups,
       password: model.password,
-      password_confirm: model.confirm,
+      password_confirm: model.password,
       username: model.username,
     }
     axios
