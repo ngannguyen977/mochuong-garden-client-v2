@@ -6,29 +6,26 @@ export default [
     icon: 'icmn icmn-stack',
   },
   {
-    divider: true,
-  },
-  {
-    title: 'Users',
+    title: 'Manage Users',
     key: 'users',
     url: '/users',
-    icon: 'icmn icmn-man',
-  },
-  {
-    title: 'Groups',
-    key: 'groups',
-    url: '/groups',
     icon: 'icmn icmn-man-woman',
   },
-  {
-    title: 'Permissions',
-    key: 'permission',
-    url: '/permissions',
-    icon: 'icmn icmn-lock',
-  },
-  {
-    divider: true,
-  },
+  // {
+  //   title: 'Groups',
+  //   key: 'groups',
+  //   url: '/groups',
+  //   icon: 'icmn icmn-man-woman',
+  // },
+  // {
+  //   title: 'Permissions',
+  //   key: 'permission',
+  //   url: '/permissions',
+  //   icon: 'icmn icmn-lock',
+  // },
+  // {
+  //   divider: true,
+  // },
   // {
   //   title: 'Projects',
   //   key: 'project',
@@ -42,7 +39,7 @@ export default [
   //   icon: 'icmn icmn-paragraph-left',
   // },
   {
-    title: 'Things',
+    title: 'Manage Things',
     key: 'thing',
     url: '/things',
     icon: 'icmn icmn-yelp',

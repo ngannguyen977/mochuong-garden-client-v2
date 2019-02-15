@@ -3,7 +3,7 @@ import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
-import { createUserPolicy } from '../services/policy'
+import { createUserPolicy, createPolicy } from '../services/policy'
 import { setPermissionPerGroup } from 'reducers/permission'
 
 export const REDUCER = 'user'
@@ -151,7 +151,6 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
   dispatch(createUserState(model))
   if (isCreate) {
     let _model = {
-      group_ids: model.groups,
       password: model.password,
       password_confirm: model.password,
       username: model.username,
@@ -163,18 +162,38 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
         users.push(response.data)
         dispatch(setUserPage({ users, page, totalItems: totalItems++ }))
         if (model.permissions && Array.isArray(model.permissions) && model.permissions.length > 0) {
-          createUserPolicy(response.data.uuid, {
-            policyIds: model.permissions.map(x => x.policyId).join(),
+          //prepare document for create policies
+          let resourceTypes = model.permissions.map(x => {
+            let actions = []
+            if (x.isControl) {
+              actions.push('iot:editThing')
+            }
+            if (x.isView) {
+              actions.push('iot:listThing')
+              actions.push('iot:readThing')
+            }
+            return {
+              name: `thing-${x.name}`,
+              effect: 'Allow',
+              actions,
+              resources: [`orn::iot::${response.data.uuid}:policies/${x.id}`]
+            }
           })
-            .then(message.success('attach permission success'))
-            .catch(error => {
-              let errorMessage =
-                ((error.response || {}).data || {}).message ||
-                `create permission for user ${model.username} fail`
-              message.error(errorMessage)
-            })
+          let document = {
+            name: `${response.data.username}`,
+            description: `Permission for customer user ${response.data.username}`,
+            resourceTypes
+          }
+          createPolicy(response.data.uuid, document).then(res => {
+            message.success('Set permission success!')
+                dispatch(createUserState({}))
+          }).catch(error => {
+            let errorMessage =
+              ((error.response || {}).data || {}).message ||
+              `set permission for user ${model.username} fail`
+            message.error(errorMessage)
+          })
         }
-        dispatch(createUserState({}))
       })
       .catch(error => {
         let errorMessage = ((error.response || {}).data || {}).message || 'create user fail'

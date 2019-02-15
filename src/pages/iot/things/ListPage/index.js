@@ -1,10 +1,9 @@
 import React from 'react'
-import { Pagination, Button } from 'antd'
+import { Pagination,Button } from 'antd'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
-import helper from '../../../../helper'
 import '../../../../resources/style.scss'
 import '../style.scss'
 import ThingCard from '../../../components/ThingCard'
@@ -49,7 +48,7 @@ class ListPage extends React.Component {
         <section className='card'>
           <div className='card-header'>
             <div className='row'>
-              <div className='col-md 12'>
+              <div className='col-md-10'>
                 <div className='utils__title'>
                   <strong>Things Management</strong>
                 </div>
@@ -60,10 +59,15 @@ class ListPage extends React.Component {
                   thing.
                 </small>
               </div>
+              <div className='col-md-2 thing__btn-create'>
+                <Button type='primary' onClick={() => history.push('/things/register')}>
+                  Register Thing
+                </Button>
+              </div>
             </div>
           </div>
           <div className='card-body'>
-            {totalItems && totalItems > 0 && (
+            {totalItems > 0 && (
               <div className='row'>
                 {data &&
                   data.map(x => (
@@ -87,8 +91,8 @@ class ListPage extends React.Component {
                 </div>
               </div>
             )}
-            {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name='Thing' link='#/things/create' />
+            {totalItems <= 0 && (
+              <LockScreenPage name='Thing' link='#/things/register' />
             )}
           </div>
         </section>

@@ -34,16 +34,6 @@ const loadableRoutes = {
   '/home': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
   },
-  // Groups
-  '/groups': {
-    component: loadable(() => import('pages/authen/Groups')),
-  },
-  '/groups/create': {
-    component: loadable(() => import('pages/authen/Groups/CreatePage')),
-  },
-  '/groups/:id': {
-    component: loadable(() => import('pages/authen/Groups/DetailPage')),
-  },
   // users
   '/users': {
     component: loadable(() => import('pages/authen/Users')),
@@ -54,74 +44,12 @@ const loadableRoutes = {
   '/users/:id': {
     component: loadable(() => import('pages/authen/Users/DetailPage')),
   },
-  // permissions
-  '/permissions': {
-    component: loadable(() => import('pages/authen/Permissions')),
-  },
-  '/permissions/create': {
-    component: loadable(() => import('pages/authen/Permissions/CreatePage')),
-  },
-  '/permissions/:id': {
-    component: loadable(() => import('pages/authen/Permissions/DetailPage')),
-  },
-  // projects
-  '/projects': {
-    component: loadable(() => import('pages/iot/projects')),
-  },
-  '/projects/create': {
-    component: loadable(() => import('pages/iot/projects/CreatePage')),
-  },
-  '/projects/:id': {
-    component: loadable(() => import('pages/iot/projects/DetailPage')),
-  },
-  // policies
-  '/policies': {
-    component: loadable(() => import('pages/iot/policies')),
-  },
-  '/policies/create': {
-    component: loadable(() => import('pages/iot/policies/CreatePage')),
-  },
-  '/policies/:id': {
-    component: loadable(() => import('pages/iot/policies/DetailPage')),
-  },
-  // templates
-  '/templates': {
-    component: loadable(() => import('pages/iot/templates')),
-  },
-  '/templates/create': {
-    component: loadable(() => import('pages/iot/templates/CreatePage')),
-  },
-
-  '/templates/:id': {
-    component: loadable(() => import('pages/iot/templates/DetailPage')),
-  },
-
-  // priority
-  '/priorities': {
-    component: loadable(() => import('pages/iot/priorities')),
-  },
-  '/priorities/create': {
-    component: loadable(() => import('pages/iot/priorities/CreatePage')),
-  },
-  '/priorities/:id': {
-    component: loadable(() => import('pages/iot/priorities/DetailPage')),
-  },
-  // properties
-  '/properties': {
-    component: loadable(() => import('pages/iot/properties')),
-  },
-  '/properties/create': {
-    component: loadable(() => import('pages/iot/properties/CreatePage')),
-  },
-  '/properties/:id': {
-    component: loadable(() => import('pages/iot/properties/DetailPage')),
-  },
   // things
   '/things': {
     component: loadable(() => import('pages/iot/things')),
   },
-  '/things/create': {
-    component: loadable(() => import('pages/iot/things/CreatePage')),
+  '/things/register': {
+    component: loadable(() => import('pages/iot/things/registerPage')),
   },
   '/things/:id/attach': {
     component: loadable(() => import('pages/iot/things/DetailPage/attach')),
@@ -129,29 +57,7 @@ const loadableRoutes = {
   '/things/:id': {
     component: loadable(() => import('pages/iot/things/DetailPage')),
   },
-  // alert
-  '/alerts/:property/thing': {
-    component: loadable(() => import('pages/iot/alerts/create/things')),
-  },
-  '/alerts/:property/template': {
-    component: loadable(() => import('pages/iot/alerts/create/templates')),
-  },
-  // certificates
-  '/certificates': {
-    component: loadable(() => import('pages/iot/certificates')),
-  },
-  '/certificates/create': {
-    component: loadable(() => import('pages/iot/certificates/CreatePage')),
-  },
-  '/certificates/:id': {
-    component: loadable(() => import('pages/iot/certificates/DetailPage')),
-  },
-  '/certificates/:id/attach-things': {
-    component: loadable(() => import('pages/iot/certificates/DetailPage/attachThing')),
-  },
-  '/certificates/:id/attach-policies': {
-    component: loadable(() => import('pages/iot/certificates/DetailPage/attachPolicy')),
-  },
+
 }
 
 class Routes extends React.Component {
@@ -173,7 +79,7 @@ class Routes extends React.Component {
   render() {
     return (
       <ConnectedSwitch>
-        <Route exact path="/" component={DashboardAlphaPage} />
+        <Route exact path='/' component={DashboardAlphaPage} />
         {Object.keys(loadableRoutes).map(path => {
           const { exact, ...props } = loadableRoutes[path]
           props.exact = exact === void 0 || exact || false // set true as default

@@ -1,9 +1,10 @@
 import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import { Table, Radio } from 'antd'
+import { Table, Radio, Checkbox } from 'antd'
 import Avatar from 'components/CleanComponents/Avatar'
 import { changeStepProgressBar } from '../../../components/buttonStep'
+import '../style.scss'
 
 const { Group, Button } = Radio
 
@@ -51,8 +52,37 @@ export class Review extends React.Component {
         changeStepState(0)
     }
     render() {
-        const { reviewColumns, userCreate, changeStepState, steps } = this.props
+        const { userCreate, changeStepState, steps } = this.props
         const { pagination, loading, data } = this.state
+        let defaultImage = 'resources/iot/camera-onsky.png'
+        const reviewColumns = [
+            {
+                title: 'Image',
+                dataIndex: 'imageUrl',
+                width: '10%',
+                render: (name, record) => {
+                    return (
+                        <img className='review-img img-responsive' src={name || defaultImage} alt=''/>
+                    )
+                },
+            },
+            {
+                title: 'Thing',
+                dataIndex: 'name',
+                width: '40%',
+            },
+            {
+                title: 'Permission',
+                dataIndex: 'type',
+                width: '50%',
+                render: (name, record) => {
+                    return (<p>
+                        <Checkbox checked={record.isControl}>Control</Checkbox>
+                        <Checkbox checked={record.isView}>View Only</Checkbox>
+                    </p>)
+                },
+            }
+        ]
         return (
             <div className='user-create-step-1 row'>
                 <div className='col-lg-4 text-justify'>

@@ -11,7 +11,10 @@ import {
   changeGroupsForUser,
   changeUsersForGroup,
 } from 'reducers/group'
+import { getList as getThings } from 'reducers/thing'
 import helper from '../../../helper'
+import { gunzip } from 'zlib';
+import { buffer } from '../../../../node_modules/rxjs/operator/buffer';
 
 const steps = [
   {
@@ -52,31 +55,12 @@ const steps = [
   },
 ]
 
-const reviewColumns = [
-  {
-    title: 'Policy name',
-    dataIndex: 'name',
-    width: '20%',
-  },
-  {
-    title: 'Type',
-    dataIndex: 'type',
-    width: '10%',
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    width: '30%',
-  },
-]
+
 
 const type = {
-  del: 'del',
-  changeStatus: 'change-status',
-  attachPolicy: 'attach-policy',
-  addToGroup: 'add-to-group',
-  group: 'group',
-  permission: 'permission',
+  del: 'DELETE',
+  changeStatus: 'CHANGE_STATUS',
+  assignThing: 'ASSIGN_THING',
 }
 const summaryColumns = [
   {
@@ -102,6 +86,7 @@ const summaryColumns = [
 
 export const mapDispathToProps = {
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
+  getThings: (limit, page, sort, isAsc) => getThings(limit, page, sort, isAsc),
   changeStatus: (id, status) => changeStatus(id, status),
   create: (model, iscreate) => create(model, iscreate),
   // update: (model, iscreate) => update(model, iscreate),
@@ -133,7 +118,6 @@ export const mapStateToProps = (state, props) => {
     detail: user.detail,
     // model
     steps,
-    reviewColumns,
     summaryColumns,
     type,
     usersInGroup: (state.user.usersInGroup || {}).users || [],
@@ -146,6 +130,8 @@ export const mapStateToProps = (state, props) => {
     groups: state.group.groups,
     // permission
     permission: state.permission,
+    // thing
+    thing: state.thing
   }
 }
 

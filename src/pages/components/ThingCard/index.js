@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.scss'
 import data from './data.json'
+import { Checkbox } from 'antd'
 
 class ProductCard extends React.Component {
   state = {
@@ -14,10 +15,8 @@ class ProductCard extends React.Component {
 
   render() {
     const { productImg, productStatus } = this.state
+    const { data, action, permission } = this.props
 
-    const {
-      data,
-    } = this.props
     return (
       <div className='thingCard'>
         <div className='thingCard__img'>
@@ -38,6 +37,10 @@ class ProductCard extends React.Component {
           </div>
         </div>
         <div className='thingCard__descr'>{data.description || 'no description'}</div>
+        <div className='thingCard__btn-control'>
+          <Checkbox defaultChecked={(permission || {}).isControl} onChange={(e) => action(data, e.target.checked)}>Control</Checkbox>
+          <Checkbox defaultChecked={(permission || {}).isView} onChange={(e) => action(data, undefined, e.target.checked)}>View Only</Checkbox>
+        </div>
       </div>
     )
   }

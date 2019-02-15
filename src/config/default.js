@@ -12,16 +12,16 @@ export default {
       confirmEmail: 'customers/activate',
     },
     policy: {
-      // host: 'http://localhost:8080/v1/api',
-      host: 'https://api-dev.onskycloud.com/policy-service/v1/api',
+      host: 'http://localhost:8080/v1/api',
+      // host: 'https://api-dev.onskycloud.com/policy-service/v1/api',
       token: 'sdcxcx22334632rwhczyr392yr02ud23r9t34uy23r9t3df932jhfo',
       policy: 'policies',
       group: 'groups',
       user: 'users',
     },
     resource: {
-      // host: 'http://localhost:8080/v1/api',
-      host: 'https://api-dev.onskycloud.com/resource-service/v1/api',
+      host: 'http://localhost:8081/v1/api',
+      // host: 'https://api-dev.onskycloud.com/resource-service',
       token: 'sdfiusfi98234632rwhczyr392yr02u-23r9t34uy23r9t3fsfskhfo',
       service: 'services',
       serviceSummary: 'summary',
@@ -62,6 +62,6 @@ export default {
     },
   },
   customer: {
-    number: '1968819478737191938'
+    number: '1969541697209631746'
   }
 }

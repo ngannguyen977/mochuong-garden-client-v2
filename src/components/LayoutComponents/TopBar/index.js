@@ -13,18 +13,25 @@ class TopBar extends React.Component {
     return (
       <div className='topbar'>
         <div className='topbar__left'>
-          <IssuesHistory />
+          {/* <IssuesHistory />
           <ProjectManagement />
-          <LiveSearch />
+          <LiveSearch /> */}
+          <Button
+          size='large'
+          type='primary'
+          // icon='plus'
+          // ghost={true}
+          onClick={()=>this.props.history.push('/things/register')}
+          >+ Register Thing</Button>
         </div>
         <div className='topbar__right'>
           <a
-            href='https://themeforest.net/item/clean-ui-admin-template-react-redux-ant-design-fully-responsive-freebies/21938700'
+            href='#'
             target='_blank'
             rel='noopener noreferrer'
             className='mr-4 d-none d-sm-inline'
           />
-          <BitcoinPrice />
+          {/* <BitcoinPrice /> */}
           <HomeMenu />
           <ProfileMenu />
         </div>

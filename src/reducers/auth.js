@@ -5,7 +5,6 @@ import {
   setLoading,
   setDataTypeState,
   setAlertTypeState,
-  setPriorityState,
   setThingTypeState,
   setIotActionState,
 } from 'reducers/app'
@@ -21,20 +20,10 @@ export const authorize = () => (dispatch, getState) => {
   }
   if (!app.userState.token) {
     const token = JSON.parse(window.localStorage.getItem('app.token'))
-    const dataTypes = JSON.parse(window.localStorage.getItem('app.dataTypes'))
-    const alertTypes = JSON.parse(window.localStorage.getItem('app.alertTypes'))
-    const priority = JSON.parse(window.localStorage.getItem('app.priority'))
-    const thingTypes = JSON.parse(window.localStorage.getItem('app.thingTypes'))
-    const iotActions = JSON.parse(window.localStorage.getItem('app.iotActions'))
     if (token) {
       //set app state
-      let userState = { ...app.userState, token: token }
+      let userState = JSON.parse(window.localStorage.getItem('app.userState'))
       dispatch(setUserState({ userState }))
-      dispatch(setDataTypeState(dataTypes))
-      dispatch(setAlertTypeState(alertTypes))
-      dispatch(setPriorityState(priority))
-      dispatch(setThingTypeState(thingTypes))
-      dispatch(setIotActionState(iotActions))
 
       return Promise.resolve(true)
     }

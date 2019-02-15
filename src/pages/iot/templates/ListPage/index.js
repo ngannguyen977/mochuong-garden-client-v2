@@ -45,12 +45,12 @@ class ListPage extends React.Component {
     const { totalItems, destroy, data, type, history } = this.props
 
     return (
-      <div className="template">
-        <section className="card">
-          <div className="card-header">
-            <div className="row">
-              <div className="col-md 10">
-                <div className="utils__title">
+      <div className='template'>
+        <section className='card'>
+          <div className='card-header'>
+            <div className='row'>
+              <div className='col-md-10'>
+                <div className='utils__title'>
                   <strong>Templates Management</strong>
                 </div>
                 <small>
@@ -60,19 +60,19 @@ class ListPage extends React.Component {
                   groups and permissions of a template.
                 </small>
               </div>
-              <div className="col-md-2 template__btn-create">
-                <Button type="primary" onClick={() => history.push('/templates/create')}>
+              <div className='col-md-2 template__btn-create'>
+                <Button type='primary' onClick={() => history.push('/templates/create')}>
                   Create New Template
                 </Button>
               </div>
             </div>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
             {totalItems && totalItems > 0 && (
-              <div className="row">
+              <div className='row'>
                 {data &&
                   data.map(x => (
-                    <div className="col-md-2" key={x.id}>
+                    <div className='col-md-2' key={x.id}>
                       <TemplateCard
                         data={x || {}}
                         type={type}
@@ -82,7 +82,7 @@ class ListPage extends React.Component {
                       />
                     </div>
                   ))}
-                <div className="col-md-12 text-right">
+                <div className='col-md-12 text-right'>
                   <Pagination
                     current={this.state.current}
                     onChange={this.onChange}
@@ -93,7 +93,7 @@ class ListPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name="Template" link="#/templates/create" />
+              <LockScreenPage name='Template' link='#/templates/create' />
             )}
           </div>
         </section>

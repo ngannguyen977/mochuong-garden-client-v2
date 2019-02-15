@@ -32,26 +32,25 @@ export class DetailPage extends React.Component {
     const { userCreate, isEdit } = this.props
     if (!isEdit) {
       this.setState({
-        name: userCreate.name,
+        username: userCreate.username,
         password: userCreate.password,
-        confirm: userCreate.confirm
       })
     }
   }
   updateInfo(type, value) {
     const { create, userCreate, isEdit } = this.props
-    if(!isEdit){
+    if (!isEdit) {
       switch (type) {
         case 'user':
-        create({ ...userCreate, username: value })
-        this.setState({
-          username: value
-        })
-          break
-        case 'password':
-        create({ ...userCreate, username: value })
+          create({ ...userCreate, username: value })
           this.setState({
             username: value
+          })
+          break
+        case 'password':
+          create({ ...userCreate, password: value })
+          this.setState({
+            password: value
           })
           break
         default:
@@ -85,11 +84,11 @@ export class DetailPage extends React.Component {
           <div className='form-group'>
             <label htmlFor='password-edit-title'>Password</label>
             <PasswordInput
-            id='password-edit-title'
-            value={password}
-            type='password'
-            placeholder='********'
-            onChange={(evt) => this.updateInfo('password', evt.target.value)} />
+              id='password-edit-title'
+              value={password}
+              type='password'
+              placeholder='********'
+              onChange={(evt) => this.updateInfo('password', evt.target.value)} />
             <small className='font-italic text-right'>*The Password is require at least 8 characters, inclusion of both uppercase,lowercase and special characters. Use of at least one number</small>
           </div>
         </div>

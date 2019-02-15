@@ -43,7 +43,7 @@ ReactDOM.render(
       <LocaleProvider locale={enGB}>
         <div>
           <Helmet titleTemplate='OnSky - %s' />
-          <Layout />
+          <Layout history={history}/>
         </div>
       </LocaleProvider>
     </ConnectedRouter>

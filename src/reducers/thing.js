@@ -250,10 +250,77 @@ export const removeCertificate = id => (dispatch, getState) => {
   let certificates = (detail || {}).certificates || []
   dispatch(setCertificate(certificates.filter(x => x.id !== id)))
 }
+export const registerGateway = serialNumber => (dispatch, getState) => {
+  axios
+    .post(`${thingApi}/${serialNumber}`)
+    .then(response => {
+      notification['success']({
+        message: 'Register thing success!',
+        description:
+          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+      })
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'register thing fail'
+      message.error(errorMessage)
+    })
+}
 const initialState = {
-  totalItems: -1,
-  page: 0,
-  things: [],
+  "things": [
+    {
+      "id": 3,
+      "created_at": "2019-02-11T09:47:18.640925Z",
+      "updated_at": "2019-02-11T09:47:18.640925Z",
+      "serial": "1976846081526334467",
+      "name": "sdsdsdsd",
+      "isActive": false,
+      "isRegister": false,
+      "projectId": 8,
+      "templateId": 5,
+      "template": {
+        "id": 5,
+        "created_at": "2019-02-11T09:45:54.969967Z",
+        "updated_at": "2019-02-11T09:45:54.969967Z",
+        "name": "dsdsd",
+        "description": "dsdsd",
+        "templateType": 2,
+        "type": 2,
+        "imageId": "",
+        "imageUrl": "",
+        "parentId": 2
+      },
+      "imageId": "",
+      "imageUrl": ""
+    },
+    {
+      "id": 4,
+      "created_at": "2019-02-15T03:28:14.010897Z",
+      "updated_at": "2019-02-15T03:28:14.010897Z",
+      "serial": "1979554388707902468",
+      "name": "OS Tho ",
+      "description": "Thing information include name and password,",
+      "isActive": false,
+      "isRegister": false,
+      "projectId": 8,
+      "templateId": 5,
+      "template": {
+        "id": 5,
+        "created_at": "2019-02-11T09:45:54.969967Z",
+        "updated_at": "2019-02-11T09:45:54.969967Z",
+        "name": "dsdsd",
+        "description": "dsdsd",
+        "templateType": 2,
+        "type": 2,
+        "imageId": "",
+        "imageUrl": "",
+        "parentId": 2
+      },
+      "imageId": "",
+      "imageUrl": ""
+    }
+  ],
+  "page": 0,
+  "totalItems": 2
 }
 const ACTION_HANDLES = {
   [setThingPage]: (state, { things, page, totalItems }) => ({
