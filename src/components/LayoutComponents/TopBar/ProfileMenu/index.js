@@ -35,46 +35,46 @@ class ProfileMenu extends React.Component {
     const menu = (
       <Menu selectable={false}>
         <Menu.Item>
-          <div className='rfq__widget__system-status__item'>
+          <div className="rfq__widget__system-status__item">
             <strong>Hello {userState.username}</strong>
             <div>
               <strong>Role:</strong> {(userState.role || {}).name}
             </div>
-            <div className='rfq__widget__system-status__item'>
-            <strong>Email:</strong> {(userState.customer || {}).email}
-          </div>
+            <div className="rfq__widget__system-status__item">
+              <strong>Email:</strong> {(userState.customer || {}).email}
+            </div>
           </div>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-          <a href='/#/profile'>
-            <i className='topbar__dropdownMenuIcon icmn-man' /> Edit Profile
+          <a href="/#/profile">
+            <i className="topbar__dropdownMenuIcon icmn-man" /> Edit Profile
           </a>
         </Menu.Item>
         <Menu.Item>
-          <a href='/#/users'>
-            <i className='topbar__dropdownMenuIcon icmn-man-woman' /> Manage Users
+          <a href="/#/users">
+            <i className="topbar__dropdownMenuIcon icmn-man-woman" /> Manage Users
           </a>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-          <a href='javascript: void(0);' onClick={logout}>
-            <i className='topbar__dropdownMenuIcon icmn-exit' /> Logout
+          <a href="javascript: void(0);" onClick={logout}>
+            <i className="topbar__dropdownMenuIcon icmn-exit" /> Logout
           </a>
         </Menu.Item>
       </Menu>
     )
     return (
-      <div className='topbar__dropdown d-inline-block'>
+      <div className="topbar__dropdown d-inline-block">
         <Dropdown
           overlay={menu}
           trigger={['click']}
-          placement='bottomRight'
+          placement="bottomRight"
           onVisibleChange={this.addCount}
         >
-          <a className='ant-dropdown-link' href='/'>
+          <a className="ant-dropdown-link" href="/">
             <Badge count={count}>
-              <Avatar className='topbar__avatar' shape='square' size='large' icon='user' />
+              <Avatar className="topbar__avatar" shape="square" size="large" icon="user" />
             </Badge>
           </a>
         </Dropdown>

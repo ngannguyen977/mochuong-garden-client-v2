@@ -13,8 +13,8 @@ import {
 } from 'reducers/group'
 import { getList as getThings } from 'reducers/thing'
 import helper from '../../../helper'
-import { gunzip } from 'zlib';
-import { buffer } from '../../../../node_modules/rxjs/operator/buffer';
+import { gunzip } from 'zlib'
+import { buffer } from '../../../../node_modules/rxjs/operator/buffer'
 
 const steps = [
   {
@@ -54,8 +54,6 @@ const steps = [
     nextTitle: 'Go to Users List',
   },
 ]
-
-
 
 const type = {
   del: 'DELETE',
@@ -131,7 +129,7 @@ export const mapStateToProps = (state, props) => {
     // permission
     permission: state.permission,
     // thing
-    thing: state.thing
+    thing: state.thing,
   }
 }
 

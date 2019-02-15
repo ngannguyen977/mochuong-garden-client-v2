@@ -176,23 +176,25 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
               name: `thing-${x.name}`,
               effect: 'Allow',
               actions,
-              resources: [`orn::iot::${response.data.uuid}:policies/${x.id}`]
+              resources: [`orn::iot::${response.data.uuid}:policies/${x.id}`],
             }
           })
           let document = {
             name: `${response.data.username}`,
             description: `Permission for customer user ${response.data.username}`,
-            resourceTypes
+            resourceTypes,
           }
-          createPolicy(response.data.uuid, document).then(res => {
-            message.success('Set permission success!')
-                dispatch(createUserState({}))
-          }).catch(error => {
-            let errorMessage =
-              ((error.response || {}).data || {}).message ||
-              `set permission for user ${model.username} fail`
-            message.error(errorMessage)
-          })
+          createPolicy(response.data.uuid, document)
+            .then(res => {
+              message.success('Set permission success!')
+              dispatch(createUserState({}))
+            })
+            .catch(error => {
+              let errorMessage =
+                ((error.response || {}).data || {}).message ||
+                `set permission for user ${model.username} fail`
+              message.error(errorMessage)
+            })
         }
       })
       .catch(error => {

@@ -62,6 +62,6 @@ export default {
     },
   },
   customer: {
-    number: '1969541697209631746'
-  }
+    number: '1969541697209631746',
+  },
 }

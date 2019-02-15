@@ -11,25 +11,27 @@ import './style.scss'
 class TopBar extends React.Component {
   render() {
     return (
-      <div className='topbar'>
-        <div className='topbar__left'>
+      <div className="topbar">
+        <div className="topbar__left">
           {/* <IssuesHistory />
           <ProjectManagement />
           <LiveSearch /> */}
           <Button
-          size='large'
-          type='primary'
-          // icon='plus'
-          // ghost={true}
-          onClick={()=>this.props.history.push('/things/register')}
-          >+ Register Thing</Button>
+            size="large"
+            type="primary"
+            // icon='plus'
+            // ghost={true}
+            onClick={() => this.props.history.push('/things/register')}
+          >
+            + Register Thing
+          </Button>
         </div>
-        <div className='topbar__right'>
+        <div className="topbar__right">
           <a
-            href='#'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='mr-4 d-none d-sm-inline'
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-4 d-none d-sm-inline"
           />
           {/* <BitcoinPrice /> */}
           <HomeMenu />

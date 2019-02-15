@@ -1,6 +1,6 @@
 
 
-APP_NAME :=iot-frontend
+APP_NAME :=iot-client
 VERSION := $(shell git describe --tags --abbrev=0)
 DOCKER_USER=eneoti
 DOCKER_REPO=754404031763.dkr.ecr.ap-southeast-1.amazonaws.com
@@ -24,18 +24,18 @@ help: ## This help.
 # Build the container
 build: ## Build the container
 	docker build -t $(APP_NAME) .
-clear-none: 
-	docker rmi -f `docker images -a |grep 'none'|awk '{print \$$3}'` 
+clear-none:
+	docker rmi -f `docker images -a |grep 'none'|awk '{print \$$3}'`
 
-clear: 
+clear:
 ifeq ($(HELM),)
 	echo 'not exist $(APP_NAME)'
-else 
-	helm delete $(APP_NAME) --purge 
+else
+	helm delete $(APP_NAME) --purge
 endif
 	docker rmi -f `docker images -a |grep '$(APP_NAME)'|awk '{print\$$3}'`
 
-clearall: 
+clearall:
 	docker rmi -f `docker images -a |grep '$(APP_NAME)\|none'|awk '{print\$$3}'`
 
 clean: stop clear
@@ -43,15 +43,15 @@ clean: stop clear
 build-nc: ## Build the container without caching
 	docker build --no-cache -t $(APP_NAME) .
 
-run: ## Run container 
-	
+run: ## Run container
+
 	docker run  \
-	--name $(APP_NAME) -p 8080:8080 -d $(APP_NAME) 
-
-	
+	--name $(APP_NAME) -p 8080:8080 -d $(APP_NAME)
 
 
-up: build run ## Run container on 
+
+
+up: build run ## Run container on
 stop: ## Stop and remove a running container
 	docker stop $(APP_NAME); docker rm -f $(APP_NAME)
 
@@ -91,7 +91,7 @@ deploy:
 upgrade-deploy:
 	helm upgrade $(APP_NAME) deployment --set ENV=production
 undeploy:
-	helm delete $(APP_NAME) --purge 
+	helm delete $(APP_NAME) --purge
 port-forward:
 	kubectl -n iot port-forward  svc/$(APP_NAME)-production 10090:10090
 version: ## Output the current version

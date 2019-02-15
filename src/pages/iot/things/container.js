@@ -9,7 +9,7 @@ import {
   attachThing,
   getByType,
   removeThing,
-  registerGateway
+  registerGateway,
 } from 'reducers/thing'
 import { getList as getProjects } from 'reducers/project'
 import {
@@ -102,7 +102,7 @@ export const mapDispathToProps = {
   generateCertificate: thingId => generateCertificate(thingId),
   removeCertificate: id => removeCertificate(id),
   getByType: (limit, page, sort, isAsc, query) => getByType(limit, page, sort, isAsc, query),
-  registerGateway: (serialNumber) => registerGateway(serialNumber)
+  registerGateway: serialNumber => registerGateway(serialNumber),
 }
 export const mapStateToProps = (state, props) => {
   let thing = state.thing || {}

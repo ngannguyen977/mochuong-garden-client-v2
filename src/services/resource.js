@@ -10,7 +10,7 @@ const instance = axios.create({
 })
 export const getServices = (keyword, keysort, skip, count, orderDescending = true) =>
   new Promise((resolve, reject) => {
-    console.log('insta',instance)
+    console.log('insta', instance)
     instance
       .get(serviceApi, {
         params: { keyword, keysort, skip, count, orderDescending },

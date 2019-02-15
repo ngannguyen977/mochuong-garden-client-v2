@@ -98,7 +98,7 @@ class Layout extends React.Component {
               <SettingsSider />
               <AntLayout>
                 <AntHeader>
-                  <TopBar history={this.props.history}/>
+                  <TopBar history={this.props.history} />
                 </AntHeader>
                 <AntContent style={{ height: '100%' }}>
                   <Content />

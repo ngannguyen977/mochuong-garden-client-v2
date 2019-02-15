@@ -12,7 +12,7 @@ class registerPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title='Things' />
+        <Helmet title="Things" />
         <Register location={props.location} match={props.match} history={props.history} />
       </Page>
     )

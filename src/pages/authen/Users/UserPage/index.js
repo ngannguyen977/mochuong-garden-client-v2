@@ -65,7 +65,7 @@ class UserPage extends React.Component {
         width: '30%',
         render: (name, record) => {
           return (
-            <a className='link' href={`#/users/${record.id}`}>
+            <a className="link" href={`#/users/${record.id}`}>
               {record.username}
             </a>
           )
@@ -144,24 +144,24 @@ class UserPage extends React.Component {
     const content = (
       <div>
         <Popconfirm
-          title='Are you sure delete these users? You cannot rollback.'
+          title="Are you sure delete these users? You cannot rollback."
           onConfirm={() => handleActions(type.del)}
           onCancel={() => handleActions(type.del, false)}
-          okText='Yes, I confirm'
+          okText="Yes, I confirm"
           cancelText="No, I don't"
         >
-          <p className='link'>Delete USERS</p>
+          <p className="link">Delete USERS</p>
         </Popconfirm>
         <Popconfirm
-          title='Are you sure change status these users?'
+          title="Are you sure change status these users?"
           onConfirm={() => handleActions(type.changeStatus)}
           onCancel={() => handleActions(type.changeStatus, false)}
-          okText='Active'
-          cancelText='Deactive'
+          okText="Active"
+          cancelText="Deactive"
         >
-          <p className='link'>Change STATUS</p>
+          <p className="link">Change STATUS</p>
         </Popconfirm>
-        <p className='link' onClick={() => handleActions(type.attachPolicy)}>
+        <p className="link" onClick={() => handleActions(type.attachPolicy)}>
           Assign Things
         </p>
       </div>
@@ -169,9 +169,9 @@ class UserPage extends React.Component {
 
     return (
       <div>
-        <section className='card'>
-          <div className='card-header'>
-            <div className='utils__title'>
+        <section className="card">
+          <div className="card-header">
+            <div className="utils__title">
               <strong>Users Management</strong>
             </div>
             <small>
@@ -180,21 +180,21 @@ class UserPage extends React.Component {
               users. You also view detail a user, identify groups and permissions of a user.
             </small>
           </div>
-          <div className='card-body'>
+          <div className="card-body">
             {totalItems > 0 && (
-              <div className='table-responsive'>
+              <div className="table-responsive">
                 <div style={{ marginBottom: 16, textAlign: 'right' }}>
                   <Button
-                    type='primary'
+                    type="primary"
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href='#/users/create'
+                    href="#/users/create"
                   >
                     Create User
                   </Button>
-                  <Popover placement='bottomRight' content={content} trigger='click'>
-                    <Button type='primary' disabled={!hasSelected} loading={loading}>
-                      Actions <Icon type='down-circle' theme='filled' />
+                  <Popover placement="bottomRight" content={content} trigger="click">
+                    <Button type="primary" disabled={!hasSelected} loading={loading}>
+                      Actions <Icon type="down-circle" theme="filled" />
                     </Button>
                   </Popover>
                 </div>
@@ -213,7 +213,7 @@ class UserPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name='User' link='#/users/create' />
+              <LockScreenPage name="User" link="#/users/create" />
             )}
           </div>
         </section>

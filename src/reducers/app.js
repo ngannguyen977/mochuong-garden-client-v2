@@ -61,9 +61,7 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        let _promise = [
-          infoApi,
-        ].map(x => axios.get(x, { limit: 100 }))
+        let _promise = [infoApi].map(x => axios.get(x, { limit: 100 }))
         Promise.all(_promise)
           .then(res => {
             let userInfo = res[0].data
