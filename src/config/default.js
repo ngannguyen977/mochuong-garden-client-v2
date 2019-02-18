@@ -12,8 +12,8 @@ export default {
       confirmEmail: 'customers/activate',
     },
     policy: {
-      host: 'http://localhost:8080/v1/api',
-      // host: 'https://api-dev.onskycloud.com/policy-service/v1/api',
+      // host: 'http://localhost:8080/v1/api',
+      host: 'https://api-dev.onskycloud.com/policy-service/v1/api',
       token: 'sdcxcx22334632rwhczyr392yr02ud23r9t34uy23r9t3df932jhfo',
       policy: 'policies',
       group: 'groups',

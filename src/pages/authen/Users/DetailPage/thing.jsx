@@ -79,6 +79,7 @@ class ListPage extends React.Component {
                       onMouseEnter={() => this.setState({ current: 0 })}
                       action={this.setPermission}
                       permission={permissions.find(a => a.id === x.id) || {}}
+                      isEdit
                     />
                   </div>
                 ))}

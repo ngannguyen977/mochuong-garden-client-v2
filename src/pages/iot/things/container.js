@@ -10,6 +10,7 @@ import {
   getByType,
   removeThing,
   registerGateway,
+  getUsers
 } from 'reducers/thing'
 import { getList as getProjects } from 'reducers/project'
 import {
@@ -103,6 +104,7 @@ export const mapDispathToProps = {
   removeCertificate: id => removeCertificate(id),
   getByType: (limit, page, sort, isAsc, query) => getByType(limit, page, sort, isAsc, query),
   registerGateway: serialNumber => registerGateway(serialNumber),
+  getUsers:(thingId,limit, page, sort, isAsc) => getUsers(thingId,limit, page, sort, isAsc),
 }
 export const mapStateToProps = (state, props) => {
   let thing = state.thing || {}
@@ -149,6 +151,7 @@ export const mapStateToProps = (state, props) => {
     detail: thing.detail,
     properties: (thing.detail || {}).properties,
     tabs: thing.tabs || [],
+    user: state.user,
     // model
     steps,
     summaryColumns,

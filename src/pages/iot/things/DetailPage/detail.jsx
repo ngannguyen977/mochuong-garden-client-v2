@@ -1,8 +1,7 @@
 import React from 'react'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
-import { Input, Menu, Dropdown, Icon, Button } from 'antd'
-import UploadImage from '../../../components/upload'
+import { Input,Checkbox } from 'antd'
 
 const { TextArea } = Input
 @connect(
@@ -14,6 +13,7 @@ export class DetailPage extends React.Component {
     super()
     this.state = {
       name: '',
+      imageUrl: 'resources/iot/camera-onsky.png',
       isLoaded: false
     }
   }
@@ -28,82 +28,58 @@ export class DetailPage extends React.Component {
         project: detail.project,
         template: detail.template,
         type: type.find(x => x.id === detail.template.type),
+        imageUrl: detail.imageUrl || 'resources/iot/camera-onsky.png',
         isLoaded: true
       })
     }
   }
-  uploadSuccess(){
+  uploadSuccess() {
 
   }
   render() {
-    const { name, description,  project, template } = this.state
-    const { isEdit } = this.props
-
-    let projects = this.props.projects.map(x => (
-      <Menu.Item key={x.id}>
-        <a href='javascript:void(0)' onClick={() => this.updateInfo('project', x)}>{x.name}</a>
-      </Menu.Item>
-    ))
-    let templates = this.props.templates.map(x => (
-      <Menu.Item key={x.id}>
-        <a href='javascript:void(0)' onClick={() => this.updateInfo('template', x)}>{x.name}</a>
-      </Menu.Item>
-    ))
-
+    const { name, description, imageUrl } = this.state
+    let status = `<status><slight_onoff>1</slight_onoff><slight_sw_1>1</slight_sw_1><slight_sw_2>1</slight_sw_2><slight_1>0</slight_1><slight_2>255</slight_2><slight_3>45</slight_3><slight_4>255</slight_4><enmotion>1</enmotion><motiontimeout>900</motiontimeout><motion>0</motion><opMode>0</opMode><secmode>0</secmode><motionhwpresent>0</motionhwpresent><slight_sw_1_name></slight_sw_1_name><slight_sw_2_name></slight_sw_2_name><slight_name_1></slight_name_1><slight_name_2></slight_name_2><slight_name_3></slight_name_3><slight_name_4></slight_name_4></status>`
     return (
       <div className='thing-detail-page row'>
         <div className='col-lg-4 text-justify'>
-          <p>Thing information include name and password, these field are provide for accession. After this thing is created success, you can give these information for a person, so they can loged in.</p>
-          {!isEdit && (<p>About the permission, please go to the next step: SET PERMISSION.</p>)}
           <div className='upload-image text-center'>
-            <UploadImage onSuccess={this.uploadSuccess} token={this.props.token} imageUrl={(this.state.image || {}).url} />
-            <label>Upload Image</label>
+            <img className='img-responsive' src={imageUrl} alt='' />
+            <h5 className='text-black'><strong>{name || 'thing name'}</strong></h5>
+            <div className='description text-justify'>
+              <small className='font-italic text-right'> *With most services, your name is a name you created, or that has been assigned to you. If you do not recall creating a name,
+               (or don't remember the name you chose), try using your e-mail address as your name.
+             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</small>
+            </div>
           </div>
         </div>
         <div className='col-lg-8'>
-          <div className='form-group'>
-            <label htmlFor='name-edit-title'>Thing name</label>
-            <Input
-              id='name-edit-title'
-              placeholder='thing name'
-              disabled={true}
-              value={name}
-              onChange={(evt) => this.updateInfo('name', evt.target.value)} />
-            <small className='font-italic text-right'> *With most services, your name is a name you created, or that has been assigned to you. If you do not recall creating a name,
-             (or don't remember the name you chose), try using your e-mail address as your name.
-             If your e-mail address does not work, and you are trying to log into a service where you have an account number, try using that number.</small>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='description-edit-title'>Description</label>
-            <TextArea
-              rows={4}
-              disabled={true}
-              placeholder='thing description'
-              value={description}
-              onChange={(evt) => this.updateInfo('description', evt.target.value)} />
-            <small className='font-italic text-right'>*Description is the pattern of narrative development that aims to make vivid a place, object, character, or group.[1] Description is one of four rhetorical modes (also known as modes of discourse), along with exposition, argumentation, and narration.[2] In practice it would be difficult to write literature that drew on just one of the four basic modes.</small>
-          </div>
-          <div className='row'>
-            <div className='form-group col-md-6'>
-              <label htmlFor='template-thing'>Thing Template</label>
-              <div>
-                <Dropdown disabled={true} overlay={<Menu>{templates}</Menu>} trigger={['click']}>
-                  <Button>
-                    {template ? template.name : 'None Template'}<Icon type='down' />
-                  </Button>
-                </Dropdown>
-              </div>
-            </div>
-            <div className='form-group col-md-6'>
-              <label htmlFor='thing-thing-type'>Project</label>
-              <div>
-                <Dropdown disabled={true} overlay={<Menu>{projects}</Menu>} trigger={['click']}>
-                  <Button>
-                    {project ? project.name : 'None Project'}<Icon type='down' />
-                  </Button>
-                </Dropdown>
-              </div>
-            </div>
+          <div className='mb-5'>
+            <h5 className='text-black'><strong>Device Information</strong></h5>
+            <p className='text-muted'>Use the well as a simple effect on an element to give it an inset effect</p>
+            <dl className='row'>
+              <dt className='col-sm-3'>Serial number</dt>
+              <dd className='col-sm-9'>194644475905</dd>
+              <dt className='col-sm-3'>Mac Address</dt>
+              <dd className='col-sm-9'><mark>84:86:f3:00:3c:cc</mark></dd>
+              <dt className='col-sm-3'>Model number</dt>
+              <dd className='col-sm-9'>194644475905</dd>
+              <dt className='col-sm-3'>Active</dt>
+              <dd className='col-sm-9'><Checkbox checked={true}> Active</Checkbox></dd>
+              <dt className='col-sm-3'>Active State</dt>
+              <dd className='col-sm-9'>True</dd>
+              <dt className='col-sm-3'>Buy at date</dt>
+              <dd className='col-sm-9'>March 3,2019</dd>
+              <dt className='col-sm-3'>Ship on date</dt>
+              <dd className='col-sm-9'>March 3,2019</dd>
+              <dt className='col-sm-3'>Quarranty Expired</dt>
+              <dd className='col-sm-9'>March 3,2019</dd>
+              <dt className='col-sm-3'>Device connected</dt>
+              <dd className='col-sm-9'>10</dd>
+              <dt className='col-sm-3'>Software version</dt>
+              <dd className='col-sm-9'>30.11.8.12</dd>
+              <dt className='col-sm-3'>Status</dt>
+              <dd className='col-sm-9'><code>{status}</code></dd>
+            </dl>
           </div>
         </div>
       </div>)

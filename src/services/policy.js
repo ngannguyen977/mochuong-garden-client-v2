@@ -71,10 +71,22 @@ export const getPolicyByGroup = groupUuids =>
         reject(error)
       })
   })
+
 export const createPolicy = (userUuid, document) =>
   new Promise((resolve, reject) => {
     instance
       .post(`${policyApi}/${userUuid}`, document)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+  export const getUserPolicy = (types,skip,count) =>
+  new Promise((resolve, reject) => {
+    instance
+      .get(`${userApi}`, { params: { types,skip,count } })
       .then(response => {
         resolve(response.data)
       })

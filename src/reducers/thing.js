@@ -3,6 +3,8 @@ import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
+import { getList as getListUser } from 'reducers/user'
+import { getUserPolicy,getPolicyById } from '../services/policy'
 
 export const REDUCER = 'thing'
 
@@ -34,6 +36,23 @@ export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
+      message.error(errorMessage)
+    })
+}
+export const getUsers = (thingId, limit = 18, page = 0, sort = 'name', isAsc = false) => (
+  dispatch,
+  getState,
+) => {
+  const userApi = constant.api.authen
+
+  let promise1 = getPolicyById('21adc1ad-0403-4c50-b4af-a823a4cead1d')
+  let promise2 = axios.get(`${userApi.host}/${userApi.user}`, { params: { limit, page, sort, isAsc } })
+  Promise.all([promise1, promise2])
+    .then(response => {
+      console.log('resss', response)
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'get user list fail'
       message.error(errorMessage)
     })
 }
