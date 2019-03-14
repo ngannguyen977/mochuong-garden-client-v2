@@ -69,7 +69,7 @@ class ListPage extends React.Component {
             </div>
           </div>
           <div className="card-body">
-            {totalItems && totalItems > 0 && (
+            {totalItems > 0 && (
               <div className="row">
                 {data && data.length > 0 &&
                   data.map(x => (
