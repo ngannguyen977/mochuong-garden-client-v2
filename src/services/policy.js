@@ -1,17 +1,17 @@
-import constant from '../config/default'
-import axios from 'axios'
+import constant from "../config/default"
+import axios from "axios"
 
 const api = constant.api.policy
 const policyApi = `${api.host}/${api.policy}`
 const userApi = `${api.host}/${api.user}`
 const groupApi = `${api.host}/${api.group}`
-const token = window.localStorage.getItem('app.token')
+const token = window.localStorage.getItem("app.token")
 const instance = axios.create({
   baseURL: api.host,
   timeout: 30000,
   headers: {
-    Authorization: 'Bearer ' + constant.api.policy.token,
-    token: 'Bearer ' + token,
+    Authorization: "Bearer " + constant.api.policy.token,
+    token: "Bearer " + token,
   },
 })
 export const getPolicies = (keyword, keysort, types, skip, limit, isAsc) =>

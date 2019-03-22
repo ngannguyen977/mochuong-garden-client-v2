@@ -13,73 +13,73 @@ import {
   getListByGraphQL,
   createThingPolicy,
   removeThingPolicy,
-  deleteThingPolicy
-} from 'reducers/thing'
+  deleteThingPolicy,
+} from "reducers/thing"
 import {
   getList as getPropertiesByTemplate,
   update as updateProperty,
   create as createProperty,
-} from 'reducers/property'
-import { getList as getTemplates } from 'reducers/template'
-import helper from '../../../helper'
+} from "reducers/property"
+import { getList as getTemplates } from "reducers/template"
+import helper from "../../../helper"
 
 const steps = [
   {
-    title: 'Adding details',
-    subTitle: 'Adding Thing Information',
-    icon: 'loading',
-    iconDefault: 'thing',
-    status: 'process',
+    title: "Adding details",
+    subTitle: "Adding Thing Information",
+    icon: "loading",
+    iconDefault: "thing",
+    status: "process",
     index: 0,
-    nextTitle: 'Next: Properties',
+    nextTitle: "Next: Properties",
   },
   {
-    title: 'Adding Properties ',
-    subTitle: 'Add properties for Thing',
-    icon: 'solution',
-    iconDefault: 'solution',
-    status: 'wait',
+    title: "Adding Properties ",
+    subTitle: "Add properties for Thing",
+    icon: "solution",
+    iconDefault: "solution",
+    status: "wait",
     index: 1,
-    nextTitle: 'Next: Review',
+    nextTitle: "Next: Review",
   },
   {
-    title: 'Review',
-    subTitle: 'Review',
-    icon: 'menu-unfold',
-    iconDefault: 'menu-unfold',
-    status: 'wait',
+    title: "Review",
+    subTitle: "Review",
+    icon: "menu-unfold",
+    iconDefault: "menu-unfold",
+    status: "wait",
     index: 2,
-    nextTitle: 'Create Thing',
+    nextTitle: "Create Thing",
   },
   {
-    title: 'Done',
-    subTitle: 'Create Thing Complete',
-    icon: 'check-circle',
-    iconDefault: 'check-circle',
-    status: 'wait',
+    title: "Done",
+    subTitle: "Create Thing Complete",
+    icon: "check-circle",
+    iconDefault: "check-circle",
+    status: "wait",
     index: 3,
-    nextTitle: 'Go to Things List',
+    nextTitle: "Go to Things List",
   },
 ]
 
 const summaryColumns = [
   {
-    title: 'Thingname',
-    dataIndex: 'thingname',
+    title: "Thingname",
+    dataIndex: "thingname",
     sorter: true,
-    width: '33%',
+    width: "33%",
   },
   {
-    title: 'Role',
-    dataIndex: 'role.name',
+    title: "Role",
+    dataIndex: "role.name",
     sorter: true,
-    width: '33%',
+    width: "33%",
   },
   {
-    title: 'Last Activity',
-    dataIndex: 'last_login',
+    title: "Last Activity",
+    dataIndex: "last_login",
     sorter: true,
-    width: '15%',
+    width: "15%",
     render: x => helper.formatDate(new Date(x)),
   },
 ]
@@ -102,7 +102,8 @@ export const mapDispathToProps = {
   removeThing: (parentId, id) => removeThing(parentId, id),
   registerGateway: serialNumber => registerGateway(serialNumber),
   getUsers: (thingName, limit, page, sort, isAsc) => getUsers(thingName, limit, page, sort, isAsc),
-  getAllUsers: (thingName, limit, page, sort, isAsc) => getAllUsers(thingName, limit, page, sort, isAsc),
+  getAllUsers: (thingName, limit, page, sort, isAsc) =>
+    getAllUsers(thingName, limit, page, sort, isAsc),
   createThingPolicy: (userUuid, thingName, type) => createThingPolicy(userUuid, thingName, type),
   removeThingPolicy: (userUuid, thingName, type) => removeThingPolicy(userUuid, thingName, type),
   deleteThingPolicy: (userUuid, thingName) => deleteThingPolicy(userUuid, thingName),

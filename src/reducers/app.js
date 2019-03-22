@@ -1,13 +1,13 @@
-import { createAction, createReducer } from 'redux-act'
-import { push } from 'react-router-redux'
-import { pendingTask, begin, end } from 'react-redux-spinner'
-import { notification } from 'antd'
-import axios from 'axios'
-import constant from '../config/default'
+import { createAction, createReducer } from "redux-act"
+import { push } from "react-router-redux"
+import { pendingTask, begin, end } from "react-redux-spinner"
+import { notification } from "antd"
+import axios from "axios"
+import constant from "../config/default"
 
 const api = constant.api.authen
 const configure = constant.api.configure
-const REDUCER = 'app'
+const REDUCER = "app"
 const NS = `@@${REDUCER}/`
 const loginApi = `${api.host}/${api.login}`
 const dataTypeApi = `${configure.host}/${configure.dataType}`
@@ -61,7 +61,8 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        axios.get(infoApi)
+        axios
+          .get(infoApi)
           .then(res => {
             let userInfo = res.data
             dispatch(_setHideLogin(true))
@@ -76,22 +77,22 @@ export const login = (customer, username, password, dispatch) =>
               }),
             )
             notification.open({
-              type: 'success',
-              message: 'You have successfully logged in!',
+              type: "success",
+              message: "You have successfully logged in!",
               description:
-                'Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!',
+                "Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!",
             })
-            dispatch(push('/'))
+            dispatch(push("/"))
             return resolve(true)
           })
           .catch(error => {
-            console.log('GET INFO ERROR', error.message)
+            console.log("GET INFO ERROR", error.message)
             return resolve(false)
           })
       })
       .catch(error => {
-        console.log('ERROR', error.message)
-        dispatch(_setFrom(''))
+        console.log("ERROR", error.message)
+        dispatch(_setFrom(""))
         return resolve(false)
       })
   })
@@ -100,22 +101,22 @@ export const logout = () => (dispatch, getState) => {
   dispatch(
     setUserState({
       userState: {
-        customer: '',
-        user: '',
-        token: '',
-        role: '',
+        customer: "",
+        user: "",
+        token: "",
+        role: "",
       },
     }),
   )
-  dispatch(push('/login'))
+  dispatch(push("/login"))
 }
 
 const initialState = {
   // APP STATE
-  from: '',
+  from: "",
   isUpdatingContent: false,
   isLoading: false,
-  activeDialog: '',
+  activeDialog: "",
   dialogForms: {},
   submitForms: {},
   isHideLogin: false,
@@ -135,10 +136,10 @@ const initialState = {
 
   // USER STATE
   userState: {
-    customer: '',
-    user: '',
-    token: '',
-    role: '',
+    customer: "",
+    user: "",
+    token: "",
+    role: "",
   },
 }
 
@@ -149,36 +150,36 @@ export default createReducer(
     [_setHideLogin]: (state, isHideLogin) => ({ ...state, isHideLogin }),
     [setUpdatingContent]: (state, isUpdatingContent) => ({ ...state, isUpdatingContent }),
     [setUserState]: (state, { userState }) => {
-      window.localStorage.setItem('app.token', userState.token)
-      window.localStorage.setItem('app.userState', JSON.stringify(userState))
+      window.localStorage.setItem("app.token", userState.token)
+      window.localStorage.setItem("app.userState", JSON.stringify(userState))
       return { ...state, userState }
     },
     [setThingTypeState]: (state, thingTypes) => {
-      window.localStorage.setItem('app.thingTypes', JSON.stringify(thingTypes))
+      window.localStorage.setItem("app.thingTypes", JSON.stringify(thingTypes))
       return { ...state, thingTypes }
     },
     [setDataTypeState]: (state, dataTypes) => {
-      window.localStorage.setItem('app.dataTypes', JSON.stringify(dataTypes))
+      window.localStorage.setItem("app.dataTypes", JSON.stringify(dataTypes))
       return { ...state, dataTypes }
     },
     [setAlertTypeState]: (state, alertTypes) => {
-      window.localStorage.setItem('app.alertTypes', JSON.stringify(alertTypes))
+      window.localStorage.setItem("app.alertTypes", JSON.stringify(alertTypes))
       return { ...state, alertTypes }
     },
 
     [setIotActionState]: (state, iotActions) => {
-      window.localStorage.setItem('app.iotActions', JSON.stringify(iotActions))
+      window.localStorage.setItem("app.iotActions", JSON.stringify(iotActions))
       return { ...state, iotActions }
     },
     [setLayoutState]: (state, param) => {
       const layoutState = { ...state.layoutState, ...param }
       const newState = { ...state, layoutState }
-      window.localStorage.setItem('app.layoutState', JSON.stringify(newState.layoutState))
+      window.localStorage.setItem("app.layoutState", JSON.stringify(newState.layoutState))
       return newState
     },
     [setActiveDialog]: (state, activeDialog) => {
       const result = { ...state, activeDialog }
-      if (activeDialog !== '') {
+      if (activeDialog !== "") {
         const id = activeDialog
         result.dialogForms = { ...state.dialogForms, [id]: true }
       }

@@ -67,7 +67,6 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged",
     "analyze": "source-map-explorer build/static/js/main.*"
   },
   "lint-staged": {

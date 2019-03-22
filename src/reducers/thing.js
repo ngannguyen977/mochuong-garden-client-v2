@@ -1,14 +1,21 @@
-import { createAction, createReducer } from 'redux-act'
-import { message } from 'antd'
-import axios from 'axios'
-import constant from '../config/default'
-import { notification } from 'antd'
-import { getPoliciesByResource, createPolicy, getPolicyByName, createUserPolicy, deleteUserPolicy, deletePolicy } from '../services/policy'
-import { setUserPage } from './user';
-import { prepareThingPermission } from './factory'
-import helper from '../helper'
+import { createAction, createReducer } from "redux-act"
+import { message } from "antd"
+import axios from "axios"
+import constant from "../config/default"
+import { notification } from "antd"
+import {
+  getPoliciesByResource,
+  createPolicy,
+  getPolicyByName,
+  createUserPolicy,
+  deleteUserPolicy,
+  deletePolicy,
+} from "../services/policy"
+import { setUserPage } from "./user"
+import { prepareThingPermission } from "./factory"
+import helper from "../helper"
 
-export const REDUCER = 'thing'
+export const REDUCER = "thing"
 
 const NS = `@@${REDUCER}/`
 const api = constant.api.iot
@@ -26,7 +33,7 @@ export const getPermission = createAction(`${NS}GET_THING_PERMISSION`)
 export const currentTab = createAction(`${NS}SET_CURRENT_TAB`)
 export const setCertificate = createAction(`${NS}SET_THING_CERTIFICATES`)
 
-export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
+export const getList = (limit = 18, page = 0, sort = "name", isAsc = false) => (
   dispatch,
   getState,
 ) => {
@@ -37,19 +44,19 @@ export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
       dispatch(setThingPage({ things, page, totalItems }))
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "get thing list fail"
       message.error(errorMessage)
     })
 }
 export const getListByGraphQL = (
-  keyword = '',
+  keyword = "",
   limit = 18,
   page = 0,
-  sort = 'name',
+  sort = "name",
   isAsc = false,
-  types = '',
-  templateName = '',
-  templateType = '',
+  types = "",
+  templateName = "",
+  templateType = "",
 ) => (dispatch, getState) => {
   let query = `{pages(key:"${keyword}",templateName:"${templateName}"){page,totalItems, things{name,description,displayName,imageUrl,isActive,serial}}}`
   axios
@@ -61,22 +68,27 @@ export const getListByGraphQL = (
       dispatch(setThingPage({ things, page, totalItems }))
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "get thing list fail"
       message.error(errorMessage)
     })
 }
-export const getAllUsers = (thingName, limit = 18, page = 0, sort = 'name', isAsc = false) => async (
-  dispatch,
-  getState,
-) => {
+export const getAllUsers = (
+  thingName,
+  limit = 18,
+  page = 0,
+  sort = "name",
+  isAsc = false,
+) => async (dispatch, getState) => {
   const userApi = constant.api.authen
 
-  let resourceType = 'things'
-  let effect = 'Allow'
+  let resourceType = "things"
+  let effect = "Allow"
   // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
   let resourceOrn = `orn::iot::${constant.customer.number}:things/${thingName}`
   let policyPromise = getPoliciesByResource(resourceOrn, resourceType, effect)
-  let userPromise = axios.get(`${userApi.host}/${userApi.user}`, { params: { limit, page, sort, isAsc } })
+  let userPromise = axios.get(`${userApi.host}/${userApi.user}`, {
+    params: { limit, page, sort, isAsc },
+  })
   Promise.all([policyPromise, userPromise])
     .then(response => {
       let { users, page, totalItems } = response[1].data || {}
@@ -86,11 +98,13 @@ export const getAllUsers = (thingName, limit = 18, page = 0, sort = 'name', isAs
         userHavePolicy.forEach(t => {
           let user = users.find(x => x.uuid === t)
           if (user && policy.resourceTypes) {
-            if (policy.resourceTypes.actions.includes('iot:listThing')
-              && (policy.resourceTypes.actions.includes('iot:readThing'))) {
+            if (
+              policy.resourceTypes.actions.includes("iot:listThing") &&
+              policy.resourceTypes.actions.includes("iot:readThing")
+            ) {
               user.isView = true
             }
-            if (policy.resourceTypes.actions.includes('iot:controlThing')) {
+            if (policy.resourceTypes.actions.includes("iot:controlThing")) {
               user.isControl = true
             }
           }
@@ -99,18 +113,18 @@ export const getAllUsers = (thingName, limit = 18, page = 0, sort = 'name', isAs
       dispatch(setUserPage({ users, page, totalItems }))
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get user list fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "get user list fail"
       message.error(errorMessage)
     })
 }
-export const getUsers = (thingName, limit = 18, page = 0, sort = 'name', isAsc = false) => async (
+export const getUsers = (thingName, limit = 18, page = 0, sort = "name", isAsc = false) => async (
   dispatch,
   getState,
 ) => {
   const userApi = constant.api.authen
 
-  let resourceType = 'things'
-  let effect = 'Allow'
+  let resourceType = "things"
+  let effect = "Allow"
   // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
   let resourceOrn = `orn::iot::${constant.customer.number}:things/${thingName}`
   try {
@@ -130,7 +144,9 @@ export const getUsers = (thingName, limit = 18, page = 0, sort = 'name', isAsc =
         })
       }
     })
-    let query = `{pages(uuids:"${userUuids.join(',')}"){page,totalItems, users{id,username,uuid,imageUrl}}}`
+    let query = `{pages(uuids:"${userUuids.join(
+      ",",
+    )}"){page,totalItems, users{id,username,uuid,imageUrl}}}`
     let response = await axios.get(`${userApi.host}/${userApi.user}/graphql/search?query=${query}`)
     let { users, page, totalItems } = response.data.data.pages
     if (users && users.length > 0) {
@@ -139,11 +155,13 @@ export const getUsers = (thingName, limit = 18, page = 0, sort = 'name', isAsc =
         userHavePolicy.forEach(t => {
           let user = users.find(x => x.uuid === t)
           if (user && policy.resourceTypes) {
-            if (policy.resourceTypes.actions.includes('iot:listThing')
-              && (policy.resourceTypes.actions.includes('iot:readThing'))) {
+            if (
+              policy.resourceTypes.actions.includes("iot:listThing") &&
+              policy.resourceTypes.actions.includes("iot:readThing")
+            ) {
               user.isView = true
             }
-            if (policy.resourceTypes.actions.includes('iot:controlThing')) {
+            if (policy.resourceTypes.actions.includes("iot:controlThing")) {
               user.isControl = true
             }
           }
@@ -160,11 +178,11 @@ export const getOne = name => (dispatch, getState) => {
   axios
     .get(`${thingApi}/${name}`)
     .then(response => {
-      console.log('get one done')
+      console.log("get one done")
       dispatch(setThingDetailPage(response.data))
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get thing fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "get thing fail"
       message.error(errorMessage)
     })
 }
@@ -188,7 +206,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
           let propertyPromises = model.properties.map(property => {
             let propertyModel = {
               dataType: property.dataType,
-              value: (property.defaultValue || '').toString(),
+              value: (property.defaultValue || "").toString(),
               description: property.description,
               isLogged: property.isLogged,
               isPersistent: property.isPersistent,
@@ -214,7 +232,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
               })
             })
             Promise.all(alertPromises).then(x => {
-              message.success('Create thing success!')
+              message.success("Create thing success!")
             })
           })
         }
@@ -225,7 +243,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       })
       .catch(error => {
         dispatch(createThingState({}))
-        let errorMessage = ((error.response || {}).data || {}).message || 'create thing fail'
+        let errorMessage = ((error.response || {}).data || {}).message || "create thing fail"
         message.error(errorMessage)
       })
   }
@@ -246,16 +264,16 @@ export const update = (id, model, isUpdate) => (dispatch, getState) => {
           if (thingId) {
             things[(id = thingId)] = response.data
             dispatch(setThingPage({ things, page, totalItems }))
-            notification['success']({
-              message: 'Update thing information success!',
+            notification["success"]({
+              message: "Update thing information success!",
               description:
-                'Things status are updated. When things was left their job, you will remove them by delete things button or just deactive these things.',
+                "Things status are updated. When things was left their job, you will remove them by delete things button or just deactive these things.",
             })
           }
         }
       })
       .catch(error => {
-        let errorMessage = ((error.response || {}).data || {}).message || 'change status thing fail'
+        let errorMessage = ((error.response || {}).data || {}).message || "change status thing fail"
         message.error(errorMessage)
       })
   }
@@ -264,10 +282,10 @@ export const destroy = ids => (dispatch, getState) => {
   axios
     .delete(`${thingApi}?ids=${ids}`)
     .then(response => {
-      notification['success']({
-        message: 'Delete thing success!',
+      notification["success"]({
+        message: "Delete thing success!",
         description:
-          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+          "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
       })
       let { things, page, totalItems } = getState().thing
       dispatch(
@@ -279,7 +297,7 @@ export const destroy = ids => (dispatch, getState) => {
       )
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'delete thing fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "delete thing fail"
       message.error(errorMessage)
     })
 }
@@ -287,14 +305,14 @@ export const attachThing = (parentId, ids) => (dispatch, getState) => {
   axios
     .post(`${thingApi}/${parentId}/addthings?ids=${ids}`)
     .then(response => {
-      notification['success']({
-        message: 'Attach thing success!',
+      notification["success"]({
+        message: "Attach thing success!",
         description:
-          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+          "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
       })
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'attach thing fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "attach thing fail"
       message.error(errorMessage)
     })
 }
@@ -310,18 +328,18 @@ export const removeThing = (parentId, id) => (dispatch, getState) => {
           totalItems: totalItems--,
         }),
       )
-      notification['success']({
-        message: 'Remove thing success!',
+      notification["success"]({
+        message: "Remove thing success!",
         description:
-          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+          "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
       })
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'remove thing fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "remove thing fail"
       message.error(errorMessage)
     })
 }
-export const setCurrentTab = (id = 0, tab = '1') => (dispatch, getState) => {
+export const setCurrentTab = (id = 0, tab = "1") => (dispatch, getState) => {
   dispatch(currentTab({ id, tab }))
 }
 export const removeCertificate = id => (dispatch, getState) => {
@@ -333,14 +351,14 @@ export const registerGateway = serialNumber => (dispatch, getState) => {
   axios
     .post(`${thingApi}/register/${serialNumber}`)
     .then(response => {
-      notification['success']({
-        message: 'Register thing success!',
+      notification["success"]({
+        message: "Register thing success!",
         description:
-          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+          "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
       })
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'register thing fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "register thing fail"
       message.error(errorMessage)
     })
 }
@@ -361,10 +379,10 @@ export const createThingPolicy = (userUuid, thingName, type) => async (dispatch,
     let user = (users || []).find(x => x.uuid === userUuid)
     if (user) {
       switch (type) {
-        case 'control':
+        case "control":
           user.isControl = true
           break
-        case 'view':
+        case "view":
           user.isView = true
           break
         default:
@@ -372,47 +390,49 @@ export const createThingPolicy = (userUuid, thingName, type) => async (dispatch,
       }
     }
     dispatch(setUserPage({ users, page, totalItems }))
-    notification['success']({
+    notification["success"]({
       message: `Add permission ${type} for this user to thing: ${thingName} success!`,
       description:
-        'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+        "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
     })
   } catch (error) {
-    console.log('err', error)
+    console.log("err", error)
   }
 }
 export const removeThingPolicy = (userUuid, thingName, type) => (dispatch, getState) => {
   let name = `iot-client-${userUuid}-${thingName}-${type}`
   let { users, page, totalItems } = getState().user
 
-  getPolicyByName(name).then(policy => {
-    if (!policy) {
-      message.warn('policy does not exist!')
-    } else {
-      deleteUserPolicy(userUuid, policy.policyId)
-      let user = users.find(x => x.uuid === userUuid)
-      if (user) {
-        switch (type) {
-          case 'control':
-            user.isControl = false
-            break
-          case 'view':
-            user.isView = false
-            break
-          default:
-            break
+  getPolicyByName(name)
+    .then(policy => {
+      if (!policy) {
+        message.warn("policy does not exist!")
+      } else {
+        deleteUserPolicy(userUuid, policy.policyId)
+        let user = users.find(x => x.uuid === userUuid)
+        if (user) {
+          switch (type) {
+            case "control":
+              user.isControl = false
+              break
+            case "view":
+              user.isView = false
+              break
+            default:
+              break
+          }
         }
+        dispatch(setUserPage({ users, page, totalItems }))
+        notification["success"]({
+          message: `Remove permission ${type} for this user to thing: ${thingName} success!`,
+          description:
+            "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
+        })
       }
-      dispatch(setUserPage({ users, page, totalItems }))
-      notification['success']({
-        message: `Remove permission ${type} for this user to thing: ${thingName} success!`,
-        description:
-          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
-      })
-    }
-  }).catch(err => {
-    console.log('err', err)
-  })
+    })
+    .catch(err => {
+      console.log("err", err)
+    })
 }
 export const deleteThingPolicy = (userUuid, thingName) => (dispatch, getState) => {
   let name = `iot-client-${userUuid}-${thingName}`
@@ -420,75 +440,87 @@ export const deleteThingPolicy = (userUuid, thingName) => (dispatch, getState) =
 
   let getControlThingPromise = getPolicyByName(`${name}-control`)
   let getViewThingPromise = getPolicyByName(`${name}-view`)
-  Promise.all([getControlThingPromise, getViewThingPromise]).then(response => {
-    let policyIds = response.map(x => x.policyId)
-    deleteUserPolicy(userUuid, policyIds.join(',')).then(a =>
-      deletePolicy(policyIds).then(x => {
-        //done
-        users = (users || []).filter(x => x.uuid !== userUuid)
-        totalItems -= 1
-        dispatch(setUserPage({ users, page, totalItems }))
-        notification['success']({
-          message: `Delete permission for this user to thing: ${thingName} success!`,
-          description:
-            'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+  Promise.all([getControlThingPromise, getViewThingPromise])
+    .then(response => {
+      let policyIds = response.map(x => x.policyId)
+      deleteUserPolicy(userUuid, policyIds.join(","))
+        .then(a =>
+          deletePolicy(policyIds)
+            .then(x => {
+              //done
+              users = (users || []).filter(x => x.uuid !== userUuid)
+              totalItems -= 1
+              dispatch(setUserPage({ users, page, totalItems }))
+              notification["success"]({
+                message: `Delete permission for this user to thing: ${thingName} success!`,
+                description:
+                  "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
+              })
+            })
+            .catch(err => {
+              console.log(err)
+            }),
+        )
+        .catch(err => {
+          console.log(err)
         })
-      }).catch(err => { console.log(err) })
-    ).catch(err => { console.log(err) })
-  }).catch(err => { console.log(err) })
+    })
+    .catch(err => {
+      console.log(err)
+    })
 }
 const initialState = {
   things: [
     {
       id: 3,
-      created_at: '2019-02-11T09:47:18.640925Z',
-      updated_at: '2019-02-11T09:47:18.640925Z',
-      serial: '1976846081526334467',
-      name: 'sdsdsdsd',
+      created_at: "2019-02-11T09:47:18.640925Z",
+      updated_at: "2019-02-11T09:47:18.640925Z",
+      serial: "1976846081526334467",
+      name: "sdsdsdsd",
       isActive: false,
       isRegister: false,
       projectId: 8,
       templateId: 5,
       template: {
         id: 5,
-        created_at: '2019-02-11T09:45:54.969967Z',
-        updated_at: '2019-02-11T09:45:54.969967Z',
-        name: 'dsdsd',
-        description: 'dsdsd',
+        created_at: "2019-02-11T09:45:54.969967Z",
+        updated_at: "2019-02-11T09:45:54.969967Z",
+        name: "dsdsd",
+        description: "dsdsd",
         templateType: 2,
         type: 2,
-        imageId: '',
-        imageUrl: '',
+        imageId: "",
+        imageUrl: "",
         parentId: 2,
       },
-      imageId: '',
-      imageUrl: '',
+      imageId: "",
+      imageUrl: "",
     },
     {
       id: 4,
-      created_at: '2019-02-15T03:28:14.010897Z',
-      updated_at: '2019-02-15T03:28:14.010897Z',
-      serial: '1979554388707902468',
-      name: 'OS Tho ',
-      description: 'Thing information include name and password,',
+      created_at: "2019-02-15T03:28:14.010897Z",
+      updated_at: "2019-02-15T03:28:14.010897Z",
+      serial: "1979554388707902468",
+      name: "OS Tho ",
+      description: "Thing information include name and password,",
       isActive: false,
       isRegister: false,
       projectId: 8,
       templateId: 5,
       template: {
         id: 5,
-        created_at: '2019-02-11T09:45:54.969967Z',
-        updated_at: '2019-02-11T09:45:54.969967Z',
-        name: 'dsdsd',
-        description: 'dsdsd',
+        created_at: "2019-02-11T09:45:54.969967Z",
+        updated_at: "2019-02-11T09:45:54.969967Z",
+        name: "dsdsd",
+        description: "dsdsd",
         templateType: 2,
         type: 2,
-        imageId: '',
-        imageUrl: '',
+        imageId: "",
+        imageUrl: "",
         parentId: 2,
       },
-      imageId: '',
-      imageUrl: '',
+      imageId: "",
+      imageUrl: "",
     },
   ],
   page: 0,

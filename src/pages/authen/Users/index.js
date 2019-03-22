@@ -14,7 +14,7 @@ class User extends React.Component {
     return (
       <Page {...props}>
         <Helmet title='Users' />
-        <UserPage location={props.location}/>
+        <UserPage location={props.location} history={props.history} match={props.match} />
       </Page>
     )
   }

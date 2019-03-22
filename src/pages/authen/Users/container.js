@@ -1,90 +1,90 @@
-import { getList, getOne, changeStatus, create, destroy, getUsersByGroup } from 'reducers/user'
+import { getList, getOne, changeStatus, create, destroy, getUsersByGroup } from "reducers/user"
 import {
   getList as getPermissions,
   getByGroup as getPermissionByGroup,
   getByUser as getPermissionByUser,
   changePermissionsForUser,
-} from 'reducers/permission'
+} from "reducers/permission"
 import {
   getList as getGroups,
   create as createGroup,
   changeGroupsForUser,
   changeUsersForGroup,
-} from 'reducers/group'
-import { getList as getThings ,getListByGraphQL } from 'reducers/thing'
-import helper from '../../../helper'
-import { gunzip } from 'zlib'
-import { buffer } from '../../../../node_modules/rxjs/operator/buffer'
+} from "reducers/group"
+import { getList as getThings, getListByGraphQL } from "reducers/thing"
+import helper from "../../../helper"
+import { gunzip } from "zlib"
+import { buffer } from "../../../../node_modules/rxjs/operator/buffer"
 
 const steps = [
   {
-    title: 'Adding details',
-    subTitle: 'Adding User Information',
-    icon: 'loading',
-    iconDefault: 'user',
-    status: 'process',
+    title: "Adding details",
+    subTitle: "Adding User Information",
+    icon: "loading",
+    iconDefault: "user",
+    status: "process",
     index: 0,
-    nextTitle: 'Next: Permission',
+    nextTitle: "Next: Permission",
   },
   {
-    title: 'Set permission',
-    subTitle: 'Set Permission for User',
-    icon: 'solution',
-    iconDefault: 'solution',
-    status: 'wait',
+    title: "Set permission",
+    subTitle: "Set Permission for User",
+    icon: "solution",
+    iconDefault: "solution",
+    status: "wait",
     index: 1,
-    nextTitle: 'Next: Review',
+    nextTitle: "Next: Review",
   },
   {
-    title: 'Review',
-    subTitle: 'Review',
-    icon: 'menu-unfold',
-    iconDefault: 'menu-unfold',
-    status: 'wait',
+    title: "Review",
+    subTitle: "Review",
+    icon: "menu-unfold",
+    iconDefault: "menu-unfold",
+    status: "wait",
     index: 2,
-    nextTitle: 'Create User',
+    nextTitle: "Create User",
   },
   {
-    title: 'Done',
-    subTitle: 'Create User Complete',
-    icon: 'check-circle',
-    iconDefault: 'check-circle',
-    status: 'wait',
+    title: "Done",
+    subTitle: "Create User Complete",
+    icon: "check-circle",
+    iconDefault: "check-circle",
+    status: "wait",
     index: 3,
-    nextTitle: 'Go to Users List',
+    nextTitle: "Go to Users List",
   },
 ]
 
 const type = {
-  del: 'DELETE',
-  changeStatus: 'CHANGE_STATUS',
-  assignThing: 'ASSIGN_THING',
+  del: "DELETE",
+  changeStatus: "CHANGE_STATUS",
+  assignThing: "ASSIGN_THING",
 }
 const summaryColumns = [
   {
-    title: 'Username',
-    dataIndex: 'username',
+    title: "Username",
+    dataIndex: "username",
     sorter: true,
-    width: '33%',
+    width: "33%",
   },
   {
-    title: 'Role',
-    dataIndex: 'role.name',
+    title: "Role",
+    dataIndex: "role.name",
     sorter: true,
-    width: '33%',
+    width: "33%",
   },
   {
-    title: 'Last Activity',
-    dataIndex: 'last_login',
+    title: "Last Activity",
+    dataIndex: "last_login",
     sorter: true,
-    width: '15%',
+    width: "15%",
     render: x => helper.formatDate(new Date(x)),
   },
 ]
 
 export const mapDispathToProps = {
   getListByGraphQL: (keyword, limit, page, sort, isAsc, types, templateName, templateType) =>
-  getListByGraphQL(keyword, limit, page, sort, isAsc, types, templateName, templateType),
+    getListByGraphQL(keyword, limit, page, sort, isAsc, types, templateName, templateType),
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   getThings: (limit, page, sort, isAsc) => getThings(limit, page, sort, isAsc),
   changeStatus: (userName, status) => changeStatus(userName, status),

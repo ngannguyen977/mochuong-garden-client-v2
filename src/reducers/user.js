@@ -1,13 +1,13 @@
-import { createAction, createReducer } from 'redux-act'
-import { message } from 'antd'
-import axios from 'axios'
-import constant from '../config/default'
-import { notification } from 'antd'
-import { createUserPolicy, createPolicy } from '../services/policy'
-import { prepareThingPermission } from './factory'
-import { setPermissionPerGroup } from 'reducers/permission'
+import { createAction, createReducer } from "redux-act"
+import { message } from "antd"
+import axios from "axios"
+import constant from "../config/default"
+import { notification } from "antd"
+import { createUserPolicy, createPolicy } from "../services/policy"
+import { prepareThingPermission } from "./factory"
+import { setPermissionPerGroup } from "reducers/permission"
 
-export const REDUCER = 'user'
+export const REDUCER = "user"
 
 const NS = `@@${REDUCER}/`
 const api = constant.api.authen
@@ -20,7 +20,7 @@ export const updateUserState = createAction(`${NS}UPDATE_USER`)
 export const getUsersInGroup = createAction(`${NS}GET_USERS_GROUP`)
 export const getPermission = createAction(`${NS}GET_USER_PERMISSION`)
 
-export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
+export const getList = (limit = 10, page = 0, sort = "name", isAsc = false) => (
   dispatch,
   getState,
 ) => {
@@ -31,7 +31,7 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
       dispatch(setUserPage({ users, page, totalItems }))
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get user list fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "get user list fail"
       message.error(errorMessage)
     })
 }
@@ -44,7 +44,7 @@ export const getUsersByGroup = groupName => (dispatch, getState) => {
     })
     .catch(error => {
       console.log(error)
-      let errorMessage = ((error.response || {}).data || {}).message || 'get user by group fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "get user by group fail"
       message.error(errorMessage)
     })
 }
@@ -55,7 +55,7 @@ export const getOne = username => (dispatch, getState) => {
       dispatch(setUserDetailPage(response.data))
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get user fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "get user fail"
       message.error(errorMessage)
     })
 }
@@ -69,16 +69,16 @@ export const changeStatus = (username, status) => (dispatch, getState) => {
         if (cName) {
           users[(username = cName)] = response.data
           dispatch(setUserPage({ users, page, totalItems }))
-          notification['success']({
-            message: 'Change status of users success!',
+          notification["success"]({
+            message: "Change status of users success!",
             description:
-              'Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.',
+              "Users status are updated. When users was left their job, you will remove them by delete users button or just deactive these users.",
           })
         }
       }
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'change status user fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "change status user fail"
       message.error(errorMessage)
     })
 }
@@ -92,16 +92,16 @@ export const changeGroups = (username, groupNames) => (dispatch, getState) => {
         if (cName) {
           users[(username = cName)] = response.data
           dispatch(setUserPage({ users, page, totalItems }))
-          notification['success']({
-            message: 'Change groups of this user success!',
-            description: 'Users groups are update. Please re-check permission for this user.',
+          notification["success"]({
+            message: "Change groups of this user success!",
+            description: "Users groups are update. Please re-check permission for this user.",
           })
         }
       }
     })
     .catch(error => {
       let errorMessage =
-        ((error.response || {}).data || {}).message || 'change groups for user fail'
+        ((error.response || {}).data || {}).message || "change groups for user fail"
       message.error(errorMessage)
     })
 }
@@ -109,22 +109,22 @@ export const destroy = usernames => (dispatch, getState) => {
   axios
     .delete(`${userApi}?usernames=${usernames}`)
     .then(response => {
-      notification['success']({
-        message: 'Delete user success!',
+      notification["success"]({
+        message: "Delete user success!",
         description:
-          'These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.',
+          "These users will be delete permanly shortly in 1 month. In that time, if you re-create these user, we will revert information for them.",
       })
       let { users, page, totalItems } = getState().user
       dispatch(
         setUserPage({
-          users: users.filter(user => !usernames.includes(user.username)),
+          users: users.filter(user => user.username !== usernames),
           page,
-          totalItems: totalItems - usernames.length,
+          totalItems: totalItems--,
         }),
       )
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'delete user fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "delete user fail"
       message.error(errorMessage)
     })
 }
@@ -137,14 +137,14 @@ export const changePassword = (name, model) => (dispatch, getState) => {
   axios
     .patch(`${userApi}/${name}/password`, _model)
     .then(response => {
-      notification['success']({
-        message: 'Update user success!',
+      notification["success"]({
+        message: "Update user success!",
         description:
-          'The password of this user is changed successfully!.Now, this user can login with new password!',
+          "The password of this user is changed successfully!.Now, this user can login with new password!",
       })
     })
     .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'update groups fail'
+      let errorMessage = ((error.response || {}).data || {}).message || "update groups fail"
       message.error(errorMessage)
     })
 }
@@ -167,10 +167,10 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
           //prepare document for create policies
           for (let thing of model.permissions) {
             if (thing.isControl) {
-              let document = prepareThingPermission(response.data.uuid, thing.name, 'control')
+              let document = prepareThingPermission(response.data.uuid, thing.name, "control")
               createPolicy(response.data.uuid, document)
                 .then(res => {
-                  message.success('Set permission success!')
+                  message.success("Set permission success!")
                   dispatch(createUserState({}))
                 })
                 .catch(error => {
@@ -181,11 +181,11 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
                 })
             }
             if (thing.isView) {
-              let document = prepareThingPermission(response.data.uuid, thing.name, 'view')
+              let document = prepareThingPermission(response.data.uuid, thing.name, "view")
 
               createPolicy(response.data.uuid, document)
                 .then(res => {
-                  message.success('Set permission success!')
+                  message.success("Set permission success!")
                   dispatch(createUserState({}))
                 })
                 .catch(error => {
@@ -199,7 +199,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
         }
       })
       .catch(error => {
-        let errorMessage = ((error.response || {}).data || {}).message || 'create user fail'
+        let errorMessage = ((error.response || {}).data || {}).message || "create user fail"
         message.error(errorMessage)
       })
   }
@@ -215,7 +215,7 @@ const ACTION_HANDLES = {
   [setUserPage]: (state, { users, page, totalItems }) => ({ ...state, users, page, totalItems }),
   [createUserState]: (state, userCreate) => ({ ...state, userCreate }),
   [updateUserState]: (state, userUpdate) => {
-    console.log('handle action update user', state, userUpdate)
+    console.log("handle action update user", state, userUpdate)
     return { ...state, detail: { ...state.detail, userUpdate } }
   },
   [setUserDetailPage]: (state, detail) => ({ ...state, detail }),
@@ -223,5 +223,3 @@ const ACTION_HANDLES = {
   [getUsersInGroup]: (state, usersInGroup) => ({ ...state, usersInGroup }),
 }
 export default createReducer(ACTION_HANDLES, initialState)
-
-

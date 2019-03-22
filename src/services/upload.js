@@ -1,21 +1,21 @@
-import constant from '../config/default'
-import axios from 'axios'
+import constant from "../config/default"
+import axios from "axios"
 
 const api = constant.api.upload
-let token = window.localStorage.getItem('app.token')
+let token = window.localStorage.getItem("app.token")
 const instance = axios.create({
   baseURL: api.host,
   timeout: 30000,
   headers: {
-    accept: 'multipart/form-data',
-    'Content-Type': 'multipart/form-data',
-    Authorization: 'Bearer ' + token
+    accept: "multipart/form-data",
+    "Content-Type": "multipart/form-data",
+    Authorization: "Bearer " + token,
   },
 })
 export const getList = (limit, page, sort, isAsc) =>
   new Promise((resolve, reject) => {
     instance
-      .get('', {
+      .get("", {
         params: { limit, page, sort, isAsc },
       })
       .then(response => {
@@ -38,9 +38,9 @@ export const getOne = id =>
   })
 export const create = file =>
   new Promise((resolve, reject) => {
-    console.log('fieeeeeeeee', file)
+    console.log("fieeeeeeeee", file)
     instance
-      .post('', { file })
+      .post("", { file })
       .then(response => {
         resolve(response.data)
       })
