@@ -19,7 +19,7 @@ export const authorize = () => (dispatch, getState) => {
     return Promise.resolve(true)
   }
   if (!app.userState.token) {
-    const token = JSON.parse(window.localStorage.getItem('app.token'))
+    const token = window.localStorage.getItem('app.token')
     if (token) {
       //set app state
       let userState = JSON.parse(window.localStorage.getItem('app.userState'))

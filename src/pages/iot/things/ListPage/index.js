@@ -1,12 +1,15 @@
 import React from 'react'
-import { Pagination, Button } from 'antd'
+import { Pagination, Button, Input, Tag } from 'antd'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LockScreenPage from '../../../DefaultPages/LockscreenPage/Lockscreen'
+import helper from '../../../../helper'
 import '../../../../resources/style.scss'
 import '../style.scss'
 import ThingCard from '../../../components/ThingCard'
+
+const Search = Input.Search
 
 @connect(
   mapStateToProps,
@@ -15,12 +18,18 @@ import ThingCard from '../../../components/ThingCard'
 class ListPage extends React.Component {
   state = {
     current: 0,
+    keyword: '',
+    tags: [],
   }
   componentWillMount() {
-    // if (!this.props.totalItems || this.props.totalItems <= 0) {
-    const { limit, page, sort, isAsc } = queryString.parse(this.props.location.search)
-    this.props.getList(limit, page, sort, isAsc)
-    // }
+    const { keyword, limit, sort, isAsc } = queryString.parse(this.props.location.search)
+    this.props.getListByGraphQL(
+      keyword,
+      limit,
+      0,
+      sort,
+      isAsc
+    )
   }
   componentWillReceiveProps() {
     const { totalItems } = this.props
@@ -33,23 +42,30 @@ class ListPage extends React.Component {
       })
     }
   }
-  onChange = page => {
+  onChange = (page, keyword) => {
     const { limit, sort, isAsc } = queryString.parse(this.props.location.search)
-    this.props.getList(limit, page - 1, sort, isAsc)
+    this.props.getListByGraphQL(
+      keyword,
+      limit,
+      0,
+      sort,
+      isAsc
+    )
     this.setState({
       current: page,
     })
   }
+
   render() {
     const { totalItems, destroy, data, type, history } = this.props
 
     return (
-      <div className="thing">
-        <section className="card">
-          <div className="card-header">
-            <div className="row">
-              <div className="col-md-10">
-                <div className="utils__title">
+      <div className='thing'>
+        <section className='card'>
+          <div className='card-header'>
+            <div className='row'>
+              <div className='col-md-10'>
+                <div className='utils__title'>
                   <strong>Things Management</strong>
                 </div>
                 <small>
@@ -59,19 +75,37 @@ class ListPage extends React.Component {
                   thing.
                 </small>
               </div>
-              <div className="col-md-2 thing__btn-create">
-                <Button type="primary" onClick={() => history.push('/things/register')}>
+              <div className='col-md-2 thing__btn-create'>
+                <Button type='primary' onClick={() => history.push('/things/register')}>
                   Register Thing
                 </Button>
               </div>
             </div>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
+            <div className='operation-box'>
+              <div className='search-box'>
+                <Search
+                  placeholder='input search text'
+                  onSearch={value => this.onChange(this.state.current, value)}
+                  // onBlur={value => this.onChange(this.state.current, value)}
+                  style={{ width: 600 }}
+                />
+              </div>
+              <div className='text-right' style={{ marginBottom: 10 }}>
+                <Pagination
+                  current={this.state.current}
+                  onChange={page => this.onChange(page, this.state.keyword)}
+                  total={totalItems}
+                  pageSize={18}
+                />
+              </div>
+            </div>
             {totalItems > 0 && (
-              <div className="row">
+              <div className='row'>
                 {data &&
                   data.map(x => (
-                    <div className="col-md-2" key={x.id}>
+                    <div className='col-md-2' key={x.name}>
                       <ThingCard
                         data={x || {}}
                         type={type}
@@ -81,7 +115,7 @@ class ListPage extends React.Component {
                       />
                     </div>
                   ))}
-                <div className="col-md-12 text-right">
+                <div className='col-md-12 text-right'>
                   <Pagination
                     current={this.state.current}
                     onChange={this.onChange}
@@ -91,7 +125,7 @@ class ListPage extends React.Component {
                 </div>
               </div>
             )}
-            {totalItems <= 0 && <LockScreenPage name="Thing" link="#/things/register" />}
+            {totalItems <= 0 && <LockScreenPage name='Thing' link='#/things/register' />}
           </div>
         </section>
       </div>

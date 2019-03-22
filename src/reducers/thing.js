@@ -3,8 +3,10 @@ import { message } from 'antd'
 import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
-import { getList as getListUser } from 'reducers/user'
-import { getUserPolicy,getPolicyById } from '../services/policy'
+import { getPoliciesByResource, createPolicy, getPolicyByName, createUserPolicy, deleteUserPolicy, deletePolicy } from '../services/policy'
+import { setUserPage } from './user';
+import { prepareThingPermission } from './factory'
+import helper from '../helper'
 
 export const REDUCER = 'thing'
 
@@ -39,66 +41,124 @@ export const getList = (limit = 18, page = 0, sort = 'name', isAsc = false) => (
       message.error(errorMessage)
     })
 }
-export const getUsers = (thingId, limit = 18, page = 0, sort = 'name', isAsc = false) => (
+export const getListByGraphQL = (
+  keyword = '',
+  limit = 18,
+  page = 0,
+  sort = 'name',
+  isAsc = false,
+  types = '',
+  templateName = '',
+  templateType = '',
+) => (dispatch, getState) => {
+  let query = `{pages(key:"${keyword}",templateName:"${templateName}"){page,totalItems, things{name,description,displayName,imageUrl,isActive,serial}}}`
+  axios
+    .get(`${thingApi}/graphql/search?query=${query}`, {
+      params: { limit: limit, page: page, sort: sort, isAsc: isAsc },
+    })
+    .then(response => {
+      let { things, page, totalItems } = response.data.data.pages
+      dispatch(setThingPage({ things, page, totalItems }))
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
+      message.error(errorMessage)
+    })
+}
+export const getAllUsers = (thingName, limit = 18, page = 0, sort = 'name', isAsc = false) => async (
   dispatch,
   getState,
 ) => {
   const userApi = constant.api.authen
 
-  let promise1 = getPolicyById('21adc1ad-0403-4c50-b4af-a823a4cead1d')
-  let promise2 = axios.get(`${userApi.host}/${userApi.user}`, { params: { limit, page, sort, isAsc } })
-  Promise.all([promise1, promise2])
+  let resourceType = 'things'
+  let effect = 'Allow'
+  // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
+  let resourceOrn = `orn::iot::${constant.customer.number}:things/${thingName}`
+  let policyPromise = getPoliciesByResource(resourceOrn, resourceType, effect)
+  let userPromise = axios.get(`${userApi.host}/${userApi.user}`, { params: { limit, page, sort, isAsc } })
+  Promise.all([policyPromise, userPromise])
     .then(response => {
-      console.log('resss', response)
+      let { users, page, totalItems } = response[1].data || {}
+      let policies = response[0] || []
+      policies.forEach(policy => {
+        let userHavePolicy = policy.users || []
+        userHavePolicy.forEach(t => {
+          let user = users.find(x => x.uuid === t)
+          if (user && policy.resourceTypes) {
+            if (policy.resourceTypes.actions.includes('iot:listThing')
+              && (policy.resourceTypes.actions.includes('iot:readThing'))) {
+              user.isView = true
+            }
+            if (policy.resourceTypes.actions.includes('iot:controlThing')) {
+              user.isControl = true
+            }
+          }
+        })
+      })
+      dispatch(setUserPage({ users, page, totalItems }))
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || 'get user list fail'
       message.error(errorMessage)
     })
 }
-export const getThingChildrenList = (id, limit = 18, page = 0, sort = 'name', isAsc = false) => (
+export const getUsers = (thingName, limit = 18, page = 0, sort = 'name', isAsc = false) => async (
   dispatch,
   getState,
 ) => {
-  axios
-    .get(`${thingApi}/gateway/${id}`, {
-      params: { limit: limit, page: page, sort: sort, isAsc: isAsc },
-    })
-    .then(response => {
-      let { things, page, totalItems } = response.data
-      dispatch(setThingPage({ things, page, totalItems }))
-    })
-    .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
-      message.error(errorMessage)
-    })
-}
-export const getByType = (limit = 18, page = 0, sort = 'name', isAsc = false, query) => (
-  dispatch,
-  getState,
-) => {
-  const { thingTypes } = getState().app
-  let type = (thingTypes.find(x => x.name !== 'Gateway') || {}).id
-  if (!query) {
-    query = `{pages(types:"${type}"){page,totalItems, things{id,name,description,imageUrl,isActive,parentId}}}`
-  }
-  axios
-    .get(`${thingApi}/availibility/by-types`, {
-      params: { limit, page, sort, isAsc, query },
-    })
-    .then(response => {
-      let { things, page, totalItems } = ((response.data || {}).data || {}).pages || {}
-      dispatch(setThingPage({ things, page, totalItems }))
-    })
-    .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || 'get thing list fail'
-      message.error(errorMessage)
-    })
-}
+  const userApi = constant.api.authen
 
-export const getOne = id => (dispatch, getState) => {
+  let resourceType = 'things'
+  let effect = 'Allow'
+  // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
+  let resourceOrn = `orn::iot::${constant.customer.number}:things/${thingName}`
+  try {
+    let policies = await getPoliciesByResource(resourceOrn, resourceType, effect)
+    if (policies.length === 0) {
+      dispatch(setUserPage({ users: [], page: 0, totalItems: 0 }))
+      return
+    }
+    let userUuids = []
+    policies.forEach(policy => {
+      if (policy.users) {
+        policy.users.forEach(x => {
+          let uuid = userUuids.find(a => a === x)
+          if (!uuid) {
+            userUuids.push(x)
+          }
+        })
+      }
+    })
+    let query = `{pages(uuids:"${userUuids.join(',')}"){page,totalItems, users{id,username,uuid,imageUrl}}}`
+    let response = await axios.get(`${userApi.host}/${userApi.user}/graphql/search?query=${query}`)
+    let { users, page, totalItems } = response.data.data.pages
+    if (users && users.length > 0) {
+      policies.forEach(policy => {
+        let userHavePolicy = policy.users || []
+        userHavePolicy.forEach(t => {
+          let user = users.find(x => x.uuid === t)
+          if (user && policy.resourceTypes) {
+            if (policy.resourceTypes.actions.includes('iot:listThing')
+              && (policy.resourceTypes.actions.includes('iot:readThing'))) {
+              user.isView = true
+            }
+            if (policy.resourceTypes.actions.includes('iot:controlThing')) {
+              user.isControl = true
+            }
+          }
+        })
+      })
+      dispatch(setUserPage({ users, page, totalItems }))
+    }
+  } catch (error) {
+    message.error(error.message)
+    console.log(error)
+  }
+}
+export const getOne = name => (dispatch, getState) => {
   axios
-    .get(`${thingApi}/${id}`)
+    .get(`${thingApi}/${name}`)
     .then(response => {
       console.log('get one done')
       dispatch(setThingDetailPage(response.data))
@@ -271,7 +331,7 @@ export const removeCertificate = id => (dispatch, getState) => {
 }
 export const registerGateway = serialNumber => (dispatch, getState) => {
   axios
-    .post(`${thingApi}/${serialNumber}`)
+    .post(`${thingApi}/register/${serialNumber}`)
     .then(response => {
       notification['success']({
         message: 'Register thing success!',
@@ -283,6 +343,99 @@ export const registerGateway = serialNumber => (dispatch, getState) => {
       let errorMessage = ((error.response || {}).data || {}).message || 'register thing fail'
       message.error(errorMessage)
     })
+}
+export const createThingPolicy = (userUuid, thingName, type) => async (dispatch, getState) => {
+  let name = `iot-client-${userUuid}-${thingName}-${type}`
+  try {
+    let { users, page, totalItems } = getState().user
+    let policy = await getPolicyByName(name)
+    if (!policy) {
+      // create new policy
+      let document = prepareThingPermission(userUuid, thingName, type)
+      policy = await createPolicy(userUuid, document)
+      // await createUserPolicy(userUuid, { policyIds: policy.policyId })
+    } else {
+      // create user policy only
+      await createUserPolicy(userUuid, { policyIds: policy.policyId })
+    }
+    let user = (users || []).find(x => x.uuid === userUuid)
+    if (user) {
+      switch (type) {
+        case 'control':
+          user.isControl = true
+          break
+        case 'view':
+          user.isView = true
+          break
+        default:
+          break
+      }
+    }
+    dispatch(setUserPage({ users, page, totalItems }))
+    notification['success']({
+      message: `Add permission ${type} for this user to thing: ${thingName} success!`,
+      description:
+        'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+    })
+  } catch (error) {
+    console.log('err', error)
+  }
+}
+export const removeThingPolicy = (userUuid, thingName, type) => (dispatch, getState) => {
+  let name = `iot-client-${userUuid}-${thingName}-${type}`
+  let { users, page, totalItems } = getState().user
+
+  getPolicyByName(name).then(policy => {
+    if (!policy) {
+      message.warn('policy does not exist!')
+    } else {
+      deleteUserPolicy(userUuid, policy.policyId)
+      let user = users.find(x => x.uuid === userUuid)
+      if (user) {
+        switch (type) {
+          case 'control':
+            user.isControl = false
+            break
+          case 'view':
+            user.isView = false
+            break
+          default:
+            break
+        }
+      }
+      dispatch(setUserPage({ users, page, totalItems }))
+      notification['success']({
+        message: `Remove permission ${type} for this user to thing: ${thingName} success!`,
+        description:
+          'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+      })
+    }
+  }).catch(err => {
+    console.log('err', err)
+  })
+}
+export const deleteThingPolicy = (userUuid, thingName) => (dispatch, getState) => {
+  let name = `iot-client-${userUuid}-${thingName}`
+  let { users, page, totalItems } = getState().user
+
+  let getControlThingPromise = getPolicyByName(`${name}-control`)
+  let getViewThingPromise = getPolicyByName(`${name}-view`)
+  Promise.all([getControlThingPromise, getViewThingPromise]).then(response => {
+    let policyIds = response.map(x => x.policyId)
+    deleteUserPolicy(userUuid, policyIds.join(',')).then(a =>
+      deletePolicy(policyIds).then(x => {
+        //done
+        users = (users || []).filter(x => x.uuid !== userUuid)
+        totalItems -= 1
+        dispatch(setUserPage({ users, page, totalItems }))
+        notification['success']({
+          message: `Delete permission for this user to thing: ${thingName} success!`,
+          description:
+            'These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.',
+        })
+      }).catch(err => { console.log(err) })
+    ).catch(err => { console.log(err) })
+  }).catch(err => { console.log(err) })
 }
 const initialState = {
   things: [

@@ -6,6 +6,7 @@ import ThingPage from './thing'
 import Review from './review'
 import ButtonStep from '../../../components/buttonStep'
 import StepProgress from '../../../components/stepProgress'
+import queryString from 'query-string'
 
 @connect(
   mapStateToProps,
@@ -28,6 +29,16 @@ class CreatePage extends React.Component {
       },
     }
   }
+  componentWillMount() {
+    const { keyword, limit, sort, isAsc } = queryString.parse(this.props.location.search)
+    this.props.getListByGraphQL(
+      keyword,
+      limit,
+      0,
+      sort,
+      isAsc
+    )
+  }
   changeStepState(current) {
     const { create, userCreate } = this.props
     if (current === 3) {
@@ -44,22 +55,22 @@ class CreatePage extends React.Component {
     const { current } = this.state.step
     const { steps } = this.props
     return (
-      <div className="user-create">
-        <StepProgress steps={steps} current={current} type="USER" />
-        <div className="card">
-          <div className="card-header">
-            <h4 className="text-black mb-3">
+      <div className='user-create'>
+        <StepProgress steps={steps} current={current} type='USER' />
+        <div className='card'>
+          <div className='card-header'>
+            <h4 className='text-black mb-3'>
               <strong>{steps[current].subTitle}</strong>
             </h4>
           </div>
-          <div className="card-body">
+          <div className='card-body'>
             {current === 0 && <DetailPage />}
             {current === 1 && <ThingPage location={this.props.location} />}
             {(current === 2 || current === 3) && <Review changeStepState={this.changeStepState} />}
             <ButtonStep
               steps={steps}
               current={current}
-              link="/users"
+              link='/users'
               changeStepState={this.changeStepState}
             />
           </div>

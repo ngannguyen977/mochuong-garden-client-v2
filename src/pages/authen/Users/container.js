@@ -11,7 +11,7 @@ import {
   changeGroupsForUser,
   changeUsersForGroup,
 } from 'reducers/group'
-import { getList as getThings } from 'reducers/thing'
+import { getList as getThings ,getListByGraphQL } from 'reducers/thing'
 import helper from '../../../helper'
 import { gunzip } from 'zlib'
 import { buffer } from '../../../../node_modules/rxjs/operator/buffer'
@@ -83,23 +83,25 @@ const summaryColumns = [
 ]
 
 export const mapDispathToProps = {
+  getListByGraphQL: (keyword, limit, page, sort, isAsc, types, templateName, templateType) =>
+  getListByGraphQL(keyword, limit, page, sort, isAsc, types, templateName, templateType),
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
   getThings: (limit, page, sort, isAsc) => getThings(limit, page, sort, isAsc),
-  changeStatus: (id, status) => changeStatus(id, status),
+  changeStatus: (userName, status) => changeStatus(userName, status),
   create: (model, iscreate) => create(model, iscreate),
   // update: (model, iscreate) => update(model, iscreate),
   createGroup: (model, iscreate) => createGroup(model, iscreate),
-  destroy: ids => destroy(ids),
-  getOne: id => getOne(id),
+  destroy: userNames => destroy(userNames),
+  getOne: userName => getOne(userName),
   getPermissions: () => getPermissions(),
   getGroups: () => getGroups(),
-  getPermissionByGroup: ids => getPermissionByGroup(ids),
-  getUsersByGroup: groupId => getUsersByGroup(groupId),
-  getPermissionByUser: userId => getPermissionByUser(userId),
-  changeGroupsForUser: (groupIds, userId, isChange) =>
-    changeGroupsForUser(groupIds, userId, isChange),
-  changeUsersForGroup: (groupId, userIds, isChange) =>
-    changeUsersForGroup(groupId, userIds, isChange),
+  getPermissionByGroup: userNames => getPermissionByGroup(userNames),
+  getUsersByGroup: groupName => getUsersByGroup(groupName),
+  getPermissionByUser: userName => getPermissionByUser(userName),
+  changeGroupsForUser: (groupNames, userName, isChange) =>
+    changeGroupsForUser(groupNames, userName, isChange),
+  changeUsersForGroup: (groupName, userNames, isChange) =>
+    changeUsersForGroup(groupName, userNames, isChange),
   changePermissionsForUser: (permissionIds, userUuid, isChange) =>
     changePermissionsForUser(permissionIds, userUuid, isChange),
 }

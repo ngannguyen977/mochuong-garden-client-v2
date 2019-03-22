@@ -4,6 +4,7 @@ import axios from 'axios'
 import constant from '../config/default'
 import { notification } from 'antd'
 import { createUserPolicy, createPolicy } from '../services/policy'
+import { prepareThingPermission } from './factory'
 import { setPermissionPerGroup } from 'reducers/permission'
 
 export const REDUCER = 'user'
@@ -34,12 +35,12 @@ export const getList = (limit = 10, page = 0, sort = 'name', isAsc = false) => (
       message.error(errorMessage)
     })
 }
-export const getUsersByGroup = groupId => (dispatch, getState) => {
+export const getUsersByGroup = groupName => (dispatch, getState) => {
   axios
-    .get(`${userApi}/${api.usersByGroup}/${groupId}`)
+    .get(`${userApi}/${api.usersByGroup}/${groupName}`)
     .then(response => {
       const { users } = response.data
-      dispatch(getUsersInGroup({ users, groupId }))
+      dispatch(getUsersInGroup({ users, groupName }))
     })
     .catch(error => {
       console.log(error)
@@ -47,9 +48,9 @@ export const getUsersByGroup = groupId => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const getOne = id => (dispatch, getState) => {
+export const getOne = username => (dispatch, getState) => {
   axios
-    .get(`${userApi}/${id}`)
+    .get(`${userApi}/${username}`)
     .then(response => {
       dispatch(setUserDetailPage(response.data))
     })
@@ -58,15 +59,15 @@ export const getOne = id => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const changeStatus = (id, status) => (dispatch, getState) => {
+export const changeStatus = (username, status) => (dispatch, getState) => {
   axios
-    .patch(`${userApi}/${id}`, { active: status })
+    .patch(`${userApi}/${username}`, { active: status })
     .then(response => {
       let { users, page, totalItems } = getState().user
       if (users && Array.isArray(users) && users.length > 0) {
-        let userId = users.findIndex(x => x.id === response.data.id)
-        if (userId) {
-          users[(id = userId)] = response.data
+        let cName = users.findIndex(x => x.username === response.data.username)
+        if (cName) {
+          users[(username = cName)] = response.data
           dispatch(setUserPage({ users, page, totalItems }))
           notification['success']({
             message: 'Change status of users success!',
@@ -81,15 +82,15 @@ export const changeStatus = (id, status) => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const changeGroups = (id, groupIds) => (dispatch, getState) => {
+export const changeGroups = (username, groupNames) => (dispatch, getState) => {
   axios
-    .patch(`${userApi}/${id}`, { groupIds: groupIds })
+    .patch(`${userApi}/${username}`, { groupNames })
     .then(response => {
       let { users, page, totalItems } = getState().user
       if (users && Array.isArray(users) && users.length > 0) {
-        let userId = users.findIndex(x => x.id === response.data.id)
-        if (userId) {
-          users[(id = userId)] = response.data
+        let cName = users.findIndex(x => x.username === response.data.username)
+        if (cName) {
+          users[(username = cName)] = response.data
           dispatch(setUserPage({ users, page, totalItems }))
           notification['success']({
             message: 'Change groups of this user success!',
@@ -104,9 +105,9 @@ export const changeGroups = (id, groupIds) => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const destroy = ids => (dispatch, getState) => {
+export const destroy = usernames => (dispatch, getState) => {
   axios
-    .delete(`${userApi}?ids=${ids}`)
+    .delete(`${userApi}?usernames=${usernames}`)
     .then(response => {
       notification['success']({
         message: 'Delete user success!',
@@ -116,9 +117,9 @@ export const destroy = ids => (dispatch, getState) => {
       let { users, page, totalItems } = getState().user
       dispatch(
         setUserPage({
-          users: users.filter(user => !ids.includes(user.id)),
+          users: users.filter(user => !usernames.includes(user.username)),
           page,
-          totalItems: totalItems - ids.length,
+          totalItems: totalItems - usernames.length,
         }),
       )
     })
@@ -127,14 +128,14 @@ export const destroy = ids => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const changePassword = (id, model) => (dispatch, getState) => {
+export const changePassword = (name, model) => (dispatch, getState) => {
   let _model = {
     new_password: model.newPassword,
     new_password_confirm: model.confirm,
     old_password: model.oldPassword,
   }
   axios
-    .patch(`${userApi}/${id}/password`, _model)
+    .patch(`${userApi}/${name}/password`, _model)
     .then(response => {
       notification['success']({
         message: 'Update user success!',
@@ -152,49 +153,49 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
   if (isCreate) {
     let _model = {
       password: model.password,
-      password_confirm: model.password,
+      passwordConfirm: model.password,
       username: model.username,
     }
     axios
-      .post(userApi, _model)
+      .post(`${userApi}/client`, _model)
       .then(response => {
         let { users, page, totalItems } = getState().user
         users.push(response.data)
         dispatch(setUserPage({ users, page, totalItems: totalItems++ }))
+        console.log(model)
         if (model.permissions && Array.isArray(model.permissions) && model.permissions.length > 0) {
           //prepare document for create policies
-          let resourceTypes = model.permissions.map(x => {
-            let actions = []
-            if (x.isControl) {
-              actions.push('iot:editThing')
+          for (let thing of model.permissions) {
+            if (thing.isControl) {
+              let document = prepareThingPermission(response.data.uuid, thing.name, 'control')
+              createPolicy(response.data.uuid, document)
+                .then(res => {
+                  message.success('Set permission success!')
+                  dispatch(createUserState({}))
+                })
+                .catch(error => {
+                  let errorMessage =
+                    ((error.response || {}).data || {}).message ||
+                    `set permission control for user ${model.username} fail`
+                  message.error(errorMessage)
+                })
             }
-            if (x.isView) {
-              actions.push('iot:listThing')
-              actions.push('iot:readThing')
+            if (thing.isView) {
+              let document = prepareThingPermission(response.data.uuid, thing.name, 'view')
+
+              createPolicy(response.data.uuid, document)
+                .then(res => {
+                  message.success('Set permission success!')
+                  dispatch(createUserState({}))
+                })
+                .catch(error => {
+                  let errorMessage =
+                    ((error.response || {}).data || {}).message ||
+                    `set permission view for user ${model.username} fail`
+                  message.error(errorMessage)
+                })
             }
-            return {
-              name: `thing-${x.name}`,
-              effect: 'Allow',
-              actions,
-              resources: [`orn::iot::${response.data.uuid}:policies/${x.id}`],
-            }
-          })
-          let document = {
-            name: `${response.data.username}`,
-            description: `Permission for customer user ${response.data.username}`,
-            resourceTypes,
           }
-          createPolicy(response.data.uuid, document)
-            .then(res => {
-              message.success('Set permission success!')
-              dispatch(createUserState({}))
-            })
-            .catch(error => {
-              let errorMessage =
-                ((error.response || {}).data || {}).message ||
-                `set permission for user ${model.username} fail`
-              message.error(errorMessage)
-            })
         }
       })
       .catch(error => {
@@ -222,3 +223,5 @@ const ACTION_HANDLES = {
   [getUsersInGroup]: (state, usersInGroup) => ({ ...state, usersInGroup }),
 }
 export default createReducer(ACTION_HANDLES, initialState)
+
+

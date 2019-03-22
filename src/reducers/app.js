@@ -61,10 +61,9 @@ export const login = (customer, username, password, dispatch) =>
             },
           }),
         )
-        let _promise = [infoApi].map(x => axios.get(x, { limit: 100 }))
-        Promise.all(_promise)
+        axios.get(infoApi)
           .then(res => {
-            let userInfo = res[0].data
+            let userInfo = res.data
             dispatch(_setHideLogin(true))
             dispatch(
               setUserState({
@@ -150,7 +149,7 @@ export default createReducer(
     [_setHideLogin]: (state, isHideLogin) => ({ ...state, isHideLogin }),
     [setUpdatingContent]: (state, isUpdatingContent) => ({ ...state, isUpdatingContent }),
     [setUserState]: (state, { userState }) => {
-      window.localStorage.setItem('app.token', JSON.stringify(userState.token))
+      window.localStorage.setItem('app.token', userState.token)
       window.localStorage.setItem('app.userState', JSON.stringify(userState))
       return { ...state, userState }
     },

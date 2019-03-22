@@ -5,14 +5,16 @@ import {
   destroy,
   update,
   setCurrentTab,
-  getThingChildrenList,
   attachThing,
-  getByType,
   removeThing,
   registerGateway,
-  getUsers
+  getUsers,
+  getAllUsers,
+  getListByGraphQL,
+  createThingPolicy,
+  removeThingPolicy,
+  deleteThingPolicy
 } from 'reducers/thing'
-import { getList as getProjects } from 'reducers/project'
 import {
   getList as getPropertiesByTemplate,
   update as updateProperty,
@@ -20,7 +22,6 @@ import {
 } from 'reducers/property'
 import { getList as getTemplates } from 'reducers/template'
 import helper from '../../../helper'
-import { create as generateCertificate, remove as removeCertificate } from 'reducers/certificate'
 
 const steps = [
   {
@@ -84,11 +85,10 @@ const summaryColumns = [
 ]
 
 export const mapDispathToProps = {
+  getListByGraphQL: (keyword, limit, page, sort, isAsc, types, templateName, templateType) =>
+    getListByGraphQL(keyword, limit, page, sort, isAsc, types, templateName, templateType),
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
-  getThingChildrenList: (id, limit, page, sort, isAsc) =>
-    getThingChildrenList(id, limit, page, sort, isAsc),
   getTemplates: (limit, page, sort, isAsc) => getTemplates(limit, page, sort, isAsc),
-  getProjects: (limit, page, sort, isAsc) => getProjects(limit, page, sort, isAsc),
   create: (model, iscreate) => create(model, iscreate),
   update: (id, model, isUpdate) => update(id, model, isUpdate),
   updateProperty: (id, model) => updateProperty(id, model),
@@ -100,11 +100,12 @@ export const mapDispathToProps = {
   setCurrentTab: (id, tab) => setCurrentTab(id, tab),
   attachThing: (parentId, id) => attachThing(parentId, id),
   removeThing: (parentId, id) => removeThing(parentId, id),
-  generateCertificate: thingId => generateCertificate(thingId),
-  removeCertificate: id => removeCertificate(id),
-  getByType: (limit, page, sort, isAsc, query) => getByType(limit, page, sort, isAsc, query),
   registerGateway: serialNumber => registerGateway(serialNumber),
-  getUsers:(thingId,limit, page, sort, isAsc) => getUsers(thingId,limit, page, sort, isAsc),
+  getUsers: (thingName, limit, page, sort, isAsc) => getUsers(thingName, limit, page, sort, isAsc),
+  getAllUsers: (thingName, limit, page, sort, isAsc) => getAllUsers(thingName, limit, page, sort, isAsc),
+  createThingPolicy: (userUuid, thingName, type) => createThingPolicy(userUuid, thingName, type),
+  removeThingPolicy: (userUuid, thingName, type) => removeThingPolicy(userUuid, thingName, type),
+  deleteThingPolicy: (userUuid, thingName) => deleteThingPolicy(userUuid, thingName),
 }
 export const mapStateToProps = (state, props) => {
   let thing = state.thing || {}

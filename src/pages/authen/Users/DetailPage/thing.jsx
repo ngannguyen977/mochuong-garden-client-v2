@@ -44,7 +44,7 @@ class ListPage extends React.Component {
     const { create, userCreate } = this.props
     let permissions = userCreate.permissions || []
 
-    let permission = permissions.find(x => x.id === thing.id)
+    let permission = permissions.find(x => x.name === thing.name)
     if (permission) {
       if (isControl !== undefined)
         permission.isControl = isControl

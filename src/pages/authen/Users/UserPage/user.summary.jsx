@@ -22,10 +22,10 @@ class UserSummaryList extends React.Component {
     }
   }
   componentWillMount() {
-    const { getList, isEdit, getUsersByGroup, groupId } = this.props
+    const { getList,  getUsersByGroup, groupName } = this.props
     getList()
-    if (groupId) {
-      getUsersByGroup(groupId)
+    if (groupName) {
+      getUsersByGroup(groupName)
     }
   }
   componentWillReceiveProps(){
@@ -35,10 +35,10 @@ class UserSummaryList extends React.Component {
     }
     const { selectedRowKeys, pagination } = this.state
       if (usersInGroup && usersInGroup.length > 0 && selectedRowKeys.length === 0) {
-        let userIds = usersInGroup.map(x => x.id)
-        if (userIds !== selectedRowKeys) {
+        let cNames = usersInGroup.map(x => x.name)
+        if (cNames !== selectedRowKeys) {
           this.setState({
-            selectedRowKeys: userIds,
+            selectedRowKeys: cNames,
             ...pagination,
             total: totalItems
           })
@@ -47,7 +47,7 @@ class UserSummaryList extends React.Component {
   }
 
   render() {
-    const { summaryColumns, isEdit, groupId, parent, groupCreate, createGroup, data, changeUsersForGroup } = this.props
+    const { summaryColumns, isEdit, groupName, parent, groupCreate, createGroup, data, changeUsersForGroup } = this.props
     const { pagination, loading ,selectedRowKeys } = this.state
     const rowSelection = {
       selectedRowKeys,
@@ -58,7 +58,7 @@ class UserSummaryList extends React.Component {
         switch (parent) {
           case 'group':
             if (isEdit) {
-              changeUsersForGroup(groupId,selectedRowKeys)
+              changeUsersForGroup(groupName,selectedRowKeys)
             } else {
               createGroup({ ...groupCreate, users: selectedRows })
             }
@@ -76,7 +76,7 @@ class UserSummaryList extends React.Component {
     return (
       <Table
         rowSelection={rowSelection}
-        rowKey={record => record.id}
+        rowKey={record => record.name}
         pagination={pagination}
         loading={loading}
         columns={summaryColumns}

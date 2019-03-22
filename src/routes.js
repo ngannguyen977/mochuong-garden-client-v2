@@ -41,7 +41,7 @@ const loadableRoutes = {
   '/users/create': {
     component: loadable(() => import('pages/authen/Users/CreatePage')),
   },
-  '/users/:id': {
+  '/users/:name': {
     component: loadable(() => import('pages/authen/Users/DetailPage')),
   },
   // things
@@ -51,9 +51,13 @@ const loadableRoutes = {
   '/things/register': {
     component: loadable(() => import('pages/iot/things/registerPage')),
   },
-  '/things/:id': {
+  '/things/:name': {
     component: loadable(() => import('pages/iot/things/DetailPage')),
   },
+  '/things/:name/users': {
+    component: loadable(() => import('pages/iot/things/DetailPage/attach')),
+  },
+
 }
 
 class Routes extends React.Component {

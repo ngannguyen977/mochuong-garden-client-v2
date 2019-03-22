@@ -65,30 +65,19 @@
     font-weight: bold;
     border-top: 1px solid $gray-border;
     padding-top: rem(15);
-    // padding-right: rem(100);
+    padding-right: rem(100);
     position: relative;
-    min-height: 70px;
     a {
       // display: block;
-      // white-space: nowrap;
+      white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      font-size: 13px;
-      color: #096dd9;
     }
   }
   &__descr {
     // padding-right: rem(100);
     font-style: italic;
     color: $black-lighten-more;
-    min-height: 45px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 25px;
-    -webkit-line-clamp: 3;
-    height: 75px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
     &__sizes {
       font-style: normal;
       margin: rem(15) 0 rem(10);

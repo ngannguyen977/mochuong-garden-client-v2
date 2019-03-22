@@ -17,7 +17,7 @@ export class DetailTabPage extends React.Component {
 
     componentWillMount() {
         const { match, getOne } = this.props
-        getOne(match.params.id)
+        getOne(match.params.name)
     }
 
     render() {

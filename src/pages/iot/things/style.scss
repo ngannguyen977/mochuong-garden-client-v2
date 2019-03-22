@@ -67,6 +67,22 @@
             padding: 0;
         }
     }
+    .thing-detail-page{
+        .thing-image{
+            img{
+             -webkit-filter: drop-shadow(5px 5px 5px #222 );
+             filter: drop-shadow(5px 5px 5px #222);
+             max-width: 258px;
+             height: auto;
+             margin: 20px;
+            }
+         }
+    }
+   &__user{
+       .user-card{
+           margin-bottom: 10px;
+       }
+   }
 }
 .register-thing{
     .product-img{

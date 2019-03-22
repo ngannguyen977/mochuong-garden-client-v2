@@ -2,14 +2,14 @@ import constant from '../config/default'
 import axios from 'axios'
 
 const api = constant.api.upload
-let token = window.localStorage.getItem('app.token') || ''
+let token = window.localStorage.getItem('app.token')
 const instance = axios.create({
   baseURL: api.host,
   timeout: 30000,
   headers: {
     accept: 'multipart/form-data',
     'Content-Type': 'multipart/form-data',
-    Authorization: 'Bearer ' + token.toString().replace(/['"]+/g, ''),
+    Authorization: 'Bearer ' + token
   },
 })
 export const getList = (limit, page, sort, isAsc) =>

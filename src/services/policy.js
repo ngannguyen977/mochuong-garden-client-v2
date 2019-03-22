@@ -5,7 +5,7 @@ const api = constant.api.policy
 const policyApi = `${api.host}/${api.policy}`
 const userApi = `${api.host}/${api.user}`
 const groupApi = `${api.host}/${api.group}`
-const token = JSON.parse(window.localStorage.getItem('app.token'))
+const token = window.localStorage.getItem('app.token')
 const instance = axios.create({
   baseURL: api.host,
   timeout: 30000,
@@ -27,10 +27,34 @@ export const getPolicies = (keyword, keysort, types, skip, limit, isAsc) =>
         reject(error)
       })
   })
+export const getPoliciesByResource = (resourceOrn, resourceType, effect) =>
+  new Promise((resolve, reject) => {
+    instance
+      .get(`${policyApi}/resources/${resourceType}`, {
+        params: { resourceOrn, effect },
+      })
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
 export const getPolicyById = policyId =>
   new Promise((resolve, reject) => {
     instance
       .get(`${policyApi}/policy/${policyId}`)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+export const getPolicyByName = policyName =>
+  new Promise((resolve, reject) => {
+    instance
+      .get(`${policyApi}/policy?name=${policyName}`)
       .then(response => {
         resolve(response.data)
       })
@@ -83,10 +107,11 @@ export const createPolicy = (userUuid, document) =>
         reject(error)
       })
   })
-  export const getUserPolicy = (types,skip,count) =>
+
+export const getUserPolicy = (types, skip, count) =>
   new Promise((resolve, reject) => {
     instance
-      .get(`${userApi}`, { params: { types,skip,count } })
+      .get(`${userApi}`, { params: { types, skip, count } })
       .then(response => {
         resolve(response.data)
       })
@@ -153,6 +178,17 @@ export const deletePolicy = policyIds =>
   new Promise((resolve, reject) => {
     instance
       .delete(`${policyApi}?policyIds=${policyIds}`)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+export const deleteUserPolicy = (userUuid, policyIds) =>
+  new Promise((resolve, reject) => {
+    instance
+      .delete(`${userApi}/${userUuid}?policyIds=${policyIds}`)
       .then(response => {
         resolve(response.data)
       })

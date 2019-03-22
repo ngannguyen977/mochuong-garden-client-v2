@@ -44,7 +44,7 @@ class ListPage extends React.Component {
     const { create, userCreate } = this.props
     let permissions = userCreate.permissions || []
 
-    let permission = permissions.find(x => x.id === thing.id)
+    let permission = permissions.find(x => x.name === thing.name)
     if (permission) {
       if (isControl !== undefined)
         permission.isControl = isControl
@@ -72,13 +72,14 @@ class ListPage extends React.Component {
             <div className='row'>
               {thing.things && thing.things.length > 0 &&
                 thing.things.map(x => (
-                  <div className='col-md-2' key={x.id}>
+                  <div className='col-md-2' key={x.name}>
                     <ThingCard
                       data={x || {}}
                       type={type}
                       onMouseEnter={() => this.setState({ current: 0 })}
                       action={this.setPermission}
-                      permission={permissions.find(a => a.id === x.id) || {}}
+                      permission={permissions.find(a => a.name === x.name) || {}}
+                      isEdit
                     />
                   </div>
                 ))}

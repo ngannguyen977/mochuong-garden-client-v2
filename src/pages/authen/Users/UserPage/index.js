@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Button } from 'antd'
+import { Table, Button, Pagination } from 'antd'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
@@ -16,12 +16,7 @@ class UserPage extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
     loading: false,
-    pagination: {
-      defaultCurrent: 1,
-      total: -1,
-      current: 1,
-      pageSize: 10,
-    },
+    current: 0,
   }
   componentWillMount() {
     // if (!this.props.totalItems || this.props.totalItems <= 0) {
@@ -40,32 +35,24 @@ class UserPage extends React.Component {
       })
     }
   }
-
-  handleTableChange = (pagination, filters, sorter) => {
-    const pager = { ...this.state.pagination }
-    pager.current = pagination.current
+  onChange = (page, keyword) => {
+    const { limit, sort, isAsc } = queryString.parse(this.props.location.search)
+    this.props.getList(limit, page > 0 ? page - 1 : page, sort, isAsc)
     this.setState({
-      pagination: pager,
+      current: page,
+      keyword,
     })
-    let params = {
-      limit: pagination.pageSize,
-      page: pagination.current - 1,
-      sort: sorter.field,
-      isAsc: sorter.order,
-      ...filters,
-    }
-    this.props.getList(params.limit, params.page, params.sort, params.isAsc, filters)
   }
   render() {
     const columns = [
       {
         title: 'Username',
         dataIndex: 'username',
-        sorter: true,
+        // sorter: true,
         width: '30%',
         render: (name, record) => {
           return (
-            <a className='link' href={`#/users/${record.id}`}>
+            <a className='link' href={`#/users/${record.username}`}>
               {record.username}
             </a>
           )
@@ -74,27 +61,27 @@ class UserPage extends React.Component {
       {
         title: 'Role',
         dataIndex: 'role.name',
-        sorter: true,
+        // sorter: true,
         width: '30%',
       },
       {
         title: 'Status',
         dataIndex: 'active',
-        sorter: true,
+        // sorter: true,
         width: '7%',
         render: record => <Checkbox defaultChecked={record} checked={record} />,
       },
       {
         title: 'Last Activity',
         dataIndex: 'last_login',
-        sorter: true,
+        // sorter: true,
         width: '15%',
         render: x => helper.formatDate(new Date(x)),
       },
       {
         title: 'Create time',
         dataIndex: 'created_at',
-        sorter: true,
+        // sorter: true,
         width: '15%',
         render: x => helper.formatDate(new Date(x)),
       },
@@ -133,8 +120,8 @@ class UserPage extends React.Component {
             changeStatus(selectedRowKeys, status)
             break
           case type.assignThing:
-          message.info('Come in soon. Please assign thing in user detail.')
-          break
+            message.info('Come in soon. Please assign thing in user detail.')
+            break
           default:
             break
         }
@@ -202,13 +189,21 @@ class UserPage extends React.Component {
                 </span>
                 <Table
                   rowSelection={rowSelection}
-                  rowKey={record => record.id}
-                  pagination={this.state.pagination}
+                  rowKey={record => record.username}
+                  pagination={false}
                   loading={this.state.loading}
                   columns={columns}
-                  onChange={this.handleTableChange}
+                  onChange={this.onChange}
                   dataSource={data}
                 />
+                <div className='text-right' style={{ marginTop: 10 }}>
+                  <Pagination
+                    current={this.state.current}
+                    onChange={page => this.onChange(page, this.state.keyword)}
+                    total={totalItems}
+                    pageSize={18}
+                  />
+                </div>
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (

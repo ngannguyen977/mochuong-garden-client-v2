@@ -21,14 +21,14 @@ export class DetailTabPage extends React.Component {
     }
     componentWillMount() {
         const { match, getOne } = this.props
-        getOne(match.params.id)
+        getOne(match.params.name)
     }
 
     handleTab(tab, id) {
         this.props.setCurrentTab(id, tab)
     }
     render() {
-        const { match, location, tabs } = this.props
+        const { match, location, tabs, history } = this.props
         const handleButton = (
             <div className='text-right'>
                 <Button
@@ -50,7 +50,7 @@ export class DetailTabPage extends React.Component {
                         {handleButton}
                     </div></TabPane>
                     <TabPane tab={<span><Icon type='user' />Users</span>} key='2'> <div className='user-tab'>
-                        <UserPage isEdit={true} location={location} />
+                        <UserPage isEdit={true} location={location} match={match} history={history} />
                         {handleButton}
                     </div></TabPane>
                     <TabPane tab={<span><Icon type='loading-3-quarters' />Activity Logs</span>} key='3'></TabPane>
