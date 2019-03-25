@@ -21,7 +21,7 @@ export class DetailTabPage extends React.Component {
     }
 
     render() {
-        const { detail } = this.props
+        const { detail, match, history ,location} = this.props
         const update = (type) => {
             switch (type) {
                 case 'detail':
@@ -64,8 +64,10 @@ export class DetailTabPage extends React.Component {
                             <div className='form-group'>
                                 <ThingList
                                     userUuid={(detail || {}).uuid}
-                                    location={this.props.location}
+                                    location={location}
                                     isEdit={true}
+                                    match={match}
+                                    history={history}
                                 />
                             </div>
                         </div>

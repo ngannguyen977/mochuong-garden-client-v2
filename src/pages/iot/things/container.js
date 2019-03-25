@@ -20,7 +20,6 @@ import {
   update as updateProperty,
   create as createProperty,
 } from "reducers/property"
-import { getList as getTemplates } from "reducers/template"
 import helper from "../../../helper"
 
 const steps = [
@@ -88,7 +87,6 @@ export const mapDispathToProps = {
   getListByGraphQL: (keyword, limit, page, sort, isAsc, types, templateName, templateType) =>
     getListByGraphQL(keyword, limit, page, sort, isAsc, types, templateName, templateType),
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
-  getTemplates: (limit, page, sort, isAsc) => getTemplates(limit, page, sort, isAsc),
   create: (model, iscreate) => create(model, iscreate),
   update: (id, model, isUpdate) => update(id, model, isUpdate),
   updateProperty: (id, model) => updateProperty(id, model),
@@ -162,7 +160,6 @@ export const mapStateToProps = (state, props) => {
     customProperties,
     inheritProperties,
     inheritCreateProperties,
-    templates: state.template.templates || [],
     // project
     projects: (state.project || {}).projects || [],
     //configure

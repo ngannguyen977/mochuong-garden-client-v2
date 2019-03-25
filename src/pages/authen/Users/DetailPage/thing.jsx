@@ -61,18 +61,29 @@ class ListPage extends React.Component {
     create({ ...userCreate, permissions })
   }
   render() {
-    const { match, data, type, thing, detail, totalItems, removeThing, userCreate } = this.props
+    const { match, data, type, thing, detail, totalItems, removeThing, userCreate,history } = this.props
     let permissions = userCreate.permissions || []
     return (
       <div className='thing'>
         <section className='card'>
           <div className='card-header'>
+            <div className='utils__title'>
+              <strong>Users Manage these thing</strong>
+              <div className='text-right' style={{ marginTop: -25, marginBottom: 10 }}>
+                <Button type='primary' onClick={() => history.push(`/users/${match.params.name}/things`)}>More Things</Button>
+              </div>
+            </div>
+            <small>
+              User management allow admins can control all users. Administrators can create a new
+              user, add a user to several groups, attach some permission, change status or delete
+              users. You also view detail a user, identify groups and permissions of a user.
+            </small>
           </div>
           <div className='card-body'>
             <div className='row'>
               {thing.things && thing.things.length > 0 &&
                 thing.things.map(x => (
-                  <div className='col-md-2' key={x.id}>
+                  <div className='col-md-2' key={x.name}>
                     <ThingCard
                       data={x || {}}
                       type={type}

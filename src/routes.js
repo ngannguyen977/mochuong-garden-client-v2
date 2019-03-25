@@ -44,6 +44,9 @@ const loadableRoutes = {
   "/users/:name": {
     component: loadable(() => import("pages/authen/Users/DetailPage")),
   },
+  "/users/:name/things": {
+    component: loadable(() => import("pages/authen/Users/DetailPage/permission")),
+  },
   // things
   "/things": {
     component: loadable(() => import("pages/iot/things")),

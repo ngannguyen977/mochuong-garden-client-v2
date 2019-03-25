@@ -3,9 +3,8 @@ import { message } from "antd"
 import axios from "axios"
 import constant from "../config/default"
 import { notification } from "antd"
-import { createUserPolicy, createPolicy } from "../services/policy"
+import { createPolicy,getPolicyByUser } from "../services/policy"
 import { prepareThingPermission } from "./factory"
-import { setPermissionPerGroup } from "reducers/permission"
 
 export const REDUCER = "user"
 
@@ -17,9 +16,30 @@ export const setUserPage = createAction(`${NS}SET_USER_PAGE`)
 export const setUserDetailPage = createAction(`${NS}SET_USER_DETAIL_PAGE`)
 export const createUserState = createAction(`${NS}CREATE_USER`)
 export const updateUserState = createAction(`${NS}UPDATE_USER`)
-export const getUsersInGroup = createAction(`${NS}GET_USERS_GROUP`)
-export const getPermission = createAction(`${NS}GET_USER_PERMISSION`)
 
+export const getPolicyByUserUuid = (uuid, username) => async (
+  dispatch,
+  getState,
+) => {
+  console.log(uuid, username)
+  try {
+    if (!uuid) {
+      let user = await axios.get(`${userApi}/${username}`)
+      if (user === null) {
+        message.error('get user detail fail!')
+        return
+      }
+      uuid = user.data.uuid
+    }
+    let response = await getPolicyByUser(uuid)
+    if (response && response.length > 0) {
+       // fill policy
+
+    }
+  } catch (error) {
+    message.error(error.message)
+  }
+}
 export const getList = (limit = 10, page = 0, sort = "name", isAsc = false) => (
   dispatch,
   getState,
@@ -203,7 +223,6 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
         message.error(errorMessage)
       })
   }
-  dispatch(setPermissionPerGroup(null))
 }
 
 const initialState = {
@@ -219,7 +238,5 @@ const ACTION_HANDLES = {
     return { ...state, detail: { ...state.detail, userUpdate } }
   },
   [setUserDetailPage]: (state, detail) => ({ ...state, detail }),
-  [getPermission]: (state, permissions) => ({ ...state, permissions }),
-  [getUsersInGroup]: (state, usersInGroup) => ({ ...state, usersInGroup }),
 }
 export default createReducer(ACTION_HANDLES, initialState)

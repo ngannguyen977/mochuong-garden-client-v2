@@ -3,3 +3,10 @@
      max-width: 100px;
  }
 }
+.thing-detail{
+    &__user{
+        .user-card{
+            margin-bottom: 10px;
+        }
+    }
+}
