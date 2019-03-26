@@ -81,14 +81,14 @@
     // padding-right: rem(100);
     font-style: italic;
     color: $black-lighten-more;
-    min-height: 45px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 25px;
-    -webkit-line-clamp: 3;
-    height: 75px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+    // min-height: 45px;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    // line-height: 25px;
+    // -webkit-line-clamp: 3;
+    // height: 75px;
+    // display: -webkit-box;
+    // -webkit-box-orient: vertical;
     &__sizes {
       font-style: normal;
       margin: rem(15) 0 rem(10);
