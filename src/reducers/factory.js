@@ -22,7 +22,7 @@ export const prepareThingPermission = (uuid, thingName, type,customerNumber) => 
         effect: "Allow",
         actions,
         // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
-        resources: [`orn::iot::customerNumber:things/${thingName}`],
+        resources: [`orn::iot::${customerNumber}:things/${thingName}`],
       },
     ],
   }

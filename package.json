@@ -40,6 +40,7 @@
     "path": "^0.12.7",
     "peity-react": "^0.0.7",
     "prop-types": "^15.5.10",
+    "quagga": "^0.12.1",
     "rc-drawer": "^1.4.4",
     "react": "^16.4.0",
     "react-chartist": "^0.13.1",
