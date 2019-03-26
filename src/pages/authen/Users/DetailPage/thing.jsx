@@ -13,13 +13,27 @@ import ThingCard from '../../../components/ThingCard'
   mapDispathToProps,
 )
 class ListPage extends React.Component {
-  state = {
-    current: 0,
+  constructor() {
+    super()
+    this.state = {
+      selectedRowKeys: [], // Check here to configure the default column
+      loading: false,
+      pagination: {
+        defaultCurrent: 1,
+        total: -1,
+        current: 1,
+        pageSize: 10,
+      },
+      totalItems: 0,
+      users: []
+    }
+    this.changePolicy = this.changePolicy.bind(this)
+    this.removePolicy = this.removePolicy.bind(this)
   }
   componentWillMount() {
-    const { getThings, match, location } = this.props
-    const { limit, page, sort, isAsc } = queryString.parse(location.search)
-    getThings(limit, page, sort, isAsc)
+    const { location, getAllThing, detail, match } = this.props
+    const { keyword, limit, sort, isAsc } = queryString.parse(location.search)
+    getAllThing((detail || {}).uuid, match.params.name, keyword, limit, 0, sort, isAsc,undefined,undefined,undefined,true)
   }
   componentWillReceiveProps() {
     const { totalItems } = this.props
@@ -32,36 +46,30 @@ class ListPage extends React.Component {
       })
     }
   }
-  onChange = page => {
-    const { getThings, location } = this.props
+  onChange = (page, keyword) => {
+    const { location, getAllThing, detail, match } = this.props
     const { limit, sort, isAsc } = queryString.parse(location.search)
-    getThings(limit, page - 1, sort, isAsc)
+    getAllThing((detail || {}).uuid, match.params.name, keyword, limit, 0, sort, isAsc,undefined,undefined,undefined,true)
     this.setState({
       current: page,
     })
   }
-  setPermission = (thing, isControl, isView) => {
-    const { create, userCreate } = this.props
-    let permissions = userCreate.permissions || []
-
-    let permission = permissions.find(x => x.name === thing.name)
-    if (permission) {
-      if (isControl !== undefined)
-        permission.isControl = isControl
-      if (isView !== undefined)
-        permission.isView = isView
-      if (!permission.isView && !permission.isControl) {
-        permissions.pop(permission)
-      }
+  removePolicy(thingName) {
+    const { destroyUserPolicy, detail } = this.props
+    let userUuid = (detail || {}).uuid
+    destroyUserPolicy(userUuid, thingName)
+  }
+  changePolicy = (type, thingName, value) => {
+    const { createThingPolicy, removeThingPolicy, detail } = this.props
+    let userUuid = (detail || {}).uuid
+    if (value) {
+      createThingPolicy(userUuid, thingName, type)
     } else {
-      permissions.push({
-        isControl, id: thing.id, name: thing.name, imageUrl: thing.imageUrl, isView
-      })
+      removeThingPolicy(userUuid, thingName, type)
     }
-    create({ ...userCreate, permissions })
   }
   render() {
-    const { match, data, type, thing, detail, totalItems, removeThing, userCreate,history } = this.props
+    const { match, type, thing, totalItems, userCreate, history } = this.props
     let permissions = userCreate.permissions || []
     return (
       <div className='thing'>
@@ -88,9 +96,9 @@ class ListPage extends React.Component {
                       data={x || {}}
                       type={type}
                       onMouseEnter={() => this.setState({ current: 0 })}
-                      action={this.setPermission}
+                      action={this.changePolicy}
                       permission={permissions.find(a => a.id === x.id) || {}}
-                      remove
+                      remove={this.removePolicy}
                     />
                   </div>
                 ))}

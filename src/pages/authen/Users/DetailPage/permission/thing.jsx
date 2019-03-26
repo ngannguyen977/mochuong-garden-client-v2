@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pagination, Button, Input } from 'antd'
+import { Pagination, Input, Button } from 'antd'
 import { mapStateToProps, mapDispathToProps } from '../../container'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
@@ -18,11 +18,9 @@ class ListPage extends React.Component {
         current: 0,
     }
     componentWillMount() {
-        const { location, getListByGraphQL, getPolicyByUserUuid, detail, match } = this.props
+        const { location, getAllThing, detail, match } = this.props
         const { keyword, limit, sort, isAsc } = queryString.parse(location.search)
-        getListByGraphQL(keyword, limit, 0, sort, isAsc)
-        console.log(match)
-        getPolicyByUserUuid((detail || {}).uuid, match.params.name)
+        getAllThing((detail || {}).uuid, match.params.name, keyword, limit, 0, sort, isAsc)
     }
     componentWillReceiveProps() {
         const { totalItems } = this.props
@@ -36,34 +34,25 @@ class ListPage extends React.Component {
         }
     }
     onChange = (page, keyword) => {
-        const { limit, sort, isAsc } = queryString.parse(this.props.location.search)
-        this.props.getListByGraphQL(keyword, limit, 0, sort, isAsc)
+        const { location, getAllThing, detail, match } = this.props
+        const { limit, sort, isAsc } = queryString.parse(location.search)
+        getAllThing((detail || {}).uuid, match.params.name, keyword, limit, 0, sort, isAsc)
         this.setState({
             current: page,
         })
     }
-    setPermission = (thing, isControl, isView) => {
-        const { create, userCreate } = this.props
-        let permissions = userCreate.permissions || []
 
-        let permission = permissions.find(x => x.name === thing.name)
-        if (permission) {
-            if (isControl !== undefined)
-                permission.isControl = isControl
-            if (isView !== undefined)
-                permission.isView = isView
-            if (!permission.isView && !permission.isControl) {
-                permissions.pop(permission)
-            }
+    setPermission = (type, thingName, value) => {
+        const { createThingPolicy, removeThingPolicy, detail } = this.props
+        let userUuid = (detail || {}).uuid
+        if (value) {
+            createThingPolicy(userUuid, thingName, type)
         } else {
-            permissions.push({
-                isControl, id: thing.id, name: thing.name, imageUrl: thing.imageUrl, isView
-            })
+            removeThingPolicy(userUuid, thingName, type)
         }
-        create({ ...userCreate, permissions })
     }
     render() {
-        const { match, data, type, thing, detail, totalItems, removeThing, userCreate } = this.props
+        const { type, thing, totalItems, userCreate, match } = this.props
         let permissions = userCreate.permissions || []
         return (
             <div className='thing'>
@@ -81,14 +70,15 @@ class ListPage extends React.Component {
 
                     <div className='card-body'>
                         <div className='row'>
-                            <div className="col-md-8 search-box">
+                            <div className='col-md-8 search-box'>
                                 <Search
-                                    placeholder="input search text"
+                                    placeholder='input search text'
                                     onSearch={value => this.onChange(this.state.current, value)}
                                     // onBlur={value => this.onChange(this.state.current, value)}
                                     style={{ width: 600 }}
                                 />
                             </div>
+
                             {thing.things && thing.things.length > 0 &&
                                 <div className='col-md-4 text-right' style={{ marginBottom: 10 }}>
                                     <Pagination
@@ -110,10 +100,10 @@ class ListPage extends React.Component {
                                             onMouseEnter={() => this.setState({ current: 0 })}
                                             action={this.setPermission}
                                             permission={permissions.find(a => a.id === x.id) || {}}
-                                            isEdit
                                         />
                                     </div>
                                 ))}
+
                             {thing.things && thing.things.length > 0 &&
                                 (<div className='col-md-12 text-right'>
                                     <Pagination
@@ -130,6 +120,16 @@ class ListPage extends React.Component {
                         )}
                     </div>
                 </section>
+                <div className='search-box text-right'>
+                    <Button
+                        type='default'
+                        className='text-capitalize'
+                        style={{ marginRight: '15px' }}
+                        href={`#/users/${match.params.name}`}
+                    >
+                        Back
+                                  </Button>
+                </div>
             </div>
         )
     }

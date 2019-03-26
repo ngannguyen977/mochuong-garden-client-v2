@@ -366,6 +366,7 @@ export const createThingPolicy = (userUuid, thingName, type) => async (dispatch,
   let name = `iot-client-${userUuid}-${thingName}-${type}`
   try {
     let { users, page, totalItems } = getState().user
+    let thing = getState().thing
     let policy = await getPolicyByName(name)
     if (!policy) {
       // create new policy
@@ -376,19 +377,21 @@ export const createThingPolicy = (userUuid, thingName, type) => async (dispatch,
       // create user policy only
       await createUserPolicy(userUuid, { policyIds: policy.policyId })
     }
-    let user = (users || []).find(x => x.uuid === userUuid)
-    if (user) {
-      switch (type) {
-        case "control":
-          user.isControl = true
-          break
-        case "view":
-          user.isView = true
-          break
-        default:
-          break
-      }
+    let user = (users || []).find(x => x.uuid === userUuid) || {}
+    let _thing = (thing.things || []).find(x => x.name === thingName) || {}
+    switch (type) {
+      case "control":
+        user.isControl = true
+        _thing.isControl = true
+        break
+      case "view":
+        user.isView = true
+        _thing.isView = true
+        break
+      default:
+        break
     }
+    dispatch(setThingPage(thing))
     dispatch(setUserPage({ users, page, totalItems }))
     notification["success"]({
       message: `Add permission ${type} for this user to thing: ${thingName} success!`,
@@ -402,6 +405,7 @@ export const createThingPolicy = (userUuid, thingName, type) => async (dispatch,
 export const removeThingPolicy = (userUuid, thingName, type) => (dispatch, getState) => {
   let name = `iot-client-${userUuid}-${thingName}-${type}`
   let { users, page, totalItems } = getState().user
+  let thing = getState().thing
 
   getPolicyByName(name)
     .then(policy => {
@@ -409,20 +413,24 @@ export const removeThingPolicy = (userUuid, thingName, type) => (dispatch, getSt
         message.warn("policy does not exist!")
       } else {
         deleteUserPolicy(userUuid, policy.policyId)
-        let user = users.find(x => x.uuid === userUuid)
-        if (user) {
-          switch (type) {
-            case "control":
-              user.isControl = false
-              break
-            case "view":
-              user.isView = false
-              break
-            default:
-              break
-          }
+
+        let user = (users || []).find(x => x.uuid === userUuid) || {}
+        let _thing = (thing.things || []).find(x => x.name === thingName) || {}
+        switch (type) {
+          case "control":
+            user.isControl = false
+            _thing.isControl = false
+            break
+          case "view":
+            user.isView = false
+            _thing.isView = false
+            break
+          default:
+            break
         }
+        dispatch(setThingPage(thing))
         dispatch(setUserPage({ users, page, totalItems }))
+
         notification["success"]({
           message: `Remove permission ${type} for this user to thing: ${thingName} success!`,
           description:

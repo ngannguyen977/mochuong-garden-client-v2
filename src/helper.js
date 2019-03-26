@@ -18,6 +18,22 @@ export const barcodeGenerator = (dom, text) => {
     width: 1.5,
   })
 }
+export const parseResourceOrn = (resourceOrn) => {
+  try {
+    if (!resourceOrn || typeof resourceOrn !== 'string') {
+      return
+    }
+    let arr = resourceOrn.split(':')
+    if (arr.length !== 6)
+      return
+    if (!arr[5].includes('/'))
+      return
+    return arr[5].split('/')[1]
+  } catch (error) {
+    console.log(error)
+    return
+  }
+}
 export const getDataType = typeId => {
   try {
     let dataTypes = JSON.parse(window.localStorage.getItem("app.dataTypes"))
@@ -289,4 +305,5 @@ export default {
   getDataType,
   checkDate,
   arrayUnique,
+  parseResourceOrn
 }

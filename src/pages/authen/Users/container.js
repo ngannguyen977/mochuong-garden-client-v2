@@ -1,8 +1,13 @@
 import {
-  getList, getOne, changeStatus, create, destroy, getUsersByGroup,
-  getPolicyByUserUuid
+  getList, getOne, changeStatus, create, destroy,
+  getPolicyByUserUuid,
+  getAllThing,
+  destroyUserPolicy
 } from "reducers/user"
-import { getList as getThings, getListByGraphQL } from "reducers/thing"
+import {
+  getList as getThings,
+  getListByGraphQL, createThingPolicy,  removeThingPolicy
+} from "reducers/thing"
 import helper from "../../../helper"
 
 const steps = [
@@ -78,15 +83,13 @@ export const mapDispathToProps = {
   getThings: (limit, page, sort, isAsc) => getThings(limit, page, sort, isAsc),
   changeStatus: (userName, status) => changeStatus(userName, status),
   create: (model, iscreate) => create(model, iscreate),
-  createGroup: (model, iscreate) => createGroup(model, iscreate),
   destroy: userNames => destroy(userNames),
   getOne: userName => getOne(userName),
-  getPermissions: () => getPermissions(),
-  getGroups: () => getGroups(),
-  getPermissionByUser: userName => getPermissionByUser(userName),
-  changePermissionsForUser: (permissionIds, userUuid, isChange) =>
-    changePermissionsForUser(permissionIds, userUuid, isChange),
-  getPolicyByUserUuid: (uuid, username) => getPolicyByUserUuid(uuid, username)
+  getPolicyByUserUuid: (uuid, username) => getPolicyByUserUuid(uuid, username),
+  createThingPolicy: (userUuid, thingName, type) => createThingPolicy(userUuid, thingName, type),
+  removeThingPolicy: (userUuid, thingName, type) => removeThingPolicy(userUuid, thingName, type),
+  destroyUserPolicy: (thingName, type) => destroyUserPolicy(thingName, type),
+  getAllThing: (userUuid, username, keyword, limit, page, sort, isAsc, types, templateName, templateType,onlySelfThing) => getAllThing(userUuid, username, keyword, limit, page, sort, isAsc, types, templateName, templateType,onlySelfThing)
 }
 export const mapStateToProps = (state, props) => {
   let user = state.user || {}
