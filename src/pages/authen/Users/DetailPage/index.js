@@ -13,7 +13,7 @@ class UserDetail extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="User Details" />
-        <DetailTabPage location={props.location} match={props.match} />
+        <DetailTabPage location={props.location} match={props.match} history={props.history} />
       </Page>
     )
   }

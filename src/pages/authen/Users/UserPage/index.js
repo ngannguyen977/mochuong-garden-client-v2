@@ -105,7 +105,7 @@ class UserPage extends React.Component {
             </div>}
           </div>
           <div className='card-body'>
-            <div className='row'>
+            <div className='row thing-detail__user'>
               {totalItems > 0 && data.map(x =>
                 <div className='col-md-4 col-xs-6 user-card' key={x.id}>
                   <UserCard

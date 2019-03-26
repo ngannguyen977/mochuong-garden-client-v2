@@ -12,8 +12,8 @@ export default {
       confirmEmail: "customers/activate",
     },
     policy: {
-      // host: 'http://localhost:8080/v1/api',
-      host: "https://api-dev.onskycloud.com/policy-service/v1/api",
+      host: 'http://localhost:8080/v1/api',
+      // host: "https://api-dev.onskycloud.com/policy-service/v1/api",
       token: "iot-frontend-client-token",
       policy: "policies",
       group: "groups",

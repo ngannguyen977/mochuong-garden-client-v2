@@ -470,61 +470,9 @@ export const deleteThingPolicy = (userUuid, thingName) => (dispatch, getState) =
     })
 }
 const initialState = {
-  things: [
-    {
-      id: 3,
-      created_at: "2019-02-11T09:47:18.640925Z",
-      updated_at: "2019-02-11T09:47:18.640925Z",
-      serial: "1976846081526334467",
-      name: "sdsdsdsd",
-      isActive: false,
-      isRegister: false,
-      projectId: 8,
-      templateId: 5,
-      template: {
-        id: 5,
-        created_at: "2019-02-11T09:45:54.969967Z",
-        updated_at: "2019-02-11T09:45:54.969967Z",
-        name: "dsdsd",
-        description: "dsdsd",
-        templateType: 2,
-        type: 2,
-        imageId: "",
-        imageUrl: "",
-        parentId: 2,
-      },
-      imageId: "",
-      imageUrl: "",
-    },
-    {
-      id: 4,
-      created_at: "2019-02-15T03:28:14.010897Z",
-      updated_at: "2019-02-15T03:28:14.010897Z",
-      serial: "1979554388707902468",
-      name: "OS Tho ",
-      description: "Thing information include name and password,",
-      isActive: false,
-      isRegister: false,
-      projectId: 8,
-      templateId: 5,
-      template: {
-        id: 5,
-        created_at: "2019-02-11T09:45:54.969967Z",
-        updated_at: "2019-02-11T09:45:54.969967Z",
-        name: "dsdsd",
-        description: "dsdsd",
-        templateType: 2,
-        type: 2,
-        imageId: "",
-        imageUrl: "",
-        parentId: 2,
-      },
-      imageId: "",
-      imageUrl: "",
-    },
-  ],
+  things: [],
   page: 0,
-  totalItems: 2,
+  totalItems: 0,
 }
 const ACTION_HANDLES = {
   [setThingPage]: (state, { things, page, totalItems }) => ({

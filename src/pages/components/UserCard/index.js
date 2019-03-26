@@ -12,6 +12,7 @@ class UserCard extends React.Component {
 
   render() {
     let { type, user, action, remove, userPageAction } = this.props
+    // console.log(user.username ,user.active)
     let time = helper.checkDate(user.last_login)
     let random = Math.floor(Math.random() * 5) + 1
     let defaultAvatar = `resources/images/avatars/${random}.jpg`

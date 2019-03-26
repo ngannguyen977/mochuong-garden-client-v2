@@ -1,20 +1,9 @@
-import { getList, getOne, changeStatus, create, destroy, getUsersByGroup } from "reducers/user"
 import {
-  getList as getPermissions,
-  getByGroup as getPermissionByGroup,
-  getByUser as getPermissionByUser,
-  changePermissionsForUser,
-} from "reducers/permission"
-import {
-  getList as getGroups,
-  create as createGroup,
-  changeGroupsForUser,
-  changeUsersForGroup,
-} from "reducers/group"
+  getList, getOne, changeStatus, create, destroy, getUsersByGroup,
+  getPolicyByUserUuid
+} from "reducers/user"
 import { getList as getThings, getListByGraphQL } from "reducers/thing"
 import helper from "../../../helper"
-import { gunzip } from "zlib"
-import { buffer } from "../../../../node_modules/rxjs/operator/buffer"
 
 const steps = [
   {
@@ -89,21 +78,15 @@ export const mapDispathToProps = {
   getThings: (limit, page, sort, isAsc) => getThings(limit, page, sort, isAsc),
   changeStatus: (userName, status) => changeStatus(userName, status),
   create: (model, iscreate) => create(model, iscreate),
-  // update: (model, iscreate) => update(model, iscreate),
   createGroup: (model, iscreate) => createGroup(model, iscreate),
   destroy: userNames => destroy(userNames),
   getOne: userName => getOne(userName),
   getPermissions: () => getPermissions(),
   getGroups: () => getGroups(),
-  getPermissionByGroup: userNames => getPermissionByGroup(userNames),
-  getUsersByGroup: groupName => getUsersByGroup(groupName),
   getPermissionByUser: userName => getPermissionByUser(userName),
-  changeGroupsForUser: (groupNames, userName, isChange) =>
-    changeGroupsForUser(groupNames, userName, isChange),
-  changeUsersForGroup: (groupName, userNames, isChange) =>
-    changeUsersForGroup(groupName, userNames, isChange),
   changePermissionsForUser: (permissionIds, userUuid, isChange) =>
     changePermissionsForUser(permissionIds, userUuid, isChange),
+  getPolicyByUserUuid: (uuid, username) => getPolicyByUserUuid(uuid, username)
 }
 export const mapStateToProps = (state, props) => {
   let user = state.user || {}
@@ -124,12 +107,6 @@ export const mapStateToProps = (state, props) => {
     userCreatePermission: (state.group || {}).permissions || [],
     userCreate: user.userCreate || {},
     userUpdate: (user.detail || {}).userUpdate || {},
-    // group
-    group: state.group,
-    groupCreate: state.group.groupCreate || {},
-    groups: state.group.groups,
-    // permission
-    permission: state.permission,
     // thing
     thing: state.thing,
   }
