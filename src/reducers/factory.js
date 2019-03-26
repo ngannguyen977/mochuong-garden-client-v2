@@ -1,6 +1,6 @@
 import constant from "../config/default"
 /// factory
-export const prepareThingPermission = (uuid, thingName, type) => {
+export const prepareThingPermission = (uuid, thingName, type,customerNumber) => {
   let actions = []
   switch (type) {
     case "control":
@@ -22,7 +22,7 @@ export const prepareThingPermission = (uuid, thingName, type) => {
         effect: "Allow",
         actions,
         // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
-        resources: [`orn::iot::${constant.customer.number}:things/${thingName}`],
+        resources: [`orn::iot::customerNumber:things/${thingName}`],
       },
     ],
   }

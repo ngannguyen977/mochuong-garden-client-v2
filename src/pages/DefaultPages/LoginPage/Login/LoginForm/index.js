@@ -37,6 +37,18 @@ class LoginForm extends React.Component {
         onSubmit={this.onSubmit(isSubmitForm)}
         className='login-form'
       >
+           <FormItem>
+          <label className='form-label mb-0'>Customer</label>
+          {getFieldDecorator('customer', {
+            initialValue: '',
+            rules: [{ required: true, message: 'Please input your customer email!' }],
+          })(
+            <Input
+              prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder='customer'
+            />,
+          )}
+        </FormItem>
         <FormItem>
           <label className='form-label mb-0'>Username</label>
           {getFieldDecorator('userName', {

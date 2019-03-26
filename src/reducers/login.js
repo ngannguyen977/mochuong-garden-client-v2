@@ -4,9 +4,9 @@ import { message } from 'antd'
 
 export const REDUCER = 'login'
 
-export const submit = ({ alias, userName, password }) => (dispatch, getState) => {
+export const submit = ({ customer, userName, password }) => (dispatch, getState) => {
   dispatch(app.addSubmitForm(REDUCER))
-  app.login(alias, userName, password, dispatch).then(isLoggined => {
+  app.login(customer, userName, password, dispatch).then(isLoggined => {
     if (isLoggined) {
       dispatch(app.deleteSubmitForm(REDUCER))
     } else {

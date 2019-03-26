@@ -36,14 +36,15 @@ if (isLogger && process.env.NODE_ENV === 'development') {
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)))
 // axios interceptor
 axiosInterceptor(store)
+const { userState } = store.getState().app
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <LocaleProvider locale={enGB}>
         <div>
-          <Helmet titleTemplate="OnSky - %s" />
-          <Layout history={history} />
+          <Helmet titleTemplate='OnSky - %s' />
+          <Layout history={history}  userState={userState}/>
         </div>
       </LocaleProvider>
     </ConnectedRouter>

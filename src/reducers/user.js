@@ -270,6 +270,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
       .post(`${userApi}/client`, _model)
       .then(response => {
         let { users, page, totalItems } = getState().user
+        let customerNumber = getState().app.userState.customer.accountNumber
         users.push(response.data)
         dispatch(setUserPage({ users, page, totalItems: totalItems++ }))
         console.log(model)
@@ -277,7 +278,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
           //prepare document for create policies
           for (let thing of model.permissions) {
             if (thing.isControl) {
-              let document = prepareThingPermission(response.data.uuid, thing.name, "control")
+              let document = prepareThingPermission(response.data.uuid, thing.name, "control", customerNumber)
               createPolicy(response.data.uuid, document)
                 .then(res => {
                   message.success("Set permission success!")
@@ -291,7 +292,7 @@ export const create = (model, isCreate = false) => (dispatch, getState) => {
                 })
             }
             if (thing.isView) {
-              let document = prepareThingPermission(response.data.uuid, thing.name, "view")
+              let document = prepareThingPermission(response.data.uuid, thing.name, "view", customerNumber)
 
               createPolicy(response.data.uuid, document)
                 .then(res => {

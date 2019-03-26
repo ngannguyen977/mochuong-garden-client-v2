@@ -80,54 +80,58 @@ export const getAllUsers = (
   isAsc = false,
 ) => async (dispatch, getState) => {
   const userApi = constant.api.authen
-
-  let resourceType = "things"
-  let effect = "Allow"
-  // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
-  let resourceOrn = `orn::iot::${constant.customer.number}:things/${thingName}`
-  let policyPromise = getPoliciesByResource(resourceOrn, resourceType, effect)
-  let userPromise = axios.get(`${userApi.host}/${userApi.user}`, {
-    params: { limit, page, sort, isAsc },
-  })
-  Promise.all([policyPromise, userPromise])
-    .then(response => {
-      let { users, page, totalItems } = response[1].data || {}
-      let policies = response[0] || []
-      policies.forEach(policy => {
-        let userHavePolicy = policy.users || []
-        userHavePolicy.forEach(t => {
-          let user = users.find(x => x.uuid === t)
-          if (user && policy.resourceTypes) {
-            if (
-              policy.resourceTypes.actions.includes("iot:listThing") &&
-              policy.resourceTypes.actions.includes("iot:readThing")
-            ) {
-              user.isView = true
+  try {
+    let resourceType = "things"
+    let effect = "Allow"
+    let customerNumber = getState().app.userState.customer.accountNumber
+    // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
+    let resourceOrn = `orn::iot::${customerNumber}:things/${thingName}`
+    let policyPromise = getPoliciesByResource(resourceOrn, resourceType, effect)
+    let userPromise = axios.get(`${userApi.host}/${userApi.user}`, {
+      params: { limit, page, sort, isAsc },
+    })
+    Promise.all([policyPromise, userPromise])
+      .then(response => {
+        let { users, page, totalItems } = response[1].data || {}
+        let policies = response[0] || []
+        policies.forEach(policy => {
+          let userHavePolicy = policy.users || []
+          userHavePolicy.forEach(t => {
+            let user = users.find(x => x.uuid === t)
+            if (user && policy.resourceTypes) {
+              if (
+                policy.resourceTypes.actions.includes("iot:listThing") &&
+                policy.resourceTypes.actions.includes("iot:readThing")
+              ) {
+                user.isView = true
+              }
+              if (policy.resourceTypes.actions.includes("iot:controlThing")) {
+                user.isControl = true
+              }
             }
-            if (policy.resourceTypes.actions.includes("iot:controlThing")) {
-              user.isControl = true
-            }
-          }
+          })
         })
+        dispatch(setUserPage({ users, page, totalItems }))
       })
-      dispatch(setUserPage({ users, page, totalItems }))
-    })
-    .catch(error => {
-      let errorMessage = ((error.response || {}).data || {}).message || "get user list fail"
-      message.error(errorMessage)
-    })
+      .catch(error => {
+        let errorMessage = ((error.response || {}).data || {}).message || "get user list fail"
+        message.error(errorMessage)
+      })
+  } catch (error) {
+    message.error(error.message)
+  }
 }
 export const getUsers = (thingName, limit = 18, page = 0, sort = "name", isAsc = false) => async (
   dispatch,
   getState,
 ) => {
   const userApi = constant.api.authen
-
-  let resourceType = "things"
-  let effect = "Allow"
-  // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
-  let resourceOrn = `orn::iot::${constant.customer.number}:things/${thingName}`
   try {
+    let customerNumber = getState().app.userState.customer.accountNumber
+    let resourceType = "things"
+    let effect = "Allow"
+    // "orn:[partition]:[service]:[region]:[account-id]:resource_type/name"
+    let resourceOrn = `orn::iot::${customerNumber}:things/${thingName}`
     let policies = await getPoliciesByResource(resourceOrn, resourceType, effect)
     if (policies.length === 0) {
       dispatch(setUserPage({ users: [], page: 0, totalItems: 0 }))
@@ -370,7 +374,8 @@ export const createThingPolicy = (userUuid, thingName, type) => async (dispatch,
     let policy = await getPolicyByName(name)
     if (!policy) {
       // create new policy
-      let document = prepareThingPermission(userUuid, thingName, type)
+      let customerNumber = getState().app.userState.customer.accountNumber
+      let document = prepareThingPermission(userUuid, thingName, type,customerNumber)
       policy = await createPolicy(userUuid, document)
       // await createUserPolicy(userUuid, { policyIds: policy.policyId })
     } else {
