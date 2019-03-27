@@ -10,7 +10,6 @@ import './style.scss'
 
 class TopBar extends React.Component {
   render() {
-    console.log('TopBar', this.props)
     let { userState } = this.props
     let isAdmin = userState.role.name === 'CLIENT_ADMIN'
     return (

@@ -84,7 +84,6 @@ class Layout extends React.Component {
 
   render() {
     const isMobile = !!this.state.isMobile
-    console.log(this.props)
     return (
       <ContainerQuery query={query}>
         {params => (
