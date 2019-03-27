@@ -84,6 +84,7 @@ class Layout extends React.Component {
 
   render() {
     const isMobile = !!this.state.isMobile
+    console.log(this.props)
     return (
       <ContainerQuery query={query}>
         {params => (
@@ -98,7 +99,7 @@ class Layout extends React.Component {
               <SettingsSider />
               <AntLayout>
                 <AntHeader>
-                  <TopBar history={this.props.history} />
+                  <TopBar history={this.props.history} userState={this.props.userState} />
                 </AntHeader>
                 <AntContent style={{ height: '100%' }}>
                   <Content />

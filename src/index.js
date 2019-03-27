@@ -17,6 +17,7 @@ import registerServiceWorker from 'registerServiceWorker'
 import Layout from 'components/LayoutComponents/Layout'
 import reducer from 'reducers'
 import axiosInterceptor from './axiosInterceptor'
+import { setUserState } from 'reducers/app'
 
 import 'resources/_antd.less' // redefinition AntDesign variables
 import 'bootstrap/dist/css/bootstrap.min.css' // bootstrap styles
@@ -36,7 +37,15 @@ if (isLogger && process.env.NODE_ENV === 'development') {
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)))
 // axios interceptor
 axiosInterceptor(store)
-const { userState } = store.getState().app
+let { userState } = store.getState().app
+if (!userState || !userState.token) {
+  const token = window.localStorage.getItem("app.token")
+  if (token) {
+    //set app state
+    let userState = JSON.parse(window.localStorage.getItem("app.userState"))
+    store.dispatch(setUserState({ userState }))
+  }
+}
 
 ReactDOM.render(
   <Provider store={store}>
@@ -44,7 +53,7 @@ ReactDOM.render(
       <LocaleProvider locale={enGB}>
         <div>
           <Helmet titleTemplate='OnSky - %s' />
-          <Layout history={history}  userState={userState}/>
+          <Layout history={history}  userState={store.getState().app.userState}/>
         </div>
       </LocaleProvider>
     </ConnectedRouter>

@@ -28,7 +28,8 @@ export class DetailTabPage extends React.Component {
         this.props.setCurrentTab(id, tab)
     }
     render() {
-        const { match, location, tabs, history } = this.props
+        const { match, location, tabs, history,userState } = this.props
+        let isAdmin = userState.role.name === 'CLIENT_ADMIN'
         const handleButton = (
             <div className='text-right'>
                 <Button
@@ -49,10 +50,10 @@ export class DetailTabPage extends React.Component {
                         <DetailPage isEdit={true} />
                         {handleButton}
                     </div></TabPane>
-                    <TabPane tab={<span><Icon type='user' />Users</span>} key='2'> <div className='user-tab'>
+                   {isAdmin && <TabPane tab={<span><Icon type='user' />Users</span>} key='2'> <div className='user-tab'>
                         <UserPage isEdit={true} location={location} match={match} history={history} />
                         {handleButton}
-                    </div></TabPane>
+                    </div></TabPane>}
                     <TabPane tab={<span><Icon type='loading-3-quarters' />Activity Logs</span>} key='3'></TabPane>
                 </Tabs>
             </div>

@@ -45,8 +45,8 @@ class ListPage extends React.Component {
   }
 
   render() {
-    const { totalItems, destroy, data, type, history } = this.props
-
+    const { totalItems, destroy, data, type, history,userState } = this.props
+    let isAdmin = userState.role.name === 'CLIENT_ADMIN'
     return (
       <div className='thing'>
         <section className='card'>
@@ -63,11 +63,12 @@ class ListPage extends React.Component {
                   thing.
                 </small>
               </div>
+              {isAdmin &&
               <div className='col-md-2 thing__btn-create'>
                 <Button type='primary' onClick={() => history.push("/things/register")}>
                   Register Thing
                 </Button>
-              </div>
+              </div>}
             </div>
           </div>
           <div className='card-body'>
@@ -98,7 +99,7 @@ class ListPage extends React.Component {
                         data={x || {}}
                         type={type}
                         onMouseEnter={() => this.setState({ current: 0 })}
-                        remove={destroy}
+                        // remove={destroy}
                         push={history.push}
                       />
                     </div>
@@ -113,7 +114,7 @@ class ListPage extends React.Component {
                 </div>
               </div>
             )}
-            {totalItems <= 0 && <LockScreenPage name='Thing' link='#/things/register' />}
+            {totalItems <= 0 && <LockScreenPage name='Thing' link={isAdmin?`#/things/register`:'#'} />}
           </div>
         </section>
       </div>

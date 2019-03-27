@@ -166,6 +166,7 @@ export const mapStateToProps = (state, props) => {
     dataTypes: state.app.dataTypes,
     certificates: (thing.detail || {}).certificates || [],
     token: state.app.userState.token,
+    userState: state.app.userState
   }
 }
 
