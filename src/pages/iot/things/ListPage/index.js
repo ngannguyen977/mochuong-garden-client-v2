@@ -8,7 +8,6 @@ import helper from "../../../../helper"
 import "../../../../resources/style.scss"
 import "../style.scss"
 import ThingCard from "../../../components/ThingCard"
-import Quagga from 'quagga'
 
 const Search = Input.Search
 
@@ -44,45 +43,7 @@ class ListPage extends React.Component {
       current: page,
     })
   }
-  componentDidMount(){
-    Quagga.init({
-      inputStream : {
-        name : "Live",
-        type : "LiveStream",
-        target: document.querySelector('#scanner')    // Or '#yourElement' (optional)
-      },
-      decoder : {
-        readers : ["code_128_reader"]
-      }
-    }, function(err) {
-        if (err) {
-            console.log(err);
-            return
-        }
-        console.log("Initialization finished. Ready to start");
-        Quagga.start();
-    });
-  }
-scan = ()=>{
-  ScanditSDK.configure("xxx", {
-    engineLocation: "https://unpkg.com/scandit-sdk/build/"
-        }).then(() => {
-          console.log('Loaded');
-          ScanditSDK.BarcodePicker.create(document.getElementById('barcode-picker'), {
-            playSoundOnScan: true,
-            vibrateOnScan: true
-          }).then(function(barcodePicker) {
-            console.log("Ready");
-            barcodePicker.applyScanSettings(new ScanditSDK.ScanSettings({
-              enabledSymbologies: ["ean8", "ean13", "upca", "upce", "code128", "code39", "code93", "itf", "qr"],
-              codeDuplicateFilter: 1000
-            }));
-            barcodePicker.onScan(function(barcodes) {
-              console.log(barcodes);
-            });
-          });
-        });
-}
+
   render() {
     const { totalItems, destroy, data, type, history } = this.props
 
@@ -95,7 +56,6 @@ scan = ()=>{
                 <div className='utils__title'>
                   <strong>Things Management</strong>
                 </div>
-                <div id='scanner'></div>
                 <small>
                   Thing management allow admins can control all things. Administrators can create a
                   new thing, add a thing to several groups, attach some permission, change status or

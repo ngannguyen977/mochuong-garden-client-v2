@@ -2,6 +2,7 @@ import React from 'react'
 import { Input, Divider } from 'antd'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispathToProps } from '../container'
+import Quagga from 'quagga'
 
 const Search = Input.Search
 
@@ -21,12 +22,31 @@ class register extends React.Component {
     submit(value) {
         this.props.registerGateway(value)
     }
-
+    componentDidMount(){
+        Quagga.init({
+          inputStream : {
+            name : "Live",
+            type : "LiveStream",
+            target: document.querySelector('#scanner')    // Or '#yourElement' (optional)
+          },
+          decoder : {
+            readers : ["code_128_reader"]
+          }
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                return
+            }
+            console.log("Initialization finished. Ready to start");
+            Quagga.start();
+        });
+      }
     render() {
         let defaultImage = 'resources/iot/goi12.png'
         let rotateImage = 'resources/iot/gateway2.webp'
         return (
             <div className='register-thing'>
+                <div id='scanner'></div>
                 <section className='card'>
                     <div className='card-header'>
                         <div className='row'>
