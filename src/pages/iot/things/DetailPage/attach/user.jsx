@@ -42,13 +42,14 @@ class UserPage extends React.Component {
             loading: true
         })
     }
-    componentWillReceiveProps() {
-        const { pagination } = this.state
-        const { totalItems } = this.props.user
-        console.log('componentWillReceiveProps', totalItems)
+    componentWillUnmount(){
         this.setState({
             loading: false,
         })
+    }
+    componentWillReceiveProps() {
+        const { pagination } = this.state
+        const { totalItems } = this.props.user
         if (totalItems > 0 && pagination !== totalItems) {
             this.setState({
                 pagination: {
@@ -60,7 +61,6 @@ class UserPage extends React.Component {
     componentDidUpdate() {
         const { totalItems, users } = this.props.user
         const { loading } = this.state
-        console.log('componentDidUpdate', loading, users)
         if (!loading && users && users.length > 0) {
             this.getParams(totalItems, users)
         }

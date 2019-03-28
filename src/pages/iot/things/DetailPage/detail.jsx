@@ -36,7 +36,7 @@ export class DetailPage extends React.Component {
       isLoaded: true
     })
   }
-  componentWillReceiveProps(){
+  componentWillUnmount(){
     this.setState({
       isLoaded: false,
     })

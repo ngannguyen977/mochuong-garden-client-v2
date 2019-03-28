@@ -23,7 +23,16 @@ export const app = {
                 target: document.querySelector('#scanner')    // Or '#yourElement' (optional)
             },
             decoder: {
-                readers: ['code_128_reader']
+                readers: [{
+                    format: "code_128_reader",
+                    config: {}
+                },{
+                    format: "ean_reader",
+                    config: {
+                        supplements: [
+                            'ean_5_reader', 'ean_2_reader'
+                        ]
+                    }}]
             }
         }, function (err) {
             if (err) {
@@ -86,18 +95,12 @@ export const app = {
             }
         })
     },
-    onDetected: function () {
-        return Quagga.onDetected(function (result) {
-            console.log('onDetected', result)
+    onDetected: function (callback) {
+         Quagga.onDetected(function (result) {
             let code = result.codeResult.code
-
             if (app.lastResult !== code) {
                 app.lastResult = code
-                console.log('code', code)
-                alert(code)
-
-                let node = null, canvas = Quagga.canvas.dom.image
-                console.log('dom', canvas)
+                callback(code)
             }
         })
     }

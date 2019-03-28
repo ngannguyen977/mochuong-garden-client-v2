@@ -24,7 +24,13 @@ class register extends React.Component {
     componentDidMount() {
         barcodeScanner.init()
         barcodeScanner.onProcessed()
-        barcodeScanner.onDetected()
+      barcodeScanner.onDetected(code=>{
+        console.log('code in detect',code)
+        this.submit(code)
+       })
+    }
+    componentWillUnmount(){
+        barcodeScanner.stop()
     }
     render() {
         let defaultImage = 'resources/iot/goi12.png'
