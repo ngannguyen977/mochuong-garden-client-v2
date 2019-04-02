@@ -298,6 +298,15 @@ function arrayUnique(array) {
 
   return a
 }
+export const pruneText = (text) => {
+  try {
+    if (text.length > 30)
+      return text.substr(0, 30)
+  } catch (error) {
+    console.log(error)
+  }
+  return text
+}
 export default {
   formatDate,
   onlyUnique,
@@ -313,5 +322,6 @@ export default {
   getDataType,
   checkDate,
   arrayUnique,
-  parseResourceOrn
+  parseResourceOrn,
+  pruneText
 }
