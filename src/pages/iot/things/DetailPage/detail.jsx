@@ -36,7 +36,7 @@ export class DetailPage extends React.Component {
       isLoaded: true
     })
   }
-  componentWillReceiveProps(){
+  componentWillReceiveProps() {
     this.setState({
       isLoaded: false,
     })
@@ -46,6 +46,7 @@ export class DetailPage extends React.Component {
     const { isLoaded } = this.state
     if (!isLoaded && detail) {
       this.getParams(detail)
+      helper.barcodeGenerator('#barcode', detail.serial)
     }
   }
 
@@ -69,7 +70,10 @@ export class DetailPage extends React.Component {
       <div className='thing-detail-page row'>
         <div className='col-lg-4 text-justify'>
           <div className='thing-image text-center'>
-            <img className='img-responsive' src={imageUrl} alt='' />
+            <div className='img-responsive thing-image'>
+              <img src={imageUrl} alt={name} />
+            </div>
+            <svg id='barcode'></svg>
             <h5 className='text-black'><strong>{displayName || 'thing name'}</strong></h5>
             <div className='description text-center'>
               <small className='font-italic text-right'> {description}</small>

@@ -14,9 +14,17 @@ export const updateArray = (arr, obj) => {
   return arr
 }
 export const barcodeGenerator = (dom, text) => {
-  return JsBarcode(dom, text, {
-    width: 1.5,
-  })
+  if (!text) {
+    return
+  }
+  if (typeof text !== 'string') {
+    text = text.toString()
+  }
+  setTimeout(() => {
+    JsBarcode(dom, text, {
+      width: 1.5,
+    })
+  }, 1000)
 }
 export const parseResourceOrn = (resourceOrn) => {
   try {
