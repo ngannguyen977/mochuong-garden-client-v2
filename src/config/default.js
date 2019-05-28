@@ -1,7 +1,7 @@
 export default {
   api: {
     authen: {
-      host: "https://api-dev.onskycloud.com/authen/v1/api",
+      host: "https://api.onskycloud.com/authen/v1/api",
       login: "auth/client",
       info: "auth/me",
       register: "clients",
@@ -13,7 +13,7 @@ export default {
     },
     policy: {
       // host: 'http://localhost:8080/v1/api',
-      host: "https://api-dev.onskycloud.com/policy-service/v1/api",
+      host: "https://api.onskycloud.com/policy-service/v1/api",
       token: "iot-frontend-client-token",
       policy: "policies",
       group: "groups",
@@ -21,7 +21,7 @@ export default {
     },
     resource: {
       // host: 'http://localhost:8081/v1/api',
-      host: "https://api-dev.onskycloud.com/resource-service",
+      host: "https://api.onskycloud.com/resource-service",
       token: "sdfiusfi98234632rwhczyr392yr02u-23r9t34uy23r9t3fsfskhfo",
       service: "services",
       serviceSummary: "summary",
@@ -34,7 +34,7 @@ export default {
       serviceDeletes: "deletes",
     },
     iot: {
-      host: "https://api-dev.onskycloud.com/iot-service/v1/api",
+      host: "https://api.onskycloud.com/iot-service/v1/api",
       certificate: "certificates",
       configures: "configures",
       policies: "policies",
@@ -50,7 +50,7 @@ export default {
       alertThing: "property-alerts",
     },
     configure: {
-      host: "https://api-dev.onskycloud.com/iot-service/v1/api",
+      host: "https://api.onskycloud.com/iot-service/v1/api",
       dataType: "configures/data-types",
       alertType: "configures/alert-types",
       priority: "priorities",
@@ -58,7 +58,7 @@ export default {
       iotAction: "configures/iot-actions",
     },
     upload: {
-      host: "https://api-dev.onskycloud.com/storage-service/v1/api/storages",
+      host: "https://api.onskycloud.com/storage-service/v1/api/storages",
     },
   },
   customer: {
