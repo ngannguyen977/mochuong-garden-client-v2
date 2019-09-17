@@ -26,7 +26,7 @@ class TopBar extends React.Component {
               // ghost={true}
               onClick={() => this.props.history.push('/things/register')}
             >
-              + Register Thing
+              + Register Gateway
           </Button>}
         </div>
         <div className='topbar__right'>

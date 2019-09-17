@@ -14,6 +14,7 @@ import {
 import { setUserPage } from "./user"
 import { prepareThingPermission } from "./factory"
 import helper from "../helper"
+import {convertHexToDec} from '../services/onsky-serial'
 
 export const REDUCER = "thing"
 
@@ -353,7 +354,7 @@ export const removeCertificate = id => (dispatch, getState) => {
 }
 export const registerGateway = serialNumber => (dispatch, getState) => {
   axios
-    .post(`${thingApi}/register/${serialNumber}`)
+    .post(`${thingApi}/register-gateway/${serialNumber}`)
     .then(response => {
       notification["success"]({
         message: "Register thing success!",
@@ -362,6 +363,30 @@ export const registerGateway = serialNumber => (dispatch, getState) => {
       })
     })
     .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || "register thing fail"
+      message.error(errorMessage)
+    })
+}
+export const unRegisterGateway = serialNumber => (dispatch, getState) => {
+  axios
+    .post(`${thingApi}/unregister-gateway/${convertHexToDec(serialNumber)}`)
+    .then(response => {
+      notification["success"]({
+        message: "UnRegister thing success!",
+        description:
+          "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
+      })
+      let { things, page, totalItems } = getState().thing
+      dispatch(
+        setThingPage({
+          things: things.filter(x => x.serial != serialNumber),
+          page,
+          totalItems: totalItems--,
+        }),
+      )
+    })
+    .catch(error => {
+      console.log(error)
       let errorMessage = ((error.response || {}).data || {}).message || "register thing fail"
       message.error(errorMessage)
     })

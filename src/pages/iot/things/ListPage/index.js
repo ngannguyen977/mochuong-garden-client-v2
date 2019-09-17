@@ -45,7 +45,7 @@ class ListPage extends React.Component {
   }
 
   render() {
-    const { totalItems, destroy, data, type, history,userState } = this.props
+    const { totalItems, destroy, data, type, history,userState ,unRegisterGateway} = this.props
     let isAdmin = userState.role.name === 'CLIENT_ADMIN'
     return (
       <div className='thing'>
@@ -63,12 +63,11 @@ class ListPage extends React.Component {
                   thing.
                 </small>
               </div>
-              {isAdmin &&
               <div className='col-md-2 thing__btn-create'>
                 <Button type='primary' onClick={() => history.push("/things/register")}>
                   Register Thing
                 </Button>
-              </div>}
+              </div>
             </div>
           </div>
           <div className='card-body'>
@@ -101,6 +100,7 @@ class ListPage extends React.Component {
                         onMouseEnter={() => this.setState({ current: 0 })}
                         // remove={destroy}
                         push={history.push}
+                        remove ={unRegisterGateway}
                       />
                     </div>
                   ))}

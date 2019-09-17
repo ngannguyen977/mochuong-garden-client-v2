@@ -81,7 +81,7 @@ class ProductCard extends React.Component {
               <Tooltip placement='bottom' title='Click to remove this user from this thing.'>
                 <Popconfirm
                   title='Are you sure remove this user from this thing?'
-                  onConfirm={() => remove(data.name)}
+                  onConfirm={() => remove(data.serial)}
                   onCancel={() => message.info("cancel selected!")}
                   okText='Yes'
                   cancelText='No'

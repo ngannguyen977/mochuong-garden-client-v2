@@ -8,6 +8,7 @@ import {
   attachThing,
   removeThing,
   registerGateway,
+  unRegisterGateway,
   getUsers,
   getAllUsers,
   getListByGraphQL,
@@ -99,6 +100,7 @@ export const mapDispathToProps = {
   attachThing: (parentId, id) => attachThing(parentId, id),
   removeThing: (parentId, id) => removeThing(parentId, id),
   registerGateway: serialNumber => registerGateway(serialNumber),
+  unRegisterGateway: serialNumber => unRegisterGateway(serialNumber),
   getUsers: (thingName, limit, page, sort, isAsc) => getUsers(thingName, limit, page, sort, isAsc),
   getAllUsers: (thingName, limit, page, sort, isAsc) =>
     getAllUsers(thingName, limit, page, sort, isAsc),
