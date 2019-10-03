@@ -13,6 +13,7 @@ export const REDUCER = "user"
 const NS = `@@${REDUCER}/`
 const api = constant.api.authen
 const userApi = `${api.host}/${api.user}`
+const passwordApi = `${api.host}/${api.password}`
 const thingApi = `${constant.api.iot.host}/${constant.api.iot.thing}`
 
 export const setUserPage = createAction(`${NS}SET_USER_PAGE`)
@@ -238,14 +239,14 @@ export const destroy = usernames => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
-export const changePassword = (name, model) => (dispatch, getState) => {
+export const changePassword = (id, model) => (dispatch, getState) => {
   let _model = {
-    new_password: model.newPassword,
-    new_password_confirm: model.confirm,
-    old_password: model.oldPassword,
+    newPassword: model.newPassword,
+    newPasswordConfirm: model.confirm,
+    oldPassword: model.oldPassword,
   }
   axios
-    .patch(`${userApi}/${name}/password`, _model)
+    .patch(`${passwordApi}/${id}`, _model)
     .then(response => {
       notification["success"]({
         message: "Update user success!",

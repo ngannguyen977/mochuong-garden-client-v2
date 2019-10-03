@@ -1,11 +1,14 @@
 import React from 'react'
-import { Button, Progress, Calendar, Tabs, Upload, Icon, Input, Menu, Dropdown } from 'antd'
+import { Button, Progress, Calendar, Tabs, Upload, Icon, Input, Menu, Dropdown, message,Modal } from 'antd'
 import data from './data.json'
 import './style.scss'
 import Avatar from 'components/CleanComponents/Avatar'
 import Donut from 'components/CleanComponents/Donut'
 import Chat from 'components/CleanComponents/Chat'
 import SettingsForm from './SettingsForm'
+import ChangePassword from './ChangePassword';
+import { mapStateToProps, mapDispathToProps } from '../container'
+import { connect } from 'react-redux'
 
 const TabPane = Tabs.TabPane
 const { TextArea } = Input
@@ -23,23 +26,35 @@ const actions = (
     </Menu.Item>
   </Menu>
 )
-
+@connect(
+  mapStateToProps,
+  mapDispathToProps,
+)
 class ProfileApp extends React.Component {
-  state = {
-    name: '',
-    nickname: '',
-    photo: '',
-    background: '',
-    post: '',
-    postsCount: '',
-    followersCount: '',
-    lastActivity: '',
-    status: '',
+  constructor() {
+    super()
+    this.state = {
+      name: '',
+      nickname: '',
+      photo: '',
+      background: '',
+      post: '',
+      postsCount: '',
+      followersCount: '',
+      lastActivity: '',
+      status: '',
+      drawer: false,
+      modalEditVisible: false,
+      newValue: "",
+    }
+    this.updatePassword = this.updatePassword.bind(this)
   }
+
 
   componentWillMount() {
     const userState = JSON.parse(window.localStorage.getItem('app.userState'))
     this.setState({
+      id: userState.id,
       name: userState.username,
       nickname: userState.username,
       photo: data.photo,
@@ -58,7 +73,17 @@ class ProfileApp extends React.Component {
       posts: data.posts,
     })
   }
-
+  setModalEditVisible(isShowModal, isConfirmed) {
+    this.setState({
+      modalEditVisible: isShowModal,
+      newValue: "",
+    })
+  }
+  updatePassword(data){
+    const {id} = this.state
+    const {changePassword} = this.props
+    changePassword(id,data)
+  }
   render() {
     let {
       name,
@@ -92,7 +117,7 @@ class ProfileApp extends React.Component {
                   <br />
                   <br />
                   <Button.Group size="default">
-                    <Button style={{ width: 150 }}>Change Password</Button>
+                    <Button style={{ width: 150 }} onClick={() => this.setModalEditVisible(true)}>Change Password</Button>
                     <Button
                       style={{ width: 150 }}
                       onClick={() => this.props.history.push('/things')}
@@ -126,7 +151,7 @@ class ProfileApp extends React.Component {
                   >
                     Manage Users
                   </Button>
-                  <Button style={{ display: 'block', width: '100%' }}>Change Password</Button>
+                  <Button style={{ display: 'block', width: '100%' }} onClick={() => this.setModalEditVisible(true)}>Change Password</Button>
                   <Button style={{ display: 'block', width: '100%' }}>Access History</Button>
                 </div>
               </div>
@@ -311,6 +336,17 @@ class ProfileApp extends React.Component {
             </div>
           </div>
         </div>
+        {/* edit modal */}
+        <Modal
+          title={'Update a new password for '+ name}
+          centered
+          visible={this.state.modalEditVisible}
+          footer={null}
+        >
+          <ChangePassword
+            submit={this.updatePassword}
+          />
+        </Modal>
       </div>
     )
   }

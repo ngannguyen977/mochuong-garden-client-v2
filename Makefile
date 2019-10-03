@@ -109,3 +109,4 @@ gittag:
 	git tag -a "$(VERSION)" -m "$(VERSION)"
 	git push --tags
 quicktag: ungittag commit gittag
+localDeploy: build publish clear deploy
