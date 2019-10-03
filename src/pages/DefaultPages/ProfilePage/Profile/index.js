@@ -342,6 +342,7 @@ class ProfileApp extends React.Component {
           centered
           visible={this.state.modalEditVisible}
           footer={null}
+          onCancel={() => this.setModalEditVisible(false)}
         >
           <ChangePassword
             submit={this.updatePassword}
