@@ -21,11 +21,11 @@ class ListPage extends React.Component {
     keyword: "",
     tags: [],
   }
-  componentWillMount() {
-    const { keyword, limit, sort, isAsc } = queryString.parse(this.props.location.search)
-    this.props.getListByGraphQL(keyword, limit, 0, sort, isAsc)
+  UNSAFE_componentWillMount() {
+    const { keyword, limit, page, sort, isAsc } = queryString.parse(this.props.location.search)
+    this.props.getListByGraphQL(keyword, limit, page, sort, isAsc,undefined,'OnSky gateway')
   }
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     const { totalItems } = this.props
     const { pagination } = this.state
     if (totalItems > 0 && pagination !== totalItems) {
@@ -37,10 +37,20 @@ class ListPage extends React.Component {
     }
   }
   onChange = (page, keyword) => {
+    let { tags } = this.state
     const { limit, sort, isAsc } = queryString.parse(this.props.location.search)
-    this.props.getListByGraphQL(keyword, limit, 0, sort, isAsc)
+    this.props.getListByGraphQL(
+      keyword,
+      limit,
+      page > 0 ? page - 1 : page,
+      sort,
+      isAsc,
+      undefined,
+      'OnSky gateway',
+    )
     this.setState({
       current: page,
+      keyword,
     })
   }
 
@@ -80,7 +90,7 @@ class ListPage extends React.Component {
                   style={{ width: 600 }}
                 />
               </div>
-              <div className='text-right' style={{ marginBottom: 10 }}>
+              <div className='text-right' style={{ marginBottom: 10,marginTop:10 }}>
                 <Pagination
                   current={this.state.current}
                   onChange={page => this.onChange(page, this.state.keyword)}
@@ -107,7 +117,7 @@ class ListPage extends React.Component {
                 <div className='col-md-12 text-right'>
                   <Pagination
                     current={this.state.current}
-                    onChange={this.onChange}
+                    onChange={page => this.onChange(page, this.state.keyword)}
                     total={totalItems}
                     pageSize={18}
                   />
