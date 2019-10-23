@@ -12,6 +12,11 @@ import queryString from 'query-string'
 class Confirm extends React.Component {
   state = { backgroundImage: 'url(resources/images/login/4.jpg)' }
 
+  componentWillMount() {
+    if (!this.props.isAccessible) {
+      this.props.history.push('/login')
+    }
+  }
   componentDidMount() {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
 
@@ -22,6 +27,9 @@ class Confirm extends React.Component {
   }
 
   componentWillUnmount() {
+    const { restrictAccessConfirmPage, isAccessible } = this.props
+    restrictAccessConfirmPage(isAccessible)
+    
     document.getElementsByTagName('body')[0].style.overflow = ''
   }
   generateBackground = () => {
@@ -38,8 +46,7 @@ class Confirm extends React.Component {
 
   render() {
     const { backgroundImage } = this.state
-    const { code } = queryString.parse(this.props.location.search)
-
+    const params = queryString.parse(this.props.location.search)
     return (
       <div
         onLoad={() => this.generateBackground()}
@@ -60,21 +67,11 @@ class Confirm extends React.Component {
                 </p>
               </div>
               <div className="main-login__block__inner">
-                <div className="main-login__block__form">
-                  {code && (
-                    <div>
-                      <h4>Welcome to OnSky Family!</h4>
-                      <h5>
-                        <i>Let make your house more modern and smart!</i>
-                      </h5>
-                    </div>
-                  )}
-                  {!code && (
+                <div className="main-login__block__form text-center">
                     <p>
-                      An email confirmation be sent to you. Please open your mail box then enter
-                      confirmation link from the inbox mail to active your account.
+                    An {params.sent && <span>reset email</span> || <span>confirmation email</span> } has been sent to you. Please check your mailbox then follow the
+                    link to {params.sent && <span>retrieve</span> || <span>active</span>} your account.
                     </p>
-                  )}
                   <Button type="primary" href="/#/login">
                     Go to Login
                   </Button>
