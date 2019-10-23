@@ -10,7 +10,7 @@ import {
 } from "reducers/app"
 import { message } from "antd"
 
-const ignoreAuth = ["/register", "/login", "/empty", "/customers/activate"]
+const ignoreAuth = ["/register", "/login", "/empty", "/customers/activate", "/forgot-password", "/forgot-password/success", "/recovery-password"]
 
 export const authorize = () => (dispatch, getState) => {
   let { app, routing } = getState()
