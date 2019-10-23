@@ -79,13 +79,9 @@ class LoginForm extends React.Component {
             valuePropName: 'checked',
             initialValue: true,
           })(<Checkbox>Remember me</Checkbox>)}
-          <a
-            className='login-form-forgot pull-right text-primary'
-            style={{ lineHeight: '36px' }}
-            href='javascript: void(0);'
-          >
-            Forgot password?
-          </a>
+          <Link to='/forgot-password' className='login-form-forgot text-primary pull-right'>
+              Forgot password?
+          </Link>
         </FormItem>
         <div className='form-actions'>
           <Button
