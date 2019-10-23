@@ -16,6 +16,7 @@ export const submit = model => (dispatch, getState) => {
     .then(response => {
       console.log(response)
       if (response && response.data) {
+        dispatch(app.setAccessConfirmPage(true))
         dispatch(push('/customers/activate'))
         notification.open({
           type: 'success',
