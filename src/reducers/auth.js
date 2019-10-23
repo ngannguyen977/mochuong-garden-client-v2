@@ -43,7 +43,7 @@ export const handleUnauthorize = (routing, dispatch, notify) => {
   if (notify) {
     message.error("Unauthorized!")
   }
-  dispatch(setLoading(false))
+  // dispatch(setLoading(false))
   dispatch(push("/login"))
 
   return Promise.reject()
