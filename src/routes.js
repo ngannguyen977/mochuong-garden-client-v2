@@ -21,6 +21,18 @@ const loadableRoutes = {
   "/login": {
     component: loadable(() => import("pages/DefaultPages/LoginPage")),
   },
+  //Forgotpassword page
+  "/forgot-password": {
+    component: loadable(() => import("pages/DefaultPages/ForgotPage")),
+  },
+  // Success request forgot password
+  "/forgot-password/success": {
+    component: loadable(() => import("pages/DefaultPages/ConfirmPage")),
+  },
+  //Recovery password page
+  "/recovery-password": {
+    component: loadable(() => import("pages/DefaultPages/RecoveryPage")),
+  },
   "/customers/activate": {
     component: loadable(() => import("pages/DefaultPages/ConfirmPage")),
   },

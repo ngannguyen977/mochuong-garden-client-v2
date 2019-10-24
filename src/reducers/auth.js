@@ -10,7 +10,7 @@ import {
 } from "reducers/app"
 import { message } from "antd"
 
-const ignoreAuth = ["/register", "/login", "/empty", "/customers/activate"]
+const ignoreAuth = ["/register", "/login", "/empty", "/customers/activate", "/forgot-password", "/forgot-password/success", "/recovery-password"]
 
 export const authorize = () => (dispatch, getState) => {
   let { app, routing } = getState()
@@ -43,7 +43,7 @@ export const handleUnauthorize = (routing, dispatch, notify) => {
   if (notify) {
     message.error("Unauthorized!")
   }
-  dispatch(setLoading(false))
+  // dispatch(setLoading(false))
   dispatch(push("/login"))
 
   return Promise.reject()

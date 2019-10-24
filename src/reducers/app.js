@@ -33,6 +33,9 @@ export const setAlertTypeState = createAction(`${NS}SET_ALERTTYPE_STATE`)
 export const setThingTypeState = createAction(`${NS}SET_THING_TYPE_STATE`)
 export const setIotActionState = createAction(`${NS}SET_IOT_ACTION_STATE`)
 
+// setAccessConfirmPage state use in confirmation page.
+export const setAccessConfirmPage = createAction(`${NS}SET_ACCESS_CONFIRM_PAGE_STATE`)
+
 export const setLoading = isLoading => {
   const action = _setLoading(isLoading)
   action[pendingTask] = isLoading ? begin : end
@@ -199,6 +202,7 @@ export default createReducer(
       delete submitForms[id]
       return { ...state, submitForms }
     },
+    [setAccessConfirmPage]: (state, isAccessible) => ({...state, isAccessible}),
   },
   initialState,
 )

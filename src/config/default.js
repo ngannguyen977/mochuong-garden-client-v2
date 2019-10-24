@@ -10,7 +10,9 @@ export default {
       usersByGroup: "bygroup",
       groupsByUser: "byuser",
       confirmEmail: "customers/activate",
-      password:'password'
+      password: 'password',
+      forgot: 'reset-password',
+      recovery: 'recovery-password',
     },
     policy: {
       // host: 'http://localhost:8080/v1/api',
