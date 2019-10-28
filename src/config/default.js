@@ -11,8 +11,8 @@ export default {
       groupsByUser: "byuser",
       confirmEmail: "customers/activate",
       password: 'password',
-      forgot: 'reset-password',
-      recovery: 'recovery-password',
+      forgot: 'auth/reset-password',
+      recovery: 'auth/recovery-password',
     },
     policy: {
       // host: 'http://localhost:8080/v1/api',
