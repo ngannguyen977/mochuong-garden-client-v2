@@ -46,7 +46,11 @@
     &__form {
       position: relative;
       z-index: 2;
+      .anticon {
+        vertical-align: 0.1em;
+      }
     }
+
     &__promo {
       padding: 0 0 rem(30);
       max-width: rem(800);
