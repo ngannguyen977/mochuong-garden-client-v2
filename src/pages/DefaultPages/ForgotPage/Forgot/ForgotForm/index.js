@@ -68,9 +68,14 @@ class ForgotForm extends React.Component {
           )}
         </FormItem>
         <div className='text-center'>
+          <Button className='mx-2'>
+            <Icon type="left" />
+            Back to login
+          </Button>
+
           <Button
             type='primary'
-            className='login-form-button'
+            className='login-form-button mx-2'
             htmlType='submit'
             loading={isSubmitForm}
             icon='check-circle'

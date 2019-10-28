@@ -69,7 +69,7 @@ class Confirm extends React.Component {
               <div className="main-login__block__inner">
                 <div className="main-login__block__form text-center">
                     <p>
-                    An {params.sent && <span>reset email</span> || <span>confirmation email</span> } has been sent to you. Please check your mailbox then follow the
+                    An {params.sent && <span>reset email</span> || <span>confirmation email</span> } has been sent to you. Please check your <strong>mailbox</strong> or <strong>spam</strong> then follow the
                     link to {params.sent && <span>retrieve</span> || <span>active</span>} your account.
                     </p>
                   <Button type="primary" href="/#/login">
