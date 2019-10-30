@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { mapStateToProps, mapDispathToProps } from './container'
 // import { Alert, notification } from 'antd'
 import { Form, Icon, Input, Button } from 'antd'
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import reducers from '../../../../../reducers/index'
 
 const FormItem = Form.Item
@@ -68,11 +68,12 @@ class ForgotForm extends React.Component {
           )}
         </FormItem>
         <div className='text-center'>
-          <Button className='mx-2'>
-            <Icon type="left" />
-            Back to login
-          </Button>
-
+          <Link to='/login'>
+            <Button className='mx-2'>
+              <Icon type="left" />
+              Back to login
+            </Button>
+          </Link>
           <Button
             type='primary'
             className='login-form-button mx-2'
