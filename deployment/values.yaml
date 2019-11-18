@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-namespace: iot
+namespace: web
 
 image:
   repository: 754404031763.dkr.ecr.ap-southeast-1.amazonaws.com/iot-client
