@@ -1,5 +1,6 @@
 import { push } from "react-router-redux"
 import moment from "moment"
+import constant from '../config/default'
 import {
   setUserState,
   setLoading,
@@ -9,14 +10,17 @@ import {
   setIotActionState,
 } from "reducers/app"
 import { message } from "antd"
+import axios from 'axios'
 
 const ignoreAuth = ["/register", "/login", "/empty", "/customers/activate", "/forgot-password", "/forgot-password/success", "/recovery-password"]
+const api = constant.api.authen
+const externalAuthApi = `${api.host}/${api.external}`
 
-export const authorize = () => (dispatch, getState) => {
+export const authorize = () => (dispatch, getState) => new Promise((resolve, reject) => {
   let { app, routing } = getState()
   const location = routing.location
   if (ignoreAuth.includes(location.pathname)) {
-    return Promise.resolve(true)
+    return resolve(true)
   }
   if (!app.userState.token) {
     const token = window.localStorage.getItem("app.token")
@@ -25,26 +29,49 @@ export const authorize = () => (dispatch, getState) => {
       let userState = JSON.parse(window.localStorage.getItem("app.userState"))
       dispatch(setUserState({ userState }))
 
-      return Promise.resolve(true)
+      return resolve(true)
     }
-    message.error("Authentication fail")
-    return handleUnauthorize(routing, dispatch)
+    return reject(handleUnauthorize(routing, dispatch, "Authentication fail"))
   }
   let nowUtc = moment.utc(new Date())
   let expires = moment.utc(app.userState.expires)
 
   if (nowUtc.isAfter(expires)) {
-    message.error("Authentication expired")
-    return handleUnauthorize(routing, dispatch)
+    return reject(handleUnauthorize(routing, dispatch, "Authentication expired"))
   }
-  return Promise.resolve(true)
-}
+  return resolve(true)
+})
 export const handleUnauthorize = (routing, dispatch, notify) => {
+  let search = ''
   if (notify) {
-    message.error("Unauthorized!")
+    message.error(notify)
+  }
+  if (routing && routing.location && routing.location.search) {
+    search = `${routing.location.search}&refererLink=${routing.location.pathname}`
   }
   // dispatch(setLoading(false))
-  dispatch(push("/login"))
+  dispatch(push(`/login${search}`))
 
-  return Promise.reject()
+  return notify
+}
+
+export const externalAuth = (model, link) => (dispatch, getState) => {
+  axios
+    .post(externalAuthApi, model)
+    .then(response => {
+      if (response && response.data && response.data.redirect_uri) {
+        window.location.href = response.data.redirect_uri
+      } else {
+        let errorMessage = "&error=fail"
+        dispatch(push(`/login${link}${errorMessage}`))
+      }
+    })
+    .catch(error => {
+      let errorMessage = ''
+      if (error.response && error.response.data && error.response.data.description) {
+        errorMessage = `&error=${error.response.data.description}`
+      }
+      dispatch(push(`/login${link}${errorMessage}`))
+      return
+    })
 }

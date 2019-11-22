@@ -9,7 +9,7 @@ class LoginPage extends React.Component {
     return (
       <Page {...props}>
         <Helmet title='Login' />
-        <Login match={match} />
+        <Login match={match} params={(props.location||{}).search}/>
       </Page>
     )
   }

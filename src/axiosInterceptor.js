@@ -37,9 +37,10 @@ const createAxiosInterceptor = store => {
     },
     function(error) {
       if (error.response) {
+        store.dispatch(setLoading(false))
         if (error.response.status === 401) {
-          store.dispatch(handleUnauthorize(store.routing, store.dispatch, 1))
-          // message.error('Unauthorized')
+          // store.dispatch(Promise.reject(handleUnauthorize(store.routing, store.dispatch, 'Unauthorized')))
+          return Promise.reject(handleUnauthorize(store.routing, store.dispatch, 'Unauthorized'))
         }
         if (error.response.status === 400) {
           // message.error(error.response.data)
@@ -49,7 +50,6 @@ const createAxiosInterceptor = store => {
           // message.error(error.response.data)
         }
       }
-      store.dispatch(setLoading(false))
       return Promise.reject(error)
     },
   )

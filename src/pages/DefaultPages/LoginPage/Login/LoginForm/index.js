@@ -13,16 +13,21 @@ const FormItem = Form.Item
 )
 @Form.create()
 class LoginForm extends React.Component {
-  static defaultProps = {}
+ constructor(){
+   super()
+   this.state ={
+   }
+ }
 
   // $FlowFixMe
   onSubmit = (isSubmitForm: ?boolean) => event => {
+
     event.preventDefault()
-    const { form, submit } = this.props
+    const { form, submit,params } = this.props
     if (!isSubmitForm) {
       form.validateFields((error, values) => {
         if (!error) {
-          submit(values)
+          submit(values,params)
         }
       })
     }

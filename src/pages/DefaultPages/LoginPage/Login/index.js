@@ -1,12 +1,19 @@
 import React from 'react'
 import LoginForm from './LoginForm'
 import './style.scss'
+import queryString from 'query-string'
+import { message } from "antd"
 
 class Login extends React.Component {
   state = { backgroundImage: 'url(resources/images/login/4.jpg)' }
 
   componentDidMount() {
+    const params = queryString.parse(this.props.params)
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+
+    if (params.error) {
+      message.error(params.error)
+    }
   }
 
   componentWillUnmount() {
@@ -47,7 +54,7 @@ class Login extends React.Component {
               </div>
               <div className='main-login__block__inner'>
                 <div className='main-login__block__form'>
-                  <LoginForm email={this.state.restoredEmail} />
+                  <LoginForm email={this.state.restoredEmail} params={this.props.params} />
                 </div>
                 <div className='main-login__block__sidebar'>
                   <h4 className='main-login__block__sidebar__title text-white'>

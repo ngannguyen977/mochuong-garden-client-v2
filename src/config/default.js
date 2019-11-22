@@ -13,6 +13,7 @@ export default {
       password: 'password',
       forgot: 'auth/reset-password',
       recovery: 'auth/recovery-password',
+      external:'auth/external'
     },
     policy: {
       // host: 'http://localhost:8080/v1/api',
