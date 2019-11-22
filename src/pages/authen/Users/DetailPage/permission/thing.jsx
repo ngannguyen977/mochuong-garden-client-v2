@@ -116,7 +116,7 @@ class ListPage extends React.Component {
                             }
                         </div>
                         {!thing.things && (
-                            <LockScreenPage name=' Thing' link={`/#/things/register`} />
+                            <LockScreenPage name=' Thing' link={`/things/register`} />
                         )}
                     </div>
                 </section>
@@ -125,7 +125,7 @@ class ListPage extends React.Component {
                         type='default'
                         className='text-capitalize'
                         style={{ marginRight: '15px' }}
-                        href={`#/users/${match.params.name}`}
+                        href={`users/${match.params.name}`}
                     >
                         Back
                                   </Button>

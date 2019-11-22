@@ -24,7 +24,7 @@ class UserCard extends React.Component {
           border={true}
           borderColor={`${type.length > 0 ? "white" : ""}`}
           size='90'
-          link={`/#/users/${user.username}`}
+          link={`/users/${user.username}`}
         />
         <div className='my-3 text-center'>
           <div className='userCard__userName font-size-18'>{user.username}</div>

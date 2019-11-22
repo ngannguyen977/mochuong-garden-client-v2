@@ -36,7 +36,7 @@ export class DetailTabPage extends React.Component {
                     type='default'
                     className='text-capitalize'
                     style={{ marginRight: '15px' }}
-                    href='#/things'
+                    href='things'
                 >
                     Back
                         </Button>

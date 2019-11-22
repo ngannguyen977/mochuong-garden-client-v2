@@ -81,7 +81,7 @@ export class ButtonStep extends React.Component {
         return (<div className='col-md-12 text-right'>
             <ButtonGroup className=''>
                 <Button
-                    href={`#${link}`}
+                    href={`${link}`}
                     onClick={() => _changeStep(0)}>Cancel
                 </Button>
                 {current > 0 && current < steps.length - 1 &&

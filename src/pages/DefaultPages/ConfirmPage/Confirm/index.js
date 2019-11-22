@@ -29,7 +29,7 @@ class Confirm extends React.Component {
   componentWillUnmount() {
     const { restrictAccessConfirmPage, isAccessible } = this.props
     restrictAccessConfirmPage(isAccessible)
-    
+
     document.getElementsByTagName('body')[0].style.overflow = ''
   }
   generateBackground = () => {
@@ -72,7 +72,7 @@ class Confirm extends React.Component {
                     An {params.sent && <span>reset email</span> || <span>confirmation email</span> } has been sent to you. Please check your <strong>mailbox</strong> or <strong>spam</strong> then follow the
                     link to {params.sent && <span>retrieve</span> || <span>active</span>} your account.
                     </p>
-                  <Button type="primary" href="/#/login">
+                  <Button type="primary" href="/login">
                     Go to Login
                   </Button>
                 </div>

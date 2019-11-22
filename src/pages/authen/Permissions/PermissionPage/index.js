@@ -61,7 +61,7 @@ class PermissionPage extends React.Component {
         sorter: true,
         width: '30%',
         render: (text, record) => (
-          <a className="link" href={`#/permissions/${record.policyId}`}>
+          <a className="link" href={`permissions/${record.policyId}`}>
             {record.name}
           </a>
         ),
@@ -166,7 +166,7 @@ class PermissionPage extends React.Component {
                     type="primary"
                     loading={loading}
                     style={{ marginRight: '5px' }}
-                    href="#/permissions/create"
+                    href="permissions/create"
                   >
                     Create Permission
                   </Button>
@@ -191,7 +191,7 @@ class PermissionPage extends React.Component {
               </div>
             )}
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name="Permission" link="#/permissions/create" />
+              <LockScreenPage name="Permission" link="permissions/create" />
             )}
           </div>
         </section>

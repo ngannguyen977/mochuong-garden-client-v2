@@ -3,6 +3,8 @@ import { Input, Divider } from 'antd'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispathToProps } from '../container'
 import barcodeScanner from '../../../../services/barcodeScanner'
+import { Link } from 'react-router-dom'
+
 const Search = Input.Search
 
 
@@ -65,7 +67,7 @@ class register extends React.Component {
                             autoFocus
                         />
                         <div className='btn-handle-back text-right text-underline'>
-                            <a href='/#/things'>Back to Thing page</a>
+                            <Link to='/things'>Back to Thing page</Link>
                         </div>
                     </div>
                 </section>

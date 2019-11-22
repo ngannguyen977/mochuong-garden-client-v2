@@ -121,7 +121,7 @@ class UserPage extends React.Component {
                         </div>
 
                         {(!totalItems || totalItems <= 0) && (
-                            <LockScreenPage name='User' link='#/users/create' />
+                            <LockScreenPage name='User' link='users/create' />
                         )}
                     </div>
                 </section>
@@ -138,7 +138,7 @@ class UserPage extends React.Component {
                         type='default'
                         className='text-capitalize'
                         style={{ marginRight: 15 }}
-                        href={`#/things/${this.props.match.params.name}`}
+                        href={`things/${this.props.match.params.name}`}
                     >
                         Back
                         </Button>

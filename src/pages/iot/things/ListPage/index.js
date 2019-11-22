@@ -124,7 +124,7 @@ class ListPage extends React.Component {
                 </div>
               </div>
             )}
-            {totalItems <= 0 && <LockScreenPage name='Thing' link={isAdmin?`#/things/register`:'#'} />}
+            {totalItems <= 0 && <LockScreenPage name='Thing' link={isAdmin?`things/register`:'#'} />}
           </div>
         </section>
       </div>

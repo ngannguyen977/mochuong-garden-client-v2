@@ -2,6 +2,7 @@ import React from 'react'
 import { Radio } from 'antd'
 import { Button, Icon, Popconfirm, message } from 'antd'
 import helper from '../../../helper'
+import { Link } from 'react-router-dom'
 
 import './style.scss'
 // import { project } from './data.json'
@@ -33,43 +34,43 @@ class UserCard extends React.Component {
         onMouseEnter={() => hover('primary')}
         onMouseLeave={() => hover('')}
       >
-        <a href="/#/projects/create" className="project-card__plusBtn">
+        <Link to='/projects/create' className='project-card__plusBtn'>
           Add
-        </a>
+        </Link>
         <Avatar
           src={url}
           border={true}
           borderColor={`${type.length > 0 ? 'white' : ''}`}
-          size="90"
+          size='90'
         />
-        <div className="my-3 text-center">
-          <div className="project-card__userName font-size-18">{project.name}</div>
-          <div className="project-card__post">{project.description}</div>
-          <div className="project-card__time">
+        <div className='my-3 text-center'>
+          <div className='project-card__userName font-size-18'>{project.name}</div>
+          <div className='project-card__post'>{project.description}</div>
+          <div className='project-card__time'>
             {helper.formatDate(new Date(project.created_at))} -{' '}
             {helper.formatDate(new Date(project.updated_at))}
           </div>
         </div>
-        <div className="text-center">
-          <div className="btn-group text-center">
+        <div className='text-center'>
+          <div className='btn-group text-center'>
             <ButtonGroup>
               <Button
                 onClick={() => push('/projects/' + project.id)}
                 type={type ? 'default' : 'primary'}
-                className="btn-edit"
+                className='btn-edit'
               >
-                <Icon type="edit" />
+                <Icon type='edit' />
                 Edit
               </Button>
               <Popconfirm
-                title="Are you sure delete this project? It cannot be rollback."
+                title='Are you sure delete this project? It cannot be rollback.'
                 onConfirm={() => remove(project.id)}
                 onCancel={() => message.info('cancel deleted')}
-                okText="Yes, I confirm"
+                okText='Yes, I confirm'
                 cancelText="No, I don't"
               >
-                <Button type="danger" className="btn-remove">
-                  <Icon type="delete" /> Remove
+                <Button type='danger' className='btn-remove'>
+                  <Icon type='delete' /> Remove
                 </Button>
               </Popconfirm>
             </ButtonGroup>

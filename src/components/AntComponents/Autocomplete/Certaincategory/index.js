@@ -74,7 +74,7 @@ export default function(ReactDOM, mountNode) {
     .concat([
       <Option disabled key='all' className='show-all'>
         <a href='https://www.google.com/search?q=antd' target='_blank' rel='noopener noreferrer'>
-          查看所有结果
+
         </a>
       </Option>,
     ])

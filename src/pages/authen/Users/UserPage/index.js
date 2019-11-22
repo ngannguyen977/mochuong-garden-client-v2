@@ -90,7 +90,7 @@ class UserPage extends React.Component {
                 type='primary'
                 loading={loading}
                 style={{ marginRight: '5px' }}
-                href='#/users/create'
+                href='users/create'
               >
                 Create User
                   </Button>
@@ -116,7 +116,7 @@ class UserPage extends React.Component {
             </div>
 
             {(!totalItems || totalItems <= 0) && (
-              <LockScreenPage name='User' link={`#/users/create`} />
+              <LockScreenPage name='User' link={`users/create`} />
             )}
             {totalItems > 0 && <div className='text-right' style={{ marginTop: 10, marginRight: 15 }}>
               <Pagination

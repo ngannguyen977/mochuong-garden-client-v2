@@ -31,7 +31,7 @@ export class DetailTabPage extends React.Component {
                     type='default'
                     className='text-capitalize'
                     style={{ marginRight: '15px' }}
-                    href='#/permissions'
+                    href='permissions'
                 >
                     Cancel
                         </Button>

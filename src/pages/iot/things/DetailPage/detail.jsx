@@ -41,7 +41,7 @@ export class DetailPage extends React.Component {
       isLoaded: false,
     })
   }
-  componentDidUpdate() {
+  componentDidMount() {
     const { detail } = this.props
     const { isLoaded } = this.state
     if (!isLoaded && detail) {

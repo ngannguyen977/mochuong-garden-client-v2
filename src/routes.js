@@ -93,7 +93,7 @@ class Routes extends React.Component {
   render() {
     return (
       <ConnectedSwitch>
-        <Route exact path="/" component={DashboardAlphaPage} />
+        <Route exact path='/' component={DashboardAlphaPage} />
         {Object.keys(loadableRoutes).map(path => {
           const { exact, ...props } = loadableRoutes[path]
           props.exact = exact === void 0 || exact || false // set true as default

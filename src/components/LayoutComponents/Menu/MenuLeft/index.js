@@ -201,11 +201,11 @@ class MenuLeft extends React.Component {
       <Sider {...params} className='menuLeft'>
         <div className='menuLeft__logo'>
           {params.collapsed ? (
-            <a href='#/' className='menuLeft__logoContainer menuLeft__logoContainer--collapsed'>
+            <a href='' className='menuLeft__logoContainer menuLeft__logoContainer--collapsed'>
               <img src='resources/images/logo-inverse-mobile.png' alt='' />
             </a>
           ) : (
-              <a href='#/' className='menuLeft__logoContainer'>
+              <a href='' className='menuLeft__logoContainer'>
                 <img src='resources/images/logo-inverse.png' alt='' />
               </a>
             )}

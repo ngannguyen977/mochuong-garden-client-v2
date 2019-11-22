@@ -114,7 +114,7 @@ class ListPage extends React.Component {
               }
             </div>
             {!thing.things && (
-              <LockScreenPage name=' Thing' link={`/#/things/register`} />
+              <LockScreenPage name=' Thing' link={`/things/register`} />
             )}
           </div>
         </section>

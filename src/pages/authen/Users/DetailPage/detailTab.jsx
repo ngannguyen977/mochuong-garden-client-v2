@@ -21,7 +21,7 @@ export class DetailTabPage extends React.Component {
     }
 
     render() {
-        const { detail, match, history ,location} = this.props
+        const { detail, match, history ,location } = this.props
         const update = (type) => {
             switch (type) {
                 case 'detail':
@@ -36,7 +36,7 @@ export class DetailTabPage extends React.Component {
                     type='default'
                     className='text-capitalize'
                     style={{ marginRight: '15px' }}
-                    href='#/users'
+                    href='users'
                 >
                     Cancel
                         </Button>

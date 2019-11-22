@@ -3,6 +3,7 @@ import TimeAgo from "react-timeago"
 import helper from "../../../helper"
 import { Tag, Button, Tooltip, Popconfirm, message, Icon, Checkbox } from "antd"
 import "./style.scss"
+import { Link } from 'react-router-dom'
 
 class ProductCard extends React.Component {
   state = {
@@ -22,12 +23,12 @@ class ProductCard extends React.Component {
               <span className='thingCard__status__title'>active</span>
             </div>
           )}
-          <a href={"/#/things/" + data.name}>
+          <Link to={"/things/" + data.name}>
             <img className='img-responsive' src={data.imageUrl || productImg} alt='' />
-          </a>
+          </Link>
         </div>
         <div className='thingCard__title'>
-          <a href={"/#/things/" + data.name}>{data.displayName}</a>
+          <Link to={"/things/" + data.name}>{data.displayName}</Link>
           <div className='thingCard__price' />
         </div>
         <div className='thingCard__descr'>{data.serial || "no description"}</div>

@@ -109,7 +109,7 @@ class UserPage extends React.Component {
                         </div>
 
                         {(!totalItems || totalItems <= 0) && (
-                            <LockScreenPage name='User' link={`#/things/${match.params.name}/users`} />
+                            <LockScreenPage name='User' link={`things/${match.params.name}/users`} />
                         )}
                     </div>
                 </section>
