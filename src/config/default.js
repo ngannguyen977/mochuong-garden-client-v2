@@ -1,7 +1,7 @@
 export default {
   api: {
     authen: {
-      host: "http://localhost:8080/v1/api",
+      host: "https://api.onskycloud.com/authen/v1/api",
       login: "auth/client",
       info: "auth/me",
       register: "clients",
