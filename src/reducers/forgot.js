@@ -10,9 +10,9 @@ export const REDUCER = 'forgot'
 const api = constant.api.authen
 const forgotApi = `${api.host}/${api.forgot}`
 
-export const submit = ({ alias, username }) => (dispatch, getState) => {
+export const submit = ({ alias, username }) => async(dispatch, getState) => {
   dispatch(app.addSubmitForm(REDUCER))
-  axios
+  await axios
     .post(forgotApi, { alias, username })
     .then(() => {
       dispatch(app.setAccessConfirmPage(true))
