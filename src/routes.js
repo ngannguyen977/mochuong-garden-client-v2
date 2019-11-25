@@ -15,7 +15,7 @@ const loadable = loader =>
 
 const loadableRoutes = {
   // Default Pages
-  "/auth/external": {
+  "/external-auth": {
     component: loadable(() => import("pages/DefaultPages/ExternalAuthPage")),
   },
   "/register": {
