@@ -47,7 +47,15 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity: {}
+affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: env
+              operator: In
+              values:
+              - development
 
 config:
   # storage_directory: /usr/src/app/
