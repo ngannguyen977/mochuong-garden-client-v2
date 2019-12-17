@@ -38,7 +38,7 @@ class ForgotForm extends React.Component {
         onSubmit={this.onSubmit(isSubmitForm)}
         className='forgot-password-form'
       >
-        <FormItem>
+        {/* <FormItem>
           <label className='form-label mb-0'>Alias</label>
           {getFieldDecorator('alias', {
             initialValue: '',
@@ -51,7 +51,7 @@ class ForgotForm extends React.Component {
               placeholder='Alias'
             />,
           )}
-        </FormItem>
+        </FormItem> */}
         <FormItem>
           <label className='form-label mb-0'>Username <span style={{ color: 'red'}}>*</span></label>
           {getFieldDecorator('username', {

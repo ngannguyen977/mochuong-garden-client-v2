@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 import "./style.scss"
 
 class Avatar extends React.Component {
@@ -12,17 +13,17 @@ class Avatar extends React.Component {
   render() {
     const { size, borderColor, src, border, link } = this.props
     return (
-      <a
+      <Link
         className={`d-block mx-auto ${size > 0 ? "avatar avatar--" + size : ""} ${
           border ? " avatar--border" : ""
         }`}
-        href={link ? link : "javascript: void(0);"}
+        to={link ? link : "javascript: void(0);"}
         style={{
           borderColor: borderColor,
         }}
       >
         <img src={src} alt="User" />
-      </a>
+      </Link>
     )
   }
 }

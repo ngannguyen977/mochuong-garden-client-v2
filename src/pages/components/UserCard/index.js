@@ -30,7 +30,7 @@ class UserCard extends React.Component {
           <div className='userCard__userName font-size-18'>{user.username}</div>
           <div className='userCard__post'>
             <i>
-              {!time && "Not Connected"}
+              {!time && "Connected"}
               {time && (
                 <p>
                   <span> Last access </span> <TimeAgo date={user.time} />
