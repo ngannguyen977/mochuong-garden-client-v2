@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 import { Helmet } from 'react-helmet'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory } from 'history'
 import thunk from 'redux-thunk'
 import 'es6-promise/auto'
 import 'setimmediate'
@@ -17,7 +17,7 @@ import registerServiceWorker from 'registerServiceWorker'
 import Layout from 'components/LayoutComponents/Layout'
 import reducer from 'reducers'
 import axiosInterceptor from './axiosInterceptor'
-import { setUserState } from 'reducers/app'
+import { setUserState,connectMqtt } from 'reducers/app'
 
 import 'resources/_antd.less' // redefinition AntDesign variables
 import 'bootstrap/dist/css/bootstrap.min.css' // bootstrap styles
@@ -26,7 +26,7 @@ import 'resources/AntStyles/AntDesign/antd.cleanui.scss'
 import 'resources/CleanStyles/Core/core.cleanui.scss'
 import 'resources/CleanStyles/Vendors/vendors.cleanui.scss'
 
-const history = createHistory()
+const history = createBrowserHistory()
 const router = routerMiddleware(history)
 const middlewares = [router, thunk]
 const isLogger = false
@@ -46,6 +46,7 @@ if (!userState || !userState.token) {
     store.dispatch(setUserState({ userState }))
   }
 }
+store.dispatch(connectMqtt())
 
 ReactDOM.render(
   <Provider store={store}>

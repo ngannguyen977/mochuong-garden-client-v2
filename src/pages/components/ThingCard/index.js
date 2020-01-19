@@ -1,9 +1,8 @@
 import React from "react"
-import TimeAgo from "react-timeago"
-import helper from "../../../helper"
 import { Tag, Button, Tooltip, Popconfirm, message, Icon, Checkbox } from "antd"
 import "./style.scss"
 import { Link } from 'react-router-dom'
+import { getPropertyValue } from '../../../helper'
 
 class ProductCard extends React.Component {
   state = {
@@ -15,12 +14,22 @@ class ProductCard extends React.Component {
     const { productImg, productStatus } = this.state
 
     const { data, isCreate, permission, action, remove, destroy } = this.props
+
+    let isGateway = (data.template || {}).name === 'OnSky gateway'
+    const isConnected = isGateway ? getPropertyValue(data.properties, 'IsConnected') : getPropertyValue(data.properties, 'reachable')
+    let name = getPropertyValue(data.properties, 'dev_name')
+
     return (
       <div className='thingCard'>
         <div className='thingCard__img'>
-          {productStatus === "new" && (
+        {(isConnected === 'true' || isConnected == 1) && (
             <div className='thingCard__status'>
-              <span className='thingCard__status__title'>active</span>
+              <span className='thingCard__status__title'>Online</span>
+            </div>
+          )}
+          {(isConnected === 'false' || isConnected == 0) && (
+            <div className='thingCard__offline'>
+              <span className='thingCard__status__title'>Offline</span>
             </div>
           )}
           <Link to={"/things/" + data.name}>

@@ -273,7 +273,7 @@ export const getPropertyValue = (properties, field) => {
   if (!properties || !Array.isArray(properties) || properties.length === 0) {
     return 0
   }
-  let property = properties.find(x => x.name === field || x.template.name === field)
+  let property = properties.find(x => x.name === field || (x.template || {}).name === field)
   if (!property) {
     return 0
   }
@@ -306,6 +306,15 @@ export const pruneText = (text) => {
     console.log(error)
   }
   return text
+}
+if (!String.prototype.trim) {
+  (function() {
+      // Make sure we trim BOM and NBSP
+      var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+      String.prototype.trim = function() {
+          return this.replace(rtrim, '');
+      };
+  })();
 }
 export default {
   formatDate,

@@ -37,6 +37,7 @@
     "moment": "^2.19.3",
     "moment-timezone": "^0.5.14",
     "nconf": "^0.10.0",
+    "paho-mqtt": "^1.1.0",
     "path": "^0.12.7",
     "peity-react": "^0.0.7",
     "prop-types": "^15.5.10",

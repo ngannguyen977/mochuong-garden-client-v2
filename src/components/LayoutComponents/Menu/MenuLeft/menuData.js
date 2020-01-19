@@ -11,12 +11,12 @@ export default [
     url: '/users',
     icon: 'icmn icmn-man-woman',
   },
-  // {
-  //   title: 'Groups',
-  //   key: 'groups',
-  //   url: '/groups',
-  //   icon: 'icmn icmn-man-woman',
-  // },
+  {
+    title: 'Customers',
+    key: 'customers',
+    url: '/customers',
+    icon: 'icmn icmn-man-woman',
+  },
   // {
   //   title: 'Permissions',
   //   key: 'permission',

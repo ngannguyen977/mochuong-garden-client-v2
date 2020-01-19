@@ -34,12 +34,12 @@ export const getPermission = createAction(`${NS}GET_THING_PERMISSION`)
 export const currentTab = createAction(`${NS}SET_CURRENT_TAB`)
 export const setCertificate = createAction(`${NS}SET_THING_CERTIFICATES`)
 
-export const getList = (limit = 18, page = 0, sort = "name", isAsc = false) => (
+export const getList = (keyword='',limit = 18, page = 0, sort = "name", isAsc = false,customers ='') => (
   dispatch,
   getState,
 ) => {
   axios
-    .get(thingApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc } })
+    .get(thingApi, { params: { limit: limit, page: page, sort: sort, isAsc: isAsc ,customers } })
     .then(response => {
       let { things, page, totalItems } = response.data
       dispatch(setThingPage({ things, page, totalItems }))

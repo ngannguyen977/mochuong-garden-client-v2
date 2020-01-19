@@ -7,6 +7,7 @@ import register from "./register"
 import user from "./user"
 import property from "./property"
 import thing from "./thing"
+import customer from "./customer"
 
 export default combineReducers({
   routing: routerReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   user,
   property,
   thing,
+  customer
 })

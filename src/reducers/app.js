@@ -1,9 +1,22 @@
-import { createAction, createReducer } from "redux-act"
-import { push } from "react-router-redux"
-import { pendingTask, begin, end } from "react-redux-spinner"
-import { notification } from "antd"
+import {
+  createAction,
+  createReducer
+} from "redux-act"
+import {
+  push
+} from "react-router-redux"
+import {
+  pendingTask,
+  begin,
+  end
+} from "react-redux-spinner"
+import {
+  notification
+} from "antd"
 import axios from "axios"
 import constant from "../config/default"
+import mqtt from "../services/mqtt"
+import helper from '../helper'
 
 const api = constant.api.authen
 const configure = constant.api.configure
@@ -49,11 +62,38 @@ export const resetHideLogin = () => (dispatch, getState) => {
   }
   return Promise.resolve()
 }
+export const connectMqtt = () => (dispatch, getState) => {
+  mqtt.connect(message => {
+    const {
+      currentThing
+    } = getState().app
+    // console.log(currentThing, message.topic)
+    // handle message
+    let topics = (message.topic || "").split("/")
+    if (topics.length > 2 && topics[1] === currentThing) {
+      if (!topics[2].includes("command")) {
+        let name = message.topic.split("/").pop()
+        let value = JSON.parse(message.payload).value
+         console.log("receive device status", name, value)
+       
+      } else {
+        let name = message.topic.split("/")[2]
+        helper.xmlHelper.parseXML(message.payload, result => {
+          console.log("receive device status 2", message,result)
+        })
+      }
 
+    }
+  })
+}
 export const login = (customer, username, password, dispatch) =>
   new Promise((resolve, reject) => {
     axios
-      .post(loginApi, { customer, username, password })
+      .post(loginApi, {
+        customer,
+        username,
+        password
+      })
       .then(response => {
         dispatch(
           setUserState({
@@ -82,8 +122,7 @@ export const login = (customer, username, password, dispatch) =>
             notification.open({
               type: "success",
               message: "You have successfully logged in!",
-              description:
-                "Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!",
+              description: "Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!",
             })
             dispatch(push("/"))
             return resolve(true)
@@ -146,63 +185,122 @@ const initialState = {
   },
 }
 
-export default createReducer(
-  {
-    [_setFrom]: (state, from) => ({ ...state, from }),
-    [_setLoading]: (state, isLoading) => ({ ...state, isLoading }),
-    [_setHideLogin]: (state, isHideLogin) => ({ ...state, isHideLogin }),
-    [setUpdatingContent]: (state, isUpdatingContent) => ({ ...state, isUpdatingContent }),
-    [setUserState]: (state, { userState }) => {
+export default createReducer({
+    [_setFrom]: (state, from) => ({
+      ...state,
+      from
+    }),
+    [_setLoading]: (state, isLoading) => ({
+      ...state,
+      isLoading
+    }),
+    [_setHideLogin]: (state, isHideLogin) => ({
+      ...state,
+      isHideLogin
+    }),
+    [setUpdatingContent]: (state, isUpdatingContent) => ({
+      ...state,
+      isUpdatingContent
+    }),
+    [setUserState]: (state, {
+      userState
+    }) => {
       window.localStorage.setItem("app.token", userState.token)
       window.localStorage.setItem("app.userState", JSON.stringify(userState))
-      return { ...state, userState }
+      return {
+        ...state,
+        userState
+      }
     },
     [setThingTypeState]: (state, thingTypes) => {
       window.localStorage.setItem("app.thingTypes", JSON.stringify(thingTypes))
-      return { ...state, thingTypes }
+      return {
+        ...state,
+        thingTypes
+      }
     },
     [setDataTypeState]: (state, dataTypes) => {
       window.localStorage.setItem("app.dataTypes", JSON.stringify(dataTypes))
-      return { ...state, dataTypes }
+      return {
+        ...state,
+        dataTypes
+      }
     },
     [setAlertTypeState]: (state, alertTypes) => {
       window.localStorage.setItem("app.alertTypes", JSON.stringify(alertTypes))
-      return { ...state, alertTypes }
+      return {
+        ...state,
+        alertTypes
+      }
     },
 
     [setIotActionState]: (state, iotActions) => {
       window.localStorage.setItem("app.iotActions", JSON.stringify(iotActions))
-      return { ...state, iotActions }
+      return {
+        ...state,
+        iotActions
+      }
     },
     [setLayoutState]: (state, param) => {
-      const layoutState = { ...state.layoutState, ...param }
-      const newState = { ...state, layoutState }
+      const layoutState = {
+        ...state.layoutState,
+        ...param
+      }
+      const newState = {
+        ...state,
+        layoutState
+      }
       window.localStorage.setItem("app.layoutState", JSON.stringify(newState.layoutState))
       return newState
     },
     [setActiveDialog]: (state, activeDialog) => {
-      const result = { ...state, activeDialog }
+      const result = {
+        ...state,
+        activeDialog
+      }
       if (activeDialog !== "") {
         const id = activeDialog
-        result.dialogForms = { ...state.dialogForms, [id]: true }
+        result.dialogForms = {
+          ...state.dialogForms,
+          [id]: true
+        }
       }
       return result
     },
     [deleteDialogForm]: (state, id) => {
-      const dialogForms = { ...state.dialogForms }
+      const dialogForms = {
+        ...state.dialogForms
+      }
       delete dialogForms[id]
-      return { ...state, dialogForms }
+      return {
+        ...state,
+        dialogForms
+      }
     },
     [addSubmitForm]: (state, id) => {
-      const submitForms = { ...state.submitForms, [id]: true }
-      return { ...state, submitForms }
+      const submitForms = {
+        ...state.submitForms,
+        [id]: true
+      }
+      return {
+        ...state,
+        submitForms
+      }
     },
     [deleteSubmitForm]: (state, id) => {
-      const submitForms = { ...state.submitForms }
+      const submitForms = {
+        ...state.submitForms
+      }
       delete submitForms[id]
-      return { ...state, submitForms }
+      return {
+        ...state,
+        submitForms
+      }
     },
-    [setAccessConfirmPage]: (state, isAccessible) => ({...state, isAccessible}),
+    [setAccessConfirmPage]: (state, isAccessible) => ({
+      ...state,
+      isAccessible
+    }),
   },
   initialState,
 )

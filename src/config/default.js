@@ -2,9 +2,10 @@ export default {
   api: {
     authen: {
       host: "https://api.onskycloud.com/authen/v1/api",
-      login: "auth/client",
+      login: "auth/observe",
       info: "auth/me",
       register: "clients",
+      observer:'clients/observer',
       group: "groups",
       user: "users",
       usersByGroup: "bygroup",
@@ -67,5 +68,18 @@ export default {
   },
   customer: {
     number: "1969541697209631746",
+  },
+  ws_mqtt: {
+    host: 'websocket.onskycloud.com',
+    port: 443,
+    clientId: 'iot-observer-react-client-',
+    path: '/ws',
+    userName: 'onsky',
+    ssl: true,
+    mqttVersion: 3,
+    timeout: 20,
+    keepAliveInterval: 30,
+    reconnect: true,
+    cleanSession: true,
   },
 }
