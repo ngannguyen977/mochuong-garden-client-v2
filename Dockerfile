@@ -1,25 +1,16 @@
-FROM node:8.11.3-alpine
+FROM node:12.2.0-alpine
 
-#RUN apk add --no-cache curl
-#RUN apk add --no-cache bash
+RUN mkdir -p /onsky/apps
+WORKDIR /onsky/apps
 
-#ENTRYPOINT ["/usr/bin/curl"]
+#COPY package*.json ./
 
-#RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+ADD build build
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-
-RUN apk update && apk add curl python g++ make && rm -rf /var/cache/apk/*
-
-
-COPY package*.json ./
-
-COPY . .
+COPY server.js .
+COPY package.deploy.json package.json
 
 RUN yarn install
-RUN yarn build
 
 EXPOSE 8080
 

@@ -1,6 +1,6 @@
 
 
-APP_NAME :=iot-client
+APP_NAME :=iot-observe
 VERSION := $(shell git describe --tags --abbrev=0)
 DOCKER_USER=eneoti
 DOCKER_REPO=754404031763.dkr.ecr.ap-southeast-1.amazonaws.com
@@ -22,7 +22,7 @@ help: ## This help.
 
 # DOCKER TASKS
 # Build the container
-build: ## Build the container
+build-docker: ## Build the container
 	docker build -t $(APP_NAME) .
 clear-none:
 	docker rmi -f `docker images -a |grep 'none'|awk '{print \$$3}'`
@@ -109,4 +109,6 @@ gittag:
 	git tag -a "$(VERSION)" -m "$(VERSION)"
 	git push --tags
 quicktag: ungittag commit gittag
-localDeploy: build publish clear deploy
+build-project:
+	yarn build
+localDeploy: build-project build-docker publish clear deploy

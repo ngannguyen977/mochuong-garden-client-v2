@@ -11,23 +11,12 @@ import './style.scss'
 class TopBar extends React.Component {
   render() {
     let { userState } = this.props
-    let isAdmin = userState.role.name === 'CLIENT_ADMIN'
     return (
       <div className='topbar'>
         <div className='topbar__left'>
           {/* <IssuesHistory />
           <ProjectManagement />
           <LiveSearch /> */}
-          {isAdmin &&
-            <Button
-              size='large'
-              type='primary'
-              // icon='plus'
-              // ghost={true}
-              onClick={() => this.props.history.push('/things/register')}
-            >
-              + Register Gateway
-          </Button>}
         </div>
         <div className='topbar__right'>
           <a

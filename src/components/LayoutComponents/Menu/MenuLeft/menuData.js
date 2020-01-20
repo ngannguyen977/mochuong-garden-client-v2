@@ -12,7 +12,7 @@ export default [
     icon: 'icmn icmn-man-woman',
   },
   {
-    title: 'Customers',
+    title: 'Manage Customers',
     key: 'customers',
     url: '/customers',
     icon: 'icmn icmn-man-woman',

@@ -18,7 +18,7 @@ export const connect = (username, callback) => {
     onSuccess: onConnect,
     onFailure,
     timeout: constant.ws_mqtt.timeout,
-    userName: userState.username,
+    userName: userState.username || 'noname',
     password: token,
     keepAliveInterval: constant.ws_mqtt.keepAliveInterval,
     cleanSession: constant.ws_mqtt.cleanSession,
