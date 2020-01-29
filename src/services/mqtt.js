@@ -2,7 +2,7 @@ import constant from "../config/default"
 import Paho from "paho-mqtt"
 import helper from "../helper"
 
-export const connect = (username, callback) => {
+export const connect = (callback) => {
   let token = "Bearer " + window.localStorage.getItem("app.token")
   let userState = JSON.parse(window.localStorage.getItem("app.userState")) || {}
   let things = JSON.parse(window.localStorage.getItem("app.things")) || []
@@ -37,7 +37,7 @@ export const connect = (username, callback) => {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect")
     for (let thing of things) {
-      console.log('subscribe topic ',`things/${thing.serial}/security_calling`,`things/${thing.serial}/safety_calling`)
+      // console.log('subscribe topic ', `things/${thing.serial}/security_calling`, `things/${thing.serial}/safety_calling`)
       client.subscribe(`things/${thing.serial}/security_calling`)
       client.subscribe(`things/${thing.serial}/safety_calling`)
     }
@@ -73,7 +73,9 @@ export const connect = (username, callback) => {
     // }
     console.log("onMessageArrived", packet.topic)
     // }
-    // callback(packet)
+    if (callback && typeof callback === 'function') {
+      callback(packet)
+    }
   }
 }
 

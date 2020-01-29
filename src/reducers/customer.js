@@ -134,7 +134,7 @@ export const getList = (limit = 10, page = 0, sort = "name", isAsc = false) => (
       } = response.data
       // get all things for these clients
       let customers = ((clients || []).map(x => x.accountNumber) || []).join(',')
-      axios.get(`${thingApi}/summary`, {
+      axios.get(`${thingApi}/summary-list`, {
         params: {
           customers: customers
         }
