@@ -1,6 +1,7 @@
 {
-  "name": "clean-ui-admin-template",
-  "version": "0.1.0",
+  "name": "iot-observer",
+  "author":"Nguyen Cat Pham",
+  "version": "1.0.0",
   "private": true,
   "homepage": ".",
   "devDependencies": {

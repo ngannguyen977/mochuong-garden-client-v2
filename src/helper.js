@@ -93,6 +93,7 @@ export function onlyUnique(value, index, self) {
   }
   return self.indexOf(value) === index
 }
+
 function download(filename, text) {
   var element = document.createElement("a")
   element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text))
@@ -288,6 +289,7 @@ export const convertOnSkyPropertyValue = value => {
   }
   return value
 }
+
 function arrayUnique(array) {
   var a = array.concat()
   for (var i = 0; i < a.length; ++i) {
@@ -308,13 +310,65 @@ export const pruneText = (text) => {
   return text
 }
 if (!String.prototype.trim) {
-  (function() {
-      // Make sure we trim BOM and NBSP
-      var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-      String.prototype.trim = function() {
-          return this.replace(rtrim, '');
-      };
+  (function () {
+    // Make sure we trim BOM and NBSP
+    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+    String.prototype.trim = function () {
+      return this.replace(rtrim, '');
+    };
   })();
+}
+
+function formatPhoneNumber(phoneNumberString) {
+  var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+  var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+  if (match) {
+    return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+  }
+  return null
+}
+
+function detectTemplate(template) {
+  switch (template) {
+    case 'Light Temperature':
+    case 'Temperature-Humidity Sensor':
+      return 'https://www.onskyinc.com/wp-content/uploads/2019/03/dim.png'
+    case 'Light DIM':
+    case 'Light DIM Old':
+      return 'https://www.onskyinc.com/wp-content/uploads/2019/03/dim.png'
+    case 'Motion Sensor':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/motion-dung-pin3-300x300.png'
+    case 'Door Sensor':
+    case 'Zigbee Door Lock':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/door-sensor-3.png'
+    case 'CO Detector':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/CO-3-3-300x300.png'
+    case 'Smoke Detector':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/Smoke-1-2-300x300.png'
+    case 'Smart Siren':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/siren-3-2-300x300.png'
+    case 'Switch 1C':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/SW-121C-S1-300x300.png'
+    case 'Switch 3C':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/SW-123C-G-1-2-300x300.png'
+    case 'Lamp 4PWM':
+    case 'LAM 110':
+    case 'LAM 130':
+    case 'Turnable':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/LAM-RGB-300x300.png'
+    case 'Security Plug':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/plugS-4-1-300x300.png'
+    case 'Switch Type Plug A':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/plugA-4-300x300.png'
+    case 'Light RGB Old':
+    case 'Light RGB':
+      return 'http://www.onskyinc.com/wp-content/uploads/2019/03/light_rgb.png'
+    case 'SOS Button':
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/Smoke-1-2-300x300.png'
+    case 'OnSky gateway':
+    default:
+      return 'https://www.onskyinc.com/wp-content/uploads/2018/11/gateway-3-300x240.png'
+  }
 }
 export default {
   formatDate,
@@ -332,5 +386,7 @@ export default {
   checkDate,
   arrayUnique,
   parseResourceOrn,
-  pruneText
+  pruneText,
+  formatPhoneNumber,
+  detectTemplate
 }

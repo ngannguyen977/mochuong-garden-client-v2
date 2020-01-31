@@ -23,9 +23,11 @@ const api = constant.api.authen
 const clientApi = `${api.host}/${api.observer}`
 const passwordApi = `${api.host}/${api.password}`
 const thingApi = `${constant.api.iot.host}/${constant.api.iot.thing}`
+const iotMicroApi = `${constant.api.micro.host}/${constant.api.micro.iot}`
 
 export const setclientPage = createAction(`${NS}SET_client_PAGE`)
 export const setclientDetailPage = createAction(`${NS}SET_client_DETAIL_PAGE`)
+export const setclientLogPage = createAction(`${NS}SET_client_LOG_PAGE`)
 export const createclientState = createAction(`${NS}CREATE_client`)
 export const updateclientState = createAction(`${NS}UPDATE_client`)
 
@@ -48,7 +50,7 @@ export const getAllThing = (
     dispatch(setclientDetailPage(response.data))
     clientUuid = response.data.uuid
   }
-  let query = `{pages(key:"${keyword}",templateName:"${templateName}"){page,totalItems, things{name,description,displayName,imageUrl,isActive,serial}}}`
+  let query = `{pages(key:"${keyword}",templateName:""){page,totalItems, things{name,description,displayName,imageUrl,isActive,serial}}}`
 
   let thingsPromise = axios.get(`${thingApi}/graphql/search?query=${query}`, {
     params: {
@@ -164,13 +166,25 @@ export const getList = (limit = 10, page = 0, sort = "name", isAsc = false) => (
       message.error(errorMessage)
     })
 }
-export const getOne = clientname => (dispatch, getState) => {
+export const getOne = customerNumber => (dispatch, getState) => {
   axios
-    .get(`${clientApi}/${clientname}`)
+    .get(`${clientApi}/${customerNumber}`)
     .then(response => {
       dispatch(setclientDetailPage(response.data))
     })
     .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || "get client fail"
+      message.error(errorMessage)
+    })
+}
+export const getLog = (customerNumber, propertyName, limit = 20) => (dispatch, getState) => {
+  axios
+    .get(`${iotMicroApi}/${constant.api.micro.getLog}?customer_number=${customerNumber}&limit=${limit}`)
+    .then(response => {
+        dispatch(setclientLogPage(response.data))
+    })
+    .catch(error => {
+      console.log(error)
       let errorMessage = ((error.response || {}).data || {}).message || "get client fail"
       message.error(errorMessage)
     })
@@ -361,6 +375,10 @@ const ACTION_HANDLES = {
   [setclientDetailPage]: (state, detail) => ({
     ...state,
     detail
+  }),
+  [setclientLogPage]: (state, log) => ({
+    ...state,
+    log
   }),
 }
 export default createReducer(ACTION_HANDLES, initialState)

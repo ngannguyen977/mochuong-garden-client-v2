@@ -5,12 +5,12 @@ export default [
     url: '/home',
     icon: 'icmn icmn-stack',
   },
-  {
-    title: 'Manage Users',
-    key: 'users',
-    url: '/users',
-    icon: 'icmn icmn-man-woman',
-  },
+  // {
+  //   title: 'Manage Users',
+  //   key: 'users',
+  //   url: '/users',
+  //   icon: 'icmn icmn-man-woman',
+  // },
   {
     title: 'Manage Customers',
     key: 'customers',

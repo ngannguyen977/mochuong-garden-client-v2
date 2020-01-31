@@ -29,11 +29,11 @@ class UserCard extends React.Component {
           link={`/customers/${user.accountNumber}`}
         />
         <div className='my-3 text-center'>
-          <div className='userCard__userName' style={{fontSize: 28}}>{name}</div>
+          <div className='userCard__userName' style={{fontSize: 28,color:'#096dd9'}}>{name}</div>
           <div className='userCard__post'>
             <i>
-                <h4>{user.mobile} </h4>
-                <p>{user.address1}  </p>
+                <h4>{helper.formatPhoneNumber(user.mobile)} </h4>
+                <p style={{fontSize: 18,color:'#092b00'}}>{user.address1}  </p>
             </i>
           </div>
         </div>

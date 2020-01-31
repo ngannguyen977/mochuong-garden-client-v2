@@ -1,14 +1,20 @@
 import {
-  getList, getOne, changeStatus, create, destroy
+  getList,
+  getOne,
+  changeStatus,
+  create,
+  destroy,
+  getLog
 } from "reducers/customer"
 import {
   getList as getThings,
-  getListByGraphQL, createThingPolicy,  removeThingPolicy
+  getListByGraphQL,
+  createThingPolicy,
+  removeThingPolicy
 } from "reducers/thing"
 import helper from "../../../helper"
 
-const steps = [
-  {
+const steps = [{
     title: "Adding details",
     subTitle: "Adding Client Information",
     icon: "loading",
@@ -51,8 +57,7 @@ const type = {
   changeStatus: "CHANGE_STATUS",
   assignThing: "ASSIGN_THING",
 }
-const summaryColumns = [
-  {
+const summaryColumns = [{
     title: "Clientname",
     dataIndex: "clientname",
     sorter: true,
@@ -77,12 +82,12 @@ export const mapDispathToProps = {
   getListByGraphQL: (keyword, limit, page, sort, isAsc, types, templateName, templateType) =>
     getListByGraphQL(keyword, limit, page, sort, isAsc, types, templateName, templateType),
   getList: (limit, page, sort, isAsc) => getList(limit, page, sort, isAsc),
-  getThings: (keyword,limit, page, sort, isAsc,customers) => getThings(keyword,limit, page, sort, isAsc,customers),
+  getThings: (keyword, limit, page, sort, isAsc, customers) => getThings(keyword, limit, page, sort, isAsc, customers),
   changeStatus: (clientName, status) => changeStatus(clientName, status),
   create: (model, iscreate) => create(model, iscreate),
   destroy: clientNames => destroy(clientNames),
-  getOne: clientName => getOne(clientName),
-  getAllThing: (clientUuid, clientname, keyword, limit, page, sort, isAsc, types, templateName, templateType,onlySelfThing) => getAllThing(clientUuid, clientname, keyword, limit, page, sort, isAsc, types, templateName, templateType,onlySelfThing)
+  getOne: cn => getOne(cn),
+  getLog: (customerNumber, propertyName, limit) => getLog(customerNumber, propertyName, limit)
 }
 export const mapStateToProps = (state, props) => {
   let client = state.customer || {}
@@ -104,7 +109,11 @@ export const mapStateToProps = (state, props) => {
     clientUpdate: (client.detail || {}).clientUpdate || {},
     // thing
     thing: state.thing,
+    log: state.customer.log||[],
   }
 }
 
-export default { mapStateToProps, mapDispathToProps }
+export default {
+  mapStateToProps,
+  mapDispathToProps
+}

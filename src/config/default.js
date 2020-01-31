@@ -2,10 +2,11 @@ export default {
   api: {
     authen: {
       host: "https://api.onskycloud.com/authen/v1/api",
+      // host: "http://localhost:9090/v1/api",
       login: "auth/observe",
       info: "auth/me",
       register: "clients",
-      observer:'clients/observer',
+      observer: 'clients/observer',
       group: "groups",
       user: "users",
       usersByGroup: "bygroup",
@@ -14,7 +15,7 @@ export default {
       password: 'password',
       forgot: 'auth/reset-password',
       recovery: 'auth/recovery-password',
-      external:'auth/external'
+      external: 'auth/external'
     },
     policy: {
       // host: 'http://localhost:8080/v1/api',
@@ -37,6 +38,12 @@ export default {
       serviceEnable: "enable",
       serviceDelete: "shortname",
       serviceDeletes: "deletes",
+    },
+    micro: {
+      host: "https://lambda-api.onskycloud.com",
+      iot: "system-micro-iot-srv/IotSvc",
+      getLog: "HistoryByCustomer",
+      getLogForThing: "HistoryBySerial"
     },
     iot: {
       host: "https://api.onskycloud.com/iot-service/v1/api",
