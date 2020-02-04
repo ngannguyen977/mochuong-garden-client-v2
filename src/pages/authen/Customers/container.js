@@ -4,7 +4,8 @@ import {
   changeStatus,
   create,
   destroy,
-  getLog
+  getLog,
+  getNotification
 } from "reducers/customer"
 import {
   getList as getThings,
@@ -87,7 +88,8 @@ export const mapDispathToProps = {
   create: (model, iscreate) => create(model, iscreate),
   destroy: clientNames => destroy(clientNames),
   getOne: cn => getOne(cn),
-  getLog: (customerNumber, propertyName, limit) => getLog(customerNumber, propertyName, limit)
+  getLog: (customerNumber, propertyName, limit) => getLog(customerNumber, propertyName, limit),
+  getNotification: (cn,serial, limit) => getNotification(cn,serial, limit)
 }
 export const mapStateToProps = (state, props) => {
   let client = state.customer || {}
@@ -110,6 +112,7 @@ export const mapStateToProps = (state, props) => {
     // thing
     thing: state.thing,
     log: state.customer.log||[],
+    notifications: state.customer.notification||[]
   }
 }
 

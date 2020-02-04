@@ -24,12 +24,14 @@ const clientApi = `${api.host}/${api.observer}`
 const passwordApi = `${api.host}/${api.password}`
 const thingApi = `${constant.api.iot.host}/${constant.api.iot.thing}`
 const iotMicroApi = `${constant.api.micro.host}/${constant.api.micro.iot}`
+const notificationApi = `${constant.api.micro.host}/${constant.api.micro.notification}`
 
-export const setclientPage = createAction(`${NS}SET_client_PAGE`)
-export const setclientDetailPage = createAction(`${NS}SET_client_DETAIL_PAGE`)
-export const setclientLogPage = createAction(`${NS}SET_client_LOG_PAGE`)
-export const createclientState = createAction(`${NS}CREATE_client`)
-export const updateclientState = createAction(`${NS}UPDATE_client`)
+export const setclientPage = createAction(`${NS}SET_CLIENT_PAGE`)
+export const setclientDetailPage = createAction(`${NS}SET_CLIENT_DETAIL_PAGE`)
+export const setclientLogPage = createAction(`${NS}SET_CLIENT_LOG_PAGE`)
+export const setclientNotificationPage = createAction(`${NS}SET_CLIENT_NOTIFICATION_PAGE`)
+export const createclientState = createAction(`${NS}CREATE_CLIENT`)
+export const updateclientState = createAction(`${NS}UPDATE_CLIENT`)
 
 
 export const getAllThing = (
@@ -186,6 +188,22 @@ export const getLog = (customerNumber, propertyName, limit = 20) => (dispatch, g
     .catch(error => {
       console.log(error)
       let errorMessage = ((error.response || {}).data || {}).message || "get client fail"
+      message.error(errorMessage)
+    })
+}
+export const getNotification = (cn,serial,  limit = 20) => (dispatch, getState) => {
+  let url = `GetNotificationAPI?cn=${cn}&count=${limit}`
+  if(serial){
+    url+=`&serial=${serial}`
+  }
+  axios
+    .get(`${notificationApi}/${url}`)
+    .then(response => {
+        dispatch(setclientNotificationPage(response.data))
+    })
+    .catch(error => {
+      console.log(error)
+      let errorMessage = ((error.response || {}).data || {}).message || "get  Notification fail"
       message.error(errorMessage)
     })
 }
@@ -379,6 +397,10 @@ const ACTION_HANDLES = {
   [setclientLogPage]: (state, log) => ({
     ...state,
     log
+  }),
+  [setclientNotificationPage]: (state, notification) => ({
+    ...state,
+    notification
   }),
 }
 export default createReducer(ACTION_HANDLES, initialState)

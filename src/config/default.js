@@ -42,6 +42,7 @@ export default {
     micro: {
       host: "https://lambda-api.onskycloud.com",
       iot: "system-micro-iot-srv/IotSvc",
+      notification:"customer-micro-simple-notification-srv/NotificationSvc",
       getLog: "HistoryByCustomer",
       getLogForThing: "HistoryBySerial"
     },
@@ -85,7 +86,7 @@ export default {
     ssl: true,
     mqttVersion: 3,
     timeout: 20,
-    keepAliveInterval: 30,
+    keepAliveInterval: 60*6,
     reconnect: true,
     cleanSession: true,
   },
