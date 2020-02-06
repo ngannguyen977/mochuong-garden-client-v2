@@ -58,12 +58,12 @@ class ListPage extends React.Component {
       keyword,
     })
   }
-  onLoadMore = () => {
+  onLoadMore = (increase) => {
     const { match, getLog, location, log } = this.props
     this.setState({
       loading: true,
     });
-    count += 10
+    count += increase
     getLog(
       match.params.cn, undefined, count
     )
@@ -96,7 +96,7 @@ class ListPage extends React.Component {
             lineHeight: '32px',
           }}
         >
-          <Button onClick={this.onLoadMore}>loading more</Button>
+          <Button onClick={() => this.onLoadMore(20)}>loading more</Button>
         </div>
       ) : null;
 
@@ -104,6 +104,9 @@ class ListPage extends React.Component {
     console.log('list', date)
     return (
       <div className='observer-log-page'>
+         <div className='text-right'>
+          <Button onClick={() => this.onLoadMore(0)}>Refresh</Button>
+        </div>
         <List
           className='demo-loadmore-list'
           loading={initLoading}

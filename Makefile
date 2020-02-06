@@ -1,14 +1,14 @@
 
 
 APP_NAME :=iot-observe
-VERSION := $(shell git describe --tags --abbrev=0)
+VERSION := v1.0.0
 DOCKER_USER=eneoti
 DOCKER_REPO=754404031763.dkr.ecr.ap-southeast-1.amazonaws.com
 HOST=localhost:8080
-HELM := $(shell helm ls|grep '$(APP_NAME)')
-ifeq ($(VERSION),)
-	VERSION:= "v1.0"
-endif
+# HELM := $(shell helm ls|grep '$(APP_NAME)')
+# ifeq ($(VERSION),)
+# 	VERSION:= "v1.0"
+# endif
 # HELP
 # This will output the help for each task
 # thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
@@ -28,11 +28,11 @@ clear-none:
 	docker rmi -f `docker images -a |grep 'none'|awk '{print \$$3}'`
 
 clear:
-ifeq ($(HELM),)
-	echo 'not exist $(APP_NAME)'
-else
+# ifeq ($(HELM),)
+# 	echo 'not exist $(APP_NAME)'
+# else
 	helm delete $(APP_NAME) --purge
-endif
+# endif
 	docker rmi -f `docker images -a |grep '$(APP_NAME)'|awk '{print\$$3}'`
 
 clearall:
