@@ -327,6 +327,16 @@ function formatPhoneNumber(phoneNumberString) {
   }
   return null
 }
+export const getFullName = (firstName, lastName) => {
+  if(!firstName){
+    return "No Name"
+  }
+  if (!lastName || lastName.replace(/\s/g,'') === firstName.replace(/\s/g,'')) {
+    return firstName
+  }
+
+  return `${firstName} ${lastName}`
+}
 
 function detectTemplate(template) {
   switch (template) {
@@ -388,5 +398,6 @@ export default {
   parseResourceOrn,
   pruneText,
   formatPhoneNumber,
-  detectTemplate
+  detectTemplate,
+  getFullName
 }

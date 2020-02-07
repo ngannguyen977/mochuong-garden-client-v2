@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import DetailPage from './detail'
 import ThingPage from './things'
 import LogPage from './log'
+import InfoPage from './info'
 import NotificationPage from './notification'
 import { Input, Button, Tabs, Icon } from 'antd'
 
@@ -25,14 +26,14 @@ export class DetailTabPage extends React.Component {
         return (
             <div className='user-detail'>
                 <Tabs defaultActiveKey='0' >
-                    <TabPane tab={<span><Icon type='info-circle' />Notification</span>} key='0'>
+                    <TabPane tab={<span><Icon type='info-circle' />Notification</span>} key='2'>
                         <NotificationPage location={this.props.location} match={this.props.match} history={this.props.history} />
                     </TabPane>
                     <TabPane tab={<span><Icon type='info-circle' />Devices</span>} key='1'>
                         <ThingPage location={this.props.location} match={this.props.match} history={this.props.history} />
                     </TabPane>
-                    <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='2'>
-                        <DetailPage location={this.props.location} match={this.props.match} history={this.props.history} />
+                    <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='0'>
+                        <InfoPage location={this.props.location} match={this.props.match} history={this.props.history} />
                     </TabPane>
                     <TabPane tab={<span><Icon type='info-circle' />Activity Log</span>} key='3'>
                         <LogPage location={this.props.location} match={this.props.match} history={this.props.history} />

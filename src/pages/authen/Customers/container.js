@@ -101,7 +101,7 @@ export const mapStateToProps = (state, props) => {
     page: client.page,
     data: client.clients || [],
     // detail
-    detail: client.detail,
+    detail: client.detail||{},
     // model
     steps,
     summaryColumns,
@@ -111,8 +111,9 @@ export const mapStateToProps = (state, props) => {
     clientUpdate: (client.detail || {}).clientUpdate || {},
     // thing
     thing: state.thing,
-    log: state.customer.log||[],
-    notifications: state.customer.notification||[]
+    log: client.log||[],
+    notifications: client.notification||[],
+    observer: state.app.userState||{}
   }
 }
 
