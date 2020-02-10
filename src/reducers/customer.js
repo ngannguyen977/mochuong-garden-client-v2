@@ -319,6 +319,82 @@ export const changePassword = (id, model) => (dispatch, getState) => {
       message.error(errorMessage)
     })
 }
+export const addSetting = ({
+  masterPhone,
+  phoneNumber1,
+  phoneNumber2
+}) => (dispatch, getState) => {
+  // convert to json string
+  let phoneNumbers = []
+  if (masterPhone) {
+    phoneNumbers.push({
+      "Id": 1,
+      "countryPrefix": "+84",
+      "fullNumber": "+84" + masterPhone,
+      "phone": masterPhone,
+      "locale": "vi-VN",
+      "isActive": true,
+      "isMobile": true,
+      "isMaster": true,
+      "isSmsEnabled": true,
+      "isCallEnabled": true
+    })
+  }
+  if (phoneNumber1) {
+    phoneNumbers.push({
+      "Id": 1,
+      "countryPrefix": "+84",
+      "fullNumber": "+84" + phoneNumber1,
+      "phone": phoneNumber1,
+      "locale": "vi-VN",
+      "isActive": true,
+      "isMobile": true,
+      "isMaster": false,
+      "isSmsEnabled": true,
+      "isCallEnabled": true
+    })
+  }
+  if (phoneNumber2) {
+    phoneNumbers.push({
+      "Id": 1,
+      "countryPrefix": "+84",
+      "fullNumber": "+84" + phoneNumber2,
+      "phone": phoneNumber2,
+      "locale": "vi-VN",
+      "isActive": true,
+      "isMobile": true,
+      "isMaster": false,
+      "isSmsEnabled": true,
+      "isCallEnabled": true
+    })
+  }
+  if (phoneNumbers.length === 0){
+    return
+  }
+  let _model = {
+    "quota": 60,
+    "phoneNumbers": phoneNumbers
+  }
+  let model = {
+    // "isAllowRegister": true,
+    other: {
+      value: JSON.stringify(_model)
+    },
+  }
+  const {userState} = getState().app
+  axios
+    .post(`${api.host}/clients/setting/${userState.customer.accountNumber}?is_observe=true`, model)
+    .then(response => {
+      notification["success"]({
+        message: "Update client setting success!",
+        description: "The setting of this client is changed successfully!",
+      })
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || "update clients fail"
+      message.error(errorMessage)
+    })
+}
 export const sendEmail = (to) => (dispatch, getState) => {
   const {
     userState
