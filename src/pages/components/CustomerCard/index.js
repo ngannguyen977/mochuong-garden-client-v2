@@ -19,7 +19,7 @@ class UserCard extends React.Component {
       name = user.firstName
     }
     return (
-      <div className={`userCard px-3 py-5 ${type.length > 0 ? "userCard--typed bg-" + type : ""}`}>
+      <div className={`userCard text-blind px-3 py-5 ${type.length > 0 ? "userCard--typed bg-" + type : ""}`}>
         <button className='userCard__plusBtn'>Add</button>
         <Avatar
           src={user.imageUrl || defaultAvatar}

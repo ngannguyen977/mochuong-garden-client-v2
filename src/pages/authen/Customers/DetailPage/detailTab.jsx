@@ -18,22 +18,22 @@ const TabPane = Tabs.TabPane;
 )
 export class DetailTabPage extends React.Component {
     componentDidMount() {
-        const { getOne,match } = this.props
+        const { getOne, match } = this.props
         getOne(match.params.cn)
     }
     render() {
 
         return (
-            <div className='user-detail'>
+            <div className='customer-detail'>
                 <Tabs defaultActiveKey='0' >
-                    <TabPane tab={<span><Icon type='info-circle' />Notification</span>} key='2'>
-                        <NotificationPage location={this.props.location} match={this.props.match} history={this.props.history} />
-                    </TabPane>
-                    <TabPane tab={<span><Icon type='info-circle' />Devices</span>} key='1'>
-                        <ThingPage location={this.props.location} match={this.props.match} history={this.props.history} />
-                    </TabPane>
                     <TabPane tab={<span><Icon type='info-circle' />Information</span>} key='0'>
                         <InfoPage location={this.props.location} match={this.props.match} history={this.props.history} />
+                    </TabPane>
+                    <TabPane tab={<span><Icon type='info-circle' />Notification</span>} key='1'>
+                        <NotificationPage location={this.props.location} match={this.props.match} history={this.props.history} />
+                    </TabPane>
+                    <TabPane tab={<span><Icon type='info-circle' />Devices</span>} key='2'>
+                        <ThingPage location={this.props.location} match={this.props.match} history={this.props.history} />
                     </TabPane>
                     <TabPane tab={<span><Icon type='info-circle' />Activity Log</span>} key='3'>
                         <LogPage location={this.props.location} match={this.props.match} history={this.props.history} />

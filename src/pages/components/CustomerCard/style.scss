@@ -26,14 +26,16 @@
   }
 
   &__post {
-     color: $text-lighten;
-     span{
-       color: darkgreen;
-     }
-     p{
+    color: $text-lighten;
+
+    span {
+      color: darkgreen;
+    }
+
+    p {
       margin-bottom: 0;
 
-     }
+    }
   }
 
   &__plusBtn {
@@ -58,6 +60,7 @@
       width: 1px;
       background: $gray;
     }
+
     &:before {
       content: "";
       position: absolute;
@@ -67,12 +70,14 @@
       top: rem(9);
       background: $gray;
     }
+
     &:hover {
       opacity: 1;
     }
   }
-  .style-icon{
-    i{
+
+  .style-icon {
+    i {
       font-size: 16px;
     }
   }

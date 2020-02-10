@@ -1,12 +1,101 @@
-.user-create-step-1{
- .review-img{
-     max-width: 100px;
- }
+.user-create-step-1 {
+    .review-img {
+        max-width: 100px;
+    }
 }
-.thing-detail{
-    &__user{
-        .user-card{
+
+.thing-detail {
+    &__user {
+        .user-card {
             margin-bottom: 10px;
         }
     }
+}
+
+.customer-page {
+    .container-blind {
+        // width: 500px;
+        // margin: auto;
+    
+        /*Neon*/
+        .blind {
+          text-align: center;
+        //   font-size: 7em;
+        //   margin: 20px 0 20px 0;
+        }
+    
+        .text-blind {
+          text-decoration: none;
+          -webkit-transition: all 0.5s;
+          -moz-transition: all 0.5s;
+          transition: all 0.5s;
+        }
+    
+        .blind .text-blind {
+          background-color: #fff;
+          font-family: Monoton;
+          -webkit-animation: neon1 0.5s ease-in-out infinite alternate;
+          -moz-animation: neon1 0.5s ease-in-out infinite alternate;
+          animation: neon1 0.5s ease-in-out infinite alternate;
+        }
+    
+        .blind .text-blind:hover {
+          background-color: rgb(255, 17, 77);
+          -webkit-animation: none;
+          -moz-animation: none;
+          animation: none;
+        }
+    
+        .blind .text-blind:hover {
+          background-color: #ffffff;
+        }
+    
+        /*glow for webkit*/
+    
+        @-webkit-keyframes neon1 {
+          from {
+            box-shadow: inset 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 100px #FF1177;
+          }
+    
+          to {
+            box-shadow: inset 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+          }
+        }
+    
+        /*glow for mozilla*/
+    
+        // @-moz-keyframes neon1 {
+        //   from {
+        //     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #FF1177;
+        //   }
+    
+        //   to {
+        //     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+        //   }
+        // }
+    
+        /*glow*/
+    
+        @keyframes neon1 {
+          from {
+            box-shadow: inset 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 100px #FF1177;
+          }
+    
+          to {
+            box-shadow: inset 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #FF1177;
+          }
+        }
+    
+        /*REEEEEEEEEEESPONSIVE*/
+    
+        // @media (max-width: 650px) {
+        //   #container {
+        //     width: 100%;
+        //   }
+    
+        //   .blind {
+        //     font-size: 3.5em;
+        //   }
+        // }
+      }
 }

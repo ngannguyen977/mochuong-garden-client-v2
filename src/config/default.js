@@ -1,8 +1,11 @@
 export default {
+  google:{
+    key:'AIzaSyC3759DMY8J3Ax-pHog-rGl4X_h2aUk-fs'
+  },
   api: {
     authen: {
       host: "https://api.onskycloud.com/authen/v1/api",
-      // host: "http://localhost:9090/v1/api",
+      // host: "http://system-authen-service.micro:8082/v1/api",
       login: "auth/observe",
       info: "auth/me",
       register: "clients",
@@ -25,29 +28,19 @@ export default {
       group: "groups",
       user: "users",
     },
-    resource: {
-      // host: 'http://localhost:8081/v1/api',
-      host: "https://api.onskycloud.com/resource-service",
-      token: "sdfiusfi98234632rwhczyr392yr02u-23r9t34uy23r9t3fsfskhfo",
-      service: "services",
-      serviceSummary: "summary",
-      serviceGetByShortName: "shortname",
-      serviceGetActions: "actions",
-      serviceCreate: "register",
-      serviceDisable: "disable",
-      serviceEnable: "enable",
-      serviceDelete: "shortname",
-      serviceDeletes: "deletes",
-    },
     micro: {
       host: "https://lambda-api.onskycloud.com",
+      // host: "http://micro-api.lambda",
       iot: "system-micro-iot-srv/IotSvc",
+      statistic:"system-micro-statistic-srv/SystemSvc",
       notification:"customer-micro-simple-notification-srv/NotificationSvc",
       getLog: "HistoryByCustomer",
-      getLogForThing: "HistoryBySerial"
+      getLogForThing: "HistoryBySerial",
+      sendEmail:"SendObserverEmailAPI"
     },
     iot: {
       host: "https://api.onskycloud.com/iot-service/v1/api",
+      // host: "http://system-iot-service.micro:8082/v1/api",
       certificate: "certificates",
       configures: "configures",
       policies: "policies",

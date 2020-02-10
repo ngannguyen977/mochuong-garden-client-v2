@@ -5,7 +5,8 @@ import {
   create,
   destroy,
   getLog,
-  getNotification
+  getNotification,
+  sendEmail
 } from "reducers/customer"
 import {
   getList as getThings,
@@ -88,6 +89,7 @@ export const mapDispathToProps = {
   create: (model, iscreate) => create(model, iscreate),
   destroy: clientNames => destroy(clientNames),
   getOne: cn => getOne(cn),
+  sendEmail: to => sendEmail(to),
   getLog: (customerNumber, propertyName, limit) => getLog(customerNumber, propertyName, limit),
   getNotification: (cn,serial, limit) => getNotification(cn,serial, limit)
 }

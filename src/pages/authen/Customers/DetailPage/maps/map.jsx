@@ -1,5 +1,5 @@
 import React from 'react'
-import data from '../data.json'
+import constant from '../../../../../config/default'
 const { compose, withProps, lifecycle } = require("recompose");
 const {
   withScriptjs,
@@ -10,9 +10,9 @@ const {
 
 const MapWithADirectionsRenderer = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyC3759DMY8J3Ax-pHog-rGl4X_h2aUk-fs&v=3.exp&libraries=geometry,drawing,places",
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${constant.google.key}&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: <div style={{ height: `600px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withScriptjs,

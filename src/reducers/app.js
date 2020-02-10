@@ -14,6 +14,7 @@ import {
   notification
 } from "antd"
 import axios from "axios"
+import {setclientPage} from 'reducers/customer'
 import constant from "../config/default"
 import mqtt from "../services/mqtt"
 import helper from '../helper'
@@ -64,26 +65,47 @@ export const resetHideLogin = () => (dispatch, getState) => {
 }
 export const connectMqtt = () => (dispatch, getState) => {
   mqtt.connect(message => {
-    const {
-      currentThing
-    } = getState().app
-    // console.log(currentThing, message.topic)
     // handle message
     let topics = (message.topic || "").split("/")
-    if (topics.length > 2 && topics[1] === currentThing) {
-      if (!topics[2].includes("command")) {
-        let name = message.topic.split("/").pop()
-        let value = JSON.parse(message.payload).value
-         console.log("receive device status", name, value)
-       
-      } else {
-        let name = message.topic.split("/")[2]
-        helper.xmlHelper.parseXML(message.payload, result => {
-          console.log("receive device status 2", message,result)
-        })
-      }
-
+    if (topics.length < 3) {
+      return
     }
+    let serial = topics[1]
+    // get info customer by thing serial
+    let things = JSON.parse(window.localStorage.getItem("app.things")) || []
+    let thing = things.find(x => x.serial === serial)
+    if (!thing) {
+      return
+    }
+    let {clients,totalItems } = getState().customer
+    let client = (clients||[]).find(x=>x.accountNumber === thing.customerNumber)
+    if (!client){
+      return
+    }
+    let name = helper.getFullName(client.firstName,client.lastName)
+    // popup info message
+    notification.open({
+      type: "warning",
+      message: name,
+      description: `Khách hàng ${name} có kẻ lạ đột nhập! Vui lòng kiểm tra!`,
+    })
+    // move this user to first item
+    clients = clients.sort(function(x,y){ return x.accountNumber == thing.customerNumber ? -1 : y.accountNumber == thing.customerNumber ? 1 : 0; });
+    clients[0].isWarning =true
+   
+    dispatch(setclientPage({
+      clients,
+      page:0,
+      totalItems
+    }))
+    setTimeout(() => {
+      clients[0].isWarning = false
+      dispatch(setclientPage({
+        clients,
+        page:0,
+        totalItems
+      }))
+    }, 1000*60);
   })
 }
 export const login = (customer, username, password, dispatch) =>

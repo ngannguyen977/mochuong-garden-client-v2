@@ -119,7 +119,7 @@ class ListPage extends React.Component {
                   avatar={
                     <Avatar src={helper.detectTemplate(item.TemplateName)} />
                   }
-                title={<a href='#'>{item.descriptionVN}</a>}
+                title={<a href='#' style={{fontSize:26}}>{item.descriptionVN}</a>}
                   description={item.Description}
                 />
           <div><TimeAgo date={new Date(item.DateTime)} /></div>

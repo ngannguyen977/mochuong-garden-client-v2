@@ -7,6 +7,7 @@ import LockScreenPage from "../../../DefaultPages/LockscreenPage/Lockscreen"
 import helper from "../../../../helper"
 import { Checkbox, Popover, Icon, Popconfirm, message } from "antd"
 import "../../../../resources/style.scss"
+import '../style.scss'
 import CustomerCard from '../../../components/CustomerCard'
 
 @connect(
@@ -74,7 +75,7 @@ class UserPage extends React.Component {
 
 
     return (
-      <div className='user-page'>
+      <div className='customer-page'>
         <section className='card'>
           <div className='card-header'>
             <div className='utils__title'>
@@ -96,9 +97,9 @@ class UserPage extends React.Component {
             </div>}
           </div>
           <div className='card-body'>
-            <div className='row thing-detail__user'>
+            <div className='row thing-detail__user container-blind'>
               {totalItems > 0 && data.map(x =>
-                <div className='col-md-4 col-xs-6 user-card' key={x.id}>
+                <div className={`col-md-4 col-xs-6 user-card  ${x.isWarning?'blind':''}`} key={x.id}>
                   <CustomerCard
                     user={x}
                     userPageAction={this.handleActions}

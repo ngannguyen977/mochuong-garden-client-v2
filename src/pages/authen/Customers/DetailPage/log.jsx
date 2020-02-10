@@ -100,8 +100,6 @@ class ListPage extends React.Component {
         </div>
       ) : null;
 
-      var date = new Date(1579970737*1000)
-    console.log('list', date)
     return (
       <div className='observer-log-page'>
          <div className='text-right'>

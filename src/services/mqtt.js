@@ -71,10 +71,10 @@ export const connect = (callback) => {
     // if(packet.topic.includes('tpi_rev1_command')){
     //   console.log(packet)
     // }
-    console.log("onMessageArrived", packet.topic)
     // }
     if (callback && typeof callback === 'function') {
-      callback(packet)
+    // console.log("onMessageArrived", packet.topic)
+    callback(packet)
     }
   }
 }

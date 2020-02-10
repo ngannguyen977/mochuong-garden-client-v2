@@ -1,22 +1,34 @@
 @import '../../../../resources/_mixins';
 
 .profile {
-.text-yellow{
-  color: yellow;
-}
-.text-bold{
-  font-weight: 600;
-}
+  .send-email-wrap {
+    width: 100%;
+    display: inline-block;
+  }
+  .send-email-btn{
+    font-size: 20px;
+    height: 40px;
+  }
+
+  .text-yellow {
+    color: yellow;
+  }
+
+  .text-bold {
+    font-weight: 600;
+  }
+
   &__header {
     background-size: cover;
   }
+
   &__social-info {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: rem(20);
-    padding-bottom:rem(15);
+    padding-bottom: rem(15);
   }
 
   &__social-counts {
@@ -72,9 +84,11 @@
       padding-bottom: rem(20);
       border-bottom: 1px solid $gray-border;
     }
+
     &-avatar {
       float: left;
     }
+
     &-content {
       margin-left: rem(70);
 
@@ -82,9 +96,11 @@
         border: none;
       }
     }
+
     &-comments {
       margin-top: rem(20);
     }
+
     &-message-img {
       border-radius: 3px;
       margin: 0 rem(5) rem(10) 0px;

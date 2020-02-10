@@ -38,12 +38,12 @@ export default [
   //   url: '/templates',
   //   icon: 'icmn icmn-paragraph-left',
   // },
-  {
-    title: 'Manage Things',
-    key: 'thing',
-    url: '/things',
-    icon: 'icmn icmn-yelp',
-  },
+  // {
+  //   title: 'Manage Things',
+  //   key: 'thing',
+  //   url: '/things',
+  //   icon: 'icmn icmn-yelp',
+  // },
   // {
   //   divider: true,
   // },

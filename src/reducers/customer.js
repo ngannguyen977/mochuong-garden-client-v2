@@ -22,9 +22,11 @@ const NS = `@@${REDUCER}/`
 const api = constant.api.authen
 const clientApi = `${api.host}/${api.observer}`
 const passwordApi = `${api.host}/${api.password}`
+const micro = constant.api.micro
 const thingApi = `${constant.api.iot.host}/${constant.api.iot.thing}`
-const iotMicroApi = `${constant.api.micro.host}/${constant.api.micro.iot}`
-const notificationApi = `${constant.api.micro.host}/${constant.api.micro.notification}`
+const iotMicroApi = `${micro.host}/${micro.iot}`
+const notificationApi = `${micro.host}/${micro.notification}`
+const emailApi = `${micro.host}/${micro.statistic}`
 
 export const setclientPage = createAction(`${NS}SET_CLIENT_PAGE`)
 export const setclientDetailPage = createAction(`${NS}SET_CLIENT_DETAIL_PAGE`)
@@ -183,7 +185,7 @@ export const getLog = (customerNumber, propertyName, limit = 20) => (dispatch, g
   axios
     .get(`${iotMicroApi}/${constant.api.micro.getLog}?customer_number=${customerNumber}&limit=${limit}`)
     .then(response => {
-        dispatch(setclientLogPage(response.data))
+      dispatch(setclientLogPage(response.data))
     })
     .catch(error => {
       console.log(error)
@@ -191,15 +193,15 @@ export const getLog = (customerNumber, propertyName, limit = 20) => (dispatch, g
       message.error(errorMessage)
     })
 }
-export const getNotification = (cn,serial,  limit = 20) => (dispatch, getState) => {
+export const getNotification = (cn, serial, limit = 20) => (dispatch, getState) => {
   let url = `GetNotificationAPI?cn=${cn}&count=${limit}`
-  if(serial){
-    url+=`&serial=${serial}`
+  if (serial) {
+    url += `&serial=${serial}`
   }
   axios
     .get(`${notificationApi}/${url}`)
     .then(response => {
-        dispatch(setclientNotificationPage(response.data))
+      dispatch(setclientNotificationPage(response.data))
     })
     .catch(error => {
       console.log(error)
@@ -314,6 +316,44 @@ export const changePassword = (id, model) => (dispatch, getState) => {
     })
     .catch(error => {
       let errorMessage = ((error.response || {}).data || {}).message || "update groups fail"
+      message.error(errorMessage)
+    })
+}
+export const sendEmail = (to) => (dispatch, getState) => {
+  const {
+    userState
+  } = getState().app
+  const {
+    detail
+  } = getState().customer
+
+  let customer = userState.customer || {}
+  let phone = detail.mobile
+  let setting = detail.setting || {}
+  if (setting.other && setting.other.value) {
+    let data = JSON.parse(setting.other.value)
+    if (data && data.phoneNumbers && Array.isArray(data.phoneNumbers) && data.phoneNumbers.length > 0) {
+      let phoneNumbers = data.phoneNumbers.map(x => x.fullNumber)
+      phone = phoneNumbers.join(',')
+    }
+  }
+  let model = {
+    to: to,
+    origin: customer.address1,
+    destination: detail.address1,
+    customer: helper.getFullName(detail.firstName, detail.lastName),
+    phone: phone,
+  }
+  axios
+    .post(`${emailApi}/${micro.sendEmail}`, model)
+    .then(response => {
+      notification["success"]({
+        message: "Send email success!",
+        description: "The email was sent successfully!",
+      })
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || "send email fail"
       message.error(errorMessage)
     })
 }
