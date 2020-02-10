@@ -5,7 +5,6 @@ export default {
   api: {
     authen: {
       host: "https://api.onskycloud.com/authen/v1/api",
-      // host: "http://system-authen-service.micro:8082/v1/api",
       login: "auth/observe",
       info: "auth/me",
       register: "clients",
@@ -22,7 +21,6 @@ export default {
       setting:"clients/setting"
     },
     policy: {
-      // host: 'http://localhost:8080/v1/api',
       host: "https://api.onskycloud.com/policy-service/v1/api",
       token: "iot-frontend-client-token",
       policy: "policies",
@@ -31,7 +29,6 @@ export default {
     },
     micro: {
       host: "https://lambda-api.onskycloud.com",
-      // host: "http://micro-api.lambda",
       iot: "system-micro-iot-srv/IotSvc",
       statistic:"system-micro-statistic-srv/SystemSvc",
       notification:"customer-micro-simple-notification-srv/NotificationSvc",
@@ -41,7 +38,6 @@ export default {
     },
     iot: {
       host: "https://api.onskycloud.com/iot-service/v1/api",
-      // host: "http://system-iot-service.micro:8082/v1/api",
       certificate: "certificates",
       configures: "configures",
       policies: "policies",

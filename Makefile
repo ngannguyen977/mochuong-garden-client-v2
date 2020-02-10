@@ -111,4 +111,4 @@ gittag:
 quicktag: ungittag commit gittag
 build-project:
 	yarn build
-localDeploy: build-project build-docker publish clear deploy
+localDeploy: build-project build-nc publish clear deploy
