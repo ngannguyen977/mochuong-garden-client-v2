@@ -141,6 +141,8 @@ export const login = (customer, username, password, dispatch) =>
                 },
               }),
             )
+            // connect mqtt
+            dispatch(connectMqtt())
             notification.open({
               type: "success",
               message: "You have successfully logged in!",
