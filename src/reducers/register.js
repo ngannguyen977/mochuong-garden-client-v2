@@ -8,14 +8,13 @@ import { notification } from 'antd'
 export const REDUCER = 'register'
 
 const api = constant.api.authen
-const registerApi = `${api.host}/${api.register}`
+const registerApi = `${api.host}/${api.observer}`
 
 export const submit = model => (dispatch, getState) => {
   model.customerNumber = constant.customer.number
   axios
     .post(registerApi, model)
     .then(response => {
-      console.log(response)
       if (response && response.data) {
         dispatch(setAccessConfirmPage(true))
         dispatch(push('/customers/activate'))
