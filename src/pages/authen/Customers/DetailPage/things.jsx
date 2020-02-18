@@ -20,12 +20,11 @@ class ListPage extends React.Component {
     keyword: "",
     tags: [],
   }
-  UNSAFE_componentWillMount() {
-    const { match, getThings, location } = this.props
-    const { keyword, limit, page, sort, isAsc } = queryString.parse(location.search)
-    console.log('param', match)
-    getThings(keyword, limit, page, sort, isAsc, match.params.cn)
-  }
+ componentDidMount(){
+  const { match, getThings, location, getListByGraphQL } = this.props
+  const { keyword, limit, page, sort, isAsc } = queryString.parse(location.search)
+  getThings(keyword, limit, page, sort, isAsc, match.params.cn)
+ }
   UNSAFE_componentWillReceiveProps() {
     const { totalItems } = this.props
     const { pagination } = this.state

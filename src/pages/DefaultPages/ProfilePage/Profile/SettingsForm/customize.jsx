@@ -43,19 +43,19 @@ const CustomizedForm = Form.create({
           <div className="col-lg-6">
             <Form.Item>
               <label className="form-label mb-0">Master Phone Number</label>
-              {getFieldDecorator('masterPhone')(<Input addonBefore="+84" placeholder="New Master Phone Number" />)}
+              {getFieldDecorator('masterPhone')(<Input defaultValue={props.masterPhone.value} addonBefore="+84" placeholder="New Master Phone Number" />)}
             </Form.Item>
           </div>
           <div className="col-lg-6">
             <Form.Item>
               <label className="form-label mb-0">Phone Number 1</label>
-              {getFieldDecorator('phoneNumber1')(<Input addonBefore="+84" placeholder="New Phone Number 1" />)}
+              {getFieldDecorator('phoneNumber1')(<Input defaultValue={props.phoneNumber1.value} addonBefore="+84" placeholder="New Phone Number 1" />)}
             </Form.Item>
           </div>
           <div className="col-lg-6">
             <Form.Item>
               <label className="form-label mb-0">Phone Number 2</label>
-              {getFieldDecorator('phoneNumber2')(<Input addonBefore="+84" placeholder="New Phone Number 2" />)}
+              {getFieldDecorator('phoneNumber2')(<Input defaultValue={props.phoneNumber2.value} addonBefore="+84" placeholder="New Phone Number 2" />)}
             </Form.Item>
           </div>
         </div>
@@ -92,9 +92,7 @@ class SettingsForm extends React.Component {
   componentDidMount(){
     const {phone,onSubmit} = this.props
     if(phone){
-      this.setState(({ fields }) => ({
-        fields: phone,
-      }));
+      this.setState({fields: phone});
     }
   }
 

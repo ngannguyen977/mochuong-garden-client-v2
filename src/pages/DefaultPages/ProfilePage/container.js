@@ -24,20 +24,20 @@ export const mapStateToProps = (state, props) => {
   let customer = (state.app.userState || {}).customer || {}
   let _otherSetting = ((customer.setting || {}).other || {}).value
   if (!_otherSetting || _otherSetting == "") {
-    _otherSetting = `{\"quota\":60,\"phoneNumbers\":[]}`
+    _otherSetting = `{\"quota\":60,\"phoneNumbers\":[{}]}`
   }
   let otherSetting = JSON.parse(_otherSetting)
-  if (otherSetting.PhoneNumbers && otherSetting.PhoneNumbers.length > 0) {
-    let masterPhone = otherSetting.PhoneNumbers.find(x => x.isMaster)
+  if (otherSetting.phoneNumbers.length > 0) {
+    let masterPhone = otherSetting.phoneNumbers.find(x => x.isMaster)
     if (!masterPhone) {
-      masterPhone = otherSetting.PhoneNumbers[0]
+      masterPhone = otherSetting.phoneNumbers[0]
     }
-    phone.masterPhone = masterPhone
-    if (otherSetting.PhoneNumbers.length === 2) {
-      phone.phoneNumber1 = otherSetting.PhoneNumbers[1]
+    phone.masterPhone.value = masterPhone.phone
+    if (otherSetting.phoneNumbers.length === 2) {
+      phone.phoneNumber1.value = otherSetting.phoneNumbers[1].phone
     }
-    if (otherSetting.PhoneNumbers.length === 3) {
-      phone.phoneNumber1 = otherSetting.PhoneNumbers[2]
+    if (otherSetting.phoneNumbers.length === 3) {
+      phone.phoneNumber1.value = otherSetting.phoneNumbers[2].phone
     }
   }
 

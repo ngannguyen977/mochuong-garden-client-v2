@@ -1,6 +1,7 @@
 import { createAction, createReducer } from "redux-act"
 import { message } from "antd"
 import axios from "axios"
+import {getList as getCustomers} from 'reducers/customer'
 import constant from "../config/default"
 import { notification } from "antd"
 import {
@@ -505,6 +506,39 @@ export const deleteThingPolicy = (userUuid, thingName) => (dispatch, getState) =
     })
     .catch(err => {
       console.log(err)
+    })
+}
+export const commandThing = (cn,serial,propertyCommand,propertyName,isGateway,payload) => (dispatch, getState) => {
+  let {
+    detail
+  } = getState().thing
+  if (!serial) {
+    return
+  }
+  let topic = `things/${serial}/${propertyName}/${serial}/${propertyCommand}`
+  if(isGateway){
+    topic= `things/${serial}/${propertyName}/${serial}/gateway/${propertyCommand}`
+  }
+  let packet = {
+    "payload": payload,
+    "qos": 0,
+    "retain": false,
+    "topic": topic
+  }
+  axios
+    .post(`${thingApi}/control/command?cn=${cn}`, packet)
+    .then(response => {
+      setTimeout(() => {
+        dispatch(getCustomers())
+        notification["success"]({
+          message: "command thing success!",
+          description: "These things will be delete permanly shortly in 1 month. In that time, if you re-create these thing, we will revert information for them.",
+        })
+      }, 3000);
+    })
+    .catch(error => {
+      let errorMessage = ((error.response || {}).data || {}).message || "command thing fail"
+      message.error(errorMessage)
     })
 }
 const initialState = {

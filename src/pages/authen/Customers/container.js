@@ -6,13 +6,14 @@ import {
   destroy,
   getLog,
   getNotification,
-  sendEmail
+  sendEmail,
 } from "reducers/customer"
 import {
   getList as getThings,
   getListByGraphQL,
   createThingPolicy,
-  removeThingPolicy
+  removeThingPolicy,
+  commandThing
 } from "reducers/thing"
 import helper from "../../../helper"
 
@@ -91,10 +92,12 @@ export const mapDispathToProps = {
   getOne: cn => getOne(cn),
   sendEmail: to => sendEmail(to),
   getLog: (customerNumber, propertyName, limit) => getLog(customerNumber, propertyName, limit),
-  getNotification: (cn,serial, limit) => getNotification(cn,serial, limit)
+  commandThing: (cn,serial,propertyCommand,propertyName,isGateway,payload) => commandThing(cn,serial,propertyCommand,propertyName,isGateway,payload),
+  getNotification: (cn, serial, limit) => getNotification(cn, serial, limit),
 }
 export const mapStateToProps = (state, props) => {
   let client = state.customer || {}
+  // get security status 
   return {
     // master
     client,
@@ -103,7 +106,7 @@ export const mapStateToProps = (state, props) => {
     page: client.page,
     data: client.clients || [],
     // detail
-    detail: client.detail||{},
+    detail: client.detail || {},
     // model
     steps,
     summaryColumns,
@@ -113,11 +116,13 @@ export const mapStateToProps = (state, props) => {
     clientUpdate: (client.detail || {}).clientUpdate || {},
     // thing
     thing: state.thing,
-    log: client.log||[],
-    notifications: client.notification||[],
-    observer: state.app.userState||{}
+    log: client.log || [],
+    notifications: client.notification || [],
+    observer: state.app.userState || {},
+    // gatewayStatus: getSecurityStatus(state.thing.things)
   }
 }
+
 
 export default {
   mapStateToProps,

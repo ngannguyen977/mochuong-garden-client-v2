@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button, Tabs, Upload, Icon, Input, Menu, Dropdown,message } from 'antd'
+import { Button, Tabs, Upload, Icon, Input, Menu, Dropdown, message, Tag, Divider } from 'antd'
 import './style.scss'
+import queryString from "query-string"
 import Avatar from 'components/CleanComponents/Avatar'
 import Donut from 'components/CleanComponents/Donut'
 import Chat from 'components/CleanComponents/Chat'
@@ -48,9 +49,6 @@ class ProfileApp extends React.Component {
     this.sendEmail = this.sendEmail.bind(this)
 
   }
-
-
-
   setModalEditVisible(isShowModal) {
     this.setState({
       modalEditVisible: isShowModal,
@@ -58,40 +56,141 @@ class ProfileApp extends React.Component {
     })
   }
   componentDidMount() {
-    setTimeout(() => {
-      let element = document.getElementsByClassName('info-body')
-      console.log('capturing...')
-      
-      html2canvas(element[0],{
-        useCORS: true,
-        allowTaint: true,
-        ignoreElements: (node) => {
-          return node.nodeName === 'IFRAME';
-        }
-      }).then(function (canvas) {
-        let image = canvas.toDataURL('image/png');
-        window.localStorage.setItem("map",image)
-      });
-    }, 1000 *5);
+    // setTimeout(() => {
+    //   let element = document.getElementsByClassName('info-body')
+    //   console.log('capturing...')
+
+    //   html2canvas(element[0], {
+    //     useCORS: true,
+    //     allowTaint: true,
+    //     ignoreElements: (node) => {
+    //       return node.nodeName === 'IFRAME';
+    //     }
+    //   }).then(function (canvas) {
+    //     let image = canvas.toDataURL('image/png');
+    //     window.localStorage.setItem("map", image)
+    //   });
+    // }, 1000 * 5);
   }
-  sendEmail(event){
-    if(event && event.key !== 'Enter'){
+  sendEmail(event) {
+    if (event && event.key !== 'Enter') {
       return
     }
-    let {to} = this.state
-    if(!to){
+    let { to } = this.state
+    if (!to) {
       message.warn('please input your securities email')
       return
     }
-    const {sendEmail} = this.props
+    const { sendEmail } = this.props
     sendEmail(to)
     // TODO:
     // save image to storage
     // disable button in 1 minutes
     // call send email with TO and imageURL
   }
+  getGatewayStatus (cn) {
+    let defaultStatus = {
+      securityStatus: 0,
+      safetyStatus: 1
+    }
+    if (!cn) {
+      return defaultStatus
+    }
+    let things = JSON.parse(window.localStorage.getItem("app.things"))
+  
+    if (!things || !Array.isArray(things) || things.length === 0) {
+      console.log('fail 2')
+      return defaultStatus
+    }
+    //  TODO: get all status of all gateway
+    let gateway = things.find(x => x.templateName === 'OnSky gateway' && x.customerNumber == cn)
+    if (!gateway || !gateway.properties || !Array.isArray(gateway.properties) || gateway.properties.length === 0) {
+      console.log('fail 4')
+      return defaultStatus
+    }
+    let securityProp = gateway.properties.find(x=>x.name === 'sec_mode' || (x.template && x.template.name === 'sec_mode'))
+    let safetyProp = gateway.properties.find(x=>x.name === 'safety_mode' || (x.template && x.template.name === 'safety_mode'))
+    let securityStatus = (securityProp || {}).value || ((securityProp || {}).template || {}).value
+    let safetyStatus = (safetyProp || {}).value || ((safetyProp || {}).template || {}).value
+    
+    return {
+      securityStatus,
+      safetyStatus,
+      serial: gateway.serial
+    }
+  }
+  changeSecurityStatus(type,serial,value) {
+    // get gateway serial
+    const { gatewayStatus,match } = this.props
+    let propertyName = ''
+    let propertyCommand =''
+    let isGateway = true
+    let payload =''
+    switch (type) {
+      case 'safety':
+        if (value>0){
+          value = 0
+        }else{
+          value = 1
+        }
+        propertyCommand = 'safetymode'
+        propertyName ='safety_mode'
+        payload = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><MQTTPayload><req_type>PUT</req_type><safety_sec_mode><safety_sec_mode_value>${value}</safety_sec_mode_value></safety_sec_mode></MQTTPayload>`
+        break
+      case 'security':
+        if (value<2){
+          value = +value+1
+        }else{
+          value = 0
+        }
+        propertyCommand = 'homesecmode'
+        propertyName ='sec_mode'
+        payload = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><MQTTPayload><req_type>PUT</req_type><home_sec_mode><home_sec_mode_value>${value}</home_sec_mode_value></home_sec_mode></MQTTPayload>`
+      default:
+        break;
+    }
+    this.props.commandThing(match.params.cn,serial,propertyCommand, propertyName, isGateway, payload)
+  }
+  getSecurityStatus(type, value) {
+    switch (type) {
+      case 'safety':
+        if (value == 0) {
+          return {
+            color: '#237804',
+            text: 'ENABLE',
+            value
+          }
+        }
+        return {
+          color: '#f5222d',
+          text: 'DISABLE',
+          value
+        }
+      case 'security':
+      default:
+        if (value == 2) {
+          return {
+            color: '#237804',
+            text: 'ARM AWAY',
+            value
+          }
+        }
+        if (value == 1) {
+          return {
+            color: '#237804',
+            text: 'ARM HOME',
+            value
+          }
+        }
+        return {
+          color: '#f5222d',
+          text: 'DISARM',
+          value
+        }
+    }
+  }
   render() {
-    const { detail, observer } = this.props
+    const { detail, observer, match } = this.props
     let {
       name,
       nickname,
@@ -100,8 +199,12 @@ class ProfileApp extends React.Component {
       post,
       postsCount,
       followersCount,
-      lastActivity,
+      lastActivity
     } = this.state
+    const gatewayStatus = this.getGatewayStatus(match.params.cn)
+    let securityStatus = this.getSecurityStatus('security', gatewayStatus.securityStatus)
+    let safetyStatus = this.getSecurityStatus('safety', gatewayStatus.safetyStatus)
+    console.log('gatewayStatus', gatewayStatus)
     return (
       <div className="profile">
         <div className="row">
@@ -114,7 +217,7 @@ class ProfileApp extends React.Component {
                 <div className="card-body text-center">
                   <Avatar src={photo} size="110" border="true" borderColor="white" />
                   <br />
-                  <br />
+                  {/* <br />
                   <Button.Group size="default">
                     <Button style={{ width: 150 }} onClick={() => this.setModalEditVisible(true)}>Send Email</Button>
                     <Button
@@ -124,7 +227,7 @@ class ProfileApp extends React.Component {
                       Manage Things
                     </Button>
                   </Button.Group>
-                  <br />
+                  <br /> */}
                   <p className="text-yellow text-bold mt-2">Last activity: <TimeAgo date={detail.updated_at} /></p>
                   <p className="text-white mt-2">
                     <Donut type="success" name="Online" />
@@ -153,6 +256,24 @@ class ProfileApp extends React.Component {
                 </div>
               </div> */}
             </div>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="card profile__social-info text-center">
+                  <h5>Security Status</h5>
+                  <Tag className='security-status' color={securityStatus.color} >{securityStatus.text}</Tag>
+                  <Button className='security-status security-operation' type='primary' onClick={() => this.changeSecurityStatus('security',gatewayStatus.serial,securityStatus.value)}>Change</Button>
+                </div>
+              </div>
+              <div className="col-md-6 text-right">
+                <div className="card profile__social-info text-center">
+                  <h5>Safety Status</h5>
+                  <Tag className='security-status' color={safetyStatus.color} >{safetyStatus.text}</Tag>
+                  <Button className='security-status security-operation' type='primary' onClick={() => this.changeSecurityStatus('safety',gatewayStatus.serial,safetyStatus.value)}>Change</Button>
+                </div>
+              </div>
+            </div>
+
+
             {/* <div className="card">
               <div className="card-body">
                 <h5 className="mb-3 text-black">
@@ -175,10 +296,10 @@ class ProfileApp extends React.Component {
             </div> */}
             <div className="card profile__social-info send-email-wrap">
               <div className="profile__social-name text-center">
-              <Input size="large" placeholder="@securities email" value={this.state.to} onChange={(e)=>this.setState({
-                to: e.target.value
-              })} onKeyPress={this.sendEmail}/>
-                <Button className='send-email-btn' type='primary' style={{ display: 'block', width: '100%' }}  onClick={()=>this.sendEmail()}>Send Email</Button>
+                <Input size="large" placeholder="@securities email" value={this.state.to} onChange={(e) => this.setState({
+                  to: e.target.value
+                })} onKeyPress={this.sendEmail} />
+                <Button className='send-email-btn' type='primary' style={{ display: 'block', width: '100%' }} onClick={() => this.sendEmail()}>Send Email</Button>
               </div>
               {/* <div className="profile__social-counts">
                 <div className="text-center mr-3">
