@@ -12,6 +12,7 @@ import TimeAgo from "react-timeago"
 import { getFullName } from '../../../../helper'
 import MapComponent from './maps/map'
 import html2canvas from 'html2canvas';
+import SettingForm from './SettingsForm/customize'
 
 const TabPane = Tabs.TabPane
 const { TextArea } = Input
@@ -44,7 +45,8 @@ class ProfileApp extends React.Component {
       drawer: false,
       modalEditVisible: false,
       newValue: "",
-      to: undefined
+      to: undefined,
+      phone:{}
     }
     this.sendEmail = this.sendEmail.bind(this)
 
@@ -88,7 +90,7 @@ class ProfileApp extends React.Component {
     // disable button in 1 minutes
     // call send email with TO and imageURL
   }
-  getGatewayStatus (cn) {
+  getGatewayStatus(cn) {
     let defaultStatus = {
       securityStatus: 0,
       safetyStatus: 1
@@ -97,7 +99,7 @@ class ProfileApp extends React.Component {
       return defaultStatus
     }
     let things = JSON.parse(window.localStorage.getItem("app.things"))
-  
+
     if (!things || !Array.isArray(things) || things.length === 0) {
       console.log('fail 2')
       return defaultStatus
@@ -108,48 +110,48 @@ class ProfileApp extends React.Component {
       console.log('fail 4')
       return defaultStatus
     }
-    let securityProp = gateway.properties.find(x=>x.name === 'sec_mode' || (x.template && x.template.name === 'sec_mode'))
-    let safetyProp = gateway.properties.find(x=>x.name === 'safety_mode' || (x.template && x.template.name === 'safety_mode'))
+    let securityProp = gateway.properties.find(x => x.name === 'sec_mode' || (x.template && x.template.name === 'sec_mode'))
+    let safetyProp = gateway.properties.find(x => x.name === 'safety_mode' || (x.template && x.template.name === 'safety_mode'))
     let securityStatus = (securityProp || {}).value || ((securityProp || {}).template || {}).value
     let safetyStatus = (safetyProp || {}).value || ((safetyProp || {}).template || {}).value
-    
+
     return {
       securityStatus,
       safetyStatus,
       serial: gateway.serial
     }
   }
-  changeSecurityStatus(type,serial,value) {
+  changeSecurityStatus(type, serial, value) {
     // get gateway serial
-    const { gatewayStatus,match } = this.props
+    const { gatewayStatus, match } = this.props
     let propertyName = ''
-    let propertyCommand =''
+    let propertyCommand = ''
     let isGateway = true
-    let payload =''
+    let payload = ''
     switch (type) {
       case 'safety':
-        if (value>0){
+        if (value > 0) {
           value = 0
-        }else{
+        } else {
           value = 1
         }
         propertyCommand = 'safetymode'
-        propertyName ='safety_mode'
+        propertyName = 'safety_mode'
         payload = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><MQTTPayload><req_type>PUT</req_type><safety_sec_mode><safety_sec_mode_value>${value}</safety_sec_mode_value></safety_sec_mode></MQTTPayload>`
         break
       case 'security':
-        if (value<2){
-          value = +value+1
-        }else{
+        if (value < 2) {
+          value = +value + 1
+        } else {
           value = 0
         }
         propertyCommand = 'homesecmode'
-        propertyName ='sec_mode'
+        propertyName = 'sec_mode'
         payload = `<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><MQTTPayload><req_type>PUT</req_type><home_sec_mode><home_sec_mode_value>${value}</home_sec_mode_value></home_sec_mode></MQTTPayload>`
       default:
         break;
     }
-    this.props.commandThing(match.params.cn,serial,propertyCommand, propertyName, isGateway, payload)
+    this.props.commandThing(match.params.cn, serial, propertyCommand, propertyName, isGateway, payload)
   }
   getSecurityStatus(type, value) {
     switch (type) {
@@ -190,7 +192,7 @@ class ProfileApp extends React.Component {
     }
   }
   render() {
-    const { detail, observer, match } = this.props
+    const { detail, observer, match,phone } = this.props
     let {
       name,
       nickname,
@@ -199,7 +201,7 @@ class ProfileApp extends React.Component {
       post,
       postsCount,
       followersCount,
-      lastActivity
+      lastActivity,
     } = this.state
     const gatewayStatus = this.getGatewayStatus(match.params.cn)
     let securityStatus = this.getSecurityStatus('security', gatewayStatus.securityStatus)
@@ -261,14 +263,14 @@ class ProfileApp extends React.Component {
                 <div className="card profile__social-info text-center">
                   <h5>Security Status</h5>
                   <Tag className='security-status' color={securityStatus.color} >{securityStatus.text}</Tag>
-                  <Button className='security-status security-operation' type='primary' onClick={() => this.changeSecurityStatus('security',gatewayStatus.serial,securityStatus.value)}>Change</Button>
+                  <Button className='security-status security-operation' type='primary' onClick={() => this.changeSecurityStatus('security', gatewayStatus.serial, securityStatus.value)}>Change</Button>
                 </div>
               </div>
               <div className="col-md-6 text-right">
                 <div className="card profile__social-info text-center">
                   <h5>Safety Status</h5>
                   <Tag className='security-status' color={safetyStatus.color} >{safetyStatus.text}</Tag>
-                  <Button className='security-status security-operation' type='primary' onClick={() => this.changeSecurityStatus('safety',gatewayStatus.serial,safetyStatus.value)}>Change</Button>
+                  <Button className='security-status security-operation' type='primary' onClick={() => this.changeSecurityStatus('safety', gatewayStatus.serial, safetyStatus.value)}>Change</Button>
                 </div>
               </div>
             </div>
@@ -342,7 +344,7 @@ class ProfileApp extends React.Component {
                     }
                     key="3"
                   >
-                    Come in soon
+                    <SettingForm history={history} phone={phone} updatePhones={this.updatePhones} />
                   </TabPane>
                 </Tabs>
               </div>

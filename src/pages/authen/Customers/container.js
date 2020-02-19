@@ -95,8 +95,56 @@ export const mapDispathToProps = {
   commandThing: (cn,serial,propertyCommand,propertyName,isGateway,payload) => commandThing(cn,serial,propertyCommand,propertyName,isGateway,payload),
   getNotification: (cn, serial, limit) => getNotification(cn, serial, limit),
 }
+
 export const mapStateToProps = (state, props) => {
   let client = state.customer || {}
+  let detail = client.detail || {}
+  let phone = {
+    firstName: {
+      value: ''
+    },
+    lastName: {
+      value: ''
+    },
+    address: {
+      value: ''
+    },
+    email: {
+      value: ''
+    },
+    masterPhone: {
+      value: ''
+    },
+    phoneNumber1: {
+      value: ''
+    },
+    phoneNumber2: {
+      value: ''
+    },
+  }
+  let _otherSetting = ((detail.setting || {}).other || {}).value
+  if (!_otherSetting || _otherSetting == "") {
+    _otherSetting = `{\"quota\":60,\"phoneNumbers\":[{}]}`
+  }
+  let otherSetting = JSON.parse(_otherSetting)
+  if (otherSetting.phoneNumbers.length > 0) {
+    let masterPhone = otherSetting.phoneNumbers.find(x => x.isMaster)
+    if (!masterPhone) {
+      masterPhone = otherSetting.phoneNumbers[0]
+    }
+    phone.masterPhone.value = masterPhone.phone
+    if (otherSetting.phoneNumbers.length === 2) {
+      phone.phoneNumber1.value = otherSetting.phoneNumbers[1].phone
+    }
+    if (otherSetting.phoneNumbers.length === 3) {
+      phone.phoneNumber1.value = otherSetting.phoneNumbers[2].phone
+    }
+  }
+  phone.firstName.value = detail.firstName
+  phone.lastName.value = detail.lastName
+  phone.email.value = detail.email
+  phone.address.value = detail.address1
+
   // get security status 
   return {
     // master
@@ -119,6 +167,7 @@ export const mapStateToProps = (state, props) => {
     log: client.log || [],
     notifications: client.notification || [],
     observer: state.app.userState || {},
+    phone,
     // gatewayStatus: getSecurityStatus(state.thing.things)
   }
 }

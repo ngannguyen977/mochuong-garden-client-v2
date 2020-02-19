@@ -322,7 +322,8 @@ export const changePassword = (id, model) => (dispatch, getState) => {
 export const addSetting = ({
   masterPhone,
   phoneNumber1,
-  phoneNumber2
+  phoneNumber2,
+  addData
 }) => (dispatch, getState) => {
   // convert to json string
   let phoneNumbers = []
@@ -368,7 +369,7 @@ export const addSetting = ({
       "isCallEnabled": true
     })
   }
-  if (phoneNumbers.length === 0){
+  if (phoneNumbers.length === 0) {
     return
   }
   let _model = {
@@ -381,7 +382,9 @@ export const addSetting = ({
       value: JSON.stringify(_model)
     },
   }
-  const {userState} = getState().app
+  const {
+    userState
+  } = getState().app
   axios
     .post(`${api.host}/clients/setting/${userState.customer.accountNumber}?is_observe=true`, model)
     .then(response => {
@@ -394,6 +397,24 @@ export const addSetting = ({
       let errorMessage = ((error.response || {}).data || {}).message || "update clients fail"
       message.error(errorMessage)
     })
+  if (addData) {
+    if (addData.firstName.value != userState.customer.firstName ||
+      addData.lastName.value != userState.customer.lastName ||
+      addData.address.value != userState.customer.address1
+    ) {
+      // update client info
+      notification["info"]({
+        message: "Update personal information!",
+        description: "Come in soon!",
+      })
+    }
+    if (addData.email.value != userState.customer.email){
+      notification["info"]({
+        message: "Change email!",
+        description: "Come in soon!",
+      })
+    }
+  }
 }
 export const sendEmail = (to) => (dispatch, getState) => {
   const {

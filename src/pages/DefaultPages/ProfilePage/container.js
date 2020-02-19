@@ -11,6 +11,18 @@ export const mapDispathToProps = {
 }
 export const mapStateToProps = (state, props) => {
   let phone = {
+    firstName: {
+      value: ''
+    },
+    lastName: {
+      value: ''
+    },
+    address: {
+      value: ''
+    },
+    email: {
+      value: ''
+    },
     masterPhone: {
       value: ''
     },
@@ -40,6 +52,10 @@ export const mapStateToProps = (state, props) => {
       phone.phoneNumber1.value = otherSetting.phoneNumbers[2].phone
     }
   }
+  phone.firstName.value = customer.firstName
+  phone.lastName.value = customer.lastName
+  phone.email.value = customer.email
+  phone.address.value = customer.address1
 
   return {
     customer,

@@ -60,9 +60,9 @@ class ProfileApp extends React.Component {
     const {changePassword} = this.props
     changePassword(id,data)
   }
-  updatePhones(masterPhone,phoneNumber1,phoneNumber2){
+  updatePhones(masterPhone,phoneNumber1,phoneNumber2,addData){
     const {addSetting} = this.props
-    addSetting({masterPhone,phoneNumber1,phoneNumber2})
+    addSetting({masterPhone,phoneNumber1,phoneNumber2,addData})
   }
   render() {
     let {
@@ -76,7 +76,7 @@ class ProfileApp extends React.Component {
       lastActivity,
       posts,
     } = this.state
-    const{history,phone} =this.props
+    const{history,phone,customer} =this.props
     return (
       <div className="profile">
         <div className="row">
@@ -154,7 +154,7 @@ class ProfileApp extends React.Component {
                     }
                     key="1"
                   >
-                    <SettingsForm history={history} phone={phone} updatePhones={this.updatePhones}/>
+                    <SettingsForm history={history} phone={phone} updatePhones={this.updatePhones} customer={customer}/>
                   </TabPane>
                   <TabPane
                     tab={
