@@ -32,12 +32,12 @@ class ProductCard extends React.Component {
               <span className='thingCard__status__title'>Offline</span>
             </div>
           )}
-          <Link to={"/things/" + data.name}>
+          <Link to={'#'}>
             <img className='img-responsive' src={data.imageUrl || productImg} alt='' />
           </Link>
         </div>
         <div className='thingCard__title'>
-          <Link to={"/things/" + data.name}>{data.displayName}</Link>
+        {data.displayName}
           <div className='thingCard__price' />
         </div>
         <div className='thingCard__descr'>{data.serial || "no description"}</div>
