@@ -7,7 +7,7 @@ replicaCount: 1
 namespace: web
 
 image:
-  repository: 754404031763.dkr.ecr.ap-southeast-1.amazonaws.com/iot-observe
+  repository: 754404031763.dkr.ecr.ap-southeast-1.amazonaws.com/iot-manage
   tag: latest
   pullPolicy: Always
 

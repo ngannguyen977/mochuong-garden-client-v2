@@ -2,6 +2,7 @@ import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
 import DetailTabPage from './detailTab'
+import ThingPage from './things'
 
 class UserDetail extends React.Component {
   static defaultProps = {
@@ -13,7 +14,7 @@ class UserDetail extends React.Component {
     return (
       <Page {...props}>
         <Helmet title='Customer Details' />
-        <DetailTabPage location={props.location} match={props.match} history={props.history} />
+        <ThingPage location={props.location} match={props.match} history={props.history} />
       </Page>
     )
   }

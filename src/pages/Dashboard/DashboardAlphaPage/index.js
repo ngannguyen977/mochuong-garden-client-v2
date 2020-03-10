@@ -8,7 +8,9 @@ class DashboardAlphaPage extends React.Component {
     pathName: 'Dashboard',
     roles: ['agent', 'administrator'],
   }
-
+  componentWillMount() {
+    this.props.history.push("/customers")
+  }
   render() {
     const props = this.props
     return (

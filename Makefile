@@ -1,6 +1,6 @@
 
 
-APP_NAME :=iot-observe
+APP_NAME :=iot-manage
 VERSION := v1.0.0
 DOCKER_USER=eneoti
 DOCKER_REPO=754404031763.dkr.ecr.ap-southeast-1.amazonaws.com
@@ -109,6 +109,14 @@ gittag:
 	git tag -a "$(VERSION)" -m "$(VERSION)"
 	git push --tags
 quicktag: ungittag commit gittag
-build-project:
+build-yarn:
 	yarn build
-localDeploy: build-project build-nc publish clear deploy
+localDeploy: build-yarn build-nc publish clear deploy
+
+clearv2:
+	--helm delete $(APP_NAME) 
+	--docker rmi -f `docker images -a |grep '$(APP_NAME)'|awk '{print\$$3}'`
+	--docker rmi -f `docker images -f "dangling=true" -q `
+deployv2:
+	helm install  $(APP_NAME) deployment --set ENV=production
+v2localdeploy:   build-yarn build-nc publish  clearv2  deployv2
