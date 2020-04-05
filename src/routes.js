@@ -14,74 +14,12 @@ const loadable = loader =>
   })
 
 const loadableRoutes = {
-  // Default Pages
-  "/external-auth": {
-    component: loadable(() => import("pages/DefaultPages/ExternalAuthPage")),
-  },
   "/register": {
     component: loadable(() => import("pages/DefaultPages/RegisterPage")),
   },
   "/login": {
     component: loadable(() => import("pages/DefaultPages/LoginPage")),
-  },
-  //Forgotpassword page
-  "/forgot-password": {
-    component: loadable(() => import("pages/DefaultPages/ForgotPage")),
-  },
-  // Success request forgot password
-  "/forgot-password/success": {
-    component: loadable(() => import("pages/DefaultPages/ConfirmPage")),
-  },
-  //Recovery password page
-  "/recovery-password": {
-    component: loadable(() => import("pages/DefaultPages/RecoveryPage")),
-  },
-  "/customers/activate": {
-    component: loadable(() => import("pages/DefaultPages/ConfirmPage")),
-  },
-  "/profile": {
-    component: loadable(() => import("pages/DefaultPages/ProfilePage")),
-  },
-  "/empty": {
-    component: loadable(() => import("pages/DefaultPages/EmptyPage")),
-  },
-  // Dashboards
-  "/home": {
-    component: loadable(() => import("pages/Dashboard/DashboardAlphaPage")),
-  },
-  // users
-  "/users": {
-    component: loadable(() => import("pages/authen/Users")),
-  },
-  "/users/create": {
-    component: loadable(() => import("pages/authen/Users/CreatePage")),
-  },
-  "/users/:name": {
-    component: loadable(() => import("pages/authen/Users/DetailPage")),
-  },
-  "/users/:name/things": {
-    component: loadable(() => import("pages/authen/Users/DetailPage/permission")),
-  },
-  // customers
-  "/customers": {
-    component: loadable(() => import("pages/authen/Customers")),
-  },
-  "/customers/:cn": {
-    component: loadable(() => import("pages/authen/Customers/DetailPage")),
-  },
-  // things
-  "/things": {
-    component: loadable(() => import("pages/iot/things")),
-  },
-  "/things/register": {
-    component: loadable(() => import("pages/iot/things/registerPage")),
-  },
-  "/things/:name": {
-    component: loadable(() => import("pages/iot/things/DetailPage")),
-  },
-  "/things/:name/users": {
-    component: loadable(() => import("pages/iot/things/DetailPage/attach")),
-  },
+  }
 }
 
 class Routes extends React.Component {
