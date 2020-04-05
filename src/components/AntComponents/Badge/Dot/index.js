@@ -12,7 +12,7 @@ export default function(ReactDOM, mountNode) {
         <Icon type="notification" />
       </Badge>
       <Badge dot>
-        <a href="javascript: void(0);">Link something</a>
+        <a href="#;">Link something</a>
       </Badge>
     </div>,
     mountNode,

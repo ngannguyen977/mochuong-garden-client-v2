@@ -24,7 +24,7 @@ export default function(ReactDOM, mountNode) {
 
   ReactDOM.render(
     <Dropdown overlay={menu}>
-      <a className='ant-dropdown-link' href='javascript: void(0);'>
+      <a className='ant-dropdown-link' href='#;'>
         Hover me <Icon type='down' />
       </a>
     </Dropdown>,

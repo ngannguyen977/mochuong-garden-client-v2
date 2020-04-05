@@ -11,7 +11,7 @@ class HomeMenu extends React.Component {
             <div className="topbar__activity__inner">
               <div className="topbar__activity__title">
                 <span className="pull-right">now</span>
-                <a href="javascript: void(0);">
+                <a href="#;">
                   Security Calling: <span className="badge badge-danger">New</span>
                 </a>
               </div>
@@ -28,7 +28,7 @@ class HomeMenu extends React.Component {
             <div className="topbar__activity__inner">
               <div className="topbar__activity__title">
                 <span className="pull-right">24 min ago</span>
-                <a href="javascript: void(0);">Income</a>
+                <a href="#;">Income</a>
               </div>
               <div className="topbar__activity__descr">Front Door motion detected.</div>
             </div>
@@ -38,10 +38,10 @@ class HomeMenu extends React.Component {
             <div className="topbar__activity__inner">
               <div className="topbar__activity__title">
                 <span className="pull-right">30 min ago</span>
-                <a href="javascript: void(0);">Security Setting</a>
+                <a href="#;">Security Setting</a>
               </div>
               <div className="topbar__activity__descr">
-                <a href="javascript: void(0);">Security mode has changed to Arm away</a>
+                <a href="#;">Security mode has changed to Arm away</a>
               </div>
             </div>
           </div>
@@ -50,10 +50,10 @@ class HomeMenu extends React.Component {
             <div className="topbar__activity__inner">
               <div className="topbar__activity__title">
                 <span className="pull-right">32 min ago</span>
-                <a href="javascript: void(0);">Security Setting</a>
+                <a href="#;">Security Setting</a>
               </div>
               <div className="topbar__activity__descr">
-                <a href="javascript: void(0);">Security mode has changed to Off</a>
+                <a href="#;">Security mode has changed to Off</a>
               </div>
             </div>
           </div>
@@ -62,10 +62,10 @@ class HomeMenu extends React.Component {
             <div className="topbar__activity__inner">
               <div className="topbar__activity__title">
                 <span className="pull-right">34 min ago</span>
-                <a href="javascript: void(0);">Security Setting</a>
+                <a href="#;">Security Setting</a>
               </div>
               <div className="topbar__activity__descr">
-                <a href="javascript: void(0);">Security mode has changed to Arm home</a>
+                <a href="#;">Security mode has changed to Arm home</a>
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@ class HomeMenu extends React.Component {
             <div className="topbar__activity__inner">
               <div className="topbar__activity__title">
                 <span className="pull-right">1 hour ago</span>
-                <a href="javascript: void(0);">Income</a>
+                <a href="#;">Income</a>
               </div>
               <div className="topbar__activity__descr">PlugS motion detected.</div>
             </div>
@@ -84,7 +84,7 @@ class HomeMenu extends React.Component {
             <div className="topbar__activity__inner">
               <div className="topbar__activity__title">
                 <span className="pull-right">1 hour ago</span>
-                <a href="javascript: void(0);">Income</a>
+                <a href="#;">Income</a>
               </div>
               <div className="topbar__activity__descr">PlugS motion detected.</div>
             </div>

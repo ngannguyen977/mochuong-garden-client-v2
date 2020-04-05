@@ -15,14 +15,14 @@ export default function(ReactDOM, mountNode) {
       >
         Group title
       </p>
-      <Card type="inner" title="Inner Card title" extra={<a href="javascript: void(0);">More</a>}>
+      <Card type="inner" title="Inner Card title" extra={<a href="#;">More</a>}>
         Inner Card content
       </Card>
       <Card
         style={{ marginTop: 16 }}
         type="inner"
         title="Inner Card title"
-        extra={<a href="javascript: void(0);">More</a>}
+        extra={<a href="#;">More</a>}
       >
         Inner Card content
       </Card>

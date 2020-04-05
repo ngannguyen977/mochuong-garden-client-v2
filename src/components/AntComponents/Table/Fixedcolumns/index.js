@@ -19,7 +19,7 @@ export default function(ReactDOM, mountNode) {
       key: 'operation',
       fixed: 'right',
       width: 100,
-      render: () => <a href="javascript: void(0);">action</a>,
+      render: () => <a href="#;">action</a>,
     },
   ]
 

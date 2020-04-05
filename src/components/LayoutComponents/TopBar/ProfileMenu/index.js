@@ -59,7 +59,7 @@ class ProfileMenu extends React.Component {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-          <a href='javascript: void(0);' onClick={logout}>
+          <a href='#;' onClick={logout}>
             <i className='topbar__dropdownMenuIcon icmn-exit' /> Logout
           </a>
         </Menu.Item>

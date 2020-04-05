@@ -1,23 +1,22 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import DashboardAlpha from './DashboardAlpha'
+import ListPage from './list'
 
-class DashboardAlphaPage extends React.Component {
+class DefaultPage extends React.Component {
   static defaultProps = {
-    pathName: 'Dashboard',
+    pathName: 'Things',
     roles: ['agent', 'administrator'],
   }
-  
   render() {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Dashboard" />
-        <DashboardAlpha />
+        <Helmet title="Things" />
+        <ListPage history={props.history} location={props.location} />
       </Page>
     )
   }
 }
 
-export default DashboardAlphaPage
+export default DefaultPage

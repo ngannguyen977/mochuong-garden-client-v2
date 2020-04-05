@@ -75,7 +75,7 @@ class SettingsForm extends React.Component {
           <Button style={{ width: 150 }} type="primary" htmlType="submit" className="mr-3">
             Submit
           </Button>
-          <Button htmlType="submit" onClick={() => this.props.history.push('/customers')}>
+          <Button htmlType="submit" onClick={() => this.props.history.push('/')}>
             Cancel
           </Button>
         </div>

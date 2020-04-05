@@ -44,7 +44,7 @@ export default function(ReactDOM, mountNode) {
             okText="Yes"
             cancelText="No"
           >
-            <a href="javascript: void(0);">Delete a task</a>
+            <a href="#;">Delete a task</a>
           </Popconfirm>
           <br />
           <br />

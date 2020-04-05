@@ -9,23 +9,23 @@ class ProjectManagement extends React.Component {
           <strong>Active</strong>
         </span>
         <Menu.Item>
-          <a href="javascript: void(0);">Project Management</a>
+          <a href="#;">Project Management</a>
         </Menu.Item>
         <Menu.Item>
-          <a href="javascript: void(0);">User Interface Development</a>
+          <a href="#;">User Interface Development</a>
         </Menu.Item>
         <Menu.Item>
-          <a href="javascript: void(0);">Documentation</a>
+          <a href="#;">Documentation</a>
         </Menu.Item>
         <span className="topbar__dropdownTitle">
           <strong>Inactive</strong>
         </span>
         <Menu.Item>
-          <a href="javascript: void(0);">Marketing</a>
+          <a href="#;">Marketing</a>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-          <a href="javascript: void(0);">
+          <a href="#;">
             <i className="topbar__dropdownMenuIcon icmn-cog" /> Settings
           </a>
         </Menu.Item>

@@ -11,7 +11,7 @@ export default function(ReactDOM, mountNode) {
       title: 'Action',
       dataIndex: '',
       key: 'x',
-      render: () => <a href="javascript: void(0);">Delete</a>,
+      render: () => <a href="#;">Delete</a>,
     },
   ]
 

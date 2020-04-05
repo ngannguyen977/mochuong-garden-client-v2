@@ -10,25 +10,8 @@ import {
   begin,
   end
 } from "react-redux-spinner"
-import {
-  notification
-} from "antd"
-import axios from "axios"
-import {setclientPage} from 'reducers/customer'
-import constant from "../config/default"
-import mqtt from "../services/mqtt"
-import helper from '../helper'
 
-const api = constant.api.authen
-const configure = constant.api.configure
-const REDUCER = "app"
-const NS = `@@${REDUCER}/`
-const loginApi = `${api.host}/${api.login}`
-const dataTypeApi = `${configure.host}/${configure.dataType}`
-const alertTypeApi = `${configure.host}/${configure.alertType}`
-const thingTypeApi = `${configure.host}/${configure.thingType}`
-const infoApi = `${api.host}/${api.info}`
-const iotActionApi = `${configure.host}/${configure.iotAction}`
+const NS = 'APP'
 
 export const _setFrom = createAction(`${NS}SET_FROM`)
 export const _setLoading = createAction(`${NS}SET_LOADING`)
@@ -63,104 +46,10 @@ export const resetHideLogin = () => (dispatch, getState) => {
   }
   return Promise.resolve()
 }
-export const connectMqtt = () => (dispatch, getState) => {
-  mqtt.connect(message => {
-    // handle message
-    let topics = (message.topic || "").split("/")
-    if (topics.length < 3) {
-      return
-    }
-    let serial = topics[1]
-    // get info customer by thing serial
-    let things = JSON.parse(window.localStorage.getItem("app.things")) || []
-    let thing = things.find(x => x.serial === serial)
-    if (!thing) {
-      return
-    }
-    let {clients,totalItems } = getState().customer
-    let client = (clients||[]).find(x=>x.accountNumber === thing.customerNumber)
-    if (!client){
-      return
-    }
-    let name = helper.getFullName(client.firstName,client.lastName)
-    // popup info message
-    notification.open({
-      type: "warning",
-      message: name,
-      description: `Khách hàng ${name} có kẻ lạ đột nhập! Vui lòng kiểm tra!`,
-    })
-    // move this user to first item
-    clients = clients.sort(function(x,y){ return x.accountNumber == thing.customerNumber ? -1 : y.accountNumber == thing.customerNumber ? 1 : 0; });
-    clients[0].isWarning =true
-   
-    dispatch(setclientPage({
-      clients,
-      page:0,
-      totalItems
-    }))
-    setTimeout(() => {
-      clients[0].isWarning = false
-      dispatch(setclientPage({
-        clients,
-        page:0,
-        totalItems
-      }))
-    }, 1000*60);
-  })
-}
+
 export const login = (customer, username, password, dispatch) =>
   new Promise((resolve, reject) => {
-    axios
-      .post(loginApi, {
-        customer,
-        username,
-        password
-      })
-      .then(response => {
-        dispatch(
-          setUserState({
-            userState: {
-              token: response.data.token,
-              refresh_token: response.data.refresh_token,
-              expires: response.data.expires,
-            },
-          }),
-        )
-        axios
-          .get(infoApi)
-          .then(res => {
-            let userInfo = res.data
-            dispatch(_setHideLogin(true))
-            dispatch(
-              setUserState({
-                userState: {
-                  ...userInfo,
-                  token: response.data.token,
-                  refresh_token: response.data.refresh_token,
-                  expires: response.data.expires,
-                },
-              }),
-            )
-            // connect mqtt
-            dispatch(connectMqtt())
-            notification.open({
-              type: "success",
-              message: "You have successfully logged in!",
-              description: "Welcome to the OnSky Family. The OnSky Team is a complimentary template that empowers developers to make perfect looking and useful apps!",
-            })
-            dispatch(push("/"))
-            return resolve(true)
-          })
-          .catch(error => {
-            console.log("GET INFO ERROR", error.message)
-            return resolve(false)
-          })
-      })
-      .catch(error => {
-        console.log("ERROR", error.message)
-        dispatch(_setFrom(""))
-        return resolve(false)
-      })
+   return resolve()
   })
 export const commonData = () => (dispatch, getState) => {}
 export const logout = () => (dispatch, getState) => {

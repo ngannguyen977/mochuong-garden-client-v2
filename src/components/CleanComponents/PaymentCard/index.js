@@ -26,7 +26,7 @@ class PaymentCard extends React.Component {
     const { icon, name, number, type, footer, sum } = this.state
 
     return (
-      <a href={'javascript: void(0);'} className='card card--withShadow paymentCard'>
+      <a href={'#;'} className='card card--withShadow paymentCard'>
         {sum && <span className='paymentCard__sum'>{sum}</span>}
         {icon && (
           <div className='paymentCard__icon'>

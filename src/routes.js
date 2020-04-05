@@ -14,11 +14,13 @@ const loadable = loader =>
   })
 
 const loadableRoutes = {
-  "/register": {
-    component: loadable(() => import("pages/DefaultPages/RegisterPage")),
+  "/products": {
+    component: loadable(() => import("pages/products")),
+    
   },
-  "/login": {
-    component: loadable(() => import("pages/DefaultPages/LoginPage")),
+  "/home": {
+    component: loadable(() => import("pages/Dashboard/DashboardAlphaPage")),
+    
   }
 }
 

@@ -29,7 +29,7 @@ export default function(ReactDOM, mountNode) {
           onVisibleChange={this.handleVisibleChange}
           visible={this.state.visible}
         >
-          <a className='ant-dropdown-link' href='javascript: void(0);'>
+          <a className='ant-dropdown-link' href='#;'>
             Hover me <Icon type='down' />
           </a>
         </Dropdown>

@@ -21,7 +21,7 @@ export default function(ReactDOM, mountNode) {
       okText="Yes"
       cancelText="No"
     >
-      <a href="javascript: void(0);">Delete</a>
+      <a href="#;">Delete</a>
     </Popconfirm>,
     mountNode,
   )

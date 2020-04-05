@@ -55,7 +55,7 @@ export default function(ReactDOM, mountNode) {
           <Card
             style={{ width: '100%' }}
             title="Card title"
-            extra={<a href="javascript: void(0);">More</a>}
+            extra={<a href="#;">More</a>}
             tabList={tabList}
             onTabChange={key => {
               this.onTabChange(key, 'key')

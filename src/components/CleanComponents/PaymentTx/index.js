@@ -25,7 +25,7 @@ class PaymentTx extends React.Component {
 
     return (
       <a
-        href={'javascript: void(0);'}
+        href={'#;'}
         className={
           income
             ? 'card card--withShadow paymentTx paymentTx--income'

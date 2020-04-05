@@ -88,7 +88,7 @@ export default function(ReactDOM, mountNode) {
             <Button onClick={info}>Show info</Button>
             <Button onClick={confirm}>Show confirm</Button>
             <Popconfirm title='Question?'>
-              <a href='javascript: void(0);'>Click to confirm</a>
+              <a href='#;'>Click to confirm</a>
             </Popconfirm>
           </div>
           <div className='example'>

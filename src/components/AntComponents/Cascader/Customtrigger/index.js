@@ -42,7 +42,7 @@ export default function(ReactDOM, mountNode) {
           {this.state.text}
           &nbsp;
           <Cascader options={options} onChange={this.onChange}>
-            <a href="javascript: void(0);">Change city</a>
+            <a href="#;">Change city</a>
           </Cascader>
         </span>
       )

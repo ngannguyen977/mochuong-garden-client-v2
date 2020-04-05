@@ -1,10 +1,9 @@
 import React from 'react'
 import ChartCard from 'components/CleanComponents/ChartCard'
-import SliderCard from '../../../components/SliderCard'
+import SliderCard from 'components/CleanComponents/SliderCard'
 import { Button, Table } from 'antd'
 import { tableData } from './data.json'
 import ChartistGraph from 'react-chartist'
-import Chartist from 'chartist'
 import { Line, Bar, Radar, Polar, Pie, Doughnut } from 'react-chartjs-2'
 
 class DashboardAlpha extends React.Component {

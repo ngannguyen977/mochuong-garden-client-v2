@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { initAuth, setLoading, setUpdatingContent, resetHideLogin } from 'reducers/app'
-import { authorize } from 'reducers/auth'
+import { setLoading, setUpdatingContent, resetHideLogin } from 'reducers/app'
 import axios from 'axios'
 import NotFoundPage from 'pages/DefaultPages/NotFoundPage'
 import 'core-js/es6/promise'
@@ -93,11 +92,9 @@ class Page extends React.Component {
     axios.defaults.cancelToken = source.token
     const { onMounted, roles, dispatch } = this.props
     this._onMounted = () => {
-      return dispatch(authorize()).then(response => {
-        if (response && onMounted) {
-          return onMounted()
-        }
-      })
+      if (onMounted) {
+        return onMounted()
+      }
     }
 
     if (this._onMounted) {
@@ -112,19 +109,7 @@ class Page extends React.Component {
       }, 0) // show state.app.isLoading equal or more then 0ms
       if (this._onMounted) {
         this._onMounted()
-          .catch(error => {
-            if (axios.isCancel(error)) {
-              // nothing
-            } else {
-              //console.log('error', error)
-            }
-          })
-          .then(() => {
-            isResolve = true
-            if (!this.timeoutId) {
-              this.stopLoading()
-            }
-          })
+        this.stopLoading()
       }
     } else {
       this.updateContent()

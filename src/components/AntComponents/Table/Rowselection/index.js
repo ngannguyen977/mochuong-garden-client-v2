@@ -7,7 +7,7 @@ export default function(ReactDOM, mountNode) {
     {
       title: 'Name',
       dataIndex: 'name',
-      render: text => <a href="javascript: void(0);">{text}</a>,
+      render: text => <a href="#;">{text}</a>,
     },
     {
       title: 'Age',

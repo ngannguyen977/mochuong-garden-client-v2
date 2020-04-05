@@ -31,10 +31,10 @@ export default function(ReactDOM, mountNode) {
           key: 'operation',
           render: () => (
             <span className='table-operation'>
-              <a href='javascript: void(0);'>Pause</a>
-              <a href='javascript: void(0);'>Stop</a>
+              <a href='#;'>Pause</a>
+              <a href='#;'>Stop</a>
               <Dropdown overlay={menu}>
-                <a href='javascript: void(0);'>
+                <a href='#;'>
                   More <Icon type='down' />
                 </a>
               </Dropdown>
@@ -65,7 +65,7 @@ export default function(ReactDOM, mountNode) {
       {
         title: 'Action',
         key: 'operation',
-        render: () => <a href='javascript: void(0);'>Publish</a>,
+        render: () => <a href='#;'>Publish</a>,
       },
     ]
 

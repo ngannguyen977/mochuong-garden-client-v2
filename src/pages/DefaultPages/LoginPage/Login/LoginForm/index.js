@@ -108,16 +108,16 @@ class LoginForm extends React.Component {
         <div className='form-group'>
           <span>Use another service to Log In</span>
           <div className='mt-2'>
-            <a href='javascript: void(0);' className='btn btn-icon mr-2'>
+            <a href='#;' className='btn btn-icon mr-2'>
               <i className='icmn-facebook' />
             </a>
-            <a href='javascript: void(0);' className='btn btn-icon mr-2'>
+            <a href='#;' className='btn btn-icon mr-2'>
               <i className='icmn-google' />
             </a>
-            <a href='javascript: void(0);' className='btn btn-icon mr-2'>
+            <a href='#;' className='btn btn-icon mr-2'>
               <i className='icmn-windows' />
             </a>
-            <a href='javascript: void(0);' className='btn btn-icon mr-2'>
+            <a href='#;' className='btn btn-icon mr-2'>
               <i className='icmn-twitter' />
             </a>
           </div>

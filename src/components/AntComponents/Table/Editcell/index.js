@@ -67,7 +67,7 @@ export default function(ReactDOM, mountNode) {
           render: (text, record) => {
             return this.state.dataSource.length > 1 ? (
               <Popconfirm title='Sure to delete?' onConfirm={() => this.onDelete(record.key)}>
-                <a href='javascript: void(0);'>Delete</a>
+                <a href='#;'>Delete</a>
               </Popconfirm>
             ) : null
           },

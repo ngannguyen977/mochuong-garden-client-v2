@@ -32,7 +32,7 @@ class Lockscreen extends React.Component {
           <div className="row">
             <div className="col-lg-8">
               <div className="login__header__logo">
-                <a href="javascript: void(0);">
+                <a href="#;">
                   <img src="resources/images/login/logo.png" alt="Clean UI Admin Template" />
                 </a>
               </div>

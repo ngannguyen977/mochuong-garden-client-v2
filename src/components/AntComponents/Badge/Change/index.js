@@ -33,7 +33,7 @@ export default function(ReactDOM, mountNode) {
         <div>
           <div>
             <Badge count={this.state.count}>
-              <a href='javascript: void(0);' className='head-example' />
+              <a href='#;' className='head-example' />
             </Badge>
             <ButtonGroup>
               <Button onClick={this.decline}>
@@ -46,7 +46,7 @@ export default function(ReactDOM, mountNode) {
           </div>
           <div style={{ marginTop: 10 }}>
             <Badge dot={this.state.show}>
-              <a href='javascript: void(0);' className='head-example' />
+              <a href='#;' className='head-example' />
             </Badge>
             <Switch onChange={this.onChange} checked={this.state.show} />
           </div>

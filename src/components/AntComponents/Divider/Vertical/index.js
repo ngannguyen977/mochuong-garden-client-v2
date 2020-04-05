@@ -7,9 +7,9 @@ export default function(ReactDOM, mountNode) {
     <div>
       Text
       <Divider type="vertical" />
-      <a href="javascript: void(0);">Link</a>
+      <a href="#;">Link</a>
       <Divider type="vertical" />
-      <a href="javascript: void(0);">Link</a>
+      <a href="#;">Link</a>
     </div>,
     mountNode,
   )
