@@ -18,6 +18,14 @@ const loadableRoutes = {
     component: loadable(() => import("pages/products")),
     
   },
+  "/products/addNew": {
+    component: loadable(() => import("pages/products/createPage")),
+    
+  },
+  "/products/update/:id": {
+    component: loadable(() => import("pages/products/updatePage")),
+    
+  },
   "/home": {
     component: loadable(() => import("pages/Dashboard/DashboardAlphaPage")),
     
