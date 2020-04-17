@@ -33,7 +33,6 @@ class addNew extends Component {
         })
     }
     onSave = (e) => {
-        console.log('prstateop', this.state)
         e.preventDefault();
         //(this.props.match.params.id= id, this.state =product)
         this.props.update(this.props.match.params.id,this.state)
@@ -41,6 +40,7 @@ class addNew extends Component {
     }
     render() {
         var data = this.props.productUpdate;
+       
         if (data && data.id != this.state.id) {
             this.setState({
                 id: data.id,

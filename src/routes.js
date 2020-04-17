@@ -29,7 +29,19 @@ const loadableRoutes = {
   "/home": {
     component: loadable(() => import("pages/Dashboard/DashboardAlphaPage")),
     
-  }
+  },
+  "/categories": {
+    component: loadable(() => import("pages/categories")),
+    
+  },
+  "/categories/addNew": {
+    component: loadable(() => import("pages/categories/createPage")),
+    
+  },
+  "/categories/update/:id": {
+    component: loadable(() => import("pages/categories/updatePage")),
+    
+  },
 }
 
 class Routes extends React.Component {

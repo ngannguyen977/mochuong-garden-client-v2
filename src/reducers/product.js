@@ -2,18 +2,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { push } from 'react-router-redux'
 import { createAction, createReducer } from "redux-act"
 import database from '../firebaseConnect';
+
 // tao action
 const ACTION_LIST = createAction(`PRODUCT_LIST`)
-const ACTION_DETAIL = createAction(`PRODUCT_DETAIL`)
 const ACTION_ADD = createAction(`PRODUCT_ADD`)
 const ACTION_EDIT = createAction(`PRODUCT_EDIT`)
 const ACTION_DELETE = createAction(`PRODUCT_DELETE`)
-
+const ACTION_DETAIL = createAction(`PRODUCT_DETAIL`)
 export const list = (pageIndex = 0, conto) => {
 	return (dispatch) => {
 		// call api get list page here
 		database.getData(pageIndex).then(products => {
-			console.log('list from store', products)
 			dispatch(ACTION_LIST(products))
 		})
 
@@ -25,7 +24,6 @@ export const add = (product) => {
 		product.createdAt = new Date().toString();
 	
 		let result = database.addData(product)
-		console.log('result', result)
 		dispatch(ACTION_ADD(result))
 		// sau khi tao xong, back ve trang list
 		dispatch(push('/products'))
@@ -34,7 +32,6 @@ export const add = (product) => {
 export const deleteData = (id) => {
 	return (dispatch,getState) => {
 		let result = database.deleteData(id)
-		console.log('result', result)
 		dispatch(ACTION_DELETE(result))
 		dispatch(list())
 		
@@ -42,8 +39,9 @@ export const deleteData = (id) => {
 }
 export const getDataById = (id) => {
 	return (dispatch,getState) => {
-		database.getOne(id).then(products => {
-			dispatch(ACTION_EDIT(products))
+		database.getOne(id).then(product => {
+			console.log('firebase product', product)
+			dispatch(ACTION_DETAIL(product))
 		})
 		
 	}
@@ -67,6 +65,9 @@ const ACTION_HANDLES = {
 		return { ...state, product }
 	},
 	[ACTION_DELETE]: (state, product) => {
+		return { ...state, product }
+	},
+	[ACTION_DETAIL]: (state, product) => {
 		return { ...state, product }
 	},
 	[ACTION_EDIT]: (state, product) => {

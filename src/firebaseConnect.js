@@ -13,7 +13,7 @@ var firebaseConfig = {
 // Initialize Firebase
 
 const firebaseData = firebase.initializeApp(firebaseConfig);
-
+////////////////PRODUCTS//////////////////
 export const getData = (pageIndex) => new Promise((resolve, reject) => {
   var productRef = firebaseData.database().ref('products');
   productRef.on('value', function (snapshot) {
@@ -22,7 +22,7 @@ export const getData = (pageIndex) => new Promise((resolve, reject) => {
     let totalItem = list.length
     let pageSize = 5;
     let dataPaging = 0;
-    console.log(typeof list)
+    // console.log(typeof list)
     // if (Array.isArray(list)) {
     dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
     // }
@@ -36,6 +36,7 @@ export const getData = (pageIndex) => new Promise((resolve, reject) => {
     return resolve(products);
   })
 })
+
 export const addData = (product) => new Promise((resolve, reject) => {
   var productRef = firebaseData.database().ref('products')
 
@@ -75,11 +76,60 @@ export const getOne = (id) => new Promise((resolve, reject) => {
     return resolve(list.find(x=>x.id===id));
   })
 })
+
+////////////CATEGORIES//////////////////
+
+export const getDataCategory = (pageIndex) => new Promise((resolve, reject) => {
+  var productRef = firebaseData.database().ref('categories');
+  productRef.on('value', function (snapshot) {
+    let list = snapshot.val() || []
+    console.log("getting cate...", list)
+    let totalItem = list.length
+    let pageSize = 5;
+    let dataPaging = 0;
+    // if (Array.isArray(list)) {
+    dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
+    // }
+    const totalPage = Math.ceil(list.length / pageSize)
+    let categories = {
+      totalItem: totalItem,
+      totalPage: totalPage,
+      dataPaging: dataPaging,
+      list: list
+    }
+    return resolve(categories);
+  })
+})
+export const addDataCategory = (category) => new Promise((resolve, reject) => {
+  var categoryRef = firebaseData.database().ref('categories')
+
+  categoryRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list.push(category)
+    categoryRef.set(list)
+    return resolve(category)
+  })
+})
+
+export const deleteCategory = (id) => new Promise((resolve, reject) => {
+  var productRef = firebaseData.database().ref('categories')
+
+  productRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list = list.filter(x => x.id != id)
+    productRef.set(list)
+    return resolve(true)
+  })
+})
+/////////////////////////////////////////////////////////////////
 let database = {
   getData,
   addData,
   updateData,
   deleteData,
-  getOne
+  getOne,
+  getDataCategory,
+  addDataCategory,
+  deleteCategory
 }
 export default database

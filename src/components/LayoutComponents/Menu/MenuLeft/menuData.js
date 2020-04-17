@@ -17,6 +17,12 @@ export default [
     url: '/products',
     icon: 'icmn icmn-man-woman',
   },
+  {
+    title: 'Manage categories',
+    key: 'categories',
+    url: '/categories',
+    icon: 'icmn icmn-man-woman',
+  },
   // {
   //   title: 'Permissions',
   //   key: 'permission',
