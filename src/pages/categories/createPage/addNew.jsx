@@ -14,6 +14,10 @@ class AddNew extends Component {
             name:'',
             description:''
         }
+       
+    }
+    componentDidMount(){
+        this.props.categoriesFromStore();
     }
     onChange = (e)=>{
         let target=e.target;
@@ -30,6 +34,7 @@ class AddNew extends Component {
         
     }
     render() {
+        
         var{id, name, description } = this.state
         return (
             <div className="add-form">

@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AC+EA,AAAA,QAAQ,CAAA;EACN,MAAM,EAAE,OAAO;CAChB;;AD7ED,sBAAsB;AAEtB,AAAA,wBAAwB,GAAG,GAAG,GAAG,SAAS,CAAC;EACzC,UAAU,EAAE,IAAI;CACjB",
+    "sources": [
+        "spin.scss",
+        "../../../_mixins.scss"
+    ],
+    "names": [],
+    "file": "spin.css"
+}

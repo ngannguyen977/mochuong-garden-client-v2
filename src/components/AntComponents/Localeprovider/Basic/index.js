@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.scss'
-import { Pagination, LocaleProvider } from 'antd'
+import { Pagination, ConfigProvider  } from 'antd'
 
 import enUS from 'antd/lib/locale-provider/en_US'
 
@@ -12,9 +12,9 @@ export default function(ReactDOM, mountNode) {
   )
 
   ReactDOM.render(
-    <LocaleProvider locale={enUS}>
+    <ConfigProvider  locale={enUS}>
       <App />
-    </LocaleProvider>,
+    </ConfigProvider >,
     mountNode,
   )
 }

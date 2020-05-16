@@ -23,12 +23,12 @@ export default [
     url: '/categories',
     icon: 'icmn icmn-man-woman',
   },
-  // {
-  //   title: 'Permissions',
-  //   key: 'permission',
-  //   url: '/permissions',
-  //   icon: 'icmn icmn-lock',
-  // },
+  {
+    title: 'Orders',
+    key: 'oder',
+    url: '/orders',
+    icon: 'icmn icmn-lock',
+  },
   // {
   //   divider: true,
   // },

@@ -42,6 +42,18 @@ const loadableRoutes = {
     component: loadable(() => import("pages/categories/updatePage")),
     
   },
+   "/categories/addNew": {
+    component: loadable(() => import("pages/categories/createPage")),
+    
+  },
+  "/orders": {
+    component: loadable(() => import("pages/order")),
+    
+  },
+  "/orders/orderDetail": {
+    component: loadable(() => import("pages/order/orderDetail")),
+    
+  }
 }
 
 class Routes extends React.Component {

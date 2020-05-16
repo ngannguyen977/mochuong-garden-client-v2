@@ -9,6 +9,7 @@ const ACTION_ADD = createAction(`PRODUCT_ADD`)
 const ACTION_EDIT = createAction(`PRODUCT_EDIT`)
 const ACTION_DELETE = createAction(`PRODUCT_DELETE`)
 const ACTION_DETAIL = createAction(`PRODUCT_DETAIL`)
+const ACTION_SEARCH = createAction(`PRODUCT_SEARCH`)
 export const list = (pageIndex = 0, conto) => {
 	return (dispatch) => {
 		// call api get list page here
@@ -40,7 +41,7 @@ export const deleteData = (id) => {
 export const getDataById = (id) => {
 	return (dispatch,getState) => {
 		database.getOne(id).then(product => {
-			console.log('firebase product', product)
+			// console.log('firebase product', product)
 			dispatch(ACTION_DETAIL(product))
 		})
 		
@@ -54,12 +55,21 @@ export const update = (id,product) => {
 		dispatch(push('/products'))
 	}
 }
+export const searchPro=(keyword)=>{
+    return(dispatch)=>{
+    database.getData(0,keyword).then(result=>{
+        dispatch(ACTION_LIST(result))  
+
+      })
+    }
+}
 const initialState = {}
 const ACTION_HANDLES = {
 	[ACTION_LIST]: (state, products) => {
 		console.log('old state', state)
 		console.log('new state', products)
 		return { ...state, products }
+
 	},
 	[ACTION_ADD]: (state, product) => {
 		return { ...state, product }
@@ -71,6 +81,9 @@ const ACTION_HANDLES = {
 		return { ...state, product }
 	},
 	[ACTION_EDIT]: (state, product) => {
+		return { ...state, product }
+	},
+	[ACTION_SEARCH]: (state, product) => {
 		return { ...state, product }
 	},
 }

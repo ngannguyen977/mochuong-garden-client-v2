@@ -14,7 +14,7 @@ var firebaseConfig = {
 
 const firebaseData = firebase.initializeApp(firebaseConfig);
 ////////////////PRODUCTS//////////////////
-export const getData = (pageIndex) => new Promise((resolve, reject) => {
+export const getData = (pageIndex, keyword) => new Promise((resolve, reject) => {
   var productRef = firebaseData.database().ref('products');
   productRef.on('value', function (snapshot) {
     let list = snapshot.val() || []
@@ -22,10 +22,11 @@ export const getData = (pageIndex) => new Promise((resolve, reject) => {
     let totalItem = list.length
     let pageSize = 5;
     let dataPaging = 0;
-    // console.log(typeof list)
-    // if (Array.isArray(list)) {
+    // search
+    if (keyword)
+      list = list.filter(x => x.displayName && x.displayName.includes(keyword))
+
     dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
-    // }
     const totalPage = Math.ceil(list.length / pageSize)
     let products = {
       totalItem: totalItem,
@@ -47,7 +48,7 @@ export const addData = (product) => new Promise((resolve, reject) => {
     return resolve(product)
   })
 })
-export const updateData = (id,product) => new Promise((resolve, reject) => {
+export const updateData = (id, product) => new Promise((resolve, reject) => {
   var productRef = firebaseData.database().ref('products')
 
   productRef.once('value', function (snapshot) {
@@ -73,23 +74,24 @@ export const getOne = (id) => new Promise((resolve, reject) => {
   var productRef = firebaseData.database().ref('products');
   productRef.once('value', function (snapshot) {
     let list = snapshot.val() || []
-    return resolve(list.find(x=>x.id===id));
+    return resolve(list.find(x => x.id === id));
   })
 })
 
-////////////CATEGORIES//////////////////
+/////////////////CATEGORIES//////////////////
 
-export const getDataCategory = (pageIndex) => new Promise((resolve, reject) => {
+export const getDataCategory = (pageIndex, keyword) => new Promise((resolve, reject) => {
+  console.log('kffff', keyword)
   var productRef = firebaseData.database().ref('categories');
   productRef.on('value', function (snapshot) {
     let list = snapshot.val() || []
-    console.log("getting cate...", list)
     let totalItem = list.length
     let pageSize = 5;
-    let dataPaging = 0;
-    // if (Array.isArray(list)) {
-    dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
-    // }
+    // search
+    if (keyword)
+      list = list.filter(x => x.name && x.name.includes(keyword))
+
+    let dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
     const totalPage = Math.ceil(list.length / pageSize)
     let categories = {
       totalItem: totalItem,
@@ -112,13 +114,121 @@ export const addDataCategory = (category) => new Promise((resolve, reject) => {
 })
 
 export const deleteCategory = (id) => new Promise((resolve, reject) => {
-  var productRef = firebaseData.database().ref('categories')
+  var categoryRef = firebaseData.database().ref('categories')
 
-  productRef.once('value', function (snapshot) {
+  categoryRef.once('value', function (snapshot) {
     let list = snapshot.val() || []
     list = list.filter(x => x.id != id)
-    productRef.set(list)
+    categoryRef.set(list)
     return resolve(true)
+  })
+})
+export const getOneCate = (id) => new Promise((resolve, reject) => {
+  var categoryRef = firebaseData.database().ref('categories');
+  categoryRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    return resolve(list.find(x => x.id === id));
+  })
+})
+
+export const updateCategory = (id, category) => new Promise((resolve, reject) => {
+  var categoryRef = firebaseData.database().ref('categories')
+
+  categoryRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list = list.filter(x => x.id != id)
+    category.id = id
+    list.push(category)
+    categoryRef.set(list)
+    return resolve(category)
+  })
+})
+////////////////////////ORDER/////////////////
+export const getDataOrders = (pageIndex, keyword) => new Promise((resolve, reject) => {
+  var orderRef = firebaseData.database().ref('orders');
+  orderRef.on('value', function (snapshot) {
+    let list = snapshot.val() || []
+    let totalItem = list.length
+    let pageSize = 5;
+    let dataPaging = 0;
+    // search
+    if (keyword)
+      list = list.filter(x => x.displayName && x.displayName.includes(keyword))
+
+    dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
+    const totalPage = Math.ceil(list.length / pageSize)
+    let orders = {
+      totalItem: totalItem,
+      totalPage: totalPage,
+      dataPaging: dataPaging,
+      list: list
+    }
+    return resolve(orders);
+  })
+})
+
+export const getOrderDetail = (orderId) => new Promise((resolve, reject) => {
+  var orderRef = firebaseData.database().ref('order_items');
+  orderRef.on('value', function (snapshot) {
+    let list = snapshot.val() || []
+    let totalItem = list.length
+    let pageSize = 5;
+    let dataPaging = 0;
+    list = list.filter(x => x.orderId && x.orderId === orderId)
+
+    dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
+    const totalPage = Math.ceil(list.length / pageSize)
+    let orders = {
+      totalItem: totalItem,
+      totalPage: totalPage,
+      dataPaging: dataPaging,
+      list: list
+    }
+    return resolve(orders);
+  })
+})
+export const getOrderFull = (pageIndex=0, pageSize=10) => new Promise((resolve, reject) => {
+  var orderRef = firebaseData.database().ref('orders');
+  var orderDetailRef = firebaseData.database().ref('order_items');
+  var productRef = firebaseData.database().ref('products');
+  orderRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    let totalItem = list.length
+    let dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
+    const totalPage = Math.ceil(list.length / pageSize)
+    let orders = {
+      totalItem: totalItem,
+      totalPage: totalPage,
+      dataPaging: dataPaging,
+      list: list
+    }
+    let orderIds = dataPaging.map(x => x.id)
+    // get order details
+    orderDetailRef.once('value', function (snapshot) {
+      let orderDetailList = snapshot.val() || []
+      orderDetailList = orderDetailList.filter(x => orderIds.includes(x.orderId))
+      let productIds = orderDetailList.map(x => x.productId)
+      // get products
+      productRef.once('value', function (snapshot) {
+        let productList = snapshot.val() || []
+        productList = productList.filter(x => productIds.includes(x.id))
+        // gan product vao order items
+        for (let product of productList) {
+          for (let orderItem of orderDetailList) {
+            // tim thay product match vs order item => cho vao orders.orderItems.products
+            if (orderItem.productId === product.id) {
+              orderItem.product = product
+            }
+          }
+        }
+        // gan order item list vao orders
+        for (let order of orders.dataPaging) {
+          // tim order detail bo vao order list
+          order.orderItems = orderDetailList.filter(orderDetail => orderDetail.orderId === order.id)
+        }
+        return resolve(orders);
+      })
+    })
   })
 })
 /////////////////////////////////////////////////////////////////
@@ -130,6 +240,11 @@ let database = {
   getOne,
   getDataCategory,
   addDataCategory,
-  deleteCategory
+  deleteCategory,
+  getOneCate,
+  updateCategory,
+  getDataOrders,
+  getOrderDetail,
+  getOrderFull
 }
 export default database

@@ -7,12 +7,17 @@ import {Link} from 'react-router-dom';
 import "../../../resources/style.scss"
 import "../style.scss"
 
-
 @connect(
   mapStateToProps,
   mapDispathToProps,
 )
 class ListPage extends React.Component {
+  constructor(props){
+    super(props)
+    this.state={
+      keyword:''
+    }
+  }
   componentDidMount() {
     this.props.listFromStore()
   }
@@ -31,6 +36,18 @@ class ListPage extends React.Component {
       return result;
     }
   }
+  onChange=(e)=>{
+    let target = e.target;
+    let name = target.name;
+    let value = target.value;
+    console.log("gõ tìm product", value, this.state)
+    this.setState({
+      [name]:value
+    })
+  }
+  onSearch(keyword){
+    this.props.searchProduct(keyword)
+  }
   onDelete = (id)=>{
     console.log('id' , id)
     this.props.deleteData(id)
@@ -47,6 +64,7 @@ class ListPage extends React.Component {
     </ul>)
   }
   render() {
+    var {keyword} = this.state;
     const { totalPage, dataPaging } = this.props;
     return (
       <div className='thing'>
@@ -54,6 +72,17 @@ class ListPage extends React.Component {
           <div className='card-header'>
             <div className='row'>
               <Link to={'/products/addNew'} type="button" className="btn btn-success">Thêm</Link>
+                <div>
+                    <input 
+                        type="text" 
+                        placeholder="Bạn cần tìm..."
+                        name="keyword"
+                        value={keyword}
+                        onChange = {(e)=>this.onChange(e)}
+                        onBlur = {()=>this.onSearch(keyword)}
+                    />
+                    <button type="button" onClick ={()=>{this.onSearch(keyword)}}>Tìm</button>
+                </div>
             </div>
           </div>
           <div className='card-body'>

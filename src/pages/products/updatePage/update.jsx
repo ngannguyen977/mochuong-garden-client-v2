@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { mapStateToProps, mapDispathToProps } from "../container"
+import { mapStateToProps, mapDispathToProps } from "../container";
+import Select from 'react-select';
+
 @connect(
     mapStateToProps,
     mapDispathToProps,
@@ -15,11 +17,11 @@ class addNew extends Component {
             price: '',
             quantity: '',
             coverSrcx1: '',
-            status: ''
+            status: '',
+            categoryId:''
         }
     }
     componentDidMount() {
-        console.log('param', this.props)
         this.props.getDataById(this.props.match.params.id)
     }
     onChange = (e) => {
@@ -49,12 +51,13 @@ class addNew extends Component {
                 price: data.price,
                 quantity: data.quantity,
                 coverSrcx1: data.coverSrcx1,
-                status: data.status
+                status: data.status,
+                categories:data.categoryId
 
             })
         }
 
-        var { displayName, description, price, quantity, status } = this.state
+        var { displayName, description, price, quantity, status, categories, listCategories } = this.state
         return (
             <div className="add-form">
                 <form className="form-horizontal form-label-left"
@@ -130,7 +133,17 @@ class addNew extends Component {
 
                         </div>
                     </div>
-
+                    <div className="form-group">
+                        <label className="col-form-label col-md-3 col-sm-3 label-align" htmlFor="textarea">Danh mục</label>
+                        <div className="col-md-6 col-sm-6">
+                            <Select 
+                            name="categories"
+                            value={categories}
+                            onChange={(e) => this.onChange(e)}
+                            options={listCategories} 
+                            />
+                        </div>
+                    </div>
                     <div className="ln_solid"></div>
                     <div className="form-group">
                         <div className="col-md-6 offset-md-3">

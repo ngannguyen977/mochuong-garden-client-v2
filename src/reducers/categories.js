@@ -8,6 +8,7 @@ const ACTION_ADD = createAction(`CATEGORY_ADD`)
 const ACTION_DELETE = createAction(`CATEGORIES_DELETE`)
 const ACTION_EDIT = createAction(`CATEGORIES_EDIT`)
 const ACTION_DETAIL = createAction(`ACTION_DETAIL`)
+const ACTION_SEARCH = createAction(`CAREGORY_FILTER`)
 export const list = (pageIndex=0) => {
     return(dispatch)=>{
         //call api categories
@@ -36,7 +37,7 @@ export const deleteCate=(id)=>{
 }
 export const getCateById=(id)=>{
     return(dispatch)=>{
-        database.getOne(id).then(category=>{
+        database.getOneCate(id).then(category=>{
             dispatch(ACTION_DETAIL(category))
         })
     }
@@ -45,7 +46,16 @@ export const updateCate=(id, category)=>{
     return (dispatch)=>{
         let result = database.updateCategory(id, category)
         dispatch(ACTION_EDIT(result))
-        dispatch(push('/catogories'))
+        dispatch(push('/categories'))
+    }
+}
+export const searchCate=(keyword)=>{
+    console.log('keywor',keyword)
+    return(dispatch)=>{
+    database.getDataCategory(0,keyword).then(result=>{
+        dispatch(ACTION_LIST(result))  
+
+      })
     }
 }
 const initialState={};
@@ -64,6 +74,9 @@ const ACTION_HANDLES = {
         return{...state, category}
     },
     [ACTION_EDIT]:(state, category)=>{
+        return{...state, category}
+    },
+    [ACTION_SEARCH]:(state, category)=>{
         return{...state, category}
     }
 }

@@ -10,7 +10,7 @@ import thunk from 'redux-thunk'
 import 'es6-promise/auto'
 import 'setimmediate'
 
-import { LocaleProvider } from 'antd'
+import { ConfigProvider  } from 'antd'
 import enGB from 'antd/lib/locale-provider/en_GB'
 import registerServiceWorker from 'registerServiceWorker'
 
@@ -36,12 +36,12 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middle
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <LocaleProvider locale={enGB}>
+      <ConfigProvider  locale={enGB}>
         <div>
           <Helmet titleTemplate='OnSky - %s' />
           <Layout history={history}  />
         </div>
-      </LocaleProvider>
+      </ConfigProvider >
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
