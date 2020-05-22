@@ -14,7 +14,8 @@ import { ConfigProvider  } from 'antd'
 import enGB from 'antd/lib/locale-provider/en_GB'
 import registerServiceWorker from 'registerServiceWorker'
 
-import Layout from 'components/LayoutComponents/Layout'
+// import Layout from 'components/LayoutComponents/Layout'
+import Layout from './pages/share'
 import reducer from 'reducers'
 
 import 'resources/_antd.less' // redefinition AntDesign variables

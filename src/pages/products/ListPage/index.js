@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from 'components/LayoutComponents/Page'
+// import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
 import ListPage from './list'
 
@@ -11,10 +11,10 @@ class DefaultPage extends React.Component {
   render() {
     const props = this.props
     return (
-      <Page {...props}>
+      <div {...props}>
         <Helmet title="Things" />
         <ListPage history={props.history} location={props.location} />
-      </Page>
+      </div>
     )
   }
 }

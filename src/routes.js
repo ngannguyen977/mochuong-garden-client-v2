@@ -4,7 +4,7 @@ import { ConnectedSwitch } from "reactRouterConnected"
 import Loadable from "react-loadable"
 import Page from "components/LayoutComponents/Page"
 import NotFoundPage from "pages/DefaultPages/NotFoundPage"
-import DashboardAlphaPage from "pages/Dashboard/DashboardAlphaPage"
+import DashboardAlphaPage from "pages/home"
 
 const loadable = loader =>
   Loadable({
@@ -18,42 +18,14 @@ const loadableRoutes = {
     component: loadable(() => import("pages/products")),
     
   },
-  "/products/addNew": {
-    component: loadable(() => import("pages/products/createPage")),
-    
-  },
-  "/products/update/:id": {
-    component: loadable(() => import("pages/products/updatePage")),
-    
-  },
   "/home": {
-    component: loadable(() => import("pages/Dashboard/DashboardAlphaPage")),
+    component: loadable(() => import("pages/home")),
     
   },
   "/categories": {
     component: loadable(() => import("pages/categories")),
     
   },
-  "/categories/addNew": {
-    component: loadable(() => import("pages/categories/createPage")),
-    
-  },
-  "/categories/update/:id": {
-    component: loadable(() => import("pages/categories/updatePage")),
-    
-  },
-   "/categories/addNew": {
-    component: loadable(() => import("pages/categories/createPage")),
-    
-  },
-  "/orders": {
-    component: loadable(() => import("pages/order")),
-    
-  },
-  "/orders/orderDetail": {
-    component: loadable(() => import("pages/order/orderDetail")),
-    
-  }
 }
 
 class Routes extends React.Component {

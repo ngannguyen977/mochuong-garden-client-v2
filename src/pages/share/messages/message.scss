@@ -1,0 +1,33 @@
+.message-wrapper {
+    // background: rgba(0, 0, 0, .5);
+    // position: absolute;
+    // width: 100%;
+    // height: 100%;
+    // top: 0;
+    // bottom: 0;
+    // right: 0;
+    // left: 0;
+    // z-index: 999;
+    .invisible {
+        display: none;
+    }
+    h3 {
+        background: rgba(0, 0, 0, .5);
+        position: fixed;
+        width: 50%;
+        height: 20%;
+        top: 35%;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 999;
+        color: #fff;
+        text-align: center;
+        margin: 0 auto;
+        padding-top: 5%;
+        >i {
+            color: green;
+            margin-right: 10px;
+        }
+    }
+}
