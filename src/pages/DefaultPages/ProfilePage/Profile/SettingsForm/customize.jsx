@@ -44,10 +44,10 @@ const CustomizedForm = Form.create({
   //   console.log(values);
   // },
   handleSubmit(data) {
-    console.log(data);
+    // console.log(data);
   },
   onSubmit(e) {
-    console.log('submit');
+    // console.log('submit');
   }
 })(props => {
   const { getFieldDecorator } = props.form;

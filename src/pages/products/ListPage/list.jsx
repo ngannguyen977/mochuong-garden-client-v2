@@ -37,7 +37,7 @@ class ListPage extends React.Component {
     let pagination = []
     for (let i = 0; i < totalPage; i++) {
       pagination.push(<li key={i} className="page-item" >
-        <a className="page-link" href="#" onClick={() => this.props.listFromStore(i)}>{i + 1}</a>
+        <p className="page-link" onClick={() => this.props.listFromStore(i)}>{i + 1}</p>
       </li>)
     }
     return (<ul className="pagination pagination-lg">

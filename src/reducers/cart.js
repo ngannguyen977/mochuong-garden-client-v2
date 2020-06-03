@@ -13,7 +13,7 @@ const ACTION_DELETE_CART = createAction(`ACTION_DELETE_CART`)
 
 
 var findProductInCart = (cart = [], product) => {
-    console.log('cart error', cart)
+    // console.log('cart error', cart)
     // index = -1 là ko tìm thấy
     var index = -1;
     if (cart != null && cart.length > 0) {
@@ -58,7 +58,7 @@ export const addToCart = (product) => {
         if (index !== -1) {
             cart[index].quantity += 1;
         } else {
-            // console.log("shopping cart reducer ",action)
+            //console.log("shopping cart reducer ",action)
             //product và quantity lấy trong action
             var cartItem = {
                 product: product,

@@ -15,7 +15,7 @@ export const showAllQuantity = (cart=[]) => {
 }
 
 export const mapStateToProps = (state, props) => {
-  console.log('state cart', state)
+  // console.log('state cart', state)
   let cart = state.cartReducer.cart || []
   return {
   

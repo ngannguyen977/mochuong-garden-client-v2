@@ -14,7 +14,7 @@ class CartItem extends Component {
         return price * quantity
     }
     onDeleteCart = (product, message)=>{
-        console.log("click xóa", product)
+        // console.log("click xóa", product)
         // var {onDeleteProductInCart, onShowConfirmMessage} = this.props;
         this.props.deleteItemCart(product)
         // this.onShowConfirmMessage(Message.MSG_CONFIRM)

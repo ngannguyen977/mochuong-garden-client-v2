@@ -9,7 +9,7 @@ export const listCategory = () => {
         // GET data from FIREBASE
         // Dispatch in to Reducer
         database.getDataCategory().then(categories=>{
-            console.log('categories reducerkkkkkkkkkkk', categories)
+            // console.log('categories reducerkkkkkkkkkkk', categories)
             dispatch(ACTION_LIST(categories))
         })
     }

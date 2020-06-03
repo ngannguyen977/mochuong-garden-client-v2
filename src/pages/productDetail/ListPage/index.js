@@ -5,12 +5,12 @@ import ProductDetail from './product-detail'
 
 class DefaultPage extends React.Component {
   static defaultProps = {
-    pathName: 'Things',
+    pathname: 'Things',
     roles: ['agent', 'administrator'],
   }
   render() {
     const props = this.props
-    console.log('xxxx')
+    // console.log('xxxx')
     return (
       <div {...props}>
         <Helmet title="Things" />

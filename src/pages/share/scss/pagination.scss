@@ -1,0 +1,53 @@
+@import "main_reset.scss";
+/////////////////////////////////////////////////////////////////////////////////////////
+/* PAGINATION */
+
+.navigation {
+    margin: 40px 0;
+}
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+    justify-content: center;
+    margin: 20px 0;
+    margin-bottom: 50px;
+   
+    .page-link {
+        background-color: #ddd;
+    }
+    .active a {
+        color: $main-color;
+        font-weight: 600;
+        &:hover {
+            color: $main-color;
+        }
+        &:focus {
+            color: $main-color;
+            outline: none;
+        }
+    }
+    li a {
+        border: 1px;
+        margin-left: 5px;
+        padding: 6px 12px;
+        border-radius: 3px;
+        color: $main-color;
+        &:hover, &:focus{
+            background-color: $main-color;
+            color: #fff !important;
+        }
+       
+    }
+    li:first-child a{
+        border:2px solid $main-color !important;
+        background-color: transparent;
+        margin: 0px;
+        border: 2px solid;
+        font-size: 14px;
+        color:$main-color;
+    }
+}
+

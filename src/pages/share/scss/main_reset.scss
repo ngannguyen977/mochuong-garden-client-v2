@@ -1,0 +1,23 @@
+/////COMMON SCSS/////
+
+$main-color: #00634f;
+a:hover, a:active, a:focus {
+    color: #333 !important;
+    text-decoration: none;
+}
+
+.product-page-list h4 {
+    color: #00634f;
+}
+
+.btn-green {
+    background: #00634f;
+    color: #fff;
+    &:hover {
+        color: yellowgreen;
+    }
+}
+
+.lbl-action {
+    color: red;
+}

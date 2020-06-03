@@ -22,7 +22,7 @@ class CategoryPage extends React.Component {
   showProductCategories(listCategories=[]){
     var result = null;
     if(listCategories.length>0){
-      console.log("tô ngu như bò")
+      // console.log("tô ngu như bò")
       result = listCategories.map((category, index)=>{
         return (
           <ProductCategoriesItem 
@@ -36,7 +36,7 @@ class CategoryPage extends React.Component {
   }
   render() {
     var { listCategories } = this.props;
-    console.log('component category aaaaaaaaaaaaaaaaaaaaaaaaaa',listCategories)
+    // console.log('component category aaaaaaaaaaaaaaaaaaaaaaaaaa',listCategories)
     return (
       <div>
         {this.showProductCategories(listCategories)}

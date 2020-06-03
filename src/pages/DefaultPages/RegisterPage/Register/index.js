@@ -56,7 +56,7 @@ class Register extends React.Component {
           </div>
         </div>
         <div className="register__footer text-center">
-          <ul className="list-unstyled list-inline">
+          {/* <ul className="list-unstyled list-inline">
             <li className="list-inline-item">
               <a href="#;">Terms of Use</a>
             </li>
@@ -72,7 +72,7 @@ class Register extends React.Component {
             <li className="list-inline-item">
               <a href="#;">Contacts</a>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     )

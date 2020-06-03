@@ -3,7 +3,7 @@ import './categories.css';
 class ProductCategoriesItem extends React.Component {
   render(){
     var {category} = this.props;
-    console.log('component category 0000000000000000000000000',this.props)
+    // console.log('component category 0000000000000000000000000',this.props)
     let img = 'https://media3.scdn.vn/img3/2019/3_6/heQoV2_simg_de2fe0_500x500_maxb.jpg'
     if(category.image){
       img = category.image;

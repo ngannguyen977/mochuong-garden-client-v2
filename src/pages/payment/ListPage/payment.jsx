@@ -14,7 +14,7 @@ class Payment extends React.Component {
     }
     onSendCart =(e,user)=>{
         e.preventDefault();
-        console.log('user nnnnnnnnnnnnnnnnnn', user)
+        // console.log('user nnnnnnnnnnnnnnnnnn', user)
 
         this.props.sendCart(user)
     }

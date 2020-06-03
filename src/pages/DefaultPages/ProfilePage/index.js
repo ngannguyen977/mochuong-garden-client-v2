@@ -5,7 +5,7 @@ import Profile from './Profile'
 
 class ProfileAppPage extends React.Component {
   static defaultProps = {
-    pathName: 'Profile',
+    pathname: 'Profile',
     roles: ['agent', 'administrator'],
   }
 

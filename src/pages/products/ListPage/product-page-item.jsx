@@ -6,7 +6,7 @@ class ProductPageItem extends React.Component {
   render(){
     //nhận prop từ product list
     var {product} = this.props;
-    // asdfasfconsole.log("item quantity",item.quantity)
+    // console.log("item quantity",item.quantity)
     let canBuy = product.quantity > 0;
     let img = 'https://1.bp.blogspot.com/-tJMkt3zEb8w/WRSMPa9PWcI/AAAAAAAAFk0/hUiCPT_y8UoofFiXWwvEPm9vXcOl9B62ACEw/s1600/cover%2B3.jpg';
     if(product.image){

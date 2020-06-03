@@ -1,6 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { ConnectedSwitch } from "reactRouterConnected"
+import { ConnectedSwitch } from "./reactRouterConnected"
 import Loadable from "react-loadable"
 import Page from "components/LayoutComponents/Page"
 import NotFoundPage from "pages/DefaultPages/NotFoundPage"

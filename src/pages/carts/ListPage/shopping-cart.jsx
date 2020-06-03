@@ -16,7 +16,7 @@ class ShoppingCart extends React.Component {
 	  //cart lấy trên store
 	var { cart } = this.props;
 
-	console.log("có message chưa", this.props.cart)
+	// console.log("có message chưa", this.props.cart)
     return (
         <div className="cart-page">
 			<div className="title-status">

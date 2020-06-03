@@ -5,7 +5,7 @@ import Empty from './Empty'
 
 class EmptyPage extends React.Component {
   static defaultProps = {
-    pathName: 'Empty Page',
+    pathname: 'Empty Page',
     roles: ['agent', 'administrator'],
   }
 

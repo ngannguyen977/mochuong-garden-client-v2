@@ -6,7 +6,7 @@ import queryString from 'query-string'
 
 class ConfirmPage extends React.Component {
   static defaultProps = {
-    pathName: 'Confirm Page',
+    pathname: 'Confirm Page',
     roles: ['agent', 'administrator'],
   }
 

@@ -49,7 +49,7 @@ enquireScreen(b => {
 })
 
 let contentBuffer = {
-  pathName: null,
+  pathname: null,
   content: null,
 }
 
@@ -66,7 +66,7 @@ class Layout extends React.Component {
   getChildContext() {
     return {
       getContentBuffer: () => contentBuffer,
-      setContentBuffer: ({ pathName, content }) => (contentBuffer = { pathName, content }),
+      setContentBuffer: ({ pathname, content }) => (contentBuffer = { pathname, content }),
     }
   }
 

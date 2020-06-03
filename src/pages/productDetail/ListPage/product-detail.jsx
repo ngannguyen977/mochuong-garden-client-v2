@@ -27,7 +27,7 @@ class ProductDetail extends React.Component {
     render() {
         let productDetail = this.props.productDetail || {};
         let canBuy = productDetail.quantity > 0;
-        console.log("lấy props", this.props)
+        // console.log("lấy props", this.props)
         return (
             <div className="container">
                 <div className="product-item-detail">
@@ -65,9 +65,9 @@ class ProductDetail extends React.Component {
                                     </tr>
                                 </tbody>
                             </table>
-                            {canBuy ? <a className="btn btn-green"
+                            {canBuy ? <p className="btn btn-green"
                                 onClick={() => this.onAddToCart(productDetail)}
-                            >Mua Hàng</a> : <span className="lbl-action">SẢN PHẨM HẾT HÀNG</span>}
+                            >Mua Hàng</p> : <span className="lbl-action">SẢN PHẨM HẾT HÀNG</span>}
 
                         </div>
                     </div>

@@ -66,8 +66,8 @@ export const searchPro=(keyword)=>{
 const initialState = {}
 const ACTION_HANDLES = {
 	[ACTION_LIST]: (state, products) => {
-		console.log('old state', state)
-		console.log('new state', products)
+		// console.log('old state', state)
+		// console.log('new state', products)
 		return { ...state, products }
 
 	},

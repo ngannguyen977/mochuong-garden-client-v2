@@ -5,7 +5,7 @@ import ChildPage from './page'
 
 class DefaultPage extends React.Component {
   static defaultProps = {
-    pathName: 'External Authentication Page',
+    pathname: 'External Authentication Page',
     roles: ['agent', 'administrator'],
   }
 

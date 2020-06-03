@@ -73,7 +73,7 @@ class Recovery extends React.Component {
           </div>
         </div>
         <div className='main-forgot-password__footer text-center'>
-          <ul className='list-unstyled list-inline'>
+          {/* <ul className='list-unstyled list-inline'>
             <li className='list-inline-item'>
               <a href='https://www.onskyinc.com'>Terms of Use</a>
             </li>
@@ -89,7 +89,7 @@ class Recovery extends React.Component {
             <li className='list-inline-item'>
               <a href='https://www.onskyinc.com'>Contacts</a>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     )

@@ -20,7 +20,7 @@ type FunctionOnMounted = () => Promise<any>
 class Page extends React.Component {
   props: {
     roles: Array<string>,
-    pathName: any,
+    pathname: any,
     onMounted: ?FunctionOnMounted,
     isNotFound: boolean,
     children: any,
@@ -30,7 +30,7 @@ class Page extends React.Component {
 
   static propTypes = {
     roles: PropTypes.array,
-    pathName: PropTypes.any,
+    pathname: PropTypes.any,
     isNotFound: PropTypes.bool,
     onMounted: PropTypes.func,
     children: PropTypes.any,
@@ -45,7 +45,7 @@ class Page extends React.Component {
 
   static defaultProps = {
     roles: [],
-    pathName: null,
+    pathname: null,
     isNotFound: false,
     onMounted: null,
     isLoading: false,
@@ -60,8 +60,8 @@ class Page extends React.Component {
 
   updateContent = () => {
     const { setContentBuffer } = this.context
-    const { isNotFound, pathName, children, dispatch } = this.props
-    setContentBuffer({ pathName, content: isNotFound ? <NotFoundPage /> : children })
+    const { isNotFound, pathname, children, dispatch } = this.props
+    setContentBuffer({ pathname, content: isNotFound ? <NotFoundPage /> : children })
     dispatch(setUpdatingContent(true))
     if (this.isFirstContent) {
       this.isFirstContent = false

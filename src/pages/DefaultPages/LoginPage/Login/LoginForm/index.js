@@ -107,7 +107,7 @@ class LoginForm extends React.Component {
         </div>
         <div className='form-group'>
           <span>Use another service to Log In</span>
-          <div className='mt-2'>
+          {/* <div className='mt-2'>
             <a href='#;' className='btn btn-icon mr-2'>
               <i className='icmn-facebook' />
             </a>
@@ -120,7 +120,7 @@ class LoginForm extends React.Component {
             <a href='#;' className='btn btn-icon mr-2'>
               <i className='icmn-twitter' />
             </a>
-          </div>
+          </div> */}
         </div>
       </Form>
     )

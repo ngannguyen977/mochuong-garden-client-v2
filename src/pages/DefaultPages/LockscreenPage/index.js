@@ -5,7 +5,7 @@ import Lockscreen from './Lockscreen'
 
 class LockscreenPage extends React.Component {
   static defaultProps = {
-    pathName: 'Lockscreen',
+    pathname: 'Lockscreen',
     roles: ['agent', 'administrator'],
   }
 

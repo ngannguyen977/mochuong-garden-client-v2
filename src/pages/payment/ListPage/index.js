@@ -4,7 +4,7 @@ import Payment from './payment'
 
 class DefaultPage extends React.Component {
   static defaultProps = {
-    pathName: 'Things',
+    pathname: 'Things',
     roles: ['agent', 'administrator'],
   }
   render() {

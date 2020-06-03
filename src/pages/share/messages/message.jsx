@@ -13,7 +13,7 @@ class MessageComponent extends Component {
     }
     render() {
         var { message } = this.props;
-        console.log('messsage in compoment', message)
+        // console.log('messsage in compoment', message)
         return (
             <div className="message-wrapper">
                 {message && (<h3>

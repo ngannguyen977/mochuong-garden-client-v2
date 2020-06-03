@@ -19,11 +19,11 @@ class RecoveryForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { form, submit, params } = this.props
-    console.log(this.props.submit)
+    // console.log(this.props.submit)
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log(values)
-        console.log(params)
+        // console.log(values)
+        // console.log(params)
         submit({ alias: params.alias, username: params.username, newPassword: values.newPassword, confirmPassword:values.confirmPassword, token: params.token })
         // submit({ alias: 'alias', 'username', 'newPassword', 'confirmPassword', 'token'})
         // console.log('Received values of form: ', values);

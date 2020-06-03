@@ -6,7 +6,7 @@ const UPLOAD_ACTION = createAction(`UPLOAD`)
 export const upload = (formData)=>{
     return(dispatch)=>{
         flickr.upload(formData).then(res=>{
-            console.log("upload",formData,res )
+            // console.log("upload",formData,res )
             dispatch(UPLOAD_ACTION(res))
         })
     }

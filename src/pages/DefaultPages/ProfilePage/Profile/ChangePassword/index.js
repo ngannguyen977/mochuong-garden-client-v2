@@ -22,7 +22,7 @@ class RegisterFormComponent extends React.Component {
   onSubmit = isSubmitForm => event => {
     event.preventDefault()
     const { form, submit } = this.props
-    console.log(this.props)
+    // console.log(this.props)
     if (!isSubmitForm) {
       form.validateFields((error, values) => {
         if (!error) {

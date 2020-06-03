@@ -18,7 +18,6 @@ export const getData = (pageIndex, keyword) => new Promise((resolve, reject) => 
   var productRef = firebaseData.database().ref('products');
   productRef.on('value', function (snapshot) {
     let list = snapshot.val() || []
-    console.log("getting...", list)
     let totalItem = list.length
     let pageSize = 5;
     let dataPaging = 0;
@@ -81,7 +80,6 @@ export const getOne = (id) => new Promise((resolve, reject) => {
 /////////////////CATEGORIES//////////////////
 
 export const getDataCategory = (pageIndex, keyword) => new Promise((resolve, reject) => {
-  console.log('kffff', keyword)
   var productRef = firebaseData.database().ref('categories');
   productRef.on('value', function (snapshot) {
     let list = snapshot.val() || []
@@ -335,7 +333,6 @@ export const addOrderItem = (orderItem) => new Promise((resolve, reject) => {
   orderItemRef.once('value', function (snapshot) {
     let list = snapshot.val() || []
     list.push(orderItem)
-    console.log('list order item',list)
     orderItemRef.set(list)
     return resolve(orderItem)
   })
