@@ -23,7 +23,7 @@ export const add = (product) => {
 	return (dispatch,getState) => {
 		product.id = uuidv4();
 		product.createdAt = new Date().toString();
-	
+		
 		let result = database.addData(product)
 		dispatch(ACTION_ADD(result))
 		// sau khi tao xong, back ve trang list

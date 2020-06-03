@@ -144,6 +144,7 @@ export const updateCategory = (id, category) => new Promise((resolve, reject) =>
   })
 })
 ////////////////////////ORDER/////////////////
+
 export const getDataOrders = (pageIndex, keyword) => new Promise((resolve, reject) => {
   var orderRef = firebaseData.database().ref('orders');
   orderRef.on('value', function (snapshot) {
@@ -231,6 +232,215 @@ export const getOrderFull = (pageIndex=0, pageSize=10) => new Promise((resolve, 
     })
   })
 })
+////////// CREATE ORDER////////////////////////
+/*
+{
+  "id":1,
+  "orderDate":"1/1/2020",
+  "total":800000
+}
+*/
+export const getOrders = (pageIndex, keyword) => new Promise((resolve, reject) => {
+  var orderRef = firebaseData.database().ref('orders');
+  orderRef.on('value', function (snapshot) {
+    let list = snapshot.val() || []
+    let totalItem = list.length
+    let pageSize = 5;
+    let dataPaging = 0;
+   
+    dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
+    const totalPage = Math.ceil(list.length / pageSize)
+    let orders = {
+      totalItem: totalItem,
+      totalPage: totalPage,
+      dataPaging: dataPaging,
+      list: list
+    }
+    return resolve(orders);
+  })
+})
+
+export const addOrder = (order) => new Promise((resolve, reject) => {
+  var orderRef = firebaseData.database().ref('orders')
+
+  orderRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list.push(order)
+    orderRef.set(list)
+    return resolve(order)
+  })
+})
+export const updateOrder = (id, order) => new Promise((resolve, reject) => {
+  var orderRef = firebaseData.database().ref('orders')
+
+  orderRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list = list.filter(x => x.id != id)
+    order.id = id
+    list.push(order)
+    orderRef.set(list)
+    return resolve(order)
+  })
+})
+export const deleteOrder = (id) => new Promise((resolve, reject) => {
+  var orderRef = firebaseData.database().ref('orders')
+
+  orderRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list = list.filter(x => x.id != id)
+    orderRef.set(list)
+    return resolve(true)
+  })
+})
+export const getOrder = (id) => new Promise((resolve, reject) => {
+  var orderRef = firebaseData.database().ref('orders');
+  orderRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    return resolve(list.find(x => x.id === id));
+  })
+})
+
+/////////////////////////////////////////////////////////////////
+////////// ORDER ITEMS////////////////////////
+/*
+{
+  "orderId":1,
+  "productId":"1",
+  "quantity":20
+}
+*/
+export const getOrderItems = (pageIndex, keyword) => new Promise((resolve, reject) => {
+  var orderItemRef = firebaseData.database().ref('order_items');
+  orderItemRef.on('value', function (snapshot) {
+    let list = snapshot.val() || []
+    let totalItem = list.length
+    let pageSize = 5;
+    let dataPaging = 0;
+   
+    dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
+    const totalPage = Math.ceil(list.length / pageSize)
+    let orderItems = {
+      totalItem: totalItem,
+      totalPage: totalPage,
+      dataPaging: dataPaging,
+      list: list
+    }
+    return resolve(orderItems);
+  })
+})
+
+export const addOrderItem = (orderItem) => new Promise((resolve, reject) => {
+  var orderItemRef = firebaseData.database().ref('order_items')
+
+  orderItemRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list.push(orderItem)
+    console.log('list order item',list)
+    orderItemRef.set(list)
+    return resolve(orderItem)
+  })
+})
+export const updateOrderItem = (id, orderItem) => new Promise((resolve, reject) => {
+  var orderItemRef = firebaseData.database().ref('order_items')
+
+  orderItemRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list = list.filter(x => x.id != id)
+    orderItem.id = id
+    list.push(orderItem)
+    orderItemRef.set(list)
+    return resolve(orderItem)
+  })
+})
+export const deleteOrderItem = (id) => new Promise((resolve, reject) => {
+  var orderItemRef = firebaseData.database().ref('order_items')
+
+  orderItemRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list = list.filter(x => x.id != id)
+    orderItemRef.set(list)
+    return resolve(true)
+  })
+})
+export const getOrderItem = (id) => new Promise((resolve, reject) => {
+  var orderItemRef = firebaseData.database().ref('order_items');
+  orderItemRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    return resolve(list.find(x => x.id === id));
+  })
+})
+
+/////////////////////////////////////////////////////////////////
+////////// USERS////////////////////////
+/*
+{
+  "id":1,
+  "address":"256 hoang hoa tham",
+  "name": "kibo",
+  "note":"kito",
+  "phone":"123456"
+}
+*/
+export const getUsers = (pageIndex, keyword) => new Promise((resolve, reject) => {
+  var userRef = firebaseData.database().ref('users');
+  userRef.on('value', function (snapshot) {
+    let list = snapshot.val() || []
+    let totalItem = list.length
+    let pageSize = 5;
+    let dataPaging = 0;
+   
+    dataPaging = list.slice(pageIndex * pageSize, ((pageIndex + 1) * pageSize))
+    const totalPage = Math.ceil(list.length / pageSize)
+    let users = {
+      totalItem: totalItem,
+      totalPage: totalPage,
+      dataPaging: dataPaging,
+      list: list
+    }
+    return resolve(users);
+  })
+})
+
+export const addUser = (user) => new Promise((resolve, reject) => {
+  var userRef = firebaseData.database().ref('users')
+
+  userRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list.push(user)
+    userRef.set(list)
+    return resolve(user)
+  })
+})
+export const updateUser = (id, user) => new Promise((resolve, reject) => {
+  var userRef = firebaseData.database().ref('users')
+
+  userRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list = list.filter(x => x.id != id)
+    user.id = id
+    list.push(user)
+    userRef.set(list)
+    return resolve(user)
+  })
+})
+export const deleteUser = (id) => new Promise((resolve, reject) => {
+  var userRef = firebaseData.database().ref('users')
+
+  userRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    list = list.filter(x => x.id != id)
+    userRef.set(list)
+    return resolve(true)
+  })
+})
+export const getUser = (id) => new Promise((resolve, reject) => {
+  var userRef = firebaseData.database().ref('users');
+  userRef.once('value', function (snapshot) {
+    let list = snapshot.val() || []
+    return resolve(list.find(x => x.id === id));
+  })
+})
+
 /////////////////////////////////////////////////////////////////
 let database = {
   getData,
@@ -245,6 +455,21 @@ let database = {
   updateCategory,
   getDataOrders,
   getOrderDetail,
-  getOrderFull
+  getOrderFull,
+  getOrders,
+  addOrder,
+  updateOrder,
+  deleteOrder,
+  getOrder,
+  getOrderItems,
+  addOrderItem,
+  updateOrderItem,
+  deleteOrderItem,
+  getOrderItem,
+  getUsers,
+  addUser,
+  updateUser,
+  deleteUser,
+  getUser,
 }
 export default database

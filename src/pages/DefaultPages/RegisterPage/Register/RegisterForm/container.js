@@ -1,6 +1,6 @@
 import { REDUCER, submit } from 'reducers/register'
 
-export const mapDispathToProps = {
+export const mapDispatchToProps = {
   submit: model => submit(model),
 }
 export const mapStateToProps = (state, props) => {
@@ -9,4 +9,4 @@ export const mapStateToProps = (state, props) => {
   }
 }
 
-export default { mapStateToProps, mapDispathToProps }
+export default { mapStateToProps, mapDispatchToProps }

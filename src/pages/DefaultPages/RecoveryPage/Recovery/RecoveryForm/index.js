@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispatchToProps } from './container'
 import { Form, Input, Button } from 'antd'
 
 
 @connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )
 @Form.create()
 class RecoveryForm extends React.Component {

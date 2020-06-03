@@ -1,20 +1,16 @@
-import { list, add, deleteCate, updateCate, getCateById,searchCate} from "reducers/categories";
+import { listCategory} from "reducers/categories";
 
 export const mapStateToProps =(state, props)=>{
+    
     let categories = state.categoriesReducer.categories || {}
+    console.log("listCategories trong containerxxxxxxxxxxxxxxxx", categories)
+
     return {
-        //listCategories: categories.list
-        dataPaging:categories.dataPaging,
-        categoryUpdate:state.categoriesReducer.category || {},
-        listCate:categories.list || []
+        listCategories: categories.list
+        
     }
 }
-export const mapDispathToProps = {
-   categoriesFromStore:(pageIndex)=>list(pageIndex),
-   addCategory:(category)=>add(category),
-   deleteCategory:(id)=>deleteCate(id),
-   getCateById:(id)=>getCateById(id),
-   updateCategory:(id, category)=>updateCate(id, category),
-   searchCategory:(keyword)=>searchCate(keyword)
+export const mapDispatchToProps = {
+   categoriesFromStore:()=>listCategory(),
 }
-export default { mapStateToProps, mapDispathToProps }
+export default { mapStateToProps, mapDispatchToProps }

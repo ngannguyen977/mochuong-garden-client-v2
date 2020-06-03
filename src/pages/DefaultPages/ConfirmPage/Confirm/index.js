@@ -2,12 +2,12 @@ import React from 'react'
 import { Button } from 'antd'
 import '../../LoginPage/Login/style.scss'
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispatchToProps } from './container'
 import queryString from 'query-string'
 
 @connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )
 class Confirm extends React.Component {
   state = { backgroundImage: 'url(resources/images/login/4.jpg)' }

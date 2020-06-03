@@ -5,7 +5,7 @@ import {
   addSetting
 } from 'reducers/customer'
 
-export const mapDispathToProps = {
+export const mapDispatchToProps = {
   changePassword: (id, model) => changePassword(id, model),
   addSetting: (model) => addSetting(model)
 }
@@ -65,5 +65,5 @@ export const mapStateToProps = (state, props) => {
 
 export default {
   mapStateToProps,
-  mapDispathToProps
+  mapDispatchToProps
 }

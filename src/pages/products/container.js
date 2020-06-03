@@ -1,10 +1,8 @@
 import { list, add, deleteData,getDataById,update, searchPro } from "reducers/product";
-import {list as listCategory} from "reducers/categories";
 import {upload} from 'reducers/upload'
 
 export const mapStateToProps = (state, props) => {
 let products = state.productPageReducer.products || {};
-let categories = state.categoriesReducer.categories || {}
   return {
     listProduct: products.list,
     pageIndex:products.pageIndex,
@@ -12,10 +10,9 @@ let categories = state.categoriesReducer.categories || {}
     dataPaging: products.dataPaging,
     totalPage:products.totalItem/5,
     productUpdate:state.productPageReducer.product ||{},
-    listCate: categories.list || [],
   }
 }
-export const mapDispathToProps = {
+export const mapDispatchToProps = {
   listFromStore: (pageIndex,conto) => list(pageIndex,conto),
   add: (product) => add(product),
   deleteData:(id)=>deleteData(id),
@@ -25,5 +22,5 @@ export const mapDispathToProps = {
   searchProduct:(keyword)=>searchPro(keyword),
   upload:(photo)=>upload(photo)
 }
-export default { mapStateToProps, mapDispathToProps }
+export default { mapStateToProps, mapDispatchToProps }
 

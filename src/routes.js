@@ -16,7 +16,6 @@ const loadable = loader =>
 const loadableRoutes = {
   "/products": {
     component: loadable(() => import("pages/products")),
-    
   },
   "/home": {
     component: loadable(() => import("pages/home")),
@@ -24,6 +23,16 @@ const loadableRoutes = {
   },
   "/categories": {
     component: loadable(() => import("pages/categories")),
+    
+  },
+  "/products/:id": {
+    component: loadable(() => import("pages/productDetail")),
+  },
+  "/cart": {
+    component: loadable(() => import("pages/carts")),
+  },
+  "/payment": {
+    component: loadable(() => import("pages/payment")),
     
   },
 }

@@ -1,6 +1,6 @@
 import { REDUCER, submit } from 'reducers/recovery'
 
-export const mapDispathToProps = {
+export const mapDispatchToProps = {
   submit: (alias, username, newPassword, confirmPassword, token) => submit(alias, username, newPassword, confirmPassword, token)
 }
 export const mapStateToProps = (state, props) => {
@@ -9,4 +9,4 @@ export const mapStateToProps = (state, props) => {
   }
 }
 
-export default { mapStateToProps, mapDispathToProps }
+export default { mapStateToProps, mapDispatchToProps }

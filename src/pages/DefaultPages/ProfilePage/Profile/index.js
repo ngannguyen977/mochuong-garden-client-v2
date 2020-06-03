@@ -7,7 +7,7 @@ import Donut from 'components/CleanComponents/Donut'
 import Chat from 'components/CleanComponents/Chat'
 import SettingsForm from './SettingsForm/customize'
 import ChangePassword from './ChangePassword';
-import { mapStateToProps, mapDispathToProps } from '../container'
+import { mapStateToProps, mapDispatchToProps } from '../container'
 import { connect } from 'react-redux'
 
 const TabPane = Tabs.TabPane
@@ -15,7 +15,7 @@ const { TextArea } = Input
 
 @connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )
 class ProfileApp extends React.Component {
   constructor() {

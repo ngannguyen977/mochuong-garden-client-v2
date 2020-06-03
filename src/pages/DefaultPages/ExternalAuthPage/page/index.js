@@ -1,12 +1,12 @@
 import React from 'react'
 import '../../LoginPage/Login/style.scss'
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispatchToProps } from './container'
 import queryString from 'query-string'
 
 @connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )
 class DefaultPage extends React.Component {
 

@@ -1,34 +1,39 @@
 
-import {addToCart,cartDetail,deleteItemCart, updateQuantity } from 'reducers/cart'
+import {addToCart,cartDetail,deleteItemCart, updateQuantity, getCartLocalStorage } from 'reducers/cart'
+import{showMessage}from "reducers/message";
 
-const showAllQuantity = (cart=[]) => {
+export const showAllQuantity = (cart=[]) => {
   var allQuantity = 0;
-  if (cart.length > 0) {
+  if (cart.length > 0 ) {
     for (var i = 0; i < cart.length; i++) {
       //lấy số lượng từng phần tử cộng dồn lại
       allQuantity += cart[i].quantity
     }
   }
+  
   return allQuantity
 }
 
 export const mapStateToProps = (state, props) => {
-  let cart = state.CartReducer
+  console.log('state cart', state)
+  let cart = state.cartReducer.cart || []
   return {
-    // key(props để sd): cart trái
-    // value: cart phải
-    // ở đâu ta có cart là 1 props lên store lấy ds các cart về
+  
     cart: cart,
     // cart: state.CartReducer
     allQuantity: showAllQuantity(cart)
   }
 }
-export const mapDispathToProps = {
-  cartDetail:(product)=>cartDetail(product),
+export const mapDispatchToProps = {
+  cartDetail:()=>cartDetail(),
   addToCart:(product)=>addToCart(product),
   deleteItemCart:(product)=>deleteItemCart(product),
-  updateQuantity:(product)=>updateQuantity(product),
+  updateQuantity:(product,quantity,buyQuantity)=>updateQuantity(product,quantity,buyQuantity),
+  getCartLocalStorage:() =>getCartLocalStorage(),
+  showMessage:(message)=>showMessage(message)
+  
+  
 
 }
-export default { mapStateToProps, mapDispathToProps }
+export default { mapStateToProps, mapDispatchToProps }
 

@@ -1,19 +1,26 @@
 .menu {
     display: flex;
-    margin-top: 20px;
+    justify-content: space-around;
+    min-height: 100px;
+    padding-top: 30px;
 }
-
+.menu a{
+    font-weight: bold;
+    color:#256357;
+}
 .cart-top {
     position: relative;
 }
-
+.nav>li>a:focus, .nav>li>a:hover{background: transparent;}
+.search-btn i{color:#01846a;}
 .account-cart {
     position: absolute;
     left: 20px;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     text-align: center;
-    line-height: 30px;
+    line-height: 20px;
+    font-size: 12px;
     bottom: 0;
     color: #fff !important;
     background: #f95c08;
@@ -42,17 +49,18 @@
 .menu .navbar-brand img {
     position: relative;
     z-index: 99;
-    top: -30px;
-    width: 80%;
+    top: -12px;
+    width: 60%;
 }
 
 .contact-socials ul li {
     list-style: none;
     float: left;
+    line-height: 30px;
+    margin-right: 10px;
 }
 
 .contact-socials {
-    margin-left: auto;
     display: inline-block;
     margin-right: 30px;
 }
@@ -71,7 +79,7 @@
 .search-box {
     display: inline-block;
     width: 100%;
-    border-radius: 3px;
+    border-radius: 33px;
     padding: 4px 55px 4px 15px;
     position: relative;
     background: #fff;
@@ -104,7 +112,7 @@
 .search-box .search-btn {
     position: absolute;
     right: 2px;
-    top: 2px;
+    top: -1px;
     color: #aaa;
     border-radius: 3px;
     font-size: 21px;

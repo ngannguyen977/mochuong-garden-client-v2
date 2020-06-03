@@ -1,10 +1,9 @@
 import React from 'react';
 import {BrowserRouter, Route, Link } from 'react-router-dom';
-// import logo from "../../img/main_logo.png";
-// import cart from "../../img/icon/cart.svg";
-// import fb from "../../img/icon/fb.svg";
-// import ship from "../../img/icon/ship.svg";
-import "./menu.css"
+import { mapStateToProps, mapDispatchToProps } from "../../carts/container";
+import { connect } from "react-redux";
+import "./menu.scss"
+
 const menus = [
   {
     name : 'Trang chính',
@@ -38,13 +37,24 @@ const MenuLink = ({label,to, acticOnlyWhenExact})=>{
 		/>
   )
 }
+@connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)
 class Menu extends React.Component {
-
+	componentDidMount(){
+		// kiem tra có cart trong store chưa
+		//nêu chua thi get tu local ra
+		if(this.props.cart.length === 0){
+			this.props.getCartLocalStorage()
+		}
+		this.props.allQuantity
+	}
   render(){
-	
+	var {allQuantity} = this.props
     return (
         <div className="menu">
-            <div className="navbar">
+            <div className="navbar navbar-expand-lg navbar-light">
                 <Link to={'/'} className="navbar-brand"><img className="img-responsive" src='/img/main_logo.png' alt="" /></Link>
                 <ul className="nav navbar-nav">
 					{this.showMenus(menus)}
@@ -62,11 +72,11 @@ class Menu extends React.Component {
 			</div>
 		  	<div className="contact-socials">
 				<ul>
-					<li><img className="img-responsive" src='/img/icon/fb.svg' alt="" /><span>Fanpage</span></li>
-					<li><img className="img-responsive" src='/img/icon/ship.svg' alt="" /><span>Vận chuyển</span></li>
+					<li><img className="img-responsive" src='/img/icon/facebook.png' alt="" /><span>Fanpage</span></li>
+					<li><img className="img-responsive" src='/img/icon/package.png' alt="" /><span>Vận chuyển</span></li>
 					<li className="cart-top">
-						<Link to={'/cart'}><img className="img-responsive" src='/img/icon/cart.svg' alt="" />
-							<span>Giỏ hàng</span><span className="account-cart">{this.props.allQuantity}</span>
+						<Link to={'/cart'}><img className="img-responsive" src='/img/icon/shopping-bag.png' alt="" />
+							<span>Giỏ hàng</span><span className="account-cart">{allQuantity}</span>
 						</Link>
 					</li>
 				</ul>

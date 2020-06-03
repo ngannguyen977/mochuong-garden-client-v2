@@ -1,5 +1,5 @@
 import { externalAuth } from 'reducers/auth'
-export const mapDispathToProps = {
+export const mapDispatchToProps = {
   externalAuth: (model,link)=>externalAuth(model,link)
 
 }
@@ -8,4 +8,4 @@ export const mapStateToProps = (state, props) => {
   }
 }
 
-export default { mapStateToProps, mapDispathToProps }
+export default { mapStateToProps, mapDispatchToProps }

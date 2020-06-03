@@ -6,6 +6,7 @@ import productPageReducer from "./product"
 import categoriesReducer from "./categories"
 import uploadReducer from "./upload"
 import cartReducer from "./cart"
+import messageReducer from './message'
 
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   productPageReducer:productPageReducer,
   categoriesReducer:categoriesReducer,
   uploadReducer,
-  cartReducer
+  cartReducer,
+  messageReducer
 })

@@ -1,18 +1,26 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import "./message.css"
+import { mapStateToProps, mapDispatchToProps } from "./container"
+import { connect } from "react-redux";
+
+@connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)
 class MessageComponent extends Component {
-    render(){
-    var {message} = this.props;
-    console.log("message componet", this.props)
+    constructor() {
+        super()
+    }
+    render() {
+        var { message } = this.props;
+        console.log('messsage in compoment', message)
         return (
             <div className="message-wrapper">
-              {message   && (<h3>
+                {message && (<h3>
                     <i className="icon-check fas fa-check"></i>
-                    <button>Hủy bỏ</button>
-                    <button>Đồng ý</button>
                 {message}</h3>)}
             </div>
-            
+
         )
 
     }

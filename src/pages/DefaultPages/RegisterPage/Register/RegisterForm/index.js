@@ -2,12 +2,12 @@ import React from 'react'
 import { Form, Input, Icon, Checkbox, Button } from 'antd'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispatchToProps } from './container'
 
 const FormItem = Form.Item
 @connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )
 class RegisterFormComponent extends React.Component {
   state = {

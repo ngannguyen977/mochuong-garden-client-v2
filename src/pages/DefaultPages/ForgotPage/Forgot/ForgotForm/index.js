@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { mapStateToProps, mapDispathToProps } from './container'
+import { mapStateToProps, mapDispatchToProps } from './container'
 // import { Alert, notification } from 'antd'
 import { Form, Icon, Input, Button } from 'antd'
 import { Link } from 'react-router-dom'
@@ -10,7 +10,7 @@ const FormItem = Form.Item
 
 @connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )
 @Form.create()
 class ForgotForm extends React.Component {

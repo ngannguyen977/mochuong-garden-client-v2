@@ -1,6 +1,6 @@
 import { REDUCER, submit } from 'reducers/login'
 
-export const mapDispathToProps = {
+export const mapDispatchToProps = {
   submit: (username, password) => submit(username, password),
 }
 export const mapStateToProps = (state, props) => {
@@ -9,4 +9,4 @@ export const mapStateToProps = (state, props) => {
   }
 }
 
-export default { mapStateToProps, mapDispathToProps }
+export default { mapStateToProps, mapDispatchToProps }

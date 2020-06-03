@@ -1,35 +1,47 @@
 import React from "react"
-import { mapStateToProps, mapDispathToProps } from "../container"
+import { mapStateToProps, mapDispatchToProps } from "../container"
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import ProductCategoriesItem from './product-categories-item'
 @connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )
-class ListPage extends React.Component {
+class CategoryPage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state={
+
+    }
 
   }
   componentDidMount() {
     this.props.categoriesFromStore();
+   
+  }
+  showProductCategories(listCategories=[]){
+    var result = null;
+    if(listCategories.length>0){
+      console.log("tô ngu như bò")
+      result = listCategories.map((category, index)=>{
+        return (
+          <ProductCategoriesItem 
+            key={index}
+            category = {category}
+          />
+        )
+      })
+    }
+    return result;///////////////NOTE///////////////
   }
   render() {
-    var { list } = this.props;
-    var result = (list||[]).map((category, index) => {
-      return (
-        <ProductCategoriesItem
-          key={index}
-          category={category}
-        />
-      )
-    })
+    var { listCategories } = this.props;
+    console.log('component category aaaaaaaaaaaaaaaaaaaaaaaaaa',listCategories)
     return (
       <div>
-        {result}
+        {this.showProductCategories(listCategories)}
       </div>
     );
   }
 }
-export default ListPage 
+export default CategoryPage 

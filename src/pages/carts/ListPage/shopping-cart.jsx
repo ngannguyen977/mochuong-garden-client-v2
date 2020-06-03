@@ -1,24 +1,26 @@
 import React from 'react';
-import * as MSG from '../../constants/message';
-import { mapStateToProps, mapDispathToProps } from "../container"
+// import * as MSG from '../../constants/message';
+import { mapStateToProps, mapDispatchToProps,showAllQuantity } from "../container"
 import { connect } from "react-redux";
 import CartItem from './shopping-cart-item';
-// import CartResult from './cartResult';
 import { Link } from 'react-router-dom';
-import ShoppingCartContainer from '../shopping-cart/shopping-cart-container';
-import MessageContainer from '../../share/messages/message-container'
 @connect(
 	mapStateToProps,
-	mapDispathToProps,
+	mapDispatchToProps,
   )
 class ShoppingCart extends React.Component {
+	componentDidMount(){
+		this.props.cartDetail()
+	}
   render(){
 	  //cart lấy trên store
 	var { cart } = this.props;
+
+	console.log("có message chưa", this.props.cart)
     return (
         <div className="cart-page">
 			<div className="title-status">
-				<h3>Thông tin giỏ hàng</h3>
+				<h4>Thông tin giỏ hàng</h4>
 			</div>
 			<div className="container">
 				<table className="table table-content">
@@ -45,7 +47,7 @@ class ShoppingCart extends React.Component {
 							<td>
 								<h4>
 									<strong>Tổng Tiền</strong>
-									<span>({this.props.showAllQuantity(cart)} sản phẩm)</span>
+									<span>({showAllQuantity(cart)} sản phẩm)</span>
 								</h4>
 							</td>
 							<td>
@@ -62,14 +64,14 @@ class ShoppingCart extends React.Component {
 					</tbody>
 				</table>
 			</div>
-			<MessageContainer />
+			{/* <MessageContainer /> */}
         </div>
 		
     );
   }
   showAllTotal=(cart)=>{
 	var total = 0;
-	if(cart.length>0){
+	if(cart && cart.length>0){
 		for(var i=0; i< cart.length; i++){
 			//lấy giá từng phần tử * số lượng và cộng dồn lại
 			total +=cart[i].product.price*cart[i].quantity
@@ -79,9 +81,9 @@ class ShoppingCart extends React.Component {
   }
 
   showCartItem =(cart) => {
-	var result = MSG.MSG_CART_EMPTY;
+	var result ;
 	var {onDeleteProductInCart, onUpdateProductQuantity} = this.props
-	if(cart.length>0){
+	if(cart &&cart.length>0){
 		result = cart.map((item, index)=>{
 			return (
 				<CartItem

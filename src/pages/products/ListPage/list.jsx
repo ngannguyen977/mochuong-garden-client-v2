@@ -1,5 +1,5 @@
 import React from "react"
-import { mapStateToProps, mapDispathToProps } from "../container"
+import { mapStateToProps, mapDispatchToProps } from "../container"
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import ProductPageItem from './product-page-item';
@@ -7,7 +7,7 @@ import "./product-page.scss"
 
 @connect(
   mapStateToProps,
-  mapDispathToProps,
+  mapDispatchToProps,
 )
 class ListPage extends React.Component {
   constructor(props) {
@@ -46,7 +46,6 @@ class ListPage extends React.Component {
   }
   render() {
     const { pageIndex, totalPage, dataPaging } = this.props;
-    console.log("render data firebase page ", this.props)
     let pagination = []
     for (let i = 0; i < totalPage; i++) {
       pagination.push(<li key={i} className={pageIndex === i ? "active" : "inactive"}>
